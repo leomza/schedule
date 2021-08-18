@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="dist/styles.min.css">
+</head>
+
+<body>
+    <h1 class="text-center" id="count-down-timer"></h1>
+    <div id="buttons">
+        <button id="call" onclick="setTime(event, 'call', 1, 30)"><img class="imagen" src="img/telefono.png"
+                alt=""></button>
+        <button id="meeting" onclick="setTime(event, 'meeting', 1, 0)"><img class="imagen" src="img/reunion.png"
+                alt=""></button>
+        <button id="conference" onclick="setTime(event, 'conference', 0, 30)"><img class="imagen"
+                src="img/videoconferencia.png" alt=""></button>
+        <button id="break" onclick="setTime(event, 'break', 2, 0)"><img class="imagen" src="img/break.png"
+                alt=""></button>
+    </div>
+
+    <div id="root"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

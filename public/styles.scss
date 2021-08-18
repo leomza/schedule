@@ -1,0 +1,19 @@
+button {
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+
+    &:disabled{
+        cursor: not-allowed;
+    }
+}
+
+.imagen {
+    width: 100px;
+    height: 100px;
+    filter: brightness(75%);
+
+    &:hover {
+        filter: brightness(100%);
+    }
+}
