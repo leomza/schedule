@@ -7,9 +7,9 @@ import { Activity, Activities } from "../models/activities";
 export function newActivity(req, res) {
   try {
     //Get the information from the body
-    const { activity, min, sec } = req.body;
+    const { activity, restMinutes, restSeconds } = req.body;
     //Initialice a new instance of the Activity
-    const userActivity = new Activity(activity, min, sec);
+    const userActivity = new Activity(activity, restMinutes, restSeconds);
     //Initialice a new instance of Activity (the initialization will read the JSON of Activities)
     const allActivities = new Activities();
     allActivities.createActivity(userActivity);

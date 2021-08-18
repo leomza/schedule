@@ -2,6 +2,7 @@ export {};
 
 const fs = require("fs");
 const path = require("path");
+const { v4: uuidv4 } = require("uuid");
 const activitiesJsonPath = path.resolve(__dirname, "./activities.json");
 
 //Function to read the JSON of created users
@@ -15,11 +16,13 @@ const readJsonActivities = () => {
 };
 
 export class Activity {
+  uuid: string;
   activity: string;
-  minutes: string;
-  seconds: string;
+  minutes: number;
+  seconds: number;
 
   constructor(activity, minutes, seconds) {
+    this.uuid = uuidv4();
     this.activity = activity;
     this.minutes = minutes;
     this.seconds = seconds;
@@ -43,7 +46,7 @@ export class Activities {
 
   createActivity(userActivity) {
     try {
-      this.activities.push(userActivity);
+      this.activities.unshift(userActivity);
       this.updateUsersJson();
     } catch (error) {
       console.error(error);

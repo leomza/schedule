@@ -15,13 +15,13 @@
 <body>
     <h1 class="text-center" id="count-down-timer"></h1>
     <div id="buttons">
-        <button id="call" onclick="setTime(event, 'call', 1, 30)"><img class="imagen" src="img/telefono.png"
+        <button name="activity" onclick="setTime(event, 'call', 1, 30)"><img class="imagen" src="img/telefono.png"
                 alt=""></button>
-        <button id="meeting" onclick="setTime(event, 'meeting', 1, 0)"><img class="imagen" src="img/reunion.png"
+        <button name="activity" onclick="setTime(event, 'meeting', 0, 59)"><img class="imagen" src="img/reunion.png"
                 alt=""></button>
-        <button id="conference" onclick="setTime(event, 'conference', 0, 30)"><img class="imagen"
+        <button name="activity" onclick="setTime(event, 'conference', 0, 30)"><img class="imagen"
                 src="img/videoconferencia.png" alt=""></button>
-        <button id="break" onclick="setTime(event, 'break', 2, 0)"><img class="imagen" src="img/break.png"
+        <button name="activity" onclick="setTime(event, 'break', 1, 59)"><img class="imagen" src="img/break.png"
                 alt=""></button>
     </div>
 

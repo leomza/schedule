@@ -16,7 +16,7 @@ function setTime(event, activity, minutos, segundos) {
     if (timer === true) {
         startCountDown(--duration, element);
     } else {
-        stopCountDown(activity);
+        stopCountDown(activity, minutos, segundos);
     }
 }
 
@@ -48,11 +48,34 @@ function startCountDown(duration, element) {
     }, 1000);
 }
 
-async function stopCountDown(activity) {
+async function stopCountDown(activity, minutos, segundos) {
     timer = true;
     clearInterval(countInterval);
-    await axios.post(`/activity/setActivity`, { activity, min, sec });
+
+    let restMinutes = paddedFormat(minutos - min);
+    let restSeconds = paddedFormat(segundos - sec);
+    
+    await axios.post(`/activity/setActivity`, { activity, restMinutes, restSeconds });
+
+    const userActivities = document.getElementsByName('activity');
+
+    userActivities.forEach(activity => {
+        activity.disabled = false;
+        activity.classList.remove('button--disabled')
+    })
     renderActivities();
+}
+
+function disabledButtons(event) {
+    const userActivities = document.getElementsByName('activity');
+
+    userActivities.forEach(activity => {
+        activity.disabled = true;
+        activity.classList.add('button--disabled')
+    })
+
+    event.path[1].disabled = false
+    event.path[1].classList.remove('button--disabled');
 }
 
 async function renderActivities() {
@@ -62,10 +85,9 @@ async function renderActivities() {
         let html = "";
         const { activities } = infoActivities.data.allActivities;
         activities.forEach(activity => {
-            html += ` <div>
+            html += ` <div class="activity">
                     <p>${activity.activity}</p>
-                    <p>${activity.minutes}:</p>
-                    <p>${activity.seconds}</p>
+                    <p>${activity.minutes}:${activity.seconds}</p>
                     </div>`
         });
         root.innerHTML = html;
@@ -73,8 +95,3 @@ async function renderActivities() {
         console.error(error);
     }
 }
-
-function disabledButtons(event) {
-    //ACA HAY QUE DESABILITAR LOS OTROS BOTONES QUE NO SE TOCARON!
-}
-

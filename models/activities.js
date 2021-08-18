@@ -3,6 +3,7 @@ exports.__esModule = true;
 exports.Activities = exports.Activity = void 0;
 var fs = require("fs");
 var path = require("path");
+var uuidv4 = require("uuid").v4;
 var activitiesJsonPath = path.resolve(__dirname, "./activities.json");
 //Function to read the JSON of created users
 var readJsonActivities = function () {
@@ -16,6 +17,7 @@ var readJsonActivities = function () {
 };
 var Activity = /** @class */ (function () {
     function Activity(activity, minutes, seconds) {
+        this.uuid = uuidv4();
         this.activity = activity;
         this.minutes = minutes;
         this.seconds = seconds;
@@ -37,7 +39,7 @@ var Activities = /** @class */ (function () {
     };
     Activities.prototype.createActivity = function (userActivity) {
         try {
-            this.activities.push(userActivity);
+            this.activities.unshift(userActivity);
             this.updateUsersJson();
         }
         catch (error) {

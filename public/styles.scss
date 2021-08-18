@@ -1,19 +1,29 @@
 button {
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-
-    &:disabled{
-        cursor: not-allowed;
-    }
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  height: 100px;
 }
 
 .imagen {
-    width: 100px;
-    height: 100px;
-    filter: brightness(75%);
+  width: 100px;
+  height: 100px;
+  filter: brightness(75%);
 
-    &:hover {
-        filter: brightness(100%);
-    }
+  &:hover {
+    filter: brightness(100%);
+  }
+}
+
+.button--disabled {
+  background: black;
+  cursor: not-allowed;
+}
+
+.activity {
+    display: flex;
+    justify-content: space-around;
+    background: green;
+    border: 3px solid black;
+    margin: 5px;
 }

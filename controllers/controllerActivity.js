@@ -7,9 +7,9 @@ var activities_1 = require("../models/activities");
 function newActivity(req, res) {
     try {
         //Get the information from the body
-        var _a = req.body, activity = _a.activity, min = _a.min, sec = _a.sec;
+        var _a = req.body, activity = _a.activity, restMinutes = _a.restMinutes, restSeconds = _a.restSeconds;
         //Initialice a new instance of the Activity
-        var userActivity = new activities_1.Activity(activity, min, sec);
+        var userActivity = new activities_1.Activity(activity, restMinutes, restSeconds);
         //Initialice a new instance of Activity (the initialization will read the JSON of Activities)
         var allActivities = new activities_1.Activities();
         allActivities.createActivity(userActivity);

@@ -14,7 +14,7 @@ function setTime(event, activity, minutos, segundos) {
   if (timer === true) {
     startCountDown(--duration, element);
   } else {
-    stopCountDown(activity);
+    stopCountDown(activity, minutos, segundos);
   }
 } //Devuelvo valor rellenado. Ejemplo: 1 minuto 2 segundos = 01 minutos 02 segundos
 
@@ -49,29 +49,47 @@ function startCountDown(duration, element) {
   }, 1000);
 }
 
-function stopCountDown(activity) {
+function stopCountDown(activity, minutos, segundos) {
+  var restMinutes, restSeconds, userActivities;
   return regeneratorRuntime.async(function stopCountDown$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           timer = true;
           clearInterval(countInterval);
-          _context.next = 4;
+          restMinutes = paddedFormat(minutos - min);
+          restSeconds = paddedFormat(segundos - sec);
+          _context.next = 6;
           return regeneratorRuntime.awrap(axios.post("/activity/setActivity", {
             activity: activity,
-            min: min,
-            sec: sec
+            restMinutes: restMinutes,
+            restSeconds: restSeconds
           }));
 
-        case 4:
+        case 6:
+          userActivities = document.getElementsByName('activity');
+          userActivities.forEach(function (activity) {
+            activity.disabled = false;
+            activity.classList.remove('button--disabled');
+          });
           renderActivities();
 
-        case 5:
+        case 9:
         case "end":
           return _context.stop();
       }
     }
   });
+}
+
+function disabledButtons(event) {
+  var userActivities = document.getElementsByName('activity');
+  userActivities.forEach(function (activity) {
+    activity.disabled = true;
+    activity.classList.add('button--disabled');
+  });
+  event.path[1].disabled = false;
+  event.path[1].classList.remove('button--disabled');
 }
 
 function renderActivities() {
@@ -90,7 +108,7 @@ function renderActivities() {
           html = "";
           activities = infoActivities.data.allActivities.activities;
           activities.forEach(function (activity) {
-            html += " <div>\n                    <p>".concat(activity.activity, "</p>\n                    <p>").concat(activity.minutes, ":</p>\n                    <p>").concat(activity.seconds, "</p>\n                    </div>");
+            html += " <div class=\"activity\">\n                    <p>".concat(activity.activity, "</p>\n                    <p>").concat(activity.minutes, ":").concat(activity.seconds, "</p>\n                    </div>");
           });
           root.innerHTML = html;
           _context2.next = 14;
@@ -107,7 +125,4 @@ function renderActivities() {
       }
     }
   }, null, null, [[0, 11]]);
-}
-
-function disabledButtons(event) {//ACA HAY QUE DESABILITAR LOS OTROS BOTONES QUE NO SE TOCARON!
 }
