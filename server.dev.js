@@ -9,11 +9,14 @@ app.use(express["static"]('public')); //Route (I import the routes of activities
 
 var activityRoute = require('./routes/routeActivity');
 
-var clientRoute = require('./routes/routeClients'); //Use of that Routes that I imported
+var clientRoute = require('./routes/routeClients');
+
+var projectRoute = require('./routes/routeProjects'); //Use of that Routes that I imported
 
 
 app.use('/activity', activityRoute);
 app.use('/clients', clientRoute);
+app.use('/projects', projectRoute);
 app.listen(port, function () {
   console.log("Listening on port: ".concat(port));
 });

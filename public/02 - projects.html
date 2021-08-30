@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="styles.min.css">
+</head>
+
+<body onload="renderClients()">
+    <a href="01- clients.html">Go to clients</a>
+
+    <button id="buttonCreate">
+        Create a new client
+    </button>
+
+    <table id="tblData">
+        <tr>
+            <th>Clientname</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Project Type</th>
+            <th><i class="fas fa-wrench"></i></th>
+        </tr>
+        <tbody class="table"></tbody>
+    </table>
+
+    <!-- Modal to create a task -->
+    <div id="modalCreate" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form id="formCreate">
+                <h3>Register a new client</h3>
+                <div>
+                    <label for="clientname">Clientname:</label>
+                    <input type="text" name="clientname" placeholder="Clientname" required>
+                </div>
+
+                <div>
+                    <label for="phone">Phone:</label>
+                    <input type="text" name="phone" placeholder="Phone" required>
+                </div>
+
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" placeholder="Email" autocomplete="off" required>
+                </div>
+
+                <div>
+                    <label for="branding">Branding:</label>
+                    <input type="radio" id="branding" name="projectType" value="branding">
+
+                    <label for="design">Design:</label>
+                    <input type="radio" id="design" name="projectType" value="design">
+
+                    <label for="business">Business:</label>
+                    <input type="radio" id="business" name="projectType" value="business">
+
+                </div>
+
+                <input type="submit" value="Create client">
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal to edit a task -->
+    <div id="modalEdit" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeEdit" class="close">&times;</span>
+            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+        </div>
+    </div>
+
+    <script src="helperModal.js"></script>
+    <script src="02 - projects.js"></script>
+</body>
+
+</html>

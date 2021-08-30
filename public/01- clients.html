@@ -53,28 +53,28 @@
         <div class="modal-content">
           <span id="closeModal" class="close">&times;</span>
           <form id="formCreate">
-            <h3>Register a new client</h3>
+            <h3>לקוח חדש</h3>
             <div>
-              <label for="clientname">Clientname:</label>
+               
               <input
                 type="text"
                 name="clientname"
-                placeholder="Clientname"
+                placeholder="שם לקוח"
                 required
               />
             </div>
 
             <div>
-              <label for="phone">Phone:</label>
-              <input type="text" name="phone" placeholder="Phone" required />
+              
+              <input type="text" name="phone" placeholder="מספר טלפון" required />
             </div>
 
             <div>
-              <label for="email">Email:</label>
+              
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="כתובת אימייל"
                 autocomplete="off"
                 required
               />
@@ -116,11 +116,19 @@
                 </div>
               </div>
               <div class="selected">
-                Select  Category
+              
+
+               <div class="selected__img">
+                   <img src="./img/maletin.svg" alt="">
+               </div>
+               <div class="selected__work">
+                <p>סוג עסקה</p>  
+               </div>
+           
               </div>
             </div>
 
-            <input type="submit" value="Create client" />
+            <input type="submit" value="Create client"  class="button-form" />
           </form>
         </div>
       </div>
