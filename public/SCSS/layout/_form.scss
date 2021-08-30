@@ -1,0 +1,36 @@
+#formCreate {
+//   p {
+//     font-size: 1.4rem;
+//     // color: $grisOscuro;
+//     margin: 2rem 0 0 0;
+//   }
+
+//   legend {
+//     font-size: 2rem;
+//     // color: $grisOscuro;
+//   }
+
+  label {
+    font-weight: $bold;
+    text-transform: uppercase;
+    display: block;
+  }
+  input:not([type="submit"]) {
+    padding: 1rem;
+    display: block;
+    width: 292px;
+    height: 47px;
+    // background-color: $blanco;
+    border: 1px solid #7784ee;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  input[type="radio"] {
+    margin: 0;
+    width: auto;
+  }
+}
+.button-hiden{
+    visibility:hidden;
+}

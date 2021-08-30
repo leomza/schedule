@@ -1,5 +1,7 @@
 .button-talbe {
   @include button($gradient, inline-block);
+  width: 88px;
+  height: 33px;
   border-radius:0.8rem;
   text-align: center;
   font-size: 1.4rem;
@@ -11,3 +13,20 @@
  
 
 }
+
+.button-form {
+  @include button($gradient, inline-block);
+  width: 292px;
+height: 49px;
+  border-radius:0.8rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: $bold;
+ 
+ 
+  
+
+ 
+
+}
+

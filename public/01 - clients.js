@@ -139,7 +139,27 @@ async function editClient(uuidClient) {
         console.error(error);
     }
 }
+//SELECT BOX
+  
+const selected = document.querySelector(".selected");
+const optionsContainer = document.querySelector(".options-container");
+const optionsList = document.querySelectorAll(".option");
+const btn = document.querySelector('.button-form')
+selected.addEventListener("click", () => {
+    optionsContainer.classList.toggle("active");
+  });
+ 
 
+  optionsList.forEach(o => {
+    o.addEventListener("click", () => {
+      selected.innerHTML = o.querySelector("label").innerHTML;
+      optionsContainer.classList.remove("active");
+    });
+  });
+
+  selected.addEventListener("click", () => {
+    btn.classList.toggle("button-hiden");
+  });
 //In the "form Edit" I stablish the previous checked value that the element already has 
 function radioButtonCheck(projectType) {
     try {
@@ -175,6 +195,8 @@ function radioButtonCheck(projectType) {
         console.error(error);
     };
 };
+
+
 
 //Handle Edit
 async function handleEdit(ev) {

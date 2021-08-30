@@ -50,8 +50,6 @@ h5 {
 }
 
 .button-talbe {
-  width: 88px;
-  height: 33px;
   background: #7784EE;
   font-family: "Assistant", sans-serif;
   color: #ffffff;
@@ -61,6 +59,8 @@ h5 {
   text-align: center;
   display: inline-block;
   border: none;
+  width: 88px;
+  height: 33px;
   border-radius: 0.8rem;
   text-align: center;
   font-size: 1.4rem;
@@ -68,6 +68,28 @@ h5 {
 }
 
 .button-talbe:hover {
+  cursor: pointer;
+}
+
+.button-form {
+  background: #7784EE;
+  font-family: "Assistant", sans-serif;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 2rem;
+  text-decoration: none;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  width: 292px;
+  height: 49px;
+  border-radius: 0.8rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.button-form:hover {
   cursor: pointer;
 }
 
@@ -106,6 +128,115 @@ button {
   cursor: not-allowed;
 }
 
+.select-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 292px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.select-box .options-container {
+  background: #ffffff;
+  color: #000000;
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.selected {
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #000000;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+  -webkit-box-ordinal-group: 1;
+      -ms-flex-order: 0;
+          order: 0;
+}
+
+.selected__work p {
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.selected::after {
+  content: "";
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.select-box .options-container.active {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+.select-box .options-container.active + .selected::after {
+  -webkit-transform: rotateX(180deg);
+          transform: rotateX(180deg);
+  top: -6px;
+}
+
+.select-box .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: #E4E4E4;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .options-container::-webkit-scrollbar-thumb {
+  background: #E4E4E4;
+  border-radius: 0 8px 8px 0;
+}
+
+.select-box .option,
+.selected {
+  padding: 12px;
+  cursor: pointer;
+}
+
+.selected {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.select-box .option:hover {
+  background: #E4E4E4;
+}
+
+.select-box label {
+  cursor: pointer;
+}
+
+.select-box .option .radio {
+  display: none;
+}
+
 #tblData {
   width: 100%;
   text-align: right;
@@ -123,20 +254,10 @@ button {
   padding: 1.2rem 0;
 }
 
-#tblData th, #tblData td {
+#tblData th,
+#tblData td {
   border-bottom: 1px solid #999;
   width: 25%;
-}
-
-.activity {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  background: green;
-  border: 3px solid black;
-  margin: 5px;
 }
 
 .modal {
@@ -167,10 +288,18 @@ button {
           justify-content: center;
   margin: auto;
   padding: 20px;
-  width: 80%;
+  width: 348px;
+  height: 472px;
+  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  border-radius: 8px;
   position: relative;
   bottom: 100px;
-  background: green;
+  background: #ffffff;
+}
+
+.modal-content .close {
+  color: #95A3B9;
 }
 
 /* Close Button */
@@ -183,5 +312,30 @@ button {
   position: relative;
   bottom: 15px;
   left: 50px;
+}
+
+#formCreate label {
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+}
+
+#formCreate input:not([type="submit"]) {
+  padding: 1rem;
+  display: block;
+  width: 292px;
+  height: 47px;
+  border: 1px solid #7784ee;
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+#formCreate input[type="radio"] {
+  margin: 0;
+  width: auto;
+}
+
+.button-hiden {
+  visibility: hidden;
 }
 /*# sourceMappingURL=app.css.map */
