@@ -1,0 +1,29 @@
+/** Media Queries **/
+@mixin telefono {
+  @media (max-width: #{$telefono}) {
+    @content;
+  }
+}
+@mixin grid($columnas, $espaciado) {
+  display: grid;
+  gap: $espaciado;
+  grid-template-columns: repeat($columnas, 1fr);
+}
+
+@mixin button($bgColor, $display) {
+  width: 88px;
+  height: 33px;
+  background: $bgColor;
+  font-family: $principal_font;
+  color: $withe;
+  font-weight: $semi-bold;
+  font-size: 2rem;
+  text-decoration: none;
+  text-align: center;
+  display: $display;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

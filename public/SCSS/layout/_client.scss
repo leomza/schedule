@@ -14,18 +14,44 @@ button {
     filter: brightness(100%);
   }
 }
+.top-table {
+  display: flex;
+  justify-content: space-between;
 
+  margin: 5rem 0;
+}
 .button--disabled {
   background: black;
   cursor: not-allowed;
 }
+#tblData {
+  width: 100%;
+
+  text-align: right;
+  border-collapse: collapse;
+  margin: 0 0 1rem 0;
+  caption-side: top;
+  thead {
+    tr {
+      text-align: right;
+    }
+  }
+  td,
+  th {
+    padding: 1.2rem 0;
+  }
+  th, td {
+    border-bottom: 1px solid #999;
+    width: 25%;
+ }
+}
 
 .activity {
-    display: flex;
-    justify-content: space-around;
-    background: green;
-    border: 3px solid black;
-    margin: 5px;
+  display: flex;
+  justify-content: space-around;
+  background: green;
+  border: 3px solid black;
+  margin: 5px;
 }
 
 //////////////////////////MODAL////////////////////////

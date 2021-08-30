@@ -1,0 +1,13 @@
+.button-talbe {
+  @include button($gradient, inline-block);
+  border-radius:0.8rem;
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: $regular;
+ 
+ 
+  
+
+ 
+
+}

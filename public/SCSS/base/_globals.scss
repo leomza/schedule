@@ -1,0 +1,41 @@
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+body {
+  direction: rtl;
+  font-family: $principal_font;
+  font-size: 1.6rem;
+  margin: 0;
+}
+p {
+  font-size: 2.1rem;
+  font-weight: $regular;
+}
+.container {
+  width: 95%;
+  max-width: 120.5rem;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h4,
+h5 {
+  font-family: $principal_font;
+  font-weight: $bold;
+  margin: 0;
+}
+ 
