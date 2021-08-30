@@ -1,7 +1,7 @@
 export {};
 
 //I import the classes (with Methods) of the Models that Im going to use here
-import { Activity, Activities } from "../models/activities";
+import { Activity, Activities } from "../models/modelActivities";
 
 //Function to add a new user into the JSON
 export function newActivity(req, res) {
