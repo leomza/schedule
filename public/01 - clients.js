@@ -42,10 +42,16 @@ async function renderClients(clientsToShow) {
             <td>${element.phone}</td> 
             <td>${element.email}</td>
             <td>${element.projectType}</td>  
-            <td>
-            <i class="fas fa-edit table__edit" onclick='editClient("${element.uuid}")' title="Edit"></i>
-            <i class="fas fa-trash table__remove" onclick='removeClient("${element.uuid}", "${element.clientname}")' title="Remove"></i>
-            </td> 
+             
+            <td class="icons">
+<div class="icons__update">
+            <img  src="./img/update.svg" alt="" class="table__edit" onclick='editClient("${element.uuid}")' title="Edit"> 
+            </div>
+            <div class="icons__delete">
+          <img src="./img/delete.svg" alt="" class="table__remove" onclick='removeClient("${element.uuid}", "${element.clientname}")' title="Remove"> 
+          </div>
+          </td> 
+             
             </tr>`
             );
         }).join('');
