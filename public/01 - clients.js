@@ -1,4 +1,4 @@
-//Handle the form to create a new Task:
+//Handle the form to create a new Client:
 const handleForm = document.querySelector("#formCreate");
 handleForm.addEventListener('submit', handleNewClient);
 
@@ -42,6 +42,7 @@ async function renderClients(clientsToShow) {
             <td>${element.phone}</td> 
             <td>${element.email}</td>
             <td>${element.projectType}</td>  
+            <td>${element.callLimitPerDay}</td>  
              
             <td class="icons">
 <div class="icons__update">
@@ -166,6 +167,7 @@ selected.addEventListener("click", () => {
   selected.addEventListener("click", () => {
     btn.classList.toggle("button-hiden");
   });
+
 //In the "form Edit" I stablish the previous checked value that the element already has 
 function radioButtonCheck(projectType) {
     try {

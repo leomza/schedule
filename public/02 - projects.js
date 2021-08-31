@@ -1,29 +1,29 @@
-//Handle the form to create a new Task:
+//Handle the form to create a new Project:
 const handleForm = document.querySelector("#formCreate");
 handleForm.addEventListener('submit', handleNewClient);
 
 async function handleNewClient(ev) {
     try {
         ev.preventDefault();
-        let { clientname, phone, email, projectType } = ev.target.elements
-        clientname = clientname.value;
-        phone = phone.value;
-        email = email.value;
-        projectType = projectType.value;
+        let { projectName, clientName, task, status } = ev.target.elements
+        projectName = projectName.value;
+        clientName = clientName.value;
+        task = task.value;
+        status = status.value;
 
         modalCreate.style.display = "none";
         ev.target.reset();
 
-        const clientDetails = { clientname, phone, email, projectType };
-        const clientsCreated = await axios.post('/clients/register', clientDetails);
-        swal("Good job!", "New user added succesfully!", "success");
-        renderClients(clientsCreated.data.allClients.clients);
+        const ProjectDetails = { projectName, clientName, task, status };
+        const projectsCreated = await axios.post('/projects/addNew', ProjectDetails);
+        swal("Good job!", "New project added succesfully!", "success");
+        //renderProjects(projectsCreated.data.allProjectrs.projects);
     } catch (error) {
         console.error(error);
     }
 }
 
-//Render all the clients
+/* //Render all the projects
 async function renderClients(clientsToShow) {
     try {
         const table = document.querySelector('.table');
@@ -202,4 +202,4 @@ async function handleEdit(ev) {
         swal("Ohhh no!", `${error}`, "warning");
         console.error(error);
     };
-};
+}; * /

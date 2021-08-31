@@ -16,18 +16,34 @@ const readJsonProjects = () => {
     }
 };
 
+enum Status {
+    complete = 'complete',
+    paidOut = 'paidOut',
+    waitingForPayment = 'waitingForPayment',
+    approvedOffer = 'approvedOffer',
+    bidding = 'bidding'
+}
+
+enum Task {
+    UI = 'userInterfaz',
+    graphics = 'graphics',
+    design = 'design'
+}
+
 export class Project {
     uuid: string;
     projectName: string;
     client: Client;
-    allottedTime: number
+    task: Task;
+    status: Status;
     createdDate: any;
 
-    constructor(projectName: string, client: Client, allottedTime: number) {
+    constructor(projectName: string, client: Client, task: Task, status: Status) {
         this.uuid = uuidv4();
         this.projectName = projectName;
-        this.client = new Client(null, null, null, null);
-        this.allottedTime = allottedTime;
+        this.client = client;
+        this.task = task;
+        this.status = status;
         this.createdDate = Date.now();
     }
 }

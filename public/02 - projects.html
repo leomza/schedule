@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clients</title>
+    <title>Projects</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -19,15 +19,16 @@
     <a href="01- clients.html">Go to clients</a>
 
     <button id="buttonCreate">
-        Create a new client
+        Create a new project
     </button>
 
     <table id="tblData">
         <tr>
-            <th>Clientname</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Project Type</th>
+            <th>Project name</th>
+            <th>Client</th>
+            <th>Task</th>
+            <th>Execution time</th>
+            <th>Status</th>
             <th><i class="fas fa-wrench"></i></th>
         </tr>
         <tbody class="table"></tbody>
@@ -39,37 +40,60 @@
         <div class="modal-content">
             <span id="closeModal" class="close">&times;</span>
             <form id="formCreate">
-                <h3>Register a new client</h3>
+                <h3>Add a new project</h3>
                 <div>
-                    <label for="clientname">Clientname:</label>
-                    <input type="text" name="clientname" placeholder="Clientname" required>
+                    <label for="projectName">Project Name:</label>
+                    <input type="text" name="projectName" placeholder="Project name" required>
                 </div>
 
                 <div>
-                    <label for="phone">Phone:</label>
-                    <input type="text" name="phone" placeholder="Phone" required>
+                    <label for="clientName">Client Name:</label>
+                    <option>Value</option>
                 </div>
 
                 <div>
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" placeholder="Email" autocomplete="off" required>
+                    <label for="task">Task =></label>
+                    <div>
+                        <label for="userInterfaz">User Interfaz:</label>
+                        <input type="radio" id="userInterfaz" name="task" value="userInterfaz">
+
+                        <label for="graphics">Graphics:</label>
+                        <input type="radio" id="graphics" name="task" value="graphics">
+
+                        <label for="design">Design:</label>
+                        <input type="radio" id="design" name="task" value="design">
+                    </div>
                 </div>
+
+                <!-- <div>
+                    <label for="executionTime">Execution time:</label>
+                    <input type="text" name="executionTime" placeholder="Execution Time">
+                </div> -->
 
                 <div>
-                    <label for="branding">Branding:</label>
-                    <input type="radio" id="branding" name="projectType" value="branding">
+                    <label for="status">Status =></label>
+                    <div>
+                        <label for="complete">Complete:</label>
+                        <input type="radio" id="complete" name="status" value="complete">
 
-                    <label for="design">Design:</label>
-                    <input type="radio" id="design" name="projectType" value="design">
+                        <label for="paidOut">Paid Out:</label>
+                        <input type="radio" id="paidOut" name="status" value="paidOut">
 
-                    <label for="business">Business:</label>
-                    <input type="radio" id="business" name="projectType" value="business">
+                        <label for="waitingForPayment">Waiting For Payment:</label>
+                        <input type="radio" id="waitingForPayment" name="status" value="waitingForPayment">
 
+                        <label for="approvedOffer">Approved Offer:</label>
+                        <input type="radio" id="approvedOffer" name="status" value="approvedOffer">
+
+                        <label for="bidding">Bidding:</label>
+                        <input type="radio" id="bidding" name="status" value="bidding">
+                    </div>
                 </div>
-
-                <input type="submit" value="Create client">
-            </form>
         </div>
+
+        <input type="submit" value="Create project">
+        </form>
+    </div>
     </div>
 
     <!-- Modal to edit a task -->
