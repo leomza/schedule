@@ -23,6 +23,24 @@ async function handleNewClient(ev) {
     }
 }
 
+//Function to get the names of the client in the "select Client Name"
+async function uploadClientNames() {
+    try {
+        const clientsInfo = await axios.get(`/clients/getAllClients`);
+        const { clients } = clientsInfo.data.allClients;
+        const select = document.getElementById('selectClientName');
+
+
+        for (let index = 0; index < clients.length; index++) {
+            const option = document.createElement('option');
+            option.innerHTML = clients[index].clientname;
+            select.appendChild(option);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 /* //Render all the projects
 async function renderClients(clientsToShow) {
     try {
@@ -39,13 +57,13 @@ async function renderClients(clientsToShow) {
             return (
                 `<tr>
             <td>${element.clientname}</td>
-            <td>${element.phone}</td> 
+            <td>${element.phone}</td>
             <td>${element.email}</td>
-            <td>${element.projectType}</td>  
+            <td>${element.projectType}</td>
             <td>
             <i class="fas fa-edit table__edit" onclick='editClient("${element.uuid}")' title="Edit"></i>
             <i class="fas fa-trash table__remove" onclick='removeClient("${element.uuid}", "${element.clientname}")' title="Remove"></i>
-            </td> 
+            </td>
             </tr>`
             );
         }).join('');
@@ -56,9 +74,9 @@ async function renderClients(clientsToShow) {
         swal("Ohhh no!", error.response.data, "warning");
         console.error(error);
     }
-}
+} */
 
-//Delete a client
+/* //Delete a client
 function removeClient(clientId, clientName) {
     try {
         swal({
@@ -78,18 +96,18 @@ function removeClient(clientId, clientName) {
     } catch (error) {
         console.error(error);
     }
-}
+} */
 
-async function deleteClient(clientId) {
+/* async function deleteClient(clientId) {
     try {
         const clientsInfo = await axios.delete(`/clients/deleteClient/${clientId}`);
         renderClients(clientsInfo.data.allClients.clients);
     } catch (error) {
         console.error(error);
     }
-}
+} */
 
-//Update a client:
+/* //Update a client:
 //This will contain the Client Id to Edit
 let clientIdEdit;
 
@@ -123,13 +141,13 @@ async function editClient(uuidClient) {
                 <div>
                 <label for="branding2">Branding:</label>
                 <input type="radio" id="branding2" name="projectType" value="branding">
-    
+
                 <label for="design2">Design:</label>
                 <input type="radio" id="design2" name="projectType" value="design">
-    
+
                 <label for="business2">Business:</label>
                 <input type="radio" id="business2" name="projectType" value="business">
-    
+
                 </div>
                 <input type="submit" value="Update client">
                 </div>`
@@ -138,45 +156,9 @@ async function editClient(uuidClient) {
     } catch (error) {
         console.error(error);
     }
-}
+} */
 
-//In the "form Edit" I stablish the previous checked value that the element already has 
-function radioButtonCheck(projectType) {
-    try {
-        const elementWithTheEvent = document.querySelector('#checkRadioButton');
-        if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button');
-
-        const radioBranding = document.querySelector('#branding2');
-        if (!radioBranding) throw new Error('The is a problem finding the element "branding" radio button');
-
-        const radioDesign = document.querySelector('#design2');
-        if (!radioDesign) throw new Error('The is a problem finding the element "design" radio button');
-
-        const radioBusiness = document.querySelector('#business2');
-        if (!radioBusiness) throw new Error('The is a problem finding the element "business" radio button');
-
-        switch (projectType) {
-            case 'branding':
-                radioBranding.checked = true;
-                break;
-
-            case 'design':
-                radioDesign.checked = true;
-                break;
-
-            case 'business':
-                radioBusiness.checked = true;
-                break;
-        };
-
-        //With this the event is going to happen only once
-        elementWithTheEvent.onmouseenter = null;
-    } catch (error) {
-        console.error(error);
-    };
-};
-
-//Handle Edit
+/* //Handle Edit
 async function handleEdit(ev) {
     try {
         console.log(ev.target.elements);
@@ -202,4 +184,4 @@ async function handleEdit(ev) {
         swal("Ohhh no!", `${error}`, "warning");
         console.error(error);
     };
-}; * /
+}; */

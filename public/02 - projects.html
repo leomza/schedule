@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles.min.css">
 </head>
 
-<body onload="renderClients()">
+<body onload="uploadClientNames()">
     <a href="01- clients.html">Go to clients</a>
 
     <button id="buttonCreate">
@@ -47,8 +47,9 @@
                 </div>
 
                 <div>
-                    <label for="clientName">Client Name:</label>
-                    <option>Value</option>
+                    <select name="selectClientName" id="selectClientName">
+                        <option>Select a client name...</option>
+                    </select>
                 </div>
 
                 <div>
