@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles.min.css">
 </head>
 
-<body onload="uploadClientNames()">
+<body onload="uploadClientNames(); renderProjects()">
     <a href="01- clients.html">Go to clients</a>
 
     <button id="buttonCreate">
@@ -25,9 +25,10 @@
     <table id="tblData">
         <tr>
             <th>Project name</th>
-            <th>Client</th>
+            <th>Client Name</th>
             <th>Task</th>
-            <th>Execution time</th>
+            <th>Call limit per day</th>
+            <th>Total Hours / Used Hours</th>
             <th>Status</th>
             <th><i class="fas fa-wrench"></i></th>
         </tr>
@@ -47,6 +48,7 @@
                 </div>
 
                 <div>
+                    <label for="selectClientName">Select a client name</label>
                     <select name="selectClientName" id="selectClientName">
                         <option>Select a client name...</option>
                     </select>
@@ -65,11 +67,6 @@
                         <input type="radio" id="design" name="task" value="design">
                     </div>
                 </div>
-
-                <!-- <div>
-                    <label for="executionTime">Execution time:</label>
-                    <input type="text" name="executionTime" placeholder="Execution Time">
-                </div> -->
 
                 <div>
                     <label for="status">Status =></label>
@@ -90,6 +87,11 @@
                         <input type="radio" id="bidding" name="status" value="bidding">
                     </div>
                 </div>
+        </div>
+
+        <div>
+            <label for="totalHours">Total hours for the project</label>
+            <input type="number" name="totalHours" placeholder="Total Hours for the project">
         </div>
 
         <input type="submit" value="Create project">

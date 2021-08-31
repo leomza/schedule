@@ -5,16 +5,17 @@ handleForm.addEventListener('submit', handleNewClient);
 async function handleNewClient(ev) {
     try {
         ev.preventDefault();
-        let { clientname, phone, email, projectType } = ev.target.elements
+        let { clientname, phone, email, projectType, callLimitPerDay } = ev.target.elements
         clientname = clientname.value;
         phone = phone.value;
         email = email.value;
         projectType = projectType.value;
+        callLimitPerDay = callLimitPerDay.value;
 
         modalCreate.style.display = "none";
         ev.target.reset();
 
-        const clientDetails = { clientname, phone, email, projectType };
+        const clientDetails = { clientname, phone, email, projectType, callLimitPerDay };
         const clientsCreated = await axios.post('/clients/register', clientDetails);
         swal("Good job!", "New user added succesfully!", "success");
         renderClients(clientsCreated.data.allClients.clients);
@@ -79,7 +80,7 @@ function removeClient(clientId, clientName) {
                 if (willDelete) {
                     deleteClient(clientId);
                 } else {
-                    swal("Your product is safe!");
+                    swal("Your client is safe!");
                 }
             });
     } catch (error) {
@@ -147,26 +148,26 @@ async function editClient(uuidClient) {
     }
 }
 //SELECT BOX
-  
+
 const selected = document.querySelector(".selected");
 const optionsContainer = document.querySelector(".options-container");
 const optionsList = document.querySelectorAll(".option");
 const btn = document.querySelector('.button-form')
 selected.addEventListener("click", () => {
     optionsContainer.classList.toggle("active");
-  });
- 
+});
 
-  optionsList.forEach(o => {
+
+optionsList.forEach(o => {
     o.addEventListener("click", () => {
-      selected.innerHTML = o.querySelector("label").innerHTML;
-      optionsContainer.classList.remove("active");
+        selected.innerHTML = o.querySelector("label").innerHTML;
+        optionsContainer.classList.remove("active");
     });
-  });
+});
 
-  selected.addEventListener("click", () => {
+selected.addEventListener("click", () => {
     btn.classList.toggle("button-hiden");
-  });
+});
 
 //In the "form Edit" I stablish the previous checked value that the element already has 
 function radioButtonCheck(projectType) {
@@ -209,7 +210,6 @@ function radioButtonCheck(projectType) {
 //Handle Edit
 async function handleEdit(ev) {
     try {
-        console.log(ev.target.elements);
         let { clientname, phone, email, projectType } = ev.target.elements;
         clientname = clientname.value;
         phone = phone.value;
@@ -224,7 +224,6 @@ async function handleEdit(ev) {
         ev.target.reset();
 
         const clientDetails = { clientname, phone, email, projectType };
-        console.log(clientDetails);
         const allClients = await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);
         renderClients(allClients);
     } catch (error) {

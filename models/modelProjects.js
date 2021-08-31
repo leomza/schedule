@@ -1,7 +1,6 @@
 "use strict";
 exports.__esModule = true;
 exports.Projects = exports.Project = void 0;
-var modelClients_1 = require("./modelClients");
 var uuidv4 = require("uuid").v4;
 var fs = require("fs");
 var path = require("path");
@@ -16,13 +15,30 @@ var readJsonProjects = function () {
         console.error(error);
     }
 };
+var Status;
+(function (Status) {
+    Status["complete"] = "complete";
+    Status["paidOut"] = "paidOut";
+    Status["waitingForPayment"] = "waitingForPayment";
+    Status["approvedOffer"] = "approvedOffer";
+    Status["bidding"] = "bidding";
+})(Status || (Status = {}));
+var Task;
+(function (Task) {
+    Task["UI"] = "userInterfaz";
+    Task["graphics"] = "graphics";
+    Task["design"] = "design";
+})(Task || (Task = {}));
 var Project = /** @class */ (function () {
-    function Project(projectName, client, allottedTime) {
-        this.uuid = uuidv4();
+    function Project(projectName, clientId, task, status, totalHours) {
+        this.projectUuid = uuidv4();
         this.projectName = projectName;
-        this.client = new modelClients_1.Client(null, null, null, null);
-        this.allottedTime = allottedTime;
+        this.clientId = clientId;
+        this.task = task;
+        this.status = status;
         this.createdDate = Date.now();
+        this.totalHours = totalHours;
+        this.usedHours = 0;
     }
     return Project;
 }());
@@ -50,7 +66,7 @@ var Projects = /** @class */ (function () {
     };
     Projects.prototype.findProjectByUuid = function (id) {
         try {
-            var projectFound = this.projects.find(function (project) { return project.uuid === id; });
+            var projectFound = this.projects.find(function (project) { return project.projectUuid === id; });
             return projectFound;
         }
         catch (error) {
@@ -59,7 +75,7 @@ var Projects = /** @class */ (function () {
     };
     Projects.prototype.deleteProject = function (id) {
         try {
-            this.projects = this.projects.filter(function (project) { return project.uuid !== id; });
+            this.projects = this.projects.filter(function (project) { return project.projectUuid !== id; });
             this.updateProjectsJson();
         }
         catch (error) {

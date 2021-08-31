@@ -5,19 +5,20 @@ handleForm.addEventListener('submit', handleNewClient);
 async function handleNewClient(ev) {
     try {
         ev.preventDefault();
-        let { projectName, clientName, task, status } = ev.target.elements
+        let { projectName, clientId, task, status, totalHours } = ev.target.elements
         projectName = projectName.value;
-        clientName = clientName.value;
+        clientId = selectClientName.value;
         task = task.value;
         status = status.value;
+        totalHours = totalHours.valueAsNumber;
 
         modalCreate.style.display = "none";
         ev.target.reset();
 
-        const ProjectDetails = { projectName, clientName, task, status };
-        const projectsCreated = await axios.post('/projects/addNew', ProjectDetails);
+        const projectDetails = { projectName, clientId, task, status, totalHours };
+        const projectsCreated = await axios.post('/projects/addNew', projectDetails);
         swal("Good job!", "New project added succesfully!", "success");
-        //renderProjects(projectsCreated.data.allProjectrs.projects);
+        renderProjects(projectsCreated.data.allProjects.projects);
     } catch (error) {
         console.error(error);
     }
@@ -30,9 +31,9 @@ async function uploadClientNames() {
         const { clients } = clientsInfo.data.allClients;
         const select = document.getElementById('selectClientName');
 
-
         for (let index = 0; index < clients.length; index++) {
             const option = document.createElement('option');
+            option.value = clients[index].uuid;
             option.innerHTML = clients[index].clientname;
             select.appendChild(option);
         }
@@ -41,29 +42,45 @@ async function uploadClientNames() {
     }
 }
 
-/* //Render all the projects
-async function renderClients(clientsToShow) {
+//Render all the projects
+async function renderProjects(projectsToShow) {
     try {
         const table = document.querySelector('.table');
         if (!table) throw new Error('There is a problem finding table from HTML');
 
-        if (!clientsToShow) {
-            const clientsInfo = await axios.get(`/clients/getAllClients`);
-            const { clients } = clientsInfo.data.allClients;
-            clientsToShow = clients;
+        const clientsInfo = await axios.get(`/clients/getAllClients`);
+        const { clients } = clientsInfo.data.allClients;
+
+        if (!projectsToShow) {
+            const projectsInfo = await axios.get(`/projects/getAllprojects`);
+            const { projects } = projectsInfo.data.allProjects;
+            projectsToShow = projects;
         }
 
-        let html = clientsToShow.map(element => {
+        //Add the information of the user to the project
+        for (let index = 0; index < projectsToShow.length; index++) {
+            const project = projectsToShow[index];
+
+            clients.forEach(client => {
+                if (client.uuid === project.clientId) {
+                    Object.assign(projectsToShow[index], client);
+                }
+            });
+        };
+
+        let html = projectsToShow.map(element => {
             return (
                 `<tr>
-            <td>${element.clientname}</td>
-            <td>${element.phone}</td>
-            <td>${element.email}</td>
-            <td>${element.projectType}</td>
-            <td>
-            <i class="fas fa-edit table__edit" onclick='editClient("${element.uuid}")' title="Edit"></i>
-            <i class="fas fa-trash table__remove" onclick='removeClient("${element.uuid}", "${element.clientname}")' title="Remove"></i>
-            </td>
+                <td>${element.projectName}</td>
+                <td>${element.clientname}</td>
+                <td>${element.task}</td>
+                <td>${element.callLimitPerDay}</td>
+                <td>${element.totalHours} / ${element.usedHours}</td>
+                <td>${element.status}</td>
+                <td>
+                <i class="fas fa-edit table__edit" onclick='editProject("${element.projectUuid}")' title="Edit"></i>
+                <i class="fas fa-trash table__remove" onclick='removeProject("${element.projectUuid}", "${element.projectName}")' title="Remove"></i>
+                </td>
             </tr>`
             );
         }).join('');
@@ -74,44 +91,44 @@ async function renderClients(clientsToShow) {
         swal("Ohhh no!", error.response.data, "warning");
         console.error(error);
     }
-} */
+}
 
-/* //Delete a client
-function removeClient(clientId, clientName) {
+//Delete a project
+function removeProject(projectId, projectName) {
     try {
         swal({
             title: "Are you sure?",
-            text: `Once deleted, you will not be able to recover this client ${clientName}!`,
+            text: `Once deleted, you will not be able to recover this project ${projectName}!`,
             icon: "warning",
             buttons: true,
             dangerMode: true,
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    deleteClient(clientId);
+                    deleteProject(projectId);
                 } else {
-                    swal("Your product is safe!");
+                    swal("Your project is safe!");
                 }
             });
     } catch (error) {
         console.error(error);
     }
-} */
+}
 
-/* async function deleteClient(clientId) {
+async function deleteProject(projectId) {
     try {
-        const clientsInfo = await axios.delete(`/clients/deleteClient/${clientId}`);
-        renderClients(clientsInfo.data.allClients.clients);
+        const projectsInfo = await axios.delete(`/projects/deleteProject/${projectId}`);
+        renderProjects(projectsInfo.data.allProjects.projects);
     } catch (error) {
         console.error(error);
     }
-} */
+}
 
-/* //Update a client:
-//This will contain the Client Id to Edit
-let clientIdEdit;
+//Update a project:
+//This will contain the Project Id to Edit
+let projectIdEdit;
 
-async function editClient(uuidClient) {
+async function editProject(uuidProject) {
     try {
         if (!modalEdit) throw new Error('There is a problem finding the modal in the HTML');
         modalEdit.style.display = "block";
@@ -119,49 +136,73 @@ async function editClient(uuidClient) {
 
         const formEdit = document.querySelector("#formEdit");
         if (!formEdit) throw new Error('There is a problem finding form from HTML');
-        const clientFound = await axios.get(`clients/findClient/${uuidClient}`);
-        const { foundClient } = clientFound.data;
+        const projectFound = await axios.get(`projects/findProject/${uuidProject}`);
+        const { foundProject } = projectFound.data;
+        console.log(foundProject);
+
         let html = `
-                <div id="checkRadioButton" onmouseenter='radioButtonCheck("${foundClient.projectType}")'>
-                 <h3>Edit client</h3>
+        <div>
+        <div>
+        <label for="projectName">Project Name:</label>
+        <input type="text" name="projectName" placeholder="Project name" required>
+        </div>
 
-                <div class="form__wrapper">
-                    <input type="text" name="clientname" value="${foundClient.clientname}" placeholder="Clientname" required>
-                </div>
+        <div>
+        <label for="selectClientName">Select a client name</label>
+        <select onclick="uploadClientNamesEdit()" name="selectClientName" id="selectClientNameEdit">
+            <option>Select a client name...</option>
+        </select>
+        </div>
 
+        <div>
+        <label for="task">Task =></label>
+        <div>
+            <label for="userInterfaz">User Interfaz:</label>
+            <input type="radio" id="userInterfaz" name="task" value="userInterfaz">
 
-                <div class="form__wrapper">
-                    <input type="text" name="phone" value="${foundClient.phone}" placeholder="Phone" required>
-                </div>
+            <label for="graphics">Graphics:</label>
+            <input type="radio" id="graphics" name="task" value="graphics">
 
-                <div class="form__wrapper">
-                    <input type="email" name="email" value="${foundClient.email}" placeholder="Email" required>
-                </div>
+            <label for="design">Design:</label>
+            <input type="radio" id="design" name="task" value="design">
+        </div>
+        </div>
 
-                <div>
-                <label for="branding2">Branding:</label>
-                <input type="radio" id="branding2" name="projectType" value="branding">
+        <div>
+        <label for="status">Status =></label>
+        <div>
+            <label for="complete">Complete:</label>
+            <input type="radio" id="complete" name="status" value="complete">
 
-                <label for="design2">Design:</label>
-                <input type="radio" id="design2" name="projectType" value="design">
+            <label for="paidOut">Paid Out:</label>
+            <input type="radio" id="paidOut" name="status" value="paidOut">
 
-                <label for="business2">Business:</label>
-                <input type="radio" id="business2" name="projectType" value="business">
+            <label for="waitingForPayment">Waiting For Payment:</label>
+            <input type="radio" id="waitingForPayment" name="status" value="waitingForPayment">
 
-                </div>
-                <input type="submit" value="Update client">
+            <label for="approvedOffer">Approved Offer:</label>
+            <input type="radio" id="approvedOffer" name="status" value="approvedOffer">
+
+            <label for="bidding">Bidding:</label>
+            <input type="radio" id="bidding" name="status" value="bidding">
+        </div>
+        </div>
+        <div>
+            <label for="totalHours">Total hours for the project</label>
+            <input type="number" name="totalHours" placeholder="Total Hours for the project">
+        </div>
+                <input type="submit" value="Update project">
                 </div>`
         formEdit.innerHTML = html;
-        clientIdEdit = foundClient.uuid;
+        projectIdEdit = foundProject.projectUuid;
     } catch (error) {
         console.error(error);
     }
-} */
+}
 
 /* //Handle Edit
 async function handleEdit(ev) {
     try {
-        console.log(ev.target.elements);
         let { clientname, phone, email, projectType } = ev.target.elements;
         clientname = clientname.value;
         phone = phone.value;
@@ -185,3 +226,23 @@ async function handleEdit(ev) {
         console.error(error);
     };
 }; */
+
+//Function to get the names of the client in the "select Client Name"
+async function uploadClientNamesEdit() {
+    try {
+        const clientsInfo = await axios.get(`/clients/getAllClients`);
+        const { clients } = clientsInfo.data.allClients;
+        const select = document.getElementById('selectClientNameEdit');
+
+        for (let index = 0; index < clients.length; index++) {
+            const option = document.createElement('option');
+            option.value = clients[index].uuid;
+            option.innerHTML = clients[index].clientname;
+            select.appendChild(option);
+        }
+        //The event is going to happen just once
+        select.onclick = null;
+    } catch (error) {
+        console.error(error);
+    }
+}
