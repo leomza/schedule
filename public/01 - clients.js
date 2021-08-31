@@ -42,6 +42,7 @@ async function renderClients(clientsToShow) {
             <td>${element.phone}</td> 
             <td>${element.email}</td>
             <td>${element.projectType}</td>  
+            <td>${element.callLimitPerDay}</td>  
              
             <td class="icons">
 <div class="icons__update">
