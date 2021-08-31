@@ -26,23 +26,17 @@ export class Client {
     phone: string;
     email: string;
     projectType: ProjectType;
-    /*     startHour: number;
-        startMinute: number;
-        finishHour: number;
-        finishMinute: number; */
+    callLimitPerDay: string;
     createdDate: any;
 
 
-    constructor(clientname: string, phone: string, email: string, projectType: ProjectType/* , startHour: number, startMinute: number, finishHour: number, finishMinute: number */) {
+    constructor(clientname: string, phone: string, email: string, projectType: ProjectType, callLimitPerDay: string) {
         this.uuid = uuidv4();
         this.clientname = clientname;
         this.phone = phone;
         this.email = email;
         this.projectType = projectType;
-        /*         this.startHour = startHour;
-                this.startMinute = startMinute;
-                this.finishHour = finishHour;
-                this.finishMinute = finishMinute; */
+        this.callLimitPerDay = callLimitPerDay;
         this.createdDate = Date.now();
     }
 }
