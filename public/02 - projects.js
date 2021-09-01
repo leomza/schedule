@@ -139,7 +139,9 @@ async function editProject(uuidProject) {
         const projectFound = await axios.get(`projects/findProject/${uuidProject}`);
         const { foundProject } = projectFound.data;
 
-        let html = `
+        //Set the client Name
+        showClientNameInDOM(foundProject.clientId).then((data) => {
+            let html = `
         <div id="checkRadioButtonEdit" onmouseenter='radioButtonCheck("${foundProject.task}", "${foundProject.status}")'>
         <div>
         <label for="projectName">Project Name:</label>
@@ -149,7 +151,7 @@ async function editProject(uuidProject) {
         <div>
         <label for="selectClientName">Select a client name</label>
         <select onclick="uploadClientNamesEdit()" name="selectClientName" id="selectClientNameEdit">
-            <option>Select a client name...</option>
+        <option id="option${foundProject.clientId}" value="${foundProject.clientId}" selected disabled hidden>${data}</option>    
         </select>
         </div>
 
@@ -192,8 +194,9 @@ async function editProject(uuidProject) {
         </div>
                 <input type="submit" value="Update project">
                 </div>`
-        formEdit.innerHTML = html;
-        projectIdEdit = foundProject.projectUuid;
+            formEdit.innerHTML = html;
+            projectIdEdit = foundProject.projectUuid;
+        });
     } catch (error) {
         console.error(error);
     }
@@ -266,7 +269,7 @@ function radioButtonCheck(projectType, status) {
                 radioBiddingEdit.checked = true;
                 break;
         };
-        
+
         //With this the event is going to happen only once
         elementWithTheEvent.onmouseenter = null;
     } catch (error) {
@@ -274,32 +277,38 @@ function radioButtonCheck(projectType, status) {
     };
 };
 
-/* //Handle Edit
+//Function to show the client name in the Edit DOM
+async function showClientNameInDOM(clientId) {
+    const clientFound = await axios.get(`clients/findClient/${clientId}`);
+    return clientFound.data.foundClient.clientname;
+}
+
+//Handle Edit
 async function handleEdit(ev) {
     try {
-        let { clientname, phone, email, projectType } = ev.target.elements;
-        clientname = clientname.value;
-        phone = phone.value;
-        email = email.value;
-        projectType = projectType.value;
- 
-        if (!clientname || !phone || !email || !projectType)
+        let { projectName, clientId, task, status, totalHours } = ev.target.elements
+        projectName = projectName.value;
+        clientId = selectClientNameEdit.value;
+        task = task.value;
+        status = status.value;
+        totalHours = totalHours.valueAsNumber;
+
+        if (!projectName || !clientId || !task || !status || !totalHours)
             throw new Error("You need to complete all the fields");
- 
+
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
         ev.target.reset();
- 
-        const clientDetails = { clientname, phone, email, projectType };
-        console.log(clientDetails);
-        const allClients = await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);
-        renderClients(allClients);
+
+        const projectDetails = { projectName, clientId, task, status, totalHours };
+        console.log(projectDetails);
+        const allProjects = await axios.put(`/projects/editProject/${projectIdEdit}`, projectDetails);
+        renderClients(allProjects);
     } catch (error) {
-        alert(error)
         swal("Ohhh no!", `${error}`, "warning");
         console.error(error);
     };
-}; */
+};
 
 //Function to get the names of the client in the "select Client Name"
 async function uploadClientNamesEdit() {
