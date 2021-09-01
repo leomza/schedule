@@ -248,9 +248,6 @@ selectedAll.forEach(function (selected) {
       optionsContainer.classList.remove("active");
     });
   });
-});
-selected.addEventListener("click", function () {
-  btn.classList.toggle("button-hiden");
 }); //SELECT BOX-TIME
 // const selectedTime = document.querySelector(".selected-time");
 // selectedTime.addEventListener("click", () => {

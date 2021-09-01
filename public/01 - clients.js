@@ -199,10 +199,7 @@ const btn = document.querySelector('.button-form')
   
    
   });
-  selected.addEventListener("click", () => {
-    btn.classList.toggle("button-hiden");
-});
-
+ 
 
 
 
