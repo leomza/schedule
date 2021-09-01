@@ -221,7 +221,7 @@ function deleteProject(projectId) {
 var projectIdEdit;
 
 function editProject(uuidProject) {
-  var formEdit, projectFound, foundProject, html;
+  var formEdit, projectFound, foundProject;
   return regeneratorRuntime.async(function editProject$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
@@ -253,24 +253,27 @@ function editProject(uuidProject) {
 
         case 10:
           projectFound = _context5.sent;
-          foundProject = projectFound.data.foundProject;
-          html = "\n        <div id=\"checkRadioButtonEdit\" onmouseenter='radioButtonCheck(\"".concat(foundProject.task, "\", \"").concat(foundProject.status, "\")'>\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" value=\"").concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n            <option>Select a client name...</option>\n        </select>\n        </div>\n\n        <div>\n        <label for=\"task\">Task =></label>\n        <div>\n            <label for=\"userInterfaz\">User Interfaz:</label>\n            <input type=\"radio\" id=\"userInterfazEdit\" name=\"task\" value=\"userInterfaz\">\n\n            <label for=\"graphics\">Graphics:</label>\n            <input type=\"radio\" id=\"graphicsEdit\" name=\"task\" value=\"graphics\">\n\n            <label for=\"design\">Design:</label>\n            <input type=\"radio\" id=\"designEdit\" name=\"task\" value=\"design\">\n        </div>\n        </div>\n\n        <div>\n        <label for=\"status\">Status =></label>\n        <div>\n            <label for=\"complete\">Complete:</label>\n            <input type=\"radio\" id=\"completeEdit\" name=\"status\" value=\"complete\">\n\n            <label for=\"paidOut\">Paid Out:</label>\n            <input type=\"radio\" id=\"paidOutEdit\" name=\"status\" value=\"paidOut\">\n\n            <label for=\"waitingForPayment\">Waiting For Payment:</label>\n            <input type=\"radio\" id=\"waitingForPaymentEdit\" name=\"status\" value=\"waitingForPayment\">\n\n            <label for=\"approvedOffer\">Approved Offer:</label>\n            <input type=\"radio\" id=\"approvedOfferEdit\" name=\"status\" value=\"approvedOffer\">\n\n            <label for=\"bidding\">Bidding:</label>\n            <input type=\"radio\" id=\"biddingEdit\" name=\"status\" value=\"bidding\">\n        </div>\n        </div>\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n                </div>");
-          formEdit.innerHTML = html;
-          projectIdEdit = foundProject.projectUuid;
-          _context5.next = 20;
+          foundProject = projectFound.data.foundProject; //Set the client Name
+
+          showClientNameInDOM(foundProject.clientId).then(function (data) {
+            var html = "\n        <div id=\"checkRadioButtonEdit\" onmouseenter='radioButtonCheck(\"".concat(foundProject.task, "\", \"").concat(foundProject.status, "\")'>\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" value=\"").concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n        <option id=\"option").concat(foundProject.clientId, "\" value=\"").concat(foundProject.clientId, "\" selected disabled hidden>").concat(data, "</option>    \n        </select>\n        </div>\n\n        <div>\n        <label for=\"task\">Task =></label>\n        <div>\n            <label for=\"userInterfaz\">User Interfaz:</label>\n            <input type=\"radio\" id=\"userInterfazEdit\" name=\"task\" value=\"userInterfaz\">\n\n            <label for=\"graphics\">Graphics:</label>\n            <input type=\"radio\" id=\"graphicsEdit\" name=\"task\" value=\"graphics\">\n\n            <label for=\"design\">Design:</label>\n            <input type=\"radio\" id=\"designEdit\" name=\"task\" value=\"design\">\n        </div>\n        </div>\n\n        <div>\n        <label for=\"status\">Status =></label>\n        <div>\n            <label for=\"complete\">Complete:</label>\n            <input type=\"radio\" id=\"completeEdit\" name=\"status\" value=\"complete\">\n\n            <label for=\"paidOut\">Paid Out:</label>\n            <input type=\"radio\" id=\"paidOutEdit\" name=\"status\" value=\"paidOut\">\n\n            <label for=\"waitingForPayment\">Waiting For Payment:</label>\n            <input type=\"radio\" id=\"waitingForPaymentEdit\" name=\"status\" value=\"waitingForPayment\">\n\n            <label for=\"approvedOffer\">Approved Offer:</label>\n            <input type=\"radio\" id=\"approvedOfferEdit\" name=\"status\" value=\"approvedOffer\">\n\n            <label for=\"bidding\">Bidding:</label>\n            <input type=\"radio\" id=\"biddingEdit\" name=\"status\" value=\"bidding\">\n        </div>\n        </div>\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n                </div>");
+            formEdit.innerHTML = html;
+            projectIdEdit = foundProject.projectUuid;
+          });
+          _context5.next = 18;
           break;
 
-        case 17:
-          _context5.prev = 17;
+        case 15:
+          _context5.prev = 15;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
 
-        case 20:
+        case 18:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 15]]);
 } //In the "form Edit" I stablish the previous checked value that the element already has 
 
 
@@ -345,48 +348,112 @@ function radioButtonCheck(projectType, status) {
   ;
 }
 
-;
-/* //Handle Edit
-async function handleEdit(ev) {
-    try {
-        let { clientname, phone, email, projectType } = ev.target.elements;
-        clientname = clientname.value;
-        phone = phone.value;
-        email = email.value;
-        projectType = projectType.value;
- 
-        if (!clientname || !phone || !email || !projectType)
-            throw new Error("You need to complete all the fields");
- 
-        if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
-        modalEdit.style.display = "none";
-        ev.target.reset();
- 
-        const clientDetails = { clientname, phone, email, projectType };
-        console.log(clientDetails);
-        const allClients = await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);
-        renderClients(allClients);
-    } catch (error) {
-        alert(error)
-        swal("Ohhh no!", `${error}`, "warning");
-        console.error(error);
-    };
-}; */
-//Function to get the names of the client in the "select Client Name"
+; //Function to show the client name in the Edit DOM
+
+function showClientNameInDOM(clientId) {
+  var clientFound;
+  return regeneratorRuntime.async(function showClientNameInDOM$(_context6) {
+    while (1) {
+      switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.next = 2;
+          return regeneratorRuntime.awrap(axios.get("clients/findClient/".concat(clientId)));
+
+        case 2:
+          clientFound = _context6.sent;
+          return _context6.abrupt("return", clientFound.data.foundClient.clientname);
+
+        case 4:
+        case "end":
+          return _context6.stop();
+      }
+    }
+  });
+} //Handle Edit
+
+
+function handleEdit(ev) {
+  var _ev$target$elements2, projectName, clientId, task, status, totalHours, projectDetails, allProjects;
+
+  return regeneratorRuntime.async(function handleEdit$(_context7) {
+    while (1) {
+      switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          _ev$target$elements2 = ev.target.elements, projectName = _ev$target$elements2.projectName, clientId = _ev$target$elements2.clientId, task = _ev$target$elements2.task, status = _ev$target$elements2.status, totalHours = _ev$target$elements2.totalHours;
+          projectName = projectName.value;
+          clientId = selectClientNameEdit.value;
+          task = task.value;
+          status = status.value;
+          totalHours = totalHours.valueAsNumber;
+
+          if (!(!projectName || !clientId || !task || !status || !totalHours)) {
+            _context7.next = 9;
+            break;
+          }
+
+          throw new Error("You need to complete all the fields");
+
+        case 9:
+          if (modalEdit) {
+            _context7.next = 11;
+            break;
+          }
+
+          throw new Error('There is a problem finding modalEdit from HTML');
+
+        case 11:
+          modalEdit.style.display = "none";
+          ev.target.reset();
+          projectDetails = {
+            projectName: projectName,
+            clientId: clientId,
+            task: task,
+            status: status,
+            totalHours: totalHours
+          };
+          console.log(projectDetails);
+          _context7.next = 17;
+          return regeneratorRuntime.awrap(axios.put("/projects/editProject/".concat(projectIdEdit), projectDetails));
+
+        case 17:
+          allProjects = _context7.sent;
+          renderClients(allProjects);
+          _context7.next = 25;
+          break;
+
+        case 21:
+          _context7.prev = 21;
+          _context7.t0 = _context7["catch"](0);
+          swal("Ohhh no!", "".concat(_context7.t0), "warning");
+          console.error(_context7.t0);
+
+        case 25:
+          ;
+
+        case 26:
+        case "end":
+          return _context7.stop();
+      }
+    }
+  }, null, null, [[0, 21]]);
+}
+
+; //Function to get the names of the client in the "select Client Name"
 
 function uploadClientNamesEdit() {
   var clientsInfo, _clients, select, index, option;
 
-  return regeneratorRuntime.async(function uploadClientNamesEdit$(_context6) {
+  return regeneratorRuntime.async(function uploadClientNamesEdit$(_context8) {
     while (1) {
-      switch (_context6.prev = _context6.next) {
+      switch (_context8.prev = _context8.next) {
         case 0:
-          _context6.prev = 0;
-          _context6.next = 3;
+          _context8.prev = 0;
+          _context8.next = 3;
           return regeneratorRuntime.awrap(axios.get("/clients/getAllClients"));
 
         case 3:
-          clientsInfo = _context6.sent;
+          clientsInfo = _context8.sent;
           _clients = clientsInfo.data.allClients.clients;
           select = document.getElementById('selectClientNameEdit');
 
@@ -399,17 +466,17 @@ function uploadClientNamesEdit() {
 
 
           select.onclick = null;
-          _context6.next = 13;
+          _context8.next = 13;
           break;
 
         case 10:
-          _context6.prev = 10;
-          _context6.t0 = _context6["catch"](0);
-          console.error(_context6.t0);
+          _context8.prev = 10;
+          _context8.t0 = _context8["catch"](0);
+          console.error(_context8.t0);
 
         case 13:
         case "end":
-          return _context6.stop();
+          return _context8.stop();
       }
     }
   }, null, null, [[0, 10]]);
