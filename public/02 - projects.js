@@ -138,13 +138,12 @@ async function editProject(uuidProject) {
         if (!formEdit) throw new Error('There is a problem finding form from HTML');
         const projectFound = await axios.get(`projects/findProject/${uuidProject}`);
         const { foundProject } = projectFound.data;
-        console.log(foundProject);
 
         let html = `
-        <div>
+        <div id="checkRadioButtonEdit" onmouseenter='radioButtonCheck("${foundProject.task}", "${foundProject.status}")'>
         <div>
         <label for="projectName">Project Name:</label>
-        <input type="text" name="projectName" placeholder="Project name" required>
+        <input type="text" name="projectName" value="${foundProject.projectName}" placeholder="Project name" required>
         </div>
 
         <div>
@@ -158,13 +157,13 @@ async function editProject(uuidProject) {
         <label for="task">Task =></label>
         <div>
             <label for="userInterfaz">User Interfaz:</label>
-            <input type="radio" id="userInterfaz" name="task" value="userInterfaz">
+            <input type="radio" id="userInterfazEdit" name="task" value="userInterfaz">
 
             <label for="graphics">Graphics:</label>
-            <input type="radio" id="graphics" name="task" value="graphics">
+            <input type="radio" id="graphicsEdit" name="task" value="graphics">
 
             <label for="design">Design:</label>
-            <input type="radio" id="design" name="task" value="design">
+            <input type="radio" id="designEdit" name="task" value="design">
         </div>
         </div>
 
@@ -172,24 +171,24 @@ async function editProject(uuidProject) {
         <label for="status">Status =></label>
         <div>
             <label for="complete">Complete:</label>
-            <input type="radio" id="complete" name="status" value="complete">
+            <input type="radio" id="completeEdit" name="status" value="complete">
 
             <label for="paidOut">Paid Out:</label>
-            <input type="radio" id="paidOut" name="status" value="paidOut">
+            <input type="radio" id="paidOutEdit" name="status" value="paidOut">
 
             <label for="waitingForPayment">Waiting For Payment:</label>
-            <input type="radio" id="waitingForPayment" name="status" value="waitingForPayment">
+            <input type="radio" id="waitingForPaymentEdit" name="status" value="waitingForPayment">
 
             <label for="approvedOffer">Approved Offer:</label>
-            <input type="radio" id="approvedOffer" name="status" value="approvedOffer">
+            <input type="radio" id="approvedOfferEdit" name="status" value="approvedOffer">
 
             <label for="bidding">Bidding:</label>
-            <input type="radio" id="bidding" name="status" value="bidding">
+            <input type="radio" id="biddingEdit" name="status" value="bidding">
         </div>
         </div>
         <div>
             <label for="totalHours">Total hours for the project</label>
-            <input type="number" name="totalHours" placeholder="Total Hours for the project">
+            <input type="number" name="totalHours" value="${foundProject.totalHours}" placeholder="Total Hours for the project">
         </div>
                 <input type="submit" value="Update project">
                 </div>`
@@ -200,6 +199,81 @@ async function editProject(uuidProject) {
     }
 }
 
+//In the "form Edit" I stablish the previous checked value that the element already has 
+function radioButtonCheck(projectType, status) {
+    try {
+        const elementWithTheEvent = document.querySelector('#checkRadioButtonEdit');
+        if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button');
+
+        //For tasks
+        const radioUserInterfaz = document.querySelector('#userInterfazEdit');
+        if (!radioUserInterfaz) throw new Error('The is a problem finding the element "user interfaz" radio button');
+
+        const radioGraphics = document.querySelector('#graphicsEdit');
+        if (!radioGraphics) throw new Error('The is a problem finding the element "graphics" radio button');
+
+        const radioDesign = document.querySelector('#designEdit');
+        if (!radioDesign) throw new Error('The is a problem finding the element "design" radio button');
+
+        switch (projectType) {
+            case 'userInterfaz':
+                radioUserInterfaz.checked = true;
+                break;
+
+            case 'graphics':
+                radioGraphics.checked = true;
+                break;
+
+            case 'design':
+                radioDesign.checked = true;
+                break;
+        };
+
+        //Status
+        const radioComplete = document.querySelector('#completeEdit');
+        if (!radioComplete) throw new Error('The is a problem finding the element "complete status" radio button');
+
+        const radioPaidOutEdit = document.querySelector('#paidOutEdit');
+        if (!radioPaidOutEdit) throw new Error('The is a problem finding the element "paid out status" radio button');
+
+        const radioWaitingForPaymentEdit = document.querySelector('#waitingForPaymentEdit');
+        if (!radioWaitingForPaymentEdit) throw new Error('The is a problem finding the element "waiting for payment" radio button');
+
+        const radioApprovedOfferEdit = document.querySelector('#approvedOfferEdit');
+        if (!radioApprovedOfferEdit) throw new Error('The is a problem finding the element "approved Offer status" radio button');
+
+        const radioBiddingEdit = document.querySelector('#biddingEdit');
+        if (!radioBiddingEdit) throw new Error('The is a problem finding the element "Bidding status" radio button');
+
+        switch (status) {
+            case 'complete':
+                radioComplete.checked = true;
+                break;
+
+            case 'paidOut':
+                radioPaidOutEdit.checked = true;
+                break;
+
+            case 'waitingForPayment':
+                radioWaitingForPaymentEdit.checked = true;
+                break;
+
+            case 'approvedOffer':
+                radioApprovedOfferEdit.checked = true;
+                break;
+
+            case 'bidding':
+                radioBiddingEdit.checked = true;
+                break;
+        };
+        
+        //With this the event is going to happen only once
+        elementWithTheEvent.onmouseenter = null;
+    } catch (error) {
+        console.error(error);
+    };
+};
+
 /* //Handle Edit
 async function handleEdit(ev) {
     try {
@@ -208,14 +282,14 @@ async function handleEdit(ev) {
         phone = phone.value;
         email = email.value;
         projectType = projectType.value;
-
+ 
         if (!clientname || !phone || !email || !projectType)
             throw new Error("You need to complete all the fields");
-
+ 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
         ev.target.reset();
-
+ 
         const clientDetails = { clientname, phone, email, projectType };
         console.log(clientDetails);
         const allClients = await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);

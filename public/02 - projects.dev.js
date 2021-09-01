@@ -254,25 +254,98 @@ function editProject(uuidProject) {
         case 10:
           projectFound = _context5.sent;
           foundProject = projectFound.data.foundProject;
-          console.log(foundProject);
-          html = "\n        <div>\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n            <option>Select a client name...</option>\n        </select>\n        </div>\n\n        <div>\n        <label for=\"task\">Task =></label>\n        <div>\n            <label for=\"userInterfaz\">User Interfaz:</label>\n            <input type=\"radio\" id=\"userInterfaz\" name=\"task\" value=\"userInterfaz\">\n\n            <label for=\"graphics\">Graphics:</label>\n            <input type=\"radio\" id=\"graphics\" name=\"task\" value=\"graphics\">\n\n            <label for=\"design\">Design:</label>\n            <input type=\"radio\" id=\"design\" name=\"task\" value=\"design\">\n        </div>\n        </div>\n\n        <div>\n        <label for=\"status\">Status =></label>\n        <div>\n            <label for=\"complete\">Complete:</label>\n            <input type=\"radio\" id=\"complete\" name=\"status\" value=\"complete\">\n\n            <label for=\"paidOut\">Paid Out:</label>\n            <input type=\"radio\" id=\"paidOut\" name=\"status\" value=\"paidOut\">\n\n            <label for=\"waitingForPayment\">Waiting For Payment:</label>\n            <input type=\"radio\" id=\"waitingForPayment\" name=\"status\" value=\"waitingForPayment\">\n\n            <label for=\"approvedOffer\">Approved Offer:</label>\n            <input type=\"radio\" id=\"approvedOffer\" name=\"status\" value=\"approvedOffer\">\n\n            <label for=\"bidding\">Bidding:</label>\n            <input type=\"radio\" id=\"bidding\" name=\"status\" value=\"bidding\">\n        </div>\n        </div>\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n                </div>";
+          html = "\n        <div id=\"checkRadioButtonEdit\" onmouseenter='radioButtonCheck(\"".concat(foundProject.task, "\", \"").concat(foundProject.status, "\")'>\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" value=\"").concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n            <option>Select a client name...</option>\n        </select>\n        </div>\n\n        <div>\n        <label for=\"task\">Task =></label>\n        <div>\n            <label for=\"userInterfaz\">User Interfaz:</label>\n            <input type=\"radio\" id=\"userInterfazEdit\" name=\"task\" value=\"userInterfaz\">\n\n            <label for=\"graphics\">Graphics:</label>\n            <input type=\"radio\" id=\"graphicsEdit\" name=\"task\" value=\"graphics\">\n\n            <label for=\"design\">Design:</label>\n            <input type=\"radio\" id=\"designEdit\" name=\"task\" value=\"design\">\n        </div>\n        </div>\n\n        <div>\n        <label for=\"status\">Status =></label>\n        <div>\n            <label for=\"complete\">Complete:</label>\n            <input type=\"radio\" id=\"completeEdit\" name=\"status\" value=\"complete\">\n\n            <label for=\"paidOut\">Paid Out:</label>\n            <input type=\"radio\" id=\"paidOutEdit\" name=\"status\" value=\"paidOut\">\n\n            <label for=\"waitingForPayment\">Waiting For Payment:</label>\n            <input type=\"radio\" id=\"waitingForPaymentEdit\" name=\"status\" value=\"waitingForPayment\">\n\n            <label for=\"approvedOffer\">Approved Offer:</label>\n            <input type=\"radio\" id=\"approvedOfferEdit\" name=\"status\" value=\"approvedOffer\">\n\n            <label for=\"bidding\">Bidding:</label>\n            <input type=\"radio\" id=\"biddingEdit\" name=\"status\" value=\"bidding\">\n        </div>\n        </div>\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n                </div>");
           formEdit.innerHTML = html;
           projectIdEdit = foundProject.projectUuid;
-          _context5.next = 21;
+          _context5.next = 20;
           break;
 
-        case 18:
-          _context5.prev = 18;
+        case 17:
+          _context5.prev = 17;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
 
-        case 21:
+        case 20:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 18]]);
+  }, null, null, [[0, 17]]);
+} //In the "form Edit" I stablish the previous checked value that the element already has 
+
+
+function radioButtonCheck(projectType, status) {
+  try {
+    var elementWithTheEvent = document.querySelector('#checkRadioButtonEdit');
+    if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button'); //For tasks
+
+    var radioUserInterfaz = document.querySelector('#userInterfazEdit');
+    if (!radioUserInterfaz) throw new Error('The is a problem finding the element "user interfaz" radio button');
+    var radioGraphics = document.querySelector('#graphicsEdit');
+    if (!radioGraphics) throw new Error('The is a problem finding the element "graphics" radio button');
+    var radioDesign = document.querySelector('#designEdit');
+    if (!radioDesign) throw new Error('The is a problem finding the element "design" radio button');
+
+    switch (projectType) {
+      case 'userInterfaz':
+        radioUserInterfaz.checked = true;
+        break;
+
+      case 'graphics':
+        radioGraphics.checked = true;
+        break;
+
+      case 'design':
+        radioDesign.checked = true;
+        break;
+    }
+
+    ; //Status
+
+    var radioComplete = document.querySelector('#completeEdit');
+    if (!radioComplete) throw new Error('The is a problem finding the element "complete status" radio button');
+    var radioPaidOutEdit = document.querySelector('#paidOutEdit');
+    if (!radioPaidOutEdit) throw new Error('The is a problem finding the element "paid out status" radio button');
+    var radioWaitingForPaymentEdit = document.querySelector('#waitingForPaymentEdit');
+    if (!radioWaitingForPaymentEdit) throw new Error('The is a problem finding the element "waiting for payment" radio button');
+    var radioApprovedOfferEdit = document.querySelector('#approvedOfferEdit');
+    if (!radioApprovedOfferEdit) throw new Error('The is a problem finding the element "approved Offer status" radio button');
+    var radioBiddingEdit = document.querySelector('#biddingEdit');
+    if (!radioBiddingEdit) throw new Error('The is a problem finding the element "Bidding status" radio button');
+
+    switch (status) {
+      case 'complete':
+        radioComplete.checked = true;
+        break;
+
+      case 'paidOut':
+        radioPaidOutEdit.checked = true;
+        break;
+
+      case 'waitingForPayment':
+        radioWaitingForPaymentEdit.checked = true;
+        break;
+
+      case 'approvedOffer':
+        radioApprovedOfferEdit.checked = true;
+        break;
+
+      case 'bidding':
+        radioBiddingEdit.checked = true;
+        break;
+    }
+
+    ; //With this the event is going to happen only once
+
+    elementWithTheEvent.onmouseenter = null;
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
 }
+
+;
 /* //Handle Edit
 async function handleEdit(ev) {
     try {
@@ -281,14 +354,14 @@ async function handleEdit(ev) {
         phone = phone.value;
         email = email.value;
         projectType = projectType.value;
-
+ 
         if (!clientname || !phone || !email || !projectType)
             throw new Error("You need to complete all the fields");
-
+ 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
         ev.target.reset();
-
+ 
         const clientDetails = { clientname, phone, email, projectType };
         console.log(clientDetails);
         const allClients = await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);
@@ -300,7 +373,6 @@ async function handleEdit(ev) {
     };
 }; */
 //Function to get the names of the client in the "select Client Name"
-
 
 function uploadClientNamesEdit() {
   var clientsInfo, _clients, select, index, option;
