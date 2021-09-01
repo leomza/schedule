@@ -5,8 +5,8 @@ exports.getAProject = exports.editProject = exports.deleteProject = exports.getA
 var modelProjects_1 = require("../models/modelProjects");
 function registerProject(req, res) {
     try {
-        var _a = req.body, projectName = _a.projectName, client = _a.client, allottedTime = _a.allottedTime;
-        var newProject = new modelProjects_1.Project(projectName, client, allottedTime);
+        var _a = req.body, projectName = _a.projectName, clientId = _a.clientId, task = _a.task, status = _a.status, totalHours = _a.totalHours;
+        var newProject = new modelProjects_1.Project(projectName, clientId, task, status, totalHours);
         var allProjects = new modelProjects_1.Projects();
         allProjects.createProject(newProject);
         res.send({ message: "A new Project was register", allProjects: allProjects });
@@ -44,12 +44,14 @@ exports.deleteProject = deleteProject;
 function editProject(req, res) {
     try {
         var idProject = req.params.idProject;
-        var _a = req.body, projectName = _a.projectName, client = _a.client, allottedTime = _a.allottedTime;
+        var _a = req.body, projectName = _a.projectName, clientId = _a.clientId, task = _a.task, status = _a.status, totalHours = _a.totalHours;
         var allProjects = new modelProjects_1.Projects();
         var foundProject = allProjects.findProjectByUuid(idProject);
         foundProject.projectName = projectName;
-        foundProject.client = client;
-        foundProject.allottedTime = allottedTime;
+        foundProject.clientId = clientId;
+        foundProject.task = task;
+        foundProject.status = status;
+        foundProject.totalHours = totalHours;
         allProjects.updateProjectsJson();
     }
     catch (error) {

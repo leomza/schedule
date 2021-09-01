@@ -31,20 +31,24 @@ enum Task {
 }
 
 export class Project {
-    uuid: string;
+    projectUuid: string;
     projectName: string;
-    client: Client;
+    clientId: string;
     task: Task;
     status: Status;
     createdDate: any;
+    totalHours: number;
+    usedHours: number;
 
-    constructor(projectName: string, client: Client, task: Task, status: Status) {
-        this.uuid = uuidv4();
+    constructor(projectName: string, clientId: string, task: Task, status: Status, totalHours: number) {
+        this.projectUuid = uuidv4();
         this.projectName = projectName;
-        this.client = client;
+        this.clientId = clientId;
         this.task = task;
         this.status = status;
         this.createdDate = Date.now();
+        this.totalHours = totalHours;
+        this.usedHours = 0;
     }
 }
 
@@ -74,7 +78,7 @@ export class Projects {
 
     findProjectByUuid(id) {
         try {
-            const projectFound = this.projects.find(project => project.uuid === id);
+            const projectFound = this.projects.find(project => project.projectUuid === id);
             return projectFound;
         } catch (error) {
             console.error(error);
@@ -83,7 +87,7 @@ export class Projects {
 
     deleteProject(id) {
         try {
-            this.projects = this.projects.filter(project => project.uuid !== id);
+            this.projects = this.projects.filter(project => project.projectUuid !== id);
             this.updateProjectsJson();
         } catch (error) {
             console.error(error);

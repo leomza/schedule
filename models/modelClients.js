@@ -22,16 +22,13 @@ var ProjectType;
     ProjectType["business"] = "business";
 })(ProjectType || (ProjectType = {}));
 var Client = /** @class */ (function () {
-    function Client(clientname, phone, email, projectType /* , startHour: number, startMinute: number, finishHour: number, finishMinute: number */) {
+    function Client(clientname, phone, email, projectType, callLimitPerDay) {
         this.uuid = uuidv4();
         this.clientname = clientname;
         this.phone = phone;
         this.email = email;
         this.projectType = projectType;
-        /*         this.startHour = startHour;
-                this.startMinute = startMinute;
-                this.finishHour = finishHour;
-                this.finishMinute = finishMinute; */
+        this.callLimitPerDay = callLimitPerDay;
         this.createdDate = Date.now();
     }
     return Client;

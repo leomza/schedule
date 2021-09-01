@@ -6,8 +6,8 @@ import { Project, Projects } from "../models/modelProjects";
 
 export function registerProject(req, res) {
     try {
-        const { projectName, client, allottedTime } = req.body;
-        const newProject = new Project(projectName, client, allottedTime)
+        const { projectName, clientId, task, status, totalHours } = req.body;
+        const newProject = new Project(projectName, clientId, task, status, totalHours)
         const allProjects = new Projects();
         allProjects.createProject(newProject);
 
@@ -44,12 +44,14 @@ export function deleteProject(req, res) {
 export function editProject(req, res) {
     try {
         const { idProject } = req.params;
-        const { projectName, client, allottedTime } = req.body;
+        const { projectName, clientId, task, status, totalHours } = req.body;
         const allProjects = new Projects();
         const foundProject = allProjects.findProjectByUuid(idProject)
         foundProject.projectName = projectName;
-        foundProject.client = client;
-        foundProject.allottedTime = allottedTime;
+        foundProject.clientId = clientId;
+        foundProject.task = task;
+        foundProject.status = status;
+        foundProject.totalHours = totalHours;
         allProjects.updateProjectsJson();
     } catch (error) {
         console.error(error);
