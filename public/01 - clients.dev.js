@@ -215,19 +215,54 @@ function editClient(uuidClient) {
 var selected = document.querySelector(".selected");
 var optionsContainer = document.querySelector(".options-container");
 var optionsList = document.querySelectorAll(".option");
-var btn = document.querySelector('.button-form');
-selected.addEventListener("click", function () {
-  optionsContainer.classList.toggle("active");
-});
-optionsList.forEach(function (o) {
-  o.addEventListener("click", function () {
-    selected.innerHTML = o.querySelector("label").innerHTML;
-    optionsContainer.classList.remove("active");
+var btn = document.querySelector('.button-form'); // selected.addEventListener("click", () => {
+//     optionsContainer.classList.toggle("active");
+//   });
+//   optionsList.forEach(o => {
+//     o.addEventListener("click", () => {
+//       selected.innerHTML = o.querySelector("label").innerHTML;
+//       optionsContainer.classList.remove("active");
+//     });
+//   });
+
+var selectedAll = document.querySelectorAll(".selected");
+selectedAll.forEach(function (selected) {
+  var optionsContainer = selected.previousElementSibling;
+  var optionsList = optionsContainer.querySelectorAll(".option");
+  selected.addEventListener("click", function () {
+    if (optionsContainer.classList.contains("active")) {
+      optionsContainer.classList.remove("active");
+    } else {
+      var currentActive = document.querySelector(".options-container.active");
+
+      if (currentActive) {
+        currentActive.classList.remove("active");
+      }
+
+      optionsContainer.classList.add("active");
+    }
+  });
+  optionsList.forEach(function (o) {
+    o.addEventListener("click", function () {
+      selected.innerHTML = o.querySelector("label").innerHTML;
+      optionsContainer.classList.remove("active");
+    });
   });
 });
 selected.addEventListener("click", function () {
   btn.classList.toggle("button-hiden");
-}); //In the "form Edit" I stablish the previous checked value that the element already has 
+}); //SELECT BOX-TIME
+// const selectedTime = document.querySelector(".selected-time");
+// selectedTime.addEventListener("click", () => {
+//     optionsContainer.classList.toggle("active");
+//   });
+//   optionsList.forEach(o => {
+//     o.addEventListener("click", () => {
+//       selected.innerHTML = o.querySelector("label").innerHTML;
+//       optionsContainer.classList.remove("active");
+//     });
+//   });
+//In the "form Edit" I stablish the previous checked value that the element already has 
 
 function radioButtonCheck(projectType) {
   try {
