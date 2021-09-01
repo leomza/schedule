@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clients</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./SCSS/app.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clients</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <link rel="stylesheet" href="./SCSS/app.css" />
-</head>
+  <a href="02 - projects.html">Go to projects</a>
 
-<a href="02 - projects.html">Go to projects</a>
-
-<body onload="renderClients()">
-  <div class="container">
-    <div class="top-table">
-      <div class="top-vreate__title">
-        <h2>לקוחות</h2>
+  <body onload="renderClients()">
+    <div class="container">
+      <div class="top-table">
+        <div class="top-vreate__title">
+          <h2>לקוחות</h2>
+        </div>
+        <div class="top-table__button">
+          <button id="buttonCreate" class="button-talbe">חדש</button>
+        </div>
       </div>
       <table id="tblData">
         <thead>
@@ -72,8 +82,6 @@
                 required
               />
             </div>
-            <div class="selected">
-
 
             <div class="select-box">
               <div class="options-container">
@@ -156,21 +164,6 @@
                   <p>סוג עסקה</p>
                 </div>
               </div>
-
-            </div>
-          </div>
-
-          <div>
-            <label for="callLimitPerDay">Call limit per day =></label>
-            <div>
-              <label for="10">10 minutes per day</label>
-              <input type="radio" id="10" name="callLimitPerDay" value="10">
-
-              <label for="30">30 minutes per day</label>
-              <input type="radio" id="30" name="callLimitPerDay" value="30">
-
-              <label for="withOutLimit">With Out Limits:</label>
-              <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
             </div>
  
 
@@ -178,19 +171,21 @@
           </form>
         </div>
       </div>
-    </div>
 
-    <!-- Modal to edit a task -->
-    <div id="modalEdit" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span id="closeEdit" class="close">&times;</span>
-        <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+      <!-- Modal to edit a task -->
+      <div id="modalEdit" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span id="closeEdit" class="close">&times;</span>
+          <form
+            class="formEdit"
+            id="formEdit"
+            onsubmit="handleEdit(event)"
+          ></form>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="helperModal.js"></script>
-  <script src="01 - clients.js"></script>
-</body>
-
+    <script src="helperModal.js"></script>
+    <script src="01 - clients.js"></script>
+  </body>
 </html>
