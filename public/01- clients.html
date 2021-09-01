@@ -40,12 +40,11 @@
             <th>מספר טלפון</th>
             <th>כתובת אימייל</th>
             <th>סוג עסקה</th>
-            <!-- <th>זמן הקמה</th>
-            <th>זמני שיחה</th> -->
+            <th>זמני שיחה</th>
             <th><i class="fas fa-wrench"></i></th>
           </tr>
         </thead>
- 
+
         <tbody class="table"></tbody>
       </table>
 
@@ -57,7 +56,6 @@
           <form id="formCreate">
             <h3>לקוח חדש</h3>
             <div>
-               
               <input
                 type="text"
                 name="clientname"
@@ -67,12 +65,15 @@
             </div>
 
             <div>
-              
-              <input type="text" name="phone" placeholder="מספר טלפון" required />
+              <input
+                type="text"
+                name="phone"
+                placeholder="מספר טלפון"
+                required
+              />
             </div>
 
             <div>
-              
               <input
                 type="email"
                 name="email"
@@ -85,7 +86,6 @@
             <div class="select-box">
               <div class="options-container">
                 <div class="option">
-                 
                   <input
                     type="radio"
                     id="branding"
@@ -96,7 +96,6 @@
                 </div>
 
                 <div class="option">
-                
                   <input
                     type="radio"
                     id="design"
@@ -107,7 +106,6 @@
                 </div>
 
                 <div class="option">
-                 
                   <input
                     type="radio"
                     id="business"
@@ -118,19 +116,58 @@
                 </div>
               </div>
               <div class="selected">
-              
-
-               <div class="selected__img">
-                   <img src="./img/maletin.svg" alt="">
-               </div>
-               <div class="selected__work">
-                <p>סוג עסקה</p>  
-               </div>
-           
+                <div class="selected__img">
+                  <img src="./img/maletin.svg" alt="" />
+                </div>
+                <div class="selected__work">
+                  <p>סוג עסקה</p>
+                </div>
               </div>
             </div>
+            <div class="select-box">
+              <div class="options-container">
+                <div class="option">
+                  <input
+                    type="radio"
+                    id="branding"
+                    name="projectType"
+                    value="branding"
+                  />
+                  <label for="branding">Branding:</label>
+                </div>
 
-            <input type="submit" value="Create client"  class="button-form" />
+                <div class="option">
+                  <input
+                    type="radio"
+                    id="design"
+                    name="projectType"
+                    value="design"
+                  />
+                  <label for="design">Design:</label>
+                </div>
+
+                <div class="option">
+                  <input
+                    type="radio"
+                    id="business"
+                    name="projectType"
+                    value="business"
+                  />
+                  <label for="business">Business:</label>
+                </div>
+              </div>
+              <div class="selected">
+                <div class="selected__img">
+                  <img src="./img/maletin.svg" alt="" />
+                </div>
+                <div class="selected__work">
+                  <p>סוג עסקה</p>
+                </div>
+              </div>
+            </div>
+ 
+
+            <input type="submit" value="Create client" class="button-form" />
           </form>
         </div>
       </div>
