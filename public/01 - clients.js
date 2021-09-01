@@ -185,18 +185,31 @@ const btn = document.querySelector('.button-form')
         optionsContainer.classList.add("active");
       }
   
-       
+    
     });
   
     optionsList.forEach((o) => {
       o.addEventListener("click", () => {
         selected.innerHTML = o.querySelector("label").innerHTML;
         optionsContainer.classList.remove("active");
+        o.children[0].checked = true
+        
       });
+     
     });
+
+    // optionsList.addEventListener('click',()=>{
+        
+    // })
   
+    // for (let i = 0; i < optionsList.length; i++) {
+    // if(optionsList[i].type === 'radio' ){
+    //       i.checked
+    // }
+      
+    // }
     
-  
+    
    
   });
  
