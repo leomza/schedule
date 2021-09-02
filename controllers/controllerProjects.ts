@@ -73,12 +73,12 @@ export function getAProject(req, res) {
 
 export function addTask(req, res) {
     try {
-        const { idTask, projectId } = req.body;
+        const { uuid, idProject } = req.body;
         const allProjects = new Projects();
-        const foundProject = allProjects.findProjectByUuid(projectId);
-        foundProject.tasks.push(idTask);
-        console.log(foundProject);
+        const foundProject = allProjects.findProjectByUuid(idProject);
+        foundProject.tasks.push(uuid);
         allProjects.updateProjectsJson();
+        res.send({ message: "The task was added to the project", allProjects })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);

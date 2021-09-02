@@ -18,17 +18,11 @@ async function handleNewTask(ev) {
         const tasksCreated = await axios.post('/tasks/newTask', taskDetails);
 
         //Push the task to the project
-        await pushTask(tasksCreated.data.newTask.uuid, tasksCreated.data.newTask.projectId);
+        const { uuid } = tasksCreated.data.newTask;
+        const { projectId: idProject } = tasksCreated.data.newTask;
+        await axios.post(`/projects/addTask`, { uuid, idProject }),
         swal("Good job!", "New task added succesfully!", "success");
-        //renderTasks(tasksCreated.data.allTasks.tasks);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-async function pushTask(idTask, projectId) {
-    try {
-        await axios.post(`/projects/addTask`, { idTask, projectId });
+        renderTasks(tasksCreated.data.allTasks.tasks);
     } catch (error) {
         console.error(error);
     }

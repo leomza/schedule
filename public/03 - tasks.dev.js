@@ -5,7 +5,7 @@ var handleForm = document.querySelector("#formCreate");
 handleForm.addEventListener('submit', handleNewTask);
 
 function handleNewTask(ev) {
-  var _ev$target$elements, taskName, description, limitDate, projectId, taskDetails, tasksCreated;
+  var _ev$target$elements, taskName, description, limitDate, projectId, taskDetails, tasksCreated, uuid, idProject;
 
   return regeneratorRuntime.async(function handleNewTask$(_context) {
     while (1) {
@@ -31,70 +31,47 @@ function handleNewTask(ev) {
 
         case 12:
           tasksCreated = _context.sent;
-          _context.next = 15;
-          return regeneratorRuntime.awrap(pushTask(tasksCreated.data.newTask.uuid, tasksCreated.data.newTask.projectId));
+          //Push the task to the project
+          uuid = tasksCreated.data.newTask.uuid;
+          idProject = tasksCreated.data.newTask.projectId;
+          _context.next = 17;
+          return regeneratorRuntime.awrap(axios.post("/projects/addTask", {
+            uuid: uuid,
+            idProject: idProject
+          }));
 
-        case 15:
-          swal("Good job!", "New task added succesfully!", "success"); //renderTasks(tasksCreated.data.allTasks.tasks);
-
-          _context.next = 21;
+        case 17:
+          swal("Good job!", "New task added succesfully!", "success");
+          renderTasks(tasksCreated.data.allTasks.tasks);
+          _context.next = 24;
           break;
 
-        case 18:
-          _context.prev = 18;
+        case 21:
+          _context.prev = 21;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 21:
+        case 24:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 18]]);
-}
-
-function pushTask(idTask, projectId) {
-  return regeneratorRuntime.async(function pushTask$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
-          return regeneratorRuntime.awrap(axios.post("/projects/addTask", {
-            idTask: idTask,
-            projectId: projectId
-          }));
-
-        case 3:
-          _context2.next = 8;
-          break;
-
-        case 5:
-          _context2.prev = 5;
-          _context2.t0 = _context2["catch"](0);
-          console.error(_context2.t0);
-
-        case 8:
-        case "end":
-          return _context2.stop();
-      }
-    }
-  }, null, null, [[0, 5]]);
+  }, null, null, [[0, 21]]);
 } //Function to get the names of the projects in the "select Project Name"
 
 
 function uploadProjectNames() {
   var projectsInfo, projects, select, index, option;
-  return regeneratorRuntime.async(function uploadProjectNames$(_context3) {
+  return regeneratorRuntime.async(function uploadProjectNames$(_context2) {
     while (1) {
-      switch (_context3.prev = _context3.next) {
+      switch (_context2.prev = _context2.next) {
         case 0:
-          _context3.prev = 0;
-          _context3.next = 3;
+          _context2.prev = 0;
+          _context2.next = 3;
           return regeneratorRuntime.awrap(axios.get("/projects/getAllProjects"));
 
         case 3:
-          projectsInfo = _context3.sent;
+          projectsInfo = _context2.sent;
           projects = projectsInfo.data.allProjects.projects;
           select = document.getElementById('selectProjectName');
 
@@ -105,17 +82,17 @@ function uploadProjectNames() {
             select.appendChild(option);
           }
 
-          _context3.next = 12;
+          _context2.next = 12;
           break;
 
         case 9:
-          _context3.prev = 9;
-          _context3.t0 = _context3["catch"](0);
-          console.error(_context3.t0);
+          _context2.prev = 9;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
 
         case 12:
         case "end":
-          return _context3.stop();
+          return _context2.stop();
       }
     }
   }, null, null, [[0, 9]]);

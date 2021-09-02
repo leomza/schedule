@@ -75,12 +75,12 @@ function getAProject(req, res) {
 exports.getAProject = getAProject;
 function addTask(req, res) {
     try {
-        var _a = req.body, idTask = _a.idTask, projectId = _a.projectId;
+        var _a = req.body, uuid = _a.uuid, idProject = _a.idProject;
         var allProjects = new modelProjects_1.Projects();
-        var foundProject = allProjects.findProjectByUuid(projectId);
-        foundProject.tasks.push(idTask);
-        console.log(foundProject);
+        var foundProject = allProjects.findProjectByUuid(idProject);
+        foundProject.tasks.push(uuid);
         allProjects.updateProjectsJson();
+        res.send({ message: "The task was added to the project", allProjects: allProjects });
     }
     catch (error) {
         console.error(error);
