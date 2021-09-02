@@ -6,8 +6,8 @@ import { Client, Clients } from "../models/modelClients";
 
 export function registerClient(req, res) {
     try {
-        const { clientname, phone, email, projectType, callLimitPerDay } = req.body;
-        const newClient = new Client(clientname, phone, email, projectType, callLimitPerDay)
+        const { clientname, phone, email, dealTime, callLimitPerDay } = req.body;
+        const newClient = new Client(clientname, phone, email, dealTime, callLimitPerDay)
         const allClients = new Clients();
         allClients.createClient(newClient);
 
@@ -44,13 +44,13 @@ export function deleteClient(req, res) {
 export function editClient(req, res) {
     try {
         const { idClient } = req.params;
-        const { clientname, phone, email, projectType, callLimitPerDay } = req.body;
+        const { clientname, phone, email, dealTime, callLimitPerDay } = req.body;
         const allClients = new Clients();
         const foundClient = allClients.findClientByUuid(idClient)
         foundClient.clientname = clientname;
         foundClient.phone = phone;
         foundClient.email = email;
-        foundClient.projectType = projectType;
+        foundClient.dealTime = dealTime;
         foundClient.callLimitPerDay = callLimitPerDay;
         allClients.updateClientsJson();
     } catch (error) {

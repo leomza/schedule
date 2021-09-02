@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="styles.min.css">
+</head>
+
+<body onload="uploadProjectNames()">
+    <a href="01- clients.html">Go to clients</a>
+    <a href="02 - projects.html">Go to projects</a>
+
+    <button id="buttonCreate">
+        Create a new task
+    </button>
+
+    <div id="root"></div>
+
+    <!-- Modal to create a task -->
+    <div id="modalCreate" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <form id="formCreate">
+                <h3>Add a new task</h3>
+                <div>
+                    <label for="taskName">Task Name:</label>
+                    <input type="text" name="taskName" placeholder="Task Name" required>
+                </div>
+
+                <div>
+                    <label for="description">Description:</label>
+                    <input type="text" name="description" placeholder="Description" required>
+                </div>
+
+                <div>
+                    <label for="selectProjectName">Select a project</label>
+                    <select name="selectProjectName" id="selectProjectName">
+                        <option selected disabled>Select a project...</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="limitDate">Select a limit date:</label>
+                    <input type="date" name="limitDate" required>
+                </div>
+
+                <input type="submit" value="Create project">
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal to edit a project -->
+    <div id="modalEdit" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span id="closeEdit" class="close">&times;</span>
+            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+        </div>
+    </div>
+
+    <script src="helperModal.js"></script>
+    <script src="03 - tasks.js"></script>
+</body>
+
+</html>

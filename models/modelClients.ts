@@ -14,10 +14,11 @@ const readJsonClients = () => {
     }
 };
 
-enum ProjectType {
-    branding = 'branding',
-    design = 'design',
-    business = 'business'
+enum DealTime {
+    retainer = 'retainer',
+    hourly = 'hourly',
+    project = 'project',
+    all = 'all'
 }
 
 export class Client {
@@ -25,17 +26,17 @@ export class Client {
     clientname: string;
     phone: string;
     email: string;
-    projectType: ProjectType;
+    dealTime: DealTime;
     callLimitPerDay: string;
     createdDate: any;
 
 
-    constructor(clientname: string, phone: string, email: string, projectType: ProjectType, callLimitPerDay: string) {
+    constructor(clientname: string, phone: string, email: string, dealTime: DealTime, callLimitPerDay: string) {
         this.uuid = uuidv4();
         this.clientname = clientname;
         this.phone = phone;
         this.email = email;
-        this.projectType = projectType;
+        this.dealTime = dealTime;
         this.callLimitPerDay = callLimitPerDay;
         this.createdDate = Date.now();
     }

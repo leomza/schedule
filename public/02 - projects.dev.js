@@ -2,21 +2,21 @@
 
 //Handle the form to create a new Project:
 var handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener('submit', handleNewClient);
+handleForm.addEventListener('submit', handleNewProject);
 
-function handleNewClient(ev) {
-  var _ev$target$elements, projectName, clientId, task, status, totalHours, projectDetails, projectsCreated;
+function handleNewProject(ev) {
+  var _ev$target$elements, projectName, clientId, projectType, status, totalHours, projectDetails, projectsCreated;
 
-  return regeneratorRuntime.async(function handleNewClient$(_context) {
+  return regeneratorRuntime.async(function handleNewProject$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           _context.prev = 0;
           ev.preventDefault();
-          _ev$target$elements = ev.target.elements, projectName = _ev$target$elements.projectName, clientId = _ev$target$elements.clientId, task = _ev$target$elements.task, status = _ev$target$elements.status, totalHours = _ev$target$elements.totalHours;
+          _ev$target$elements = ev.target.elements, projectName = _ev$target$elements.projectName, clientId = _ev$target$elements.clientId, projectType = _ev$target$elements.projectType, status = _ev$target$elements.status, totalHours = _ev$target$elements.totalHours;
           projectName = projectName.value;
           clientId = selectClientName.value;
-          task = task.value;
+          projectType = projectType.value;
           status = status.value;
           totalHours = totalHours.valueAsNumber;
           modalCreate.style.display = "none";
@@ -24,7 +24,7 @@ function handleNewClient(ev) {
           projectDetails = {
             projectName: projectName,
             clientId: clientId,
-            task: task,
+            projectType: projectType,
             status: status,
             totalHours: totalHours
           };
@@ -146,7 +146,7 @@ function renderProjects(projectsToShow) {
 
           ;
           html = projectsToShow.map(function (element) {
-            return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.task, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(element.totalHours, " / ").concat(element.usedHours, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <i class=\"fas fa-edit table__edit\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"></i>\n                <i class=\"fas fa-trash table__remove\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\"></i>\n                </td>\n            </tr>");
+            return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(element.totalHours, " / ").concat(element.usedHours, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <i class=\"fas fa-edit table__edit\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"></i>\n                <i class=\"fas fa-trash table__remove\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\"></i>\n                </td>\n            </tr>");
           }).join('');
           table.innerHTML = html;
           _context3.next = 25;
@@ -256,7 +256,7 @@ function editProject(uuidProject) {
           foundProject = projectFound.data.foundProject; //Set the client Name
 
           showClientNameInDOM(foundProject.clientId).then(function (data) {
-            var html = "\n        <div id=\"checkRadioButtonEdit\" onmouseenter='radioButtonCheck(\"".concat(foundProject.task, "\", \"").concat(foundProject.status, "\")'>\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" value=\"").concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n        <option id=\"option").concat(foundProject.clientId, "\" value=\"").concat(foundProject.clientId, "\" selected disabled hidden>").concat(data, "</option>    \n        </select>\n        </div>\n\n        <div>\n        <label for=\"task\">Task =></label>\n        <div>\n            <label for=\"userInterfaz\">User Interfaz:</label>\n            <input type=\"radio\" id=\"userInterfazEdit\" name=\"task\" value=\"userInterfaz\">\n\n            <label for=\"graphics\">Graphics:</label>\n            <input type=\"radio\" id=\"graphicsEdit\" name=\"task\" value=\"graphics\">\n\n            <label for=\"design\">Design:</label>\n            <input type=\"radio\" id=\"designEdit\" name=\"task\" value=\"design\">\n        </div>\n        </div>\n\n        <div>\n        <label for=\"status\">Status =></label>\n        <div>\n            <label for=\"complete\">Complete:</label>\n            <input type=\"radio\" id=\"completeEdit\" name=\"status\" value=\"complete\">\n\n            <label for=\"paidOut\">Paid Out:</label>\n            <input type=\"radio\" id=\"paidOutEdit\" name=\"status\" value=\"paidOut\">\n\n            <label for=\"waitingForPayment\">Waiting For Payment:</label>\n            <input type=\"radio\" id=\"waitingForPaymentEdit\" name=\"status\" value=\"waitingForPayment\">\n\n            <label for=\"approvedOffer\">Approved Offer:</label>\n            <input type=\"radio\" id=\"approvedOfferEdit\" name=\"status\" value=\"approvedOffer\">\n\n            <label for=\"bidding\">Bidding:</label>\n            <input type=\"radio\" id=\"biddingEdit\" name=\"status\" value=\"bidding\">\n        </div>\n        </div>\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n                </div>");
+            var html = "\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" value=\"".concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n        <option id=\"option").concat(foundProject.clientId, "\" value=\"").concat(foundProject.clientId, "\" selected disabled hidden>").concat(data, "</option>    \n        </select>\n        </div>\n\n        <div>\n        <label for=\"projectType\">Project Type:</label>\n        <select name=\"projectType\" id=\"projectType\">\n            <option value=\"").concat(foundProject.projectType, "\" selected disabled hidden>").concat(foundProject.projectType, "</option>\n            <option value=\"logo\">Logo</option>\n            <option value=\"graphicLanguage\">Graphic Language</option>\n            <option value=\"corporateWebsite\">Corporate Website</option>\n            <option value=\"landingPage\">Landing Page</option>\n            <option value=\"ecommerce\">Ecommerce</option>\n            <option value=\"branding\">Branding</option>\n            <option value=\"post\">Post</option>\n            <option value=\"packageDesign\">Package Design</option>\n            <option value=\"banner\">Banner</option>\n            <option value=\"rollUp\">Roll Up</option>\n            <option value=\"flyer\">Flyer</option>\n            <option value=\"digitalBook\">Digital Book</option>\n            <option value=\"newsLetter\">News Letter</option>\n            <option value=\"calendar\">Calendar</option>\n            <option value=\"businessCard\">Business Card</option>\n            <option value=\"presentation\">Presentation</option>\n            <option value=\"designedPage\">Designed Page</option>\n        </select>\n        </div>\n\n        <div>\n        <label for=\"status\">Status:</label>\n        <select name=\"status\" id=\"status\">\n            <option value=\"").concat(foundProject.status, "\" selected disabled hidden>").concat(foundProject.status, "</option>\n            <option value=\"offerPending\">Offer Pending</option>\n            <option value=\"inProgress\">In Progress</option>\n            <option value=\"offerApproved\">Offer Approved</option>\n            <option value=\"stuck\">Stuck</option>\n            <option value=\"paidUp\">Paid Up</option>\n            <option value=\"waitingForSketchApproval\">Waiting for Sketch Approval</option>\n            <option value=\"postponed\">Postponed</option>\n            <option value=\"canceled\">Canceled</option>\n            <option value=\"finished\">Finished</option>\n        </select>\n        </div>\n\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n        ");
             formEdit.innerHTML = html;
             projectIdEdit = foundProject.projectUuid;
           });
@@ -274,81 +274,8 @@ function editProject(uuidProject) {
       }
     }
   }, null, null, [[0, 15]]);
-} //In the "form Edit" I stablish the previous checked value that the element already has 
+} //Function to show the client name in the Edit DOM
 
-
-function radioButtonCheck(projectType, status) {
-  try {
-    var elementWithTheEvent = document.querySelector('#checkRadioButtonEdit');
-    if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button'); //For tasks
-
-    var radioUserInterfaz = document.querySelector('#userInterfazEdit');
-    if (!radioUserInterfaz) throw new Error('The is a problem finding the element "user interfaz" radio button');
-    var radioGraphics = document.querySelector('#graphicsEdit');
-    if (!radioGraphics) throw new Error('The is a problem finding the element "graphics" radio button');
-    var radioDesign = document.querySelector('#designEdit');
-    if (!radioDesign) throw new Error('The is a problem finding the element "design" radio button');
-
-    switch (projectType) {
-      case 'userInterfaz':
-        radioUserInterfaz.checked = true;
-        break;
-
-      case 'graphics':
-        radioGraphics.checked = true;
-        break;
-
-      case 'design':
-        radioDesign.checked = true;
-        break;
-    }
-
-    ; //Status
-
-    var radioComplete = document.querySelector('#completeEdit');
-    if (!radioComplete) throw new Error('The is a problem finding the element "complete status" radio button');
-    var radioPaidOutEdit = document.querySelector('#paidOutEdit');
-    if (!radioPaidOutEdit) throw new Error('The is a problem finding the element "paid out status" radio button');
-    var radioWaitingForPaymentEdit = document.querySelector('#waitingForPaymentEdit');
-    if (!radioWaitingForPaymentEdit) throw new Error('The is a problem finding the element "waiting for payment" radio button');
-    var radioApprovedOfferEdit = document.querySelector('#approvedOfferEdit');
-    if (!radioApprovedOfferEdit) throw new Error('The is a problem finding the element "approved Offer status" radio button');
-    var radioBiddingEdit = document.querySelector('#biddingEdit');
-    if (!radioBiddingEdit) throw new Error('The is a problem finding the element "Bidding status" radio button');
-
-    switch (status) {
-      case 'complete':
-        radioComplete.checked = true;
-        break;
-
-      case 'paidOut':
-        radioPaidOutEdit.checked = true;
-        break;
-
-      case 'waitingForPayment':
-        radioWaitingForPaymentEdit.checked = true;
-        break;
-
-      case 'approvedOffer':
-        radioApprovedOfferEdit.checked = true;
-        break;
-
-      case 'bidding':
-        radioBiddingEdit.checked = true;
-        break;
-    }
-
-    ; //With this the event is going to happen only once
-
-    elementWithTheEvent.onmouseenter = null;
-  } catch (error) {
-    console.error(error);
-  }
-
-  ;
-}
-
-; //Function to show the client name in the Edit DOM
 
 function showClientNameInDOM(clientId) {
   var clientFound;
@@ -373,21 +300,21 @@ function showClientNameInDOM(clientId) {
 
 
 function handleEdit(ev) {
-  var _ev$target$elements2, projectName, clientId, task, status, totalHours, projectDetails, allProjects;
+  var _ev$target$elements2, projectName, clientId, projectType, status, totalHours, projectDetails, allProjects;
 
   return regeneratorRuntime.async(function handleEdit$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
           _context7.prev = 0;
-          _ev$target$elements2 = ev.target.elements, projectName = _ev$target$elements2.projectName, clientId = _ev$target$elements2.clientId, task = _ev$target$elements2.task, status = _ev$target$elements2.status, totalHours = _ev$target$elements2.totalHours;
+          _ev$target$elements2 = ev.target.elements, projectName = _ev$target$elements2.projectName, clientId = _ev$target$elements2.clientId, projectType = _ev$target$elements2.projectType, status = _ev$target$elements2.status, totalHours = _ev$target$elements2.totalHours;
           projectName = projectName.value;
           clientId = selectClientNameEdit.value;
-          task = task.value;
+          projectType = projectType.value;
           status = status.value;
           totalHours = totalHours.valueAsNumber;
 
-          if (!(!projectName || !clientId || !task || !status || !totalHours)) {
+          if (!(!projectName || !clientId || !projectType || !status || !totalHours)) {
             _context7.next = 9;
             break;
           }
@@ -408,35 +335,34 @@ function handleEdit(ev) {
           projectDetails = {
             projectName: projectName,
             clientId: clientId,
-            task: task,
+            projectType: projectType,
             status: status,
             totalHours: totalHours
           };
-          console.log(projectDetails);
-          _context7.next = 17;
+          _context7.next = 16;
           return regeneratorRuntime.awrap(axios.put("/projects/editProject/".concat(projectIdEdit), projectDetails));
 
-        case 17:
+        case 16:
           allProjects = _context7.sent;
           renderClients(allProjects);
-          _context7.next = 25;
+          _context7.next = 24;
           break;
 
-        case 21:
-          _context7.prev = 21;
+        case 20:
+          _context7.prev = 20;
           _context7.t0 = _context7["catch"](0);
           swal("Ohhh no!", "".concat(_context7.t0), "warning");
           console.error(_context7.t0);
 
-        case 25:
+        case 24:
           ;
 
-        case 26:
+        case 25:
         case "end":
           return _context7.stop();
       }
     }
-  }, null, null, [[0, 21]]);
+  }, null, null, [[0, 20]]);
 }
 
 ; //Function to get the names of the client in the "select Client Name"

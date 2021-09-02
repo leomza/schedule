@@ -5,7 +5,7 @@ var handleForm = document.querySelector("#formCreate");
 handleForm.addEventListener('submit', handleNewClient);
 
 function handleNewClient(ev) {
-  var _ev$target$elements, clientname, phone, email, projectType, callLimitPerDay, clientDetails, clientsCreated;
+  var _ev$target$elements, clientname, phone, email, dealTime, callLimitPerDay, clientDetails, clientsCreated;
 
   return regeneratorRuntime.async(function handleNewClient$(_context) {
     while (1) {
@@ -13,11 +13,11 @@ function handleNewClient(ev) {
         case 0:
           _context.prev = 0;
           ev.preventDefault();
-          _ev$target$elements = ev.target.elements, clientname = _ev$target$elements.clientname, phone = _ev$target$elements.phone, email = _ev$target$elements.email, projectType = _ev$target$elements.projectType, callLimitPerDay = _ev$target$elements.callLimitPerDay;
+          _ev$target$elements = ev.target.elements, clientname = _ev$target$elements.clientname, phone = _ev$target$elements.phone, email = _ev$target$elements.email, dealTime = _ev$target$elements.dealTime, callLimitPerDay = _ev$target$elements.callLimitPerDay;
           clientname = clientname.value;
           phone = phone.value;
           email = email.value;
-          projectType = projectType.value;
+          dealTime = dealTime.value;
           callLimitPerDay = callLimitPerDay.value;
           modalCreate.style.display = "none";
           ev.target.reset();
@@ -25,7 +25,7 @@ function handleNewClient(ev) {
             clientname: clientname,
             phone: phone,
             email: email,
-            projectType: projectType,
+            dealTime: dealTime,
             callLimitPerDay: callLimitPerDay
           };
           _context.next = 13;
@@ -84,7 +84,7 @@ function renderClients(clientsToShow) {
 
         case 10:
           html = clientsToShow.map(function (element) {
-            return "<tr>\n            <td>".concat(element.clientname, "</td>\n            <td>").concat(element.phone, "</td> \n            <td>").concat(element.email, "</td>\n            <td>").concat(element.projectType, "</td>  \n            <td>").concat(element.callLimitPerDay, "</td>  \n             \n            <td class=\"icons\">\n<div class=\"icons__update\">\n            <img  src=\"./img/update.svg\" alt=\"\" class=\"table__edit\" onclick='editClient(\"").concat(element.uuid, "\")' title=\"Edit\"> \n            </div>\n            <div class=\"icons__delete\">\n          <img src=\"./img/delete.svg\" alt=\"\" class=\"table__remove\" onclick='removeClient(\"").concat(element.uuid, "\", \"").concat(element.clientname, "\")' title=\"Remove\"> \n          </div>\n          </td> \n             \n            </tr>");
+            return "<tr>\n            <td>".concat(element.clientname, "</td>\n            <td>").concat(element.phone, "</td> \n            <td>").concat(element.email, "</td>\n            <td>").concat(element.dealTime, "</td>  \n            <td>").concat(element.callLimitPerDay, "</td>  \n             \n            <td class=\"icons\">\n<div class=\"icons__update\">\n            <img  src=\"./img/update.svg\" alt=\"\" class=\"table__edit\" onclick='editClient(\"").concat(element.uuid, "\")' title=\"Edit\"> \n            </div>\n            <div class=\"icons__delete\">\n          <img src=\"./img/delete.svg\" alt=\"\" class=\"table__remove\" onclick='removeClient(\"").concat(element.uuid, "\", \"").concat(element.clientname, "\")' title=\"Remove\"> \n          </div>\n          </td> \n             \n            </tr>");
           }).join('');
           table.innerHTML = html;
           _context2.next = 18;
@@ -192,7 +192,7 @@ function editClient(uuidClient) {
         case 10:
           clientFound = _context4.sent;
           foundClient = clientFound.data.foundClient;
-          html = "\n                <div id=\"checkRadioButton\" onmouseenter='radioButtonCheck(\"".concat(foundClient.projectType, "\")'>\n                 <h3>Edit client</h3>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"clientname\" value=\"").concat(foundClient.clientname, "\" placeholder=\"Clientname\" required>\n                </div>\n\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"phone\" value=\"").concat(foundClient.phone, "\" placeholder=\"Phone\" required>\n                </div>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"email\" name=\"email\" value=\"").concat(foundClient.email, "\" placeholder=\"Email\" required>\n                </div>\n\n                <div>\n                <label for=\"branding2\">Branding:</label>\n                <input type=\"radio\" id=\"branding2\" name=\"projectType\" value=\"branding\">\n    \n                <label for=\"design2\">Design:</label>\n                <input type=\"radio\" id=\"design2\" name=\"projectType\" value=\"design\">\n    \n                <label for=\"business2\">Business:</label>\n                <input type=\"radio\" id=\"business2\" name=\"projectType\" value=\"business\">\n    \n                </div>\n                <input type=\"submit\" value=\"Update client\">\n                </div>");
+          html = "\n                <div id=\"checkRadioButton\" onmouseenter='radioButtonCheck(\"".concat(foundClient.dealTime, "\")'>\n                 <h3>Edit client</h3>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"clientname\" value=\"").concat(foundClient.clientname, "\" placeholder=\"Clientname\" required>\n                </div>\n\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"phone\" value=\"").concat(foundClient.phone, "\" placeholder=\"Phone\" required>\n                </div>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"email\" name=\"email\" value=\"").concat(foundClient.email, "\" placeholder=\"Email\" required>\n                </div>\n\n                <div>\n                <label for=\"retainer2\">Retainer:</label>\n                <input type=\"radio\" id=\"retainer2\" name=\"dealTime\" value=\"retainer\">\n    \n                <label for=\"hourly2\">Hourly:</label>\n                <input type=\"radio\" id=\"hourly2\" name=\"dealTime\" value=\"hourly\">\n    \n                <label for=\"project2\">Project:</label>\n                <input type=\"radio\" id=\"project2\" name=\"dealTime\" value=\"project\">\n\n                <label for=\"all2\">All:</label>\n                <input type=\"radio\" id=\"all2\" name=\"dealTime\" value=\"all\">\n    \n                </div>\n                <input type=\"submit\" value=\"Update client\">\n                </div>");
           formEdit.innerHTML = html;
           clientIdEdit = foundClient.uuid;
           _context4.next = 20;
@@ -246,8 +246,15 @@ selectedAll.forEach(function (selected) {
     o.addEventListener("click", function () {
       selected.innerHTML = o.querySelector("label").innerHTML;
       optionsContainer.classList.remove("active");
+      o.children[0].checked = true;
     });
-  });
+  }); // optionsList.addEventListener('click',()=>{
+  // })
+  // for (let i = 0; i < optionsList.length; i++) {
+  // if(optionsList[i].type === 'radio' ){
+  //       i.checked
+  // }
+  // }
 }); //SELECT BOX-TIME
 // const selectedTime = document.querySelector(".selected-time");
 // selectedTime.addEventListener("click", () => {
@@ -261,28 +268,34 @@ selectedAll.forEach(function (selected) {
 //   });
 //In the "form Edit" I stablish the previous checked value that the element already has 
 
-function radioButtonCheck(projectType) {
+function radioButtonCheck(dealTime) {
   try {
     var elementWithTheEvent = document.querySelector('#checkRadioButton');
     if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button');
-    var radioBranding = document.querySelector('#branding2');
-    if (!radioBranding) throw new Error('The is a problem finding the element "branding" radio button');
-    var radioDesign = document.querySelector('#design2');
-    if (!radioDesign) throw new Error('The is a problem finding the element "design" radio button');
-    var radioBusiness = document.querySelector('#business2');
-    if (!radioBusiness) throw new Error('The is a problem finding the element "business" radio button');
+    var radioRetainer = document.querySelector('#retainer2');
+    if (!radioRetainer) throw new Error('The is a problem finding the element "retainer" radio button');
+    var radioHourly = document.querySelector('#hourly2');
+    if (!radioHourly) throw new Error('The is a problem finding the element "hourly" radio button');
+    var radioProject = document.querySelector('#project2');
+    if (!radioProject) throw new Error('The is a problem finding the element "project" radio button');
+    var radioAll = document.querySelector('#all2');
+    if (!radioAll) throw new Error('The is a problem finding the element "all" radio button');
 
-    switch (projectType) {
-      case 'branding':
-        radioBranding.checked = true;
+    switch (dealTime) {
+      case 'retainer':
+        radioRetainer.checked = true;
         break;
 
-      case 'design':
-        radioDesign.checked = true;
+      case 'hourly':
+        radioHourly.checked = true;
         break;
 
-      case 'business':
-        radioBusiness.checked = true;
+      case 'project':
+        radioProject.checked = true;
+        break;
+
+      case 'all':
+        radioAll.checked = true;
         break;
     }
 
@@ -299,20 +312,20 @@ function radioButtonCheck(projectType) {
 ; //Handle Edit
 
 function handleEdit(ev) {
-  var _ev$target$elements2, clientname, phone, email, projectType, clientDetails, allClients;
+  var _ev$target$elements2, clientname, phone, email, dealTime, clientDetails, allClients;
 
   return regeneratorRuntime.async(function handleEdit$(_context5) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
-          _ev$target$elements2 = ev.target.elements, clientname = _ev$target$elements2.clientname, phone = _ev$target$elements2.phone, email = _ev$target$elements2.email, projectType = _ev$target$elements2.projectType;
+          _ev$target$elements2 = ev.target.elements, clientname = _ev$target$elements2.clientname, phone = _ev$target$elements2.phone, email = _ev$target$elements2.email, dealTime = _ev$target$elements2.dealTime;
           clientname = clientname.value;
           phone = phone.value;
           email = email.value;
-          projectType = projectType.value;
+          dealTime = dealTime.value;
 
-          if (!(!clientname || !phone || !email || !projectType)) {
+          if (!(!clientname || !phone || !email || !dealTime)) {
             _context5.next = 8;
             break;
           }
@@ -334,7 +347,7 @@ function handleEdit(ev) {
             clientname: clientname,
             phone: phone,
             email: email,
-            projectType: projectType
+            dealTime: dealTime
           };
           _context5.next = 15;
           return regeneratorRuntime.awrap(axios.put("/clients/editClient/".concat(clientIdEdit), clientDetails));

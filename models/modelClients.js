@@ -15,19 +15,20 @@ var readJsonClients = function () {
         console.error(error);
     }
 };
-var ProjectType;
-(function (ProjectType) {
-    ProjectType["branding"] = "branding";
-    ProjectType["design"] = "design";
-    ProjectType["business"] = "business";
-})(ProjectType || (ProjectType = {}));
+var DealTime;
+(function (DealTime) {
+    DealTime["retainer"] = "retainer";
+    DealTime["hourly"] = "hourly";
+    DealTime["project"] = "project";
+    DealTime["all"] = "all";
+})(DealTime || (DealTime = {}));
 var Client = /** @class */ (function () {
-    function Client(clientname, phone, email, projectType, callLimitPerDay) {
+    function Client(clientname, phone, email, dealTime, callLimitPerDay) {
         this.uuid = uuidv4();
         this.clientname = clientname;
         this.phone = phone;
         this.email = email;
-        this.projectType = projectType;
+        this.dealTime = dealTime;
         this.callLimitPerDay = callLimitPerDay;
         this.createdDate = Date.now();
     }

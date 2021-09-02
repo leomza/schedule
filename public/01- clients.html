@@ -1,186 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Clients</title>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="./SCSS/app.css" />
-  </head>
 
-  <a href="02 - projects.html">Go to projects</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clients</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="stylesheet" href="./SCSS/app.css" />
+</head>
 
-  <body onload="renderClients()">
-    <div class="container">
-      <div class="top-table">
-        <div class="top-vreate__title">
-          <h2>לקוחות</h2>
-        </div>
-        <div class="top-table__button">
-          <button id="buttonCreate" class="button-talbe">חדש</button>
-        </div>
+<a href="02 - projects.html">Go to projects</a>
+
+<body onload="renderClients()">
+  <div class="container">
+    <div class="top-table">
+      <div class="top-vreate__title">
+        <h2>לקוחות</h2>
       </div>
-      <table id="tblData">
-        <thead>
-          <tr>
-            <th>שם</th>
-            <th>מספר טלפון</th>
-            <th>כתובת אימייל</th>
-            <th>סוג עסקה</th>
-            <th>זמני שיחה</th>
-            <th><i class="fas fa-wrench"></i></th>
-          </tr>
-        </thead>
+      <div class="top-table__button">
+        <button id="buttonCreate" class="button-talbe">חדש</button>
+      </div>
+    </div>
+    <table id="tblData">
+      <thead>
+        <tr>
+          <th>שם</th>
+          <th>מספר טלפון</th>
+          <th>כתובת אימייל</th>
+          <th>סוג עסקה</th>
+          <th>זמני שיחה</th>
+          <th><i class="fas fa-wrench"></i></th>
+        </tr>
+      </thead>
 
-        <tbody class="table"></tbody>
-      </table>
+      <tbody class="table"></tbody>
+    </table>
 
-      <!-- Modal to create a task -->
-      <div id="modalCreate" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-          <span id="closeModal" class="close">&times;</span>
-          <form id="formCreate">
-            <h3>לקוח חדש</h3>
-            <div>
-              <input
-                type="text"
-                name="clientname"
-                placeholder="שם לקוח"
-                required
-              />
-            </div>
+    <!-- Modal to create a task -->
+    <div id="modalCreate" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <form id="formCreate">
+          <h3>לקוח חדש</h3>
+          <div>
+            <input type="text" name="clientname" placeholder="שם לקוח" required />
+          </div>
 
-            <div>
-              <input
-                type="text"
-                name="phone"
-                placeholder="מספר טלפון"
-                required
-              />
-            </div>
+          <div>
+            <input type="text" name="phone" placeholder="מספר טלפון" required />
+          </div>
 
-            <div>
-              <input
-                type="email"
-                name="email"
-                placeholder="כתובת אימייל"
-                autocomplete="off"
-                required
-              />
-            </div>
+          <div>
+            <input type="email" name="email" placeholder="כתובת אימייל" autocomplete="off" required />
+          </div>
 
-            <div class="select-box">
-              <div class="options-container">
-                <div class="option">
-                  <input
-                    type="radio"
-                    id="branding"
-                    name="projectType"
-                    value="branding"
-                  />
-                  <label for="branding">Branding:</label>
-                </div>
-
-                <div class="option">
-                  <input
-                    type="radio"
-                    id="design"
-                    name="projectType"
-                    value="design"
-                  />
-                  <label for="design">Design:</label>
-                </div>
-
-                <div class="option">
-                  <input
-                    type="radio"
-                    id="business"
-                    name="projectType"
-                    value="business"
-                  />
-                  <label for="business">Business:</label>
-                </div>
+          <div class="select-box">
+            <div class="options-container">
+              <div class="option">
+                <input type="radio" id="retainer" name="dealTime" value="retainer" />
+                <label for="retainer">Retainer:</label>
               </div>
-              <div class="selected">
-                <div class="selected__img">
-                  <img src="./img/maletin.svg" alt="" />
-                </div>
-                <div class="selected__work">
-                  <p>סוג עסקה</p>
-                </div>
+
+              <div class="option">
+                <input type="radio" id="hourly" name="dealTime" value="hourly" />
+                <label for="hourly">Hourly:</label>
+              </div>
+
+              <div class="option">
+                <input type="radio" id="project" name="dealTime" value="project" />
+                <label for="project">Project:</label>
+              </div>
+
+              <div class="option">
+                <input type="radio" id="all" name="dealTime" value="all" />
+                <label for="all">All:</label>
               </div>
             </div>
-            <div class="select-box">
-              <div class="options-container">
-                <div class="option">
-                  <!-- <input
+            <div class="selected">
+              <div class="selected__img">
+                <img src="./img/maletin.svg" alt="" />
+              </div>
+              <div class="selected__work">
+                <p>סוג עסקה</p>
+              </div>
+            </div>
+          </div>
+          <div class="select-box">
+            <div class="options-container">
+              <div class="option">
+                <!-- <input
                     type="radio"
                     id="branding"
                     name="projectType"
                     value="branding"
                   />
                   <label for="branding">Branding:</label> -->
-                
-          <input type="radio" id="10" name="callLimitPerDay" value="10">
-          <label for="10">10 minutes per day</label>
-                </div>
 
-                <div class="option">
-                  <!-- <input
+                <input type="radio" id="10" name="callLimitPerDay" value="10">
+                <label for="10">10 minutes per day</label>
+              </div>
+
+              <div class="option">
+                <!-- <input
                     type="radio"
                     id="design"
                     name="projectType"
                     value="design"
                   />
                   <label for="design">Design:</label> -->
-                  <input type="radio" id="30" name="callLimitPerDay" value="30">
-                  <label for="30">30 minutes per day</label>
-                </div>
+                <input type="radio" id="30" name="callLimitPerDay" value="30">
+                <label for="30">30 minutes per day</label>
+              </div>
 
-                <div class="option">
-                  <!-- <input
+              <div class="option">
+                <!-- <input
                     type="radio"
                     id="business"
                     name="projectType"
                     value="business"
                   />
                   <label for="business">Business:</label> -->
-                  <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
-                  <label for="withOutLimit">With Out Limits:</label>
-                
-                </div>
-              </div>
-              <div class="selected">
-                <div class="selected__img">
-                  <img src="./img/maletin.svg" alt="" />
-                </div>
-                <div class="selected__work">
-                  <p>סוג עסקה</p>
-                </div>
+                <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
+                <label for="withOutLimit">With Out Limits:</label>
+
               </div>
             </div>
- 
+            <div class="selected">
+              <div class="selected__img">
+                <img src="./img/maletin.svg" alt="" />
+              </div>
+              <div class="selected__work">
+                <p>סוג עסקה</p>
+              </div>
+            </div>
+          </div>
 
-            <input type="submit" value="Create client" class="button-form" />
-          </form>
-        </div>
+
+          <input type="submit" value="Create client" class="button-form" />
+        </form>
       </div>
+    </div>
 
-<!-- 
+    <!-- 
       <div>
         <label for="callLimitPerDay">Call limit per day =></label>
         <div>
@@ -193,20 +161,17 @@
           <label for="withOutLimit">With Out Limits:</label>
           <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
         </div> -->
-      <!-- Modal to edit a task -->
-      <div id="modalEdit" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-          <span id="closeEdit" class="close">&times;</span>
-          <form
-            class="formEdit"
-            id="formEdit"
-            onsubmit="handleEdit(event)"
-          ></form>
-        </div>
+    <!-- Modal to edit a task -->
+    <div id="modalEdit" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span id="closeEdit" class="close">&times;</span>
+        <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
       </div>
     </div>
-    <script src="helperModal.js"></script>
-    <script src="01 - clients.js"></script>
-  </body>
+  </div>
+  <script src="helperModal.js"></script>
+  <script src="01 - clients.js"></script>
+</body>
+
 </html>
