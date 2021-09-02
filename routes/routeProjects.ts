@@ -6,7 +6,7 @@ const router = express.Router();
 import { registerProject, getAllProjects, getAProject, deleteProject, editProject, addTask } from '../controllers/controllerProjects'
 
 router.post('/addNew', registerProject);
-router.post('/addTask/:idTask/:idProject', addTask);
+router.post('/addTask', addTask);
 router.get('/getAllProjects', getAllProjects);
 router.get('/findProject/:idProject', getAProject);
 router.delete('/deleteProject/:idProject', deleteProject);

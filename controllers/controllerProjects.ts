@@ -73,10 +73,9 @@ export function getAProject(req, res) {
 
 export function addTask(req, res) {
     try {
-        const { idTask, idProject } = req.params;
+        const { idTask, projectId } = req.body;
         const allProjects = new Projects();
-        console.log("entro aca");
-        const foundProject = allProjects.findProjectByUuid(idProject);
+        const foundProject = allProjects.findProjectByUuid(projectId);
         foundProject.tasks.push(idTask);
         console.log(foundProject);
         allProjects.updateProjectsJson();

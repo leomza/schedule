@@ -32,7 +32,7 @@ function handleNewTask(ev) {
         case 12:
           tasksCreated = _context.sent;
           _context.next = 15;
-          return regeneratorRuntime.awrap(axios.post("/projects/addTask/".concat(tasksCreated.data.newTask.uuid, "/").concat(tasksCreated.data.newTask.projectId)));
+          return regeneratorRuntime.awrap(pushTask(tasksCreated.data.newTask.uuid, tasksCreated.data.newTask.projectId));
 
         case 15:
           swal("Good job!", "New task added succesfully!", "success"); //renderTasks(tasksCreated.data.allTasks.tasks);
@@ -51,21 +51,50 @@ function handleNewTask(ev) {
       }
     }
   }, null, null, [[0, 18]]);
-} //Function to get the names of the projects in the "select Project Name"
+}
 
-
-function uploadProjectNames() {
-  var projectsInfo, projects, select, index, option;
-  return regeneratorRuntime.async(function uploadProjectNames$(_context2) {
+function pushTask(idTask, projectId) {
+  return regeneratorRuntime.async(function pushTask$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
         case 0:
           _context2.prev = 0;
           _context2.next = 3;
+          return regeneratorRuntime.awrap(axios.post("/projects/addTask", {
+            idTask: idTask,
+            projectId: projectId
+          }));
+
+        case 3:
+          _context2.next = 8;
+          break;
+
+        case 5:
+          _context2.prev = 5;
+          _context2.t0 = _context2["catch"](0);
+          console.error(_context2.t0);
+
+        case 8:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  }, null, null, [[0, 5]]);
+} //Function to get the names of the projects in the "select Project Name"
+
+
+function uploadProjectNames() {
+  var projectsInfo, projects, select, index, option;
+  return regeneratorRuntime.async(function uploadProjectNames$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
           return regeneratorRuntime.awrap(axios.get("/projects/getAllProjects"));
 
         case 3:
-          projectsInfo = _context2.sent;
+          projectsInfo = _context3.sent;
           projects = projectsInfo.data.allProjects.projects;
           select = document.getElementById('selectProjectName');
 
@@ -76,17 +105,17 @@ function uploadProjectNames() {
             select.appendChild(option);
           }
 
-          _context2.next = 12;
+          _context3.next = 12;
           break;
 
         case 9:
-          _context2.prev = 9;
-          _context2.t0 = _context2["catch"](0);
-          console.error(_context2.t0);
+          _context3.prev = 9;
+          _context3.t0 = _context3["catch"](0);
+          console.error(_context3.t0);
 
         case 12:
         case "end":
-          return _context2.stop();
+          return _context3.stop();
       }
     }
   }, null, null, [[0, 9]]);
