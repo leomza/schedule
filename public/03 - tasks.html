@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="styles.min.css">
 </head>
 
-<body onload="uploadProjectNames()">
+<body onload="uploadProjectNames(); renderTasks()">
     <a href="01- clients.html">Go to clients</a>
     <a href="02 - projects.html">Go to projects</a>
 
@@ -54,12 +54,12 @@
                     <input type="date" name="limitDate" required>
                 </div>
 
-                <input type="submit" value="Create project">
+                <input type="submit" value="Create task">
             </form>
         </div>
     </div>
 
-    <!-- Modal to edit a project -->
+    <!-- Modal to edit a task -->
     <div id="modalEdit" class="modal">
         <!-- Modal content -->
         <div class="modal-content">

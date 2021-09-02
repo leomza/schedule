@@ -55,4 +55,22 @@ export class Tasks {
             console.error(error);
         }
     }
+
+    deleteTask(idTask) {
+        try {
+            this.tasks = this.tasks.filter(task => task.uuid !== idTask);
+            this.updateTasksJson();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    findTaskById(idTask) {
+        try {
+            const taskFound = this.tasks.find(task => task.uuid === idTask);
+            return taskFound;
+        } catch (error) {
+            console.error(error);
+        }
+    }
 }

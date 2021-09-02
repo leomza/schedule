@@ -48,6 +48,24 @@ var Tasks = /** @class */ (function () {
             console.error(error);
         }
     };
+    Tasks.prototype.deleteTask = function (idTask) {
+        try {
+            this.tasks = this.tasks.filter(function (task) { return task.uuid !== idTask; });
+            this.updateTasksJson();
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    Tasks.prototype.findTaskById = function (idTask) {
+        try {
+            var taskFound = this.tasks.find(function (task) { return task.uuid === idTask; });
+            return taskFound;
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
     return Tasks;
 }());
 exports.Tasks = Tasks;
