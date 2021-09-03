@@ -53,6 +53,7 @@ export function editProject(req, res) {
         foundProject.status = status;
         foundProject.totalHours = totalHours;
         allProjects.updateProjectsJson();
+        res.send({ message: "The project was updated", allProjects })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);

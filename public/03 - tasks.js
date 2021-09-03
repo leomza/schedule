@@ -154,7 +154,7 @@ async function editTask(idTask) {
 
             <div>
                 <label for="selectProjectName">Select a project</label>
-                <select onclick="uploadProjectNamesEdit()" name="selectProjectName" id="selectProjectName">
+                <select onclick="uploadProjectNamesEdit()" name="projectId" id="selectProjectNameEdit">
                     <option id="option${foundTask.projectId}" value="${foundTask.projectId}" selected disabled hidden>${data}</option>
                 </select>
             </div>
@@ -164,7 +164,7 @@ async function editTask(idTask) {
                 <input type="date" name="limitDate" value="${foundTask.limitDate}" required>
             </div>
 
-            <input type="submit" value="Create task">
+            <input type="submit" value="Update task">
         `
             formEdit.innerHTML = html;
             taskIdEdit = foundTask.uuid;
@@ -183,23 +183,21 @@ async function showProjectNameInDOM(projectId) {
 //Handle Edit
 async function handleEdit(ev) {
     try {
-        let { taskName, description, limitDate, projectId } = ev.target.elements
+        let { taskName, description, projectId, limitDate } = ev.target.elements
         taskName = taskName.value;
-        description = selectProjectNameEdit.value;
-        limitDate = limitDate.value;
+        description = description.value;
         projectId = projectId.value;
+        limitDate = limitDate.value;
 
         if (!taskName || !description || !limitDate || !projectId)
             throw new Error("You need to complete all the fields");
 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
+        const tasksDetails = { taskName, description, projectId, limitDate };
+        const allTasks = await axios.put(`/tasks/editTask/${taskIdEdit}`, tasksDetails);
         ev.target.reset();
-
-        const tasksDetails = { taskName, description, limitDate, projectId };
-        console.log(tasksDetails);
-        //const allTasks = await axios.put(`/tasks/editTask/${taskIdEdit}`, tasksDetails);
-        //renderProjects(allTasks);
+        renderTasks(allTasks);
     } catch (error) {
         swal("Ohhh no!", `${error}`, "warning");
         console.error(error);
@@ -215,7 +213,7 @@ async function uploadProjectNamesEdit() {
 
         for (let index = 0; index < projects.length; index++) {
             const option = document.createElement('option');
-            option.value = projects[index].uuid;
+            option.value = projects[index].projectUuid;
             option.innerHTML = projects[index].projectName;
             select.appendChild(option);
         }

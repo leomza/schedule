@@ -49,12 +49,48 @@ export function deleteTask(req, res) {
     }
 }
 
-export function getATask(req, res){
+export function getATask(req, res) {
     try {
         const { idTask } = req.params;
         const allTasks = new Tasks();
         const foundTask = allTasks.findTaskById(idTask)
         res.send({ message: "The task was founded", foundTask })
+    } catch (error) {
+        console.error(error);
+        res.status(500).send(error.message);
+    }
+}
+
+export function editTask(req, res) {
+    try {
+        const { idTask } = req.params;
+        const { taskName, description, limitDate, projectId } = req.body;
+
+        //Found the task
+        const allTasks = new Tasks();
+        const foundTask = allTasks.findTaskById(idTask);
+
+        //If the change move to another proyect should change the taskId
+        const allProjects = new Projects();
+        const foundProject = allProjects.findProjectByUuid(foundTask.projectId);
+        if (foundProject.projectUuid !== projectId) {
+            //Delete the task from the old project
+
+            foundProject.tasks = foundProject.tasks.filter(task => task !== idTask);
+            //Add the task to the new project
+            const newFoundProject = allProjects.findProjectByUuid(projectId);
+            newFoundProject.tasks.push(idTask);
+            allProjects.updateProjectsJson();
+        }
+
+        //Edit the task
+        foundTask.taskName = taskName;
+        foundTask.description = description;
+        foundTask.limitDate = limitDate;
+        foundTask.projectId = projectId;
+
+        allTasks.updateTasksJson();
+        res.send({ message: "The task was updated", allTasks })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);

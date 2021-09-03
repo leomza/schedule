@@ -8,4 +8,5 @@ router.post('/newTask', controllerTasks_1.createTask);
 router.get('/getAllTasks', controllerTasks_1.getAllTasks);
 router.get('/findTask/:idTask', controllerTasks_1.getATask);
 router["delete"]('/deleteTask/:idTask/:idProject', controllerTasks_1.deleteTask);
+router.put('/editTask/:idTask', controllerTasks_1.editTask);
 module.exports = router;
