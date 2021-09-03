@@ -1,6 +1,6 @@
-import { Client } from "./modelClients";
-
 export { };
+
+import { Task } from "./modelTasks";
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
@@ -17,38 +17,60 @@ const readJsonProjects = () => {
 };
 
 enum Status {
-    complete = 'complete',
-    paidOut = 'paidOut',
-    waitingForPayment = 'waitingForPayment',
-    approvedOffer = 'approvedOffer',
-    bidding = 'bidding'
+    offerPending = 'offerPending',
+    inProgress = 'inProgress',
+    offerApproved = 'offerApproved',
+    stuck = 'stuck',
+    paidUp = 'paidUp',
+    waitingForSketchApproval = 'waitingForSketchApproval',
+    postponed = 'postponed',
+    canceled = 'canceled',
+    finished = 'finished',
 }
 
-enum Task {
-    UI = 'userInterfaz',
-    graphics = 'graphics',
-    design = 'design'
+enum projectType {
+    logo = 'logo',
+    graphicLanguage = 'graphicLanguage',
+    corporateWebsite = 'corporateWebsite',
+    landingPage = 'landingPage',
+    ecommerce = 'ecommerce',
+    branding = 'branding',
+    post = 'post',
+    packageDesign = 'packageDesign',
+    banner = 'banner',
+    rollUp = 'rollUp',
+    flyer = 'flyer',
+    digitalBook = 'digitalBook',
+    newsLetter = 'newsLetter',
+    calendar = 'calendar',
+    businessCard = 'businessCard',
+    presentation = 'presentation',
+    designedPage = 'designedPage',
 }
+
+
 
 export class Project {
     projectUuid: string;
     projectName: string;
     clientId: string;
-    task: Task;
+    projectType: projectType;
     status: Status;
     createdDate: any;
     totalHours: number;
     usedHours: number;
+    tasks: Array<Task>
 
-    constructor(projectName: string, clientId: string, task: Task, status: Status, totalHours: number) {
+    constructor(projectName: string, clientId: string, projectType: projectType, status: Status, totalHours: number) {
         this.projectUuid = uuidv4();
         this.projectName = projectName;
         this.clientId = clientId;
-        this.task = task;
+        this.projectType = projectType;
         this.status = status;
         this.createdDate = Date.now();
         this.totalHours = totalHours;
         this.usedHours = 0;
+        this.tasks = [];
     }
 }
 

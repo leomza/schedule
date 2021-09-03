@@ -5,8 +5,8 @@ exports.getAClient = exports.editClient = exports.deleteClient = exports.getAllC
 var modelClients_1 = require("../models/modelClients");
 function registerClient(req, res) {
     try {
-        var _a = req.body, clientname = _a.clientname, phone = _a.phone, email = _a.email, projectType = _a.projectType, callLimitPerDay = _a.callLimitPerDay;
-        var newClient = new modelClients_1.Client(clientname, phone, email, projectType, callLimitPerDay);
+        var _a = req.body, clientname = _a.clientname, phone = _a.phone, email = _a.email, dealTime = _a.dealTime, callLimitPerDay = _a.callLimitPerDay;
+        var newClient = new modelClients_1.Client(clientname, phone, email, dealTime, callLimitPerDay);
         var allClients = new modelClients_1.Clients();
         allClients.createClient(newClient);
         res.send({ message: "A new Client was register", allClients: allClients });
@@ -44,13 +44,13 @@ exports.deleteClient = deleteClient;
 function editClient(req, res) {
     try {
         var idClient = req.params.idClient;
-        var _a = req.body, clientname = _a.clientname, phone = _a.phone, email = _a.email, projectType = _a.projectType, callLimitPerDay = _a.callLimitPerDay;
+        var _a = req.body, clientname = _a.clientname, phone = _a.phone, email = _a.email, dealTime = _a.dealTime, callLimitPerDay = _a.callLimitPerDay;
         var allClients = new modelClients_1.Clients();
         var foundClient = allClients.findClientByUuid(idClient);
         foundClient.clientname = clientname;
         foundClient.phone = phone;
         foundClient.email = email;
-        foundClient.projectType = projectType;
+        foundClient.dealTime = dealTime;
         foundClient.callLimitPerDay = callLimitPerDay;
         allClients.updateClientsJson();
     }

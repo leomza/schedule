@@ -17,28 +17,47 @@ var readJsonProjects = function () {
 };
 var Status;
 (function (Status) {
-    Status["complete"] = "complete";
-    Status["paidOut"] = "paidOut";
-    Status["waitingForPayment"] = "waitingForPayment";
-    Status["approvedOffer"] = "approvedOffer";
-    Status["bidding"] = "bidding";
+    Status["offerPending"] = "offerPending";
+    Status["inProgress"] = "inProgress";
+    Status["offerApproved"] = "offerApproved";
+    Status["stuck"] = "stuck";
+    Status["paidUp"] = "paidUp";
+    Status["waitingForSketchApproval"] = "waitingForSketchApproval";
+    Status["postponed"] = "postponed";
+    Status["canceled"] = "canceled";
+    Status["finished"] = "finished";
 })(Status || (Status = {}));
-var Task;
-(function (Task) {
-    Task["UI"] = "userInterfaz";
-    Task["graphics"] = "graphics";
-    Task["design"] = "design";
-})(Task || (Task = {}));
+var projectType;
+(function (projectType) {
+    projectType["logo"] = "logo";
+    projectType["graphicLanguage"] = "graphicLanguage";
+    projectType["corporateWebsite"] = "corporateWebsite";
+    projectType["landingPage"] = "landingPage";
+    projectType["ecommerce"] = "ecommerce";
+    projectType["branding"] = "branding";
+    projectType["post"] = "post";
+    projectType["packageDesign"] = "packageDesign";
+    projectType["banner"] = "banner";
+    projectType["rollUp"] = "rollUp";
+    projectType["flyer"] = "flyer";
+    projectType["digitalBook"] = "digitalBook";
+    projectType["newsLetter"] = "newsLetter";
+    projectType["calendar"] = "calendar";
+    projectType["businessCard"] = "businessCard";
+    projectType["presentation"] = "presentation";
+    projectType["designedPage"] = "designedPage";
+})(projectType || (projectType = {}));
 var Project = /** @class */ (function () {
-    function Project(projectName, clientId, task, status, totalHours) {
+    function Project(projectName, clientId, projectType, status, totalHours) {
         this.projectUuid = uuidv4();
         this.projectName = projectName;
         this.clientId = clientId;
-        this.task = task;
+        this.projectType = projectType;
         this.status = status;
         this.createdDate = Date.now();
         this.totalHours = totalHours;
         this.usedHours = 0;
+        this.tasks = [];
     }
     return Project;
 }());

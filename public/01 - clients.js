@@ -5,17 +5,17 @@ handleForm.addEventListener('submit', handleNewClient);
 async function handleNewClient(ev) {
     try {
         ev.preventDefault();
-        let { clientname, phone, email, projectType, callLimitPerDay } = ev.target.elements
+        let { clientname, phone, email, dealTime, callLimitPerDay } = ev.target.elements
         clientname = clientname.value;
         phone = phone.value;
         email = email.value;
-        projectType = projectType.value;
+        dealTime = dealTime.value;
         callLimitPerDay = callLimitPerDay.value;
 
         modalCreate.style.display = "none";
         ev.target.reset();
 
-        const clientDetails = { clientname, phone, email, projectType, callLimitPerDay };
+        const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };
         const clientsCreated = await axios.post('/clients/register', clientDetails);
         swal("Good job!", "New user added succesfully!", "success");
         renderClients(clientsCreated.data.allClients.clients);
@@ -42,7 +42,7 @@ async function renderClients(clientsToShow) {
             <td>${element.clientname}</td>
             <td>${element.phone}</td> 
             <td>${element.email}</td>
-            <td>${element.projectType}</td>  
+            <td>${element.dealTime}</td>  
             <td>${element.callLimitPerDay}</td>  
              
             <td class="icons">
@@ -112,7 +112,7 @@ async function editClient(uuidClient) {
         const clientFound = await axios.get(`clients/findClient/${uuidClient}`);
         const { foundClient } = clientFound.data;
         let html = `
-                <div id="checkRadioButton" onmouseenter='radioButtonCheck("${foundClient.projectType}")'>
+                <div id="checkRadioButton" onmouseenter='radioButtonCheck("${foundClient.dealTime}")'>
                  <h3>Edit client</h3>
 
                 <div class="form__wrapper">
@@ -129,14 +129,17 @@ async function editClient(uuidClient) {
                 </div>
 
                 <div>
-                <label for="branding2">Branding:</label>
-                <input type="radio" id="branding2" name="projectType" value="branding">
+                <label for="retainer2">Retainer:</label>
+                <input type="radio" id="retainer2" name="dealTime" value="retainer">
     
-                <label for="design2">Design:</label>
-                <input type="radio" id="design2" name="projectType" value="design">
+                <label for="hourly2">Hourly:</label>
+                <input type="radio" id="hourly2" name="dealTime" value="hourly">
     
-                <label for="business2">Business:</label>
-                <input type="radio" id="business2" name="projectType" value="business">
+                <label for="project2">Project:</label>
+                <input type="radio" id="project2" name="dealTime" value="project">
+
+                <label for="all2">All:</label>
+                <input type="radio" id="all2" name="dealTime" value="all">
     
                 </div>
                 <input type="submit" value="Update client">
@@ -156,7 +159,7 @@ const btn = document.querySelector('.button-form')
 // selected.addEventListener("click", () => {
 //     optionsContainer.classList.toggle("active");
 //   });
- 
+
 
 //   optionsList.forEach(o => {
 //     o.addEventListener("click", () => {
@@ -164,66 +167,66 @@ const btn = document.querySelector('.button-form')
 //       optionsContainer.classList.remove("active");
 //     });
 //   });
-  const selectedAll = document.querySelectorAll(".selected");
+const selectedAll = document.querySelectorAll(".selected");
 
-  selectedAll.forEach((selected) => {
+selectedAll.forEach((selected) => {
     const optionsContainer = selected.previousElementSibling;
- 
-  
+
+
     const optionsList = optionsContainer.querySelectorAll(".option");
-  
+
     selected.addEventListener("click", () => {
-      if (optionsContainer.classList.contains("active")) {
-        optionsContainer.classList.remove("active");
-      } else {
-        let currentActive = document.querySelector(".options-container.active");
-  
-        if (currentActive) {
-          currentActive.classList.remove("active");
+        if (optionsContainer.classList.contains("active")) {
+            optionsContainer.classList.remove("active");
+        } else {
+            let currentActive = document.querySelector(".options-container.active");
+
+            if (currentActive) {
+                currentActive.classList.remove("active");
+            }
+
+            optionsContainer.classList.add("active");
         }
-  
-        optionsContainer.classList.add("active");
-      }
-  
-    
+
+
     });
-  
+
     optionsList.forEach((o) => {
-      o.addEventListener("click", () => {
-        selected.innerHTML = o.querySelector("label").innerHTML;
-        optionsContainer.classList.remove("active");
-        o.children[0].checked = true
-        
-      });
-     
+        o.addEventListener("click", () => {
+            selected.innerHTML = o.querySelector("label").innerHTML;
+            optionsContainer.classList.remove("active");
+            o.children[0].checked = true
+
+        });
+
     });
 
     // optionsList.addEventListener('click',()=>{
-        
+
     // })
-  
+
     // for (let i = 0; i < optionsList.length; i++) {
     // if(optionsList[i].type === 'radio' ){
     //       i.checked
     // }
-      
+
     // }
-    
-    
-   
-  });
- 
+
+
+
+});
+
 
 
 
 //SELECT BOX-TIME
 // const selectedTime = document.querySelector(".selected-time");
- 
+
 
 // selectedTime.addEventListener("click", () => {
 //     optionsContainer.classList.toggle("active");
 //   });
- 
+
 
 //   optionsList.forEach(o => {
 //     o.addEventListener("click", () => {
@@ -233,31 +236,38 @@ const btn = document.querySelector('.button-form')
 //   });
 
 //In the "form Edit" I stablish the previous checked value that the element already has 
-function radioButtonCheck(projectType) {
+function radioButtonCheck(dealTime) {
     try {
         const elementWithTheEvent = document.querySelector('#checkRadioButton');
         if (!elementWithTheEvent) throw new Error('The is a problem finding the element to check the radio button');
 
-        const radioBranding = document.querySelector('#branding2');
-        if (!radioBranding) throw new Error('The is a problem finding the element "branding" radio button');
+        const radioRetainer = document.querySelector('#retainer2');
+        if (!radioRetainer) throw new Error('The is a problem finding the element "retainer" radio button');
 
-        const radioDesign = document.querySelector('#design2');
-        if (!radioDesign) throw new Error('The is a problem finding the element "design" radio button');
+        const radioHourly = document.querySelector('#hourly2');
+        if (!radioHourly) throw new Error('The is a problem finding the element "hourly" radio button');
 
-        const radioBusiness = document.querySelector('#business2');
-        if (!radioBusiness) throw new Error('The is a problem finding the element "business" radio button');
+        const radioProject = document.querySelector('#project2');
+        if (!radioProject) throw new Error('The is a problem finding the element "project" radio button');
 
-        switch (projectType) {
-            case 'branding':
-                radioBranding.checked = true;
+        const radioAll = document.querySelector('#all2');
+        if (!radioAll) throw new Error('The is a problem finding the element "all" radio button');
+
+        switch (dealTime) {
+            case 'retainer':
+                radioRetainer.checked = true;
                 break;
 
-            case 'design':
-                radioDesign.checked = true;
+            case 'hourly':
+                radioHourly.checked = true;
                 break;
 
-            case 'business':
-                radioBusiness.checked = true;
+            case 'project':
+                radioProject.checked = true;
+                break;
+
+            case 'all':
+                radioAll.checked = true;
                 break;
         };
 
@@ -273,20 +283,20 @@ function radioButtonCheck(projectType) {
 //Handle Edit
 async function handleEdit(ev) {
     try {
-        let { clientname, phone, email, projectType } = ev.target.elements;
+        let { clientname, phone, email, dealTime } = ev.target.elements;
         clientname = clientname.value;
         phone = phone.value;
         email = email.value;
-        projectType = projectType.value;
+        dealTime = dealTime.value;
 
-        if (!clientname || !phone || !email || !projectType)
+        if (!clientname || !phone || !email || !dealTime)
             throw new Error("You need to complete all the fields");
 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";
         ev.target.reset();
 
-        const clientDetails = { clientname, phone, email, projectType };
+        const clientDetails = { clientname, phone, email, dealTime };
         const allClients = await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);
         renderClients(allClients);
     } catch (error) {

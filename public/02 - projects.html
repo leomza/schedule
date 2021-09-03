@@ -17,6 +17,7 @@
 
 <body onload="uploadClientNames(); renderProjects()">
     <a href="01- clients.html">Go to clients</a>
+    <a href="03 - tasks.html">Go to tasks</a>
 
     <button id="buttonCreate">
         Create a new project
@@ -26,7 +27,7 @@
         <tr>
             <th>Project name</th>
             <th>Client Name</th>
-            <th>Task</th>
+            <th>Project Type</th>
             <th>Call limit per day</th>
             <th>Total Hours / Used Hours</th>
             <th>Status</th>
@@ -35,7 +36,7 @@
         <tbody class="table"></tbody>
     </table>
 
-    <!-- Modal to create a task -->
+    <!-- Modal to create a project -->
     <div id="modalCreate" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
@@ -50,56 +51,61 @@
                 <div>
                     <label for="selectClientName">Select a client name</label>
                     <select name="selectClientName" id="selectClientName">
-                        <option>Select a client name...</option>
+                        <option selected disabled>Select a client name...</option>
                     </select>
                 </div>
 
                 <div>
-                    <label for="task">Task =></label>
-                    <div>
-                        <label for="userInterfaz">User Interfaz:</label>
-                        <input type="radio" id="userInterfaz" name="task" value="userInterfaz">
-
-                        <label for="graphics">Graphics:</label>
-                        <input type="radio" id="graphics" name="task" value="graphics">
-
-                        <label for="design">Design:</label>
-                        <input type="radio" id="design" name="task" value="design">
-                    </div>
+                    <label for="projectType">Project Type:</label>
+                    <select name="projectType" id="projectType">
+                        <option selected disabled>Select a project type...</option>
+                        <option value="logo">Logo</option>
+                        <option value="graphicLanguage">Graphic Language</option>
+                        <option value="corporateWebsite">Corporate Website</option>
+                        <option value="landingPage">Landing Page</option>
+                        <option value="ecommerce">Ecommerce</option>
+                        <option value="branding">Branding</option>
+                        <option value="post">Post</option>
+                        <option value="packageDesign">Package Design</option>
+                        <option value="banner">Banner</option>
+                        <option value="rollUp">Roll Up</option>
+                        <option value="flyer">Flyer</option>
+                        <option value="digitalBook">Digital Book</option>
+                        <option value="newsLetter">News Letter</option>
+                        <option value="calendar">Calendar</option>
+                        <option value="businessCard">Business Card</option>
+                        <option value="presentation">Presentation</option>
+                        <option value="designedPage">Designed Page</option>
+                    </select>
                 </div>
 
                 <div>
-                    <label for="status">Status =></label>
-                    <div>
-                        <label for="complete">Complete:</label>
-                        <input type="radio" id="complete" name="status" value="complete">
-
-                        <label for="paidOut">Paid Out:</label>
-                        <input type="radio" id="paidOut" name="status" value="paidOut">
-
-                        <label for="waitingForPayment">Waiting For Payment:</label>
-                        <input type="radio" id="waitingForPayment" name="status" value="waitingForPayment">
-
-                        <label for="approvedOffer">Approved Offer:</label>
-                        <input type="radio" id="approvedOffer" name="status" value="approvedOffer">
-
-                        <label for="bidding">Bidding:</label>
-                        <input type="radio" id="bidding" name="status" value="bidding">
-                    </div>
+                    <label for="status">Status:</label>
+                    <select name="status" id="status">
+                        <option selected disabled>Select a status...</option>
+                        <option value="offerPending">Offer Pending</option>
+                        <option value="inProgress">In Progress</option>
+                        <option value="offerApproved">Offer Approved</option>
+                        <option value="stuck">Stuck</option>
+                        <option value="paidUp">Paid Up</option>
+                        <option value="waitingForSketchApproval">Waiting for Sketch Approval</option>
+                        <option value="postponed">Postponed</option>
+                        <option value="canceled">Canceled</option>
+                        <option value="finished">Finished</option>
+                    </select>
                 </div>
+
+                <div>
+                    <label for="totalHours">Total hours for the project</label>
+                    <input type="number" name="totalHours" placeholder="Total Hours for the project">
+                </div>
+
+                <input type="submit" value="Create project">
+            </form>
         </div>
-
-        <div>
-            <label for="totalHours">Total hours for the project</label>
-            <input type="number" name="totalHours" placeholder="Total Hours for the project">
-        </div>
-
-        <input type="submit" value="Create project">
-        </form>
-    </div>
     </div>
 
-    <!-- Modal to edit a task -->
+    <!-- Modal to edit a project -->
     <div id="modalEdit" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
