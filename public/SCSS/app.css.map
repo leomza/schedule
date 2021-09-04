@@ -8,8 +8,7 @@
         "base/_globals.scss",
         "base/_buttons.scss",
         "layout/_client.scss",
-        "layout/_form.scss",
-        "layout/_projects.scss"
+        "layout/_form.scss"
     ],
     "names": [],
     "file": "app.css"
