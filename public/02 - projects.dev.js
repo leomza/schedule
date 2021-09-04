@@ -146,7 +146,8 @@ function renderProjects(projectsToShow) {
 
           ;
           html = projectsToShow.map(function (element) {
-            return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(element.totalHours, " / ").concat(element.usedHours, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <i class=\"fas fa-edit table__edit\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"></i>\n                <i class=\"fas fa-trash table__remove\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\"></i>\n                </td>\n            </tr>");
+            usedHoursInProject = parseFloat(element.usedHours).toFixed(2);
+            return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(element.totalHours, " / ").concat(usedHoursInProject, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <img src=\"./img/edit.png\" alt=\"\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"> \n                <img src=\"./img/delete.png\" alt=\"\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\">\n                </td>\n            </tr>");
           }).join('');
           table.innerHTML = html;
           _context3.next = 25;

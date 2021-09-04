@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.addTask = exports.getAProject = exports.editProject = exports.deleteProject = exports.getAllProjects = exports.registerProject = void 0;
+exports.setProjectTime = exports.addTask = exports.getAProject = exports.editProject = exports.deleteProject = exports.getAllProjects = exports.registerProject = void 0;
 //I import the classes (with Methods) of the Models that Im going to use here
 var modelProjects_1 = require("../models/modelProjects");
 function registerProject(req, res) {
@@ -89,3 +89,18 @@ function addTask(req, res) {
     }
 }
 exports.addTask = addTask;
+function setProjectTime(req, res) {
+    try {
+        var _a = req.params, idProject = _a.idProject, timeInHours = _a.timeInHours;
+        var allProjects = new modelProjects_1.Projects();
+        var foundProject = allProjects.findProjectByUuid(idProject);
+        timeInHours = parseFloat(timeInHours);
+        foundProject.usedHours = foundProject.usedHours + timeInHours;
+        allProjects.updateProjectsJson();
+        res.send({ message: "The time was added to the project" });
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+exports.setProjectTime = setProjectTime;

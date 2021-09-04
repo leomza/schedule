@@ -85,3 +85,17 @@ export function addTask(req, res) {
         res.status(500).send(error.message);
     }
 }
+
+export function setProjectTime(req, res) {
+    try {
+        let { idProject, timeInHours } = req.params;
+        const allProjects = new Projects();
+        const foundProject = allProjects.findProjectByUuid(idProject);
+        timeInHours = parseFloat(timeInHours);
+        foundProject.usedHours = foundProject.usedHours + timeInHours;
+        allProjects.updateProjectsJson();
+        res.send({ message: "The time was added to the project" })
+    } catch (error) {
+        console.error(error);
+    }
+}

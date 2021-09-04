@@ -536,7 +536,7 @@ button {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 400;
-  color: #41475E;
+  color: #41475e;
 }
 
 .tasks .task-container {
@@ -574,7 +574,7 @@ button {
 .tasks .task-container .task .task-date p {
   font-size: 1.2rem;
   font-weight: 400;
-  color: #41475E;
+  color: #41475e;
 }
 
 .tasks .task-container::-webkit-scrollbar {
@@ -584,8 +584,31 @@ button {
 }
 
 .tasks .task-container::-webkit-scrollbar-thumb {
-  background: #C9C9C9;
+  background: #c9c9c9;
   border-radius: 0 8px 8px 0;
   height: 5px;
+}
+
+.cronometer {
+  -webkit-text-stroke: 2px #46b8f9;
+  color: transparent;
+}
+
+.cronometer--number {
+  margin: 0;
+  font-size: 140px;
+}
+
+.projects__list {
+  border-top: 1px solid grey;
+  width: 20%;
+}
+
+.button__disabled {
+  cursor: not-allowed;
+}
+
+.button__height {
+  height: 50px;
 }
 /*# sourceMappingURL=app.css.map */

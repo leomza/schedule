@@ -10,4 +10,5 @@ router.get('/getAllProjects', controllerProjects_1.getAllProjects);
 router.get('/findProject/:idProject', controllerProjects_1.getAProject);
 router["delete"]('/deleteProject/:idProject', controllerProjects_1.deleteProject);
 router.put('/editProject/:idProject', controllerProjects_1.editProject);
+router.post('/setTimeInProject/:idProject/:timeInHours', controllerProjects_1.setProjectTime);
 module.exports = router;

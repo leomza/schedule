@@ -1,21 +1,28 @@
 //Cronometer
 function init() {
-    document.querySelector(".start").addEventListener("click", cronometer);
-    document.querySelector(".stop").addEventListener("click", stop);
-    document.querySelector(".restart").addEventListener("click", restart);
+    document.querySelector("#stop").addEventListener("click", stop);
+    document.querySelector("#saveTime").addEventListener("click", saveTime);
     h = 0;
     m = 0;
     s = 0;
-    document.getElementById("hms").innerHTML = `<p style="margin:0">00</p>
-                                                <p style="margin:0">00</p>`;
+    document.getElementById("hms").innerHTML = `<p class="cronometer--number">00</p>
+                                                <p class="cronometer--number">00</p>`;
 }
-function cronometer() {
+
+//To know what button I press and the id of the project
+let eventTarget;
+let idProject;
+
+function cronometer(event, projectId) {
+    eventTarget = event.target;
+    idProject = projectId;
+
+    disabledButtons(event);
     write();
     id = setInterval(write, 1000);
-    document.querySelector(".start").removeEventListener("click", cronometer);
 }
 function write() {
-    var hAux, mAux, sAux;
+    let hAux, mAux, sAux;
     s++;
     if (s > 59) { m++; s = 0; }
     if (m > 59) { h++; m = 0; }
@@ -25,20 +32,45 @@ function write() {
     if (m < 10) { mAux = "0" + m; } else { mAux = m; }
     if (h < 10) { hAux = "0" + h; } else { hAux = h; }
 
-    document.getElementById("hms").innerHTML = `<p style="margin:0">${sAux}</p>
-                                                <p style="margin:0">${mAux}</p>`;
+    document.getElementById("hms").innerHTML = `<p class="cronometer--number">${sAux}</p>
+                                                <p class="cronometer--number">${mAux}</p>`;
 }
 function stop() {
     clearInterval(id);
-    document.querySelector(".start").addEventListener("click", cronometer);
+}
+
+async function saveTime() {
+    const userActivities = document.getElementsByName('activity');
+    clearInterval(id);
+    document.getElementById("hms").innerHTML = `<p class="cronometer--number">00</p>
+                                                <p class="cronometer--number">00</p>`;
+
+    eventTarget.classList.remove('button__height')
+
+    userActivities.forEach(activity => {
+        activity.disabled = false;
+        activity.classList.remove('button__disabled')
+    })
+    let timeInHours = h + (m / 60) + (s / 60 / 60);
+    timeInHours = parseFloat(timeInHours);
+
+    if (idProject) {
+        const message = await axios.post(`/projects/setTimeInProject/${idProject}/${timeInHours}`);
+        swal(`${message.data.message}!`);
+    }
+    h = 0; m = 0; s = 0;
 
 }
-function restart() {
-    clearInterval(id);
-    document.getElementById("hms").innerHTML = `<p style="margin:0">00</p>
-                                                <p style="margin:0">00</p>`;
-    h = 0; m = 0; s = 0;
-    document.querySelector(".start").addEventListener("click", cronometer);
+
+function disabledButtons(event) {
+    const userActivities = document.getElementsByName('activity');
+
+    userActivities.forEach(activity => {
+        activity.disabled = true;
+        activity.classList.add('button__disabled')
+    })
+
+    event.target.classList.add('button__height')
 }
 
 //Render all the projects
@@ -52,15 +84,15 @@ async function renderProjects() {
 
         let html = projects.map(element => {
             return (
-                `<div>
+                `<div class="projects__list" >
                     <p> ${element.projectName} </p>
                     
-                <div>
-                    <img src="img/calendar.png" alt="">
-                    <img src="img/task.png" alt="">
-                    <img src="img/call.png" alt="">
-                    <img src="img/design.png" alt="">
-                </div>
+                    <div>
+                        <button name="activity" onclick="cronometer(event, '${element.projectUuid}')"><img src="img/design.png" alt=""></button>
+                        <button name="activity" onclick="cronometer(event, '${element.projectUuid}')"><img src="img/call.png" alt=""></button>
+                        <img src="img/task.png" alt="">
+                        <img src="img/calendar.png" alt="">
+                    </div>
                 </div>
                 `
             );
@@ -73,5 +105,3 @@ async function renderProjects() {
         console.error(error);
     }
 }
-
-{/* <p> ${element.projectUuid} </p> */ }

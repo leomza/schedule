@@ -4,6 +4,7 @@ const modalEdit = document.getElementById("modalEdit");
 
 // Get the button that opens the modal
 const buttonUpload = document.getElementById("buttonCreate");
+const buttonUpload1 = document.getElementById("buttonCreate1");
 
 // Get the <span> element that closes the modal
 const closeUpload = document.getElementById("closeModal");
@@ -11,6 +12,7 @@ const closeEdit = document.getElementById("closeEdit");
 
 // When the user clicks the button, open the modal
 buttonUpload.addEventListener('click', openModal);
+buttonUpload1.addEventListener('click', openModal);
 
 function openModal() {
     try {

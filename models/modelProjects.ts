@@ -48,8 +48,6 @@ enum projectType {
     designedPage = 'designedPage',
 }
 
-
-
 export class Project {
     projectUuid: string;
     projectName: string;

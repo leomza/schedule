@@ -69,13 +69,14 @@ async function renderProjects(projectsToShow) {
         };
 
         let html = projectsToShow.map(element => {
+            usedHoursInProject = parseFloat(element.usedHours).toFixed(2);
             return (
                 `<tr>
                 <td>${element.projectName}</td>
                 <td>${element.clientname}</td>
                 <td>${element.projectType}</td>
                 <td>${element.callLimitPerDay}</td>
-                <td>${element.totalHours} / ${element.usedHours}</td>
+                <td>${element.totalHours} / ${usedHoursInProject}</td>
                 <td>${element.status}</td>
                 <td>
                 <img src="./img/edit.png" alt="" onclick='editProject("${element.projectUuid}")' title="Edit"> 

@@ -15,86 +15,109 @@
     <link rel="stylesheet" href="./SCSS/app.css">
 </head>
 
-<body onload="uploadProjectNames(); renderTasks()">
+<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects()">
     <a href="01- clients.html">Go to clients</a>
     <a href="02 - projects.html">Go to projects</a>
-<div class="container">
+    <div class="container">
 
 
 
-    <button id="buttonCreate" class="button-talbe">
-        חדשk
+        <button id="buttonCreate" class="button-talbe">
+            חדשk
+        </button>
+
+
+        <div class="tasks">
+            <div>
+                <div class="task-title">
+                    <h3>General</h3>
+                </div>
+
+                <div id="taskGeneral" class="task-container"></div>
+            </div>
+            <div>
+                <div class="task-title">
+                    <h3>Tomorrow</h3>
+                </div>
+                <div id="taskTomorrow" class="task-container">
+                </div>
+            </div>
+            <div>
+                <div class="task-title">
+                    <h3>Today</h3>
+                </div>
+                <div id="taskToday" class="task-container"></div>
+            </div>
+        </div>
+
+        <!-- Modal to create a task -->
+        <div id="modalCreate" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <form id="formCreate">
+                    <h3>Add a new task</h3>
+                    <div>
+                        <label for="taskName">Task Name:</label>
+                        <input type="text" name="taskName" placeholder="Task Name" required>
+                    </div>
+
+                    <div>
+                        <label for="description">Description:</label>
+                        <input type="text" name="description" placeholder="Description" required>
+                    </div>
+
+                    <div>
+                        <label for="selectProjectName">Select a project</label>
+                        <select name="selectProjectName" id="selectProjectName">
+                            <option selected disabled>Select a project...</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="limitDate">Select a limit date:</label>
+                        <input type="date" name="limitDate" required>
+                    </div>
+
+                    <input type="submit" value="Create task">
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal to edit a task -->
+        <div id="modalEdit" class="modal">
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span id="closeEdit" class="close">&times;</span>
+                <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        <div class="cronometer" id="hms"></div>
+        <div id="stop">Pause</div>
+        <div id="saveTime">Save time</div>
+    </div>
+
+    <div>
+        <button name="activity" onclick="cronometer(event)"><img  src="img/recreation.png" alt=""></button>
+        <button name="activity" onclick="cronometer(event)"><img src="img/eat.png" alt=""></button>
+        <button name="activity" onclick="cronometer(event)"><img  src="img/call.png" alt=""></button>
+        <img src="img/task.png" alt="">
+        <img src="img/calendar.png" alt="">
+    </div>
+
+    <button id="buttonCreate1" class="button-talbe">
+        השדח המישמ
     </button>
 
+    <div id="root"></div>
 
-    <div class="tasks">
-        <div >
-            <div class="task-title">
-                <h3 >General</h3>
-            </div>
-          
-            <div id="taskGeneral" class="task-container"></div>
-        </div>
-        <div >
-            <div class="task-title">
-                <h3 >Tomorrow</h3>
-            </div>
-            <div id="taskTomorrow" class="task-container">
-            </div>
-        </div>
-        <div >
-            <div class="task-title">
-                <h3 >Today</h3>
-            </div>
-            <div id="taskToday"  class="task-container"></div>
-        </div>
-    </div>
-
-    <!-- Modal to create a task -->
-    <div id="modalCreate" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <form id="formCreate">
-                <h3>Add a new task</h3>
-                <div>
-                    <label for="taskName">Task Name:</label>
-                    <input type="text" name="taskName" placeholder="Task Name" required>
-                </div>
-
-                <div>
-                    <label for="description">Description:</label>
-                    <input type="text" name="description" placeholder="Description" required>
-                </div>
-
-                <div>
-                    <label for="selectProjectName">Select a project</label>
-                    <select name="selectProjectName" id="selectProjectName">
-                        <option selected disabled>Select a project...</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label for="limitDate">Select a limit date:</label>
-                    <input type="date" name="limitDate" required>
-                </div>
-
-                <input type="submit" value="Create task">
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal to edit a task -->
-    <div id="modalEdit" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span id="closeEdit" class="close">&times;</span>
-            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
-        </div>
-    </div>
-</div>
     <script src="helperModal.js"></script>
     <script src="03 - tasks.js"></script>
+    <script src="04 - cronometer.js"></script>
 </body>
 
 </html>
