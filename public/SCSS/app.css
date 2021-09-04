@@ -3,15 +3,13 @@
 /** Media Queries **/
 html {
   font-size: 62.5%;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 *,
 *:before,
 *:after {
-  -webkit-box-sizing: inherit;
-          box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 body {
@@ -66,7 +64,6 @@ h5 {
   font-size: 1.4rem;
   font-weight: 400;
 }
-
 .button-talbe:hover {
   cursor: pointer;
 }
@@ -88,7 +85,6 @@ h5 {
   font-size: 1.4rem;
   font-weight: 700;
 }
-
 .button-form:hover {
   cursor: pointer;
 }
@@ -104,22 +100,15 @@ button {
 .imagen {
   width: 100px;
   height: 100px;
-  -webkit-filter: brightness(75%);
-          filter: brightness(75%);
+  filter: brightness(75%);
 }
-
 .imagen:hover {
-  -webkit-filter: brightness(100%);
-          filter: brightness(100%);
+  filter: brightness(100%);
 }
 
 .top-table {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  justify-content: space-between;
   margin: 5rem 0;
 }
 
@@ -129,14 +118,9 @@ button {
 }
 
 .select-box {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 292px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .select-box .options-container {
@@ -145,13 +129,10 @@ button {
   max-height: 0;
   width: 100%;
   opacity: 0;
-  -webkit-transition: all 0.4s;
   transition: all 0.4s;
   border-radius: 8px;
   overflow: hidden;
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
+  order: 1;
   position: absolute;
   z-index: 100;
 }
@@ -162,18 +143,11 @@ button {
   margin-bottom: 8px;
   color: #000000;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   gap: 2rem;
-  -webkit-box-ordinal-group: 1;
-      -ms-flex-order: 0;
-          order: 0;
+  order: 0;
 }
-
 .selected__work p {
   font-size: 1.2rem;
   font-weight: 400;
@@ -188,7 +162,6 @@ button {
   width: 32px;
   right: 10px;
   top: 5px;
-  -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
 
@@ -201,8 +174,7 @@ button {
 }
 
 .select-box .options-container.active + .selected::after {
-  -webkit-transform: rotateX(180deg);
-          transform: rotateX(180deg);
+  transform: rotateX(180deg);
   top: -6px;
 }
 
@@ -224,8 +196,6 @@ button {
 }
 
 .selected {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -248,16 +218,13 @@ button {
   margin: 0 0 1rem 0;
   caption-side: top;
 }
-
 #tblData thead tr {
   text-align: right;
 }
-
 #tblData td,
 #tblData th {
   padding: 1.2rem 0;
 }
-
 #tblData th,
 #tblData td {
   border-bottom: 1px solid #DBDDE0;
@@ -278,30 +245,20 @@ button {
   background-color: rgba(0, 0, 0, 0.4);
   /* Modal Content */
 }
-
 .modal-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: reverse;
-      -ms-flex-direction: row-reverse;
-          flex-direction: row-reverse;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  flex-direction: row-reverse;
+  justify-content: center;
   margin: auto;
   padding: 20px;
   width: 348px;
   height: 472px;
-  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
   border-radius: 8px;
   position: relative;
   bottom: 100px;
   background: #ffffff;
 }
-
 .modal-content .close {
   color: #95A3B9;
 }
@@ -323,28 +280,24 @@ button {
   text-transform: uppercase;
   display: block;
 }
-
-#formCreate input:not([type="submit"]) {
+#formCreate input:not([type=submit]) {
   padding: 1rem;
   display: block;
   width: 292px;
   height: 47px;
-  -webkit-box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
-          box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
+  box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
   border: 1px solid #7784ee;
   border-radius: 8rem;
   margin-bottom: 2rem;
 }
-
-#formCreate input[type="radio"] {
+#formCreate input[type=radio] {
   display: none;
 }
 
 .select-box .options-container .option:hover {
   background-color: #F0F5FC;
-  border-right: 2px solid  #08A0F7;
+  border-right: 2px solid #08A0F7;
 }
-
 .select-box .options-container .option label {
   font-size: 1.3rem;
   font-weight: 400;
@@ -356,28 +309,24 @@ button {
   text-transform: uppercase;
   display: block;
 }
-
-#formEdit input:not([type="submit"]) {
+#formEdit input:not([type=submit]) {
   padding: 1rem;
   display: block;
   width: 292px;
   height: 47px;
-  -webkit-box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
-          box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
+  box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
   border: 1px solid #7784ee;
   border-radius: 8rem;
   margin-bottom: 2rem;
 }
-
-#formEdit input[type="radio"] {
+#formEdit input[type=radio] {
   display: none;
 }
 
 .select-box .options-container .option:hover {
   background-color: #F0F5FC;
-  border-right: 2px solid  #08A0F7;
+  border-right: 2px solid #08A0F7;
 }
-
 .select-box .options-container .option label {
   font-size: 1.3rem;
   font-weight: 400;
@@ -385,14 +334,9 @@ button {
 }
 
 .select-box-edit {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
   width: 292px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
 }
 
 .select-box-edit .options-container-edit {
@@ -401,13 +345,10 @@ button {
   max-height: 0;
   width: 100%;
   opacity: 0;
-  -webkit-transition: all 0.4s;
   transition: all 0.4s;
   border-radius: 8px;
   overflow: hidden;
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
+  order: 1;
   position: absolute;
   z-index: 100;
 }
@@ -418,18 +359,11 @@ button {
   margin-bottom: 8px;
   color: #000000;
   position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   gap: 2rem;
-  -webkit-box-ordinal-group: 1;
-      -ms-flex-order: 0;
-          order: 0;
+  order: 0;
 }
-
 .selected-edit__work p {
   font-size: 1.2rem;
   font-weight: 400;
@@ -444,7 +378,6 @@ button {
   width: 32px;
   right: 10px;
   top: 5px;
-  -webkit-transition: all 0.4s;
   transition: all 0.4s;
 }
 
@@ -457,8 +390,7 @@ button {
 }
 
 .select-box-edit .options-container-edit.active + .selected-edit::after {
-  -webkit-transform: rotateX(180deg);
-          transform: rotateX(180deg);
+  transform: rotateX(180deg);
   top: -6px;
 }
 
@@ -480,8 +412,6 @@ button {
 }
 
 .selected-edit {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
 }
 
@@ -496,4 +426,13 @@ button {
 .select-box-edit .option-edit .radio {
   display: none;
 }
-/*# sourceMappingURL=app.css.map */
+
+.form__wrapper--select {
+  padding: 1rem;
+  display: block;
+  width: 292px;
+  height: 47px;
+  border-radius: 50px;
+  border-color: #838fef;
+  margin-bottom: 2rem;
+}

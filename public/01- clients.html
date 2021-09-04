@@ -61,88 +61,26 @@
             <input type="email" name="email" placeholder="כתובת אימייל" autocomplete="off" required />
           </div>
 
-          <div class="select-box">
-            <div class="options-container">
-              <div class="option">
-                <input type="radio" id="retainer" name="dealTime" value="retainer" />
-                <label for="retainer">Retainer </label>
-              </div>
+          <select class="form__wrapper--select" name="dealTime" id="dealTime">
+            <option selected disabled hidden>סוג עסקה</option>
+            <option value="retainer">Retainer</option>
+            <option value="hourly">Hourly</option>
+            <option value="project">Project</option>
+            <option value="all">All</option>
+          </select>
 
-              <div class="option">
-                <input type="radio" id="hourly" name="dealTime" value="hourly" />
-                <label for="hourly">Hourly </label>
-              </div>
-
-              <div class="option">
-                <input type="radio" id="project" name="dealTime" value="project" />
-                <label for="project">Project </label>
-              </div>
-
-              <div class="option">
-                <input type="radio" id="all" name="dealTime" value="all" />
-                <label for="all">All </label>
-              </div>
-            </div>
-            <div class="selected">
-              <div class="selected__img">
-                <img src="./img/maletin.svg" alt="" />
-              </div>
-              <div class="selected__work">
-                <p>סוג עסקה</p>
-              </div>
-            </div>
-          </div>
-          <div class="select-box">
-            <div class="options-container">
-              <div class="option">
- 
-
-                <input type="radio" id="10" name="callLimitPerDay" value="10">
-                <label for="10">10 minutes per day</label>
-              </div>
-
-              <div class="option">
-             
-                <input type="radio" id="30" name="callLimitPerDay" value="30">
-                <label for="30">30 minutes per day</label>
-              </div>
-
-              <div class="option">
-            
-                <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
-                <label for="withOutLimit">With Out Limits</label>
-
-              </div>
-            </div>
-            <div class="selected">
-              <div class="selected__img">
-                <img src="./img/maletin.svg" alt="" />
-              </div>
-              <div class="selected__work">
-                <p>סוג עסקה</p>
-              </div>
-            </div>
-          </div>
-
+          <select class="form__wrapper--select" name="callLimitPerDay" id="callLimitPerDay">
+            <option selected disabled hidden>סוג עסקה</option>
+            <option value="10">10 minutes per day</option>
+            <option value="30">30 minutes per day</option>
+            <option value="withOutLimit">With Out Limits</option>
+          </select>
 
           <input type="submit" value="Create client" class="button-form" />
         </form>
       </div>
     </div>
 
-    <!-- 
-      <div>
-        <label for="callLimitPerDay">Call limit per day =></label>
-        <div>
-          <label for="10">10 minutes per day</label>
-          <input type="radio" id="10" name="callLimitPerDay" value="10">
-
-          <label for="30">30 minutes per day</label>
-          <input type="radio" id="30" name="callLimitPerDay" value="30">
-
-          <label for="withOutLimit">With Out Limits:</label>
-          <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
-        </div> -->
     <!-- Modal to edit a task -->
     <div id="modalEdit" class="modal">
       <!-- Modal content -->
