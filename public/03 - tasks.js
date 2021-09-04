@@ -49,8 +49,14 @@ async function uploadProjectNames() {
 //Render all the tasks
 async function renderTasks(tasksToShow) {
     try {
-        const root = document.querySelector('#root');
-        if (!root) throw new Error('There is a problem finding the HTML element to put the data');
+        const taskToday = document.querySelector('#taskToday');
+        if (!taskToday) throw new Error('There is a problem finding the HTML element to put the data');
+
+        const taskTomorrow = document.querySelector('#taskTomorrow');
+        if (!taskTomorrow) throw new Error('There is a problem finding the HTML element to put the data');
+
+        const taskGeneral = document.querySelector('#taskGeneral');
+        if (!taskGeneral) throw new Error('There is a problem finding the HTML element to put the data');
 
         const projectsInfo = await axios.get(`/projects/getAllProjects`);
         const { projects } = projectsInfo.data.allProjects;
@@ -72,22 +78,85 @@ async function renderTasks(tasksToShow) {
             });
         };
 
-        let html = tasksToShow.map(element => {
-            return (
-                `<div style="background-color: green;">
+        //Set the today date
+        const todayDay = setTodayDay();
+        const tomorrowDay = setTomorrowDay();
+
+        let htmlToday = tasksToShow.map(element => {
+            if (element.limitDate === todayDay)
+                return (
+                    `<div style="background-color: green;">
                     <p>${element.taskName}</p>
                     <p>${element.projectName}</p>
                     <p>${element.limitDate}</p>
                     <i class="fas fa-edit table__edit" onclick='editTask("${element.uuid}")' title="Edit"></i>
                     <i class="fas fa-trash table__remove" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"></i>
                 </div>`
-            );
+                );
         }).join('');
 
-        root.innerHTML = html;
+        taskToday.innerHTML = htmlToday;
+
+        let htmlTommorow = tasksToShow.map(element => {
+            if (element.limitDate === tomorrowDay)
+                return (
+                    `<div style="background-color: green;">
+                    <p>${element.taskName}</p>
+                    <p>${element.projectName}</p>
+                    <p>${element.limitDate}</p>
+                    <i class="fas fa-edit table__edit" onclick='editTask("${element.uuid}")' title="Edit"></i>
+                    <i class="fas fa-trash table__remove" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"></i>
+                </div>`
+                );
+        }).join('');
+
+        taskTomorrow.innerHTML = htmlTommorow;
+
+        let htmlGeneral = tasksToShow.map(element => {
+            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay)
+                return (
+                    `<div style="background-color: green;">
+                    <p>${element.taskName}</p>
+                    <p>${element.projectName}</p>
+                    <p>${element.limitDate}</p>
+                    <i class="fas fa-edit table__edit" onclick='editTask("${element.uuid}")' title="Edit"></i>
+                    <i class="fas fa-trash table__remove" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"></i>
+                </div>`
+                );
+        }).join('');
+
+        taskGeneral.innerHTML = htmlGeneral;
 
     } catch (error) {
         swal("Ohhh no!", error.response.data, "warning");
+        console.error(error);
+    }
+}
+
+//Set the day of today
+function setTodayDay() {
+    try {
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        today = yyyy + '-' + mm + '-' + dd;
+        return today
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//Set the day of tomorrow
+function setTomorrowDay() {
+    try {
+        let today = new Date();
+        const dd = String(today.getDate() + 1).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        tomorrow = yyyy + '-' + mm + '-' + dd;
+        return tomorrow
+    } catch (error) {
         console.error(error);
     }
 }

@@ -1,23 +1,21 @@
-
 /*Base*/
-@import 'base/varibles';
-@import 'base/mixins';
-@import 'base/globals';
-@import 'base/buttons';
+@import "base/varibles";
+@import "base/mixins";
+@import "base/globals";
+@import "base/buttons";
 /*Layout*/
-@import 'layout/client';
-@import 'layout/form';
-@import 'layout/projects';
-
+@import "layout/client";
+@import "layout/form";
+@import "layout/projects";
 
 //ADDED BY LEO TO SEE WELL THE SELECT INPUTS IN THE EDIT CLIENT PAGE
 
 .form__wrapper--select {
-    padding: 1rem;
-    display: block;
-    width: 292px;
-    height: 47px;
-    border-radius: 50px;
-    border-color: #838fef;
-    margin-bottom: 2rem;
-  }
+  padding: 1rem;
+  display: block;
+  width: 292px;
+  height: 47px;
+  border-radius: 50px;
+  border-color: #838fef;
+  margin-bottom: 2rem;
+}

@@ -100,16 +100,16 @@ function uploadProjectNames() {
 
 
 function renderTasks(tasksToShow) {
-  var root, projectsInfo, projects, tasksInfo, tasks, _loop, index, html;
+  var taskToday, taskTomorrow, taskGeneral, projectsInfo, projects, tasksInfo, tasks, _loop, index, todayDay, tomorrowDay, htmlToday, htmlTommorow, htmlGeneral;
 
   return regeneratorRuntime.async(function renderTasks$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          root = document.querySelector('#root');
+          taskToday = document.querySelector('#taskToday');
 
-          if (root) {
+          if (taskToday) {
             _context3.next = 4;
             break;
           }
@@ -117,27 +117,47 @@ function renderTasks(tasksToShow) {
           throw new Error('There is a problem finding the HTML element to put the data');
 
         case 4:
-          _context3.next = 6;
+          taskTomorrow = document.querySelector('#taskTomorrow');
+
+          if (taskTomorrow) {
+            _context3.next = 7;
+            break;
+          }
+
+          throw new Error('There is a problem finding the HTML element to put the data');
+
+        case 7:
+          taskGeneral = document.querySelector('#taskGeneral');
+
+          if (taskGeneral) {
+            _context3.next = 10;
+            break;
+          }
+
+          throw new Error('There is a problem finding the HTML element to put the data');
+
+        case 10:
+          _context3.next = 12;
           return regeneratorRuntime.awrap(axios.get("/projects/getAllProjects"));
 
-        case 6:
+        case 12:
           projectsInfo = _context3.sent;
           projects = projectsInfo.data.allProjects.projects;
 
           if (tasksToShow) {
-            _context3.next = 14;
+            _context3.next = 20;
             break;
           }
 
-          _context3.next = 11;
+          _context3.next = 17;
           return regeneratorRuntime.awrap(axios.get("/tasks/getAlltasks"));
 
-        case 11:
+        case 17:
           tasksInfo = _context3.sent;
           tasks = tasksInfo.data.allTasks.tasks;
           tasksToShow = tasks;
 
-        case 14:
+        case 20:
           _loop = function _loop(index) {
             var task = tasksToShow[index];
             projects.forEach(function (project) {
@@ -152,26 +172,67 @@ function renderTasks(tasksToShow) {
             _loop(index);
           }
 
-          ;
-          html = tasksToShow.map(function (element) {
-            return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
+          ; //Set the today date
+
+          todayDay = setTodayDay();
+          tomorrowDay = setTomorrowDay();
+          htmlToday = tasksToShow.map(function (element) {
+            if (element.limitDate === todayDay) return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
           }).join('');
-          root.innerHTML = html;
-          _context3.next = 25;
+          taskToday.innerHTML = htmlToday;
+          htmlTommorow = tasksToShow.map(function (element) {
+            if (element.limitDate === tomorrowDay) return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
+          }).join('');
+          taskTomorrow.innerHTML = htmlTommorow;
+          htmlGeneral = tasksToShow.map(function (element) {
+            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
+          }).join('');
+          taskGeneral.innerHTML = htmlGeneral;
+          _context3.next = 37;
           break;
 
-        case 21:
-          _context3.prev = 21;
+        case 33:
+          _context3.prev = 33;
           _context3.t0 = _context3["catch"](0);
           swal("Ohhh no!", _context3.t0.response.data, "warning");
           console.error(_context3.t0);
 
-        case 25:
+        case 37:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 21]]);
+  }, null, null, [[0, 33]]);
+} //Set the day of today
+
+
+function setTodayDay() {
+  try {
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    return today;
+  } catch (error) {
+    console.error(error);
+  }
+} //Set the day of tomorrow
+
+
+function setTomorrowDay() {
+  try {
+    var today = new Date();
+    var dd = String(today.getDate() + 1).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+
+    var yyyy = today.getFullYear();
+    tomorrow = yyyy + '-' + mm + '-' + dd;
+    return tomorrow;
+  } catch (error) {
+    console.error(error);
+  }
 } //Delete a tasks
 
 
