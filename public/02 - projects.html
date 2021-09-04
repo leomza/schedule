@@ -1,126 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projects</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<<<<<<< HEAD
-    <!-- <link rel="stylesheet" href="./SCSS/app.css" /> -->
+    <link rel="stylesheet" href="./SCSS/app.css" />
   </head>
-=======
-    <link rel="stylesheet" href="styles.min.css">
-</head>
->>>>>>> parent of 0c36bc8 (up)
 
-<body onload="uploadClientNames(); renderProjects()">
-    <a href="01- clients.html">Go to clients</a>
-    <a href="03 - tasks.html">Go to tasks</a>
-
-    <button id="buttonCreate">
-        Create a new project
-    </button>
-
-    <table id="tblData">
+  <body onload="uploadClientNames(); renderProjects()">
+    <div class="container">
+      <a href="01- clients.html">Go to clients</a>
+      <a href="03 - tasks.html">Go to tasks</a>
+      <div class="top-table">
+        <div class="top-vreate__title">
+          <h2>לקוחות</h2>
+        </div>
+        <div class="top-table__button">
+          <button id="buttonCreate" class="button-talbe">
+            חדש
+          </button>
+        </div>
+      </div>
+      <table id="tblData">
         <tr>
-            <th>Project name</th>
-            <th>Client Name</th>
-            <th>Project Type</th>
-            <th>Call limit per day</th>
-            <th>Total Hours / Used Hours</th>
-            <th>Status</th>
-            <th><i class="fas fa-wrench"></i></th>
+          <th>שם</th>
+          <th>לקוח</th>
+          <th>סוג תוצר</th>
+          <th>זמני שיחה</th>
+          <th>זמן ביצוע</th>
+          <th>Status</th>
+          <th><i class="fas fa-wrench"></i></th>
         </tr>
+     
         <tbody class="table"></tbody>
-    </table>
+      </table>
 
-    <!-- Modal to create a project -->
-    <div id="modalCreate" class="modal">
+      <!-- Modal to create a project -->
+      <div id="modalCreate" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span id="closeModal" class="close">&times;</span>
-            <form id="formCreate">
-                <h3>Add a new project</h3>
-                <div>
-                    <label for="projectName">Project Name:</label>
-                    <input type="text" name="projectName" placeholder="Project name" required>
-                </div>
+          <span id="closeModal" class="close">&times;</span>
+          <form id="formCreate">
+            <h3>Add a new project</h3>
+            <div>
+              <label for="projectName">Project Name:</label>
+              <input
+                type="text"
+                name="projectName"
+                placeholder="Project name"
+                required
+              />
+            </div>
 
-                <div>
-                    <label for="selectClientName">Select a client name</label>
-                    <select name="selectClientName" id="selectClientName">
-                        <option selected disabled>Select a client name...</option>
-                    </select>
-                </div>
+            <div>
+              <label for="selectClientName">Select a client name</label>
+              <select name="selectClientName" id="selectClientName">
+                <option selected disabled>Select a client name...</option>
+              </select>
+            </div>
 
-                <div>
-                    <label for="projectType">Project Type:</label>
-                    <select name="projectType" id="projectType">
-                        <option selected disabled>Select a project type...</option>
-                        <option value="logo">Logo</option>
-                        <option value="graphicLanguage">Graphic Language</option>
-                        <option value="corporateWebsite">Corporate Website</option>
-                        <option value="landingPage">Landing Page</option>
-                        <option value="ecommerce">Ecommerce</option>
-                        <option value="branding">Branding</option>
-                        <option value="post">Post</option>
-                        <option value="packageDesign">Package Design</option>
-                        <option value="banner">Banner</option>
-                        <option value="rollUp">Roll Up</option>
-                        <option value="flyer">Flyer</option>
-                        <option value="digitalBook">Digital Book</option>
-                        <option value="newsLetter">News Letter</option>
-                        <option value="calendar">Calendar</option>
-                        <option value="businessCard">Business Card</option>
-                        <option value="presentation">Presentation</option>
-                        <option value="designedPage">Designed Page</option>
-                    </select>
-                </div>
+            <div>
+              <label for="projectType">Project Type:</label>
+              <select name="projectType" id="projectType">
+                <option selected disabled>Select a project type...</option>
+                <option value="logo">Logo</option>
+                <option value="graphicLanguage">Graphic Language</option>
+                <option value="corporateWebsite">Corporate Website</option>
+                <option value="landingPage">Landing Page</option>
+                <option value="ecommerce">Ecommerce</option>
+                <option value="branding">Branding</option>
+                <option value="post">Post</option>
+                <option value="packageDesign">Package Design</option>
+                <option value="banner">Banner</option>
+                <option value="rollUp">Roll Up</option>
+                <option value="flyer">Flyer</option>
+                <option value="digitalBook">Digital Book</option>
+                <option value="newsLetter">News Letter</option>
+                <option value="calendar">Calendar</option>
+                <option value="businessCard">Business Card</option>
+                <option value="presentation">Presentation</option>
+                <option value="designedPage">Designed Page</option>
+              </select>
+            </div>
 
-                <div>
-                    <label for="status">Status:</label>
-                    <select name="status" id="status">
-                        <option selected disabled>Select a status...</option>
-                        <option value="offerPending">Offer Pending</option>
-                        <option value="inProgress">In Progress</option>
-                        <option value="offerApproved">Offer Approved</option>
-                        <option value="stuck">Stuck</option>
-                        <option value="paidUp">Paid Up</option>
-                        <option value="waitingForSketchApproval">Waiting for Sketch Approval</option>
-                        <option value="postponed">Postponed</option>
-                        <option value="canceled">Canceled</option>
-                        <option value="finished">Finished</option>
-                    </select>
-                </div>
+            <div>
+              <label for="status">Status:</label>
+              <select name="status" id="status">
+                <option selected disabled>Select a status...</option>
+                <option value="offerPending">Offer Pending</option>
+                <option value="inProgress">In Progress</option>
+                <option value="offerApproved">Offer Approved</option>
+                <option value="stuck">Stuck</option>
+                <option value="paidUp">Paid Up</option>
+                <option value="waitingForSketchApproval">
+                  Waiting for Sketch Approval
+                </option>
+                <option value="postponed">Postponed</option>
+                <option value="canceled">Canceled</option>
+                <option value="finished">Finished</option>
+              </select>
+            </div>
 
-                <div>
-                    <label for="totalHours">Total hours for the project</label>
-                    <input type="number" name="totalHours" placeholder="Total Hours for the project">
-                </div>
+            <div>
+              <label for="totalHours">Total hours for the project</label>
+              <input
+                type="number"
+                name="totalHours"
+                placeholder="Total Hours for the project"
+              />
+            </div>
 
-                <input type="submit" value="Create project">
-            </form>
+            <input type="submit" value="Create project" />
+          </form>
         </div>
-    </div>
+      </div>
 
-    <!-- Modal to edit a project -->
-    <div id="modalEdit" class="modal">
+      <!-- Modal to edit a project -->
+      <div id="modalEdit" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span id="closeEdit" class="close">&times;</span>
-            <form class="formEdit" id="formEdit" onsubmit="handleEdit(event)"></form>
+          <span id="closeEdit" class="close">&times;</span>
+          <form
+            class="formEdit"
+            id="formEdit"
+            onsubmit="handleEdit(event)"
+          ></form>
         </div>
+      </div>
     </div>
-
     <script src="helperModal.js"></script>
     <script src="02 - projects.js"></script>
-</body>
-
+  </body>
 </html>

@@ -78,13 +78,13 @@ async function renderProjects(projectsToShow) {
                 <td>${element.totalHours} / ${element.usedHours}</td>
                 <td>${element.status}</td>
                 <td>
-                <i class="fas fa-edit table__edit" onclick='editProject("${element.projectUuid}")' title="Edit"></i>
-                <i class="fas fa-trash table__remove" onclick='removeProject("${element.projectUuid}", "${element.projectName}")' title="Remove"></i>
+                <img src="./img/edit.png" alt="" onclick='editProject("${element.projectUuid}")' title="Edit"> 
+                <img src="./img/delete.png" alt="" onclick='removeProject("${element.projectUuid}", "${element.projectName}")' title="Remove">
                 </td>
             </tr>`
             );
         }).join('');
-
+   
         table.innerHTML = html;
 
     } catch (error) {

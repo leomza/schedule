@@ -143,21 +143,31 @@ gap: 2rem;
   text-align: right;
   border-collapse: collapse;
   margin: 0 0 1rem 0;
+ 
   caption-side: top;
-  thead {
-    tr {
-      text-align: right;
-    }
+  
+ 
+  th{
+    font-weight: $regular;
+    background-color: #E8E8E8;
+    color: #25282B;
+   
+  }
+  td{
+   
+   
+    color: #52575C;
+  
   }
   td,
   th {
-    padding: 1.2rem 0;
+    padding: 1.2rem;
+    
+    border-bottom: 1px solid #DBDDE0;
+    height: 56px;
+    
   }
-  th,
-  td {
-   border-bottom: 1px solid #DBDDE0;
-    width: 20%;
-  }
+  
 }
 // .icons{
    

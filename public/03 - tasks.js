@@ -85,13 +85,19 @@ async function renderTasks(tasksToShow) {
         let htmlToday = tasksToShow.map(element => {
             if (element.limitDate === todayDay)
                 return (
-                    `<div style="background-color: green;">
-                    <p>${element.taskName}</p>
+                    ` <div class="task">
+                    <div class="task-titles">
+                    <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
+                    </div>
+                    <div class="task-date">
                     <p>${element.limitDate}</p>
-                    <i class="fas fa-edit table__edit" onclick='editTask("${element.uuid}")' title="Edit"></i>
-                    <i class="fas fa-trash table__remove" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"></i>
-                </div>`
+                    <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
+                    <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
+                    </div>
+                   
+                </div>
+                `
                 );
         }).join('');
 
@@ -100,13 +106,20 @@ async function renderTasks(tasksToShow) {
         let htmlTommorow = tasksToShow.map(element => {
             if (element.limitDate === tomorrowDay)
                 return (
-                    `<div style="background-color: green;">
-                    <p>${element.taskName}</p>
+                    
+                    ` <div class="task">
+                    <div class="task-titles">
+                    <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
+                    </div>
+                    <div class="task-date">
                     <p>${element.limitDate}</p>
-                    <i class="fas fa-edit table__edit" onclick='editTask("${element.uuid}")' title="Edit"></i>
-                    <i class="fas fa-trash table__remove" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"></i>
-                </div>`
+                    <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
+                    <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
+                    </div>
+                   
+                </div>
+                    `
                 );
         }).join('');
 
@@ -115,13 +128,21 @@ async function renderTasks(tasksToShow) {
         let htmlGeneral = tasksToShow.map(element => {
             if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay)
                 return (
-                    `<div style="background-color: green;">
-                    <p>${element.taskName}</p>
+                    `
+                    <div class="task">
+                    <div class="task-titles">
+                    <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
+                    </div>
+                    <div class="task-date">
                     <p>${element.limitDate}</p>
-                    <i class="fas fa-edit table__edit" onclick='editTask("${element.uuid}")' title="Edit"></i>
-                    <i class="fas fa-trash table__remove" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"></i>
-                </div>`
+                    <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
+                    <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
+                    </div>
+                   
+                </div>
+                  
+                `
                 );
         }).join('');
 
