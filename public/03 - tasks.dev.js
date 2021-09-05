@@ -177,15 +177,26 @@ function renderTasks(tasksToShow) {
           todayDay = setTodayDay();
           tomorrowDay = setTomorrowDay();
           htmlToday = tasksToShow.map(function (element) {
-            if (element.limitDate === todayDay) return " <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(element.limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                   \n                </div>\n                ");
+            if (element.limitDate === todayDay) {
+              var limitDate = formatDate(element.limitDate);
+              return " <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                    </div>");
+            }
+
+            ;
           }).join('');
           taskToday.innerHTML = htmlToday;
           htmlTommorow = tasksToShow.map(function (element) {
-            if (element.limitDate === tomorrowDay) return " <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(element.limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                   \n                </div>\n                    ");
+            if (element.limitDate === tomorrowDay) {
+              var limitDate = formatDate(element.limitDate);
+              return "<div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                    </div>");
+            }
           }).join('');
           taskTomorrow.innerHTML = htmlTommorow;
           htmlGeneral = tasksToShow.map(function (element) {
-            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) return "\n                    <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(element.limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                   \n                </div>\n                  \n                ");
+            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) {
+              var limitDate = formatDate(element.limitDate);
+              return "<div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>  \n                    </div>");
+            }
           }).join('');
           taskGeneral.innerHTML = htmlGeneral;
           _context3.next = 37;
@@ -485,7 +496,7 @@ function handleSearch() {
           _context9.prev = 0;
           searchTask = document.querySelector('#search');
           regEx = searchTask.value;
-          searching = new RegExp(regEx, 'i');
+          searching = new RegExp(regEx, 'gmi');
           _context9.next = 6;
           return regeneratorRuntime.awrap(axios.get("/tasks/getAllTasks"));
 

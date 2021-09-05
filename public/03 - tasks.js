@@ -83,7 +83,8 @@ async function renderTasks(tasksToShow) {
         const tomorrowDay = setTomorrowDay();
 
         let htmlToday = tasksToShow.map(element => {
-            if (element.limitDate === todayDay)
+            if (element.limitDate === todayDay) {
+                const limitDate = formatDate(element.limitDate);
                 return (
                     ` <div class="task">
                     <div class="task-titles">
@@ -91,59 +92,55 @@ async function renderTasks(tasksToShow) {
                     <p>${element.projectName}</p>
                     </div>
                     <div class="task-date">
-                    <p>${element.limitDate}</p>
+                    <p>${limitDate}</p>
                     <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
                     <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
                     </div>
-                   
-                </div>
-                `
-                );
+                    </div>`
+                )
+            };
         }).join('');
 
         taskToday.innerHTML = htmlToday;
 
         let htmlTommorow = tasksToShow.map(element => {
-            if (element.limitDate === tomorrowDay)
+            if (element.limitDate === tomorrowDay) {
+                const limitDate = formatDate(element.limitDate);
                 return (
-                    
-                    ` <div class="task">
+                    `<div class="task">
                     <div class="task-titles">
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
                     <div class="task-date">
-                    <p>${element.limitDate}</p>
+                    <p>${limitDate}</p>
                     <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
                     <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
                     </div>
-                   
-                </div>
-                    `
+                    </div>`
                 );
+            }
         }).join('');
 
         taskTomorrow.innerHTML = htmlTommorow;
 
         let htmlGeneral = tasksToShow.map(element => {
-            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay)
+            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) {
+                const limitDate = formatDate(element.limitDate);
                 return (
-                    `
-                    <div class="task">
+                    `<div class="task">
                     <div class="task-titles">
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
                     <div class="task-date">
-                    <p>${element.limitDate}</p>
+                    <p>${limitDate}</p>
                     <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
                     <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
-                    </div>
-                   
-                </div>
-                  
-                `
+                    </div>  
+                    </div>`
                 );
+            }
         }).join('');
 
         taskGeneral.innerHTML = htmlGeneral;
@@ -319,7 +316,7 @@ async function handleSearch() {
     try {
         const searchTask = document.querySelector('#search');
         const regEx = searchTask.value;
-        const searching = new RegExp(regEx, 'i');
+        const searching = new RegExp(regEx, 'gmi');
         const allTasks = await axios.get(`/tasks/getAllTasks`);
         const { tasks } = allTasks.data.allTasks;
         const tasksFiltered = tasks.filter(task => searching.test(task.taskName));

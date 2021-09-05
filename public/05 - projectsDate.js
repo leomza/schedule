@@ -37,18 +37,15 @@ async function renderClients() {
     }
 }
 
-/* function formatDate(lastDate) {
+function formatDate(lastDate) {
     try {
-        lastDate.toLocaleString('en-US')
-        console.log(lastDate.toLocaleString('en-US'));
-        var dd = String(lastDate.getDate()).padStart(2, '0');
-        var mm = String(lastDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = lastDate.getFullYear();
-
-        lastDate = mm + '/' + dd + '/' + yyyy;
-        console.log(lastDate);
+        if (lastDate) {
+            lastDate = moment(lastDate).format('DD.MM');
+        } else {
+            lastDate = 'No yet'
+        }
         return lastDate;
     } catch (error) {
         console.error(error);
     }
-} */
+}

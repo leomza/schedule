@@ -46,18 +46,17 @@ function renderClients() {
     }
   }, null, null, [[0, 12]]);
 }
-/* function formatDate(lastDate) {
-    try {
-        lastDate.toLocaleString('en-US')
-        console.log(lastDate.toLocaleString('en-US'));
-        var dd = String(lastDate.getDate()).padStart(2, '0');
-        var mm = String(lastDate.getMonth() + 1).padStart(2, '0'); //January is 0!
-        var yyyy = lastDate.getFullYear();
 
-        lastDate = mm + '/' + dd + '/' + yyyy;
-        console.log(lastDate);
-        return lastDate;
-    } catch (error) {
-        console.error(error);
+function formatDate(lastDate) {
+  try {
+    if (lastDate) {
+      lastDate = moment(lastDate).format('DD.MM');
+    } else {
+      lastDate = 'No yet';
     }
-} */
+
+    return lastDate;
+  } catch (error) {
+    console.error(error);
+  }
+}

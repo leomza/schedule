@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "moment": "^2.29.1",
     "mongoose": "^5.13.7",
     "sweetalert": "^2.1.2",
     "uuidv4": "^6.2.12"
