@@ -57,6 +57,7 @@ export class Project {
     createdDate: any;
     totalHours: number;
     usedHours: number;
+    timeInDesign: number;
     tasks: Array<Task>
 
     constructor(projectName: string, clientId: string, projectType: projectType, status: Status, totalHours: number) {
@@ -68,6 +69,7 @@ export class Project {
         this.createdDate = Date.now();
         this.totalHours = totalHours;
         this.usedHours = 0;
+        this.timeInDesign = 0;
         this.tasks = [];
     }
 }

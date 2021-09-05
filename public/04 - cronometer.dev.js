@@ -3,7 +3,6 @@
 //Cronometer
 function init() {
   try {
-    document.querySelector("#stop").addEventListener("click", stop);
     document.querySelector("#saveTime").addEventListener("click", saveTime);
     h = 0;
     m = 0;
@@ -75,14 +74,6 @@ function write() {
   }
 }
 
-function stop() {
-  try {
-    clearInterval(id);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 function saveTime() {
   var userActivities, timeInHours, message;
   return regeneratorRuntime.async(function saveTime$(_context) {
@@ -107,7 +98,7 @@ function saveTime() {
           }
 
           _context.next = 11;
-          return regeneratorRuntime.awrap(axios.post("/projects/setTimeInProject/".concat(idProject, "/").concat(timeInHours)));
+          return regeneratorRuntime.awrap(axios.post("/projects/setTimeInProject/".concat(idProject, "/").concat(timeInHours, "/").concat(typeOfButton)));
 
         case 11:
           message = _context.sent;
@@ -175,7 +166,7 @@ function renderProjects() {
           projectsInfo = _context2.sent;
           projects = projectsInfo.data.allProjects.projects;
           html = projects.map(function (element) {
-            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div>\n                        <button name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call')\"><img src=\"img/call.png\" alt=\"\"></button>\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                    </div>\n                </div>\n                ");
+            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call')\"><img src=\"img/call.png\" alt=\"\"></button>\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                    </div>\n                </div>\n                ");
           }).join('');
           root.innerHTML = html;
           _context2.next = 16;

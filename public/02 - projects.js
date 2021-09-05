@@ -69,14 +69,16 @@ async function renderProjects(projectsToShow) {
         };
 
         let html = projectsToShow.map(element => {
-            usedHoursInProject = parseFloat(element.usedHours).toFixed(2);
+            timeInProject = convertTimeToMinuteAndHours(element.usedHours);
+            timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
             return (
                 `<tr>
                 <td>${element.projectName}</td>
                 <td>${element.clientname}</td>
                 <td>${element.projectType}</td>
                 <td>${element.callLimitPerDay}</td>
-                <td>${element.totalHours} / ${usedHoursInProject}</td>
+                <td>${timeSpendInDesign}</td>
+                <td>${element.totalHours}:00 / ${timeInProject}</td>
                 <td>${element.status}</td>
                 <td>
                 <img src="./img/edit.png" alt="" onclick='editProject("${element.projectUuid}")' title="Edit"> 
@@ -85,11 +87,36 @@ async function renderProjects(projectsToShow) {
             </tr>`
             );
         }).join('');
-   
+
         table.innerHTML = html;
 
     } catch (error) {
         swal("Ohhh no!", error.response.data, "warning");
+        console.error(error);
+    }
+}
+
+function convertTimeToMinuteAndHours(time) {
+    try {
+        let secondTime = time * 3600;
+        let minuteTime = 0;
+        let hourTime = 0;
+        if (secondTime > 60) {
+            minuteTime = parseInt(secondTime / 60);
+            secondTime = parseInt(secondTime % 60);
+            if (minuteTime > 60) {
+                hourTime = parseInt(minuteTime / 60);
+                minuteTime = parseInt(minuteTime % 60);
+            }
+        }
+
+        if (minuteTime < 10) {
+            result = `${hourTime}:0${minuteTime}`;
+        } else {
+            result = `${hourTime}:${minuteTime}`;
+        }
+        return result;
+    } catch (error) {
         console.error(error);
     }
 }

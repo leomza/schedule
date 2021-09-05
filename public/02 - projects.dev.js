@@ -146,8 +146,9 @@ function renderProjects(projectsToShow) {
 
           ;
           html = projectsToShow.map(function (element) {
-            usedHoursInProject = parseFloat(element.usedHours).toFixed(2);
-            return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(element.totalHours, " / ").concat(usedHoursInProject, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <img src=\"./img/edit.png\" alt=\"\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"> \n                <img src=\"./img/delete.png\" alt=\"\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\">\n                </td>\n            </tr>");
+            timeInProject = convertTimeToMinuteAndHours(element.usedHours);
+            timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
+            return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(timeSpendInDesign, "</td>\n                <td>").concat(element.totalHours, ":00 / ").concat(timeInProject, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <img src=\"./img/edit.png\" alt=\"\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"> \n                <img src=\"./img/delete.png\" alt=\"\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\">\n                </td>\n            </tr>");
           }).join('');
           table.innerHTML = html;
           _context3.next = 25;
@@ -165,6 +166,34 @@ function renderProjects(projectsToShow) {
       }
     }
   }, null, null, [[0, 21]]);
+}
+
+function convertTimeToMinuteAndHours(time) {
+  try {
+    var secondTime = time * 3600;
+    var minuteTime = 0;
+    var hourTime = 0;
+
+    if (secondTime > 60) {
+      minuteTime = parseInt(secondTime / 60);
+      secondTime = parseInt(secondTime % 60);
+
+      if (minuteTime > 60) {
+        hourTime = parseInt(minuteTime / 60);
+        minuteTime = parseInt(minuteTime % 60);
+      }
+    }
+
+    if (minuteTime < 10) {
+      result = "".concat(hourTime, ":0").concat(minuteTime);
+    } else {
+      result = "".concat(hourTime, ":").concat(minuteTime);
+    }
+
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 } //Delete a project
 
 

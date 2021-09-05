@@ -91,11 +91,15 @@ function addTask(req, res) {
 exports.addTask = addTask;
 function setProjectTime(req, res) {
     try {
-        var _a = req.params, idProject = _a.idProject, timeInHours = _a.timeInHours;
+        var _a = req.params, idProject = _a.idProject, timeInHours = _a.timeInHours, typeOfButton = _a.typeOfButton;
         var allProjects = new modelProjects_1.Projects();
         var foundProject = allProjects.findProjectByUuid(idProject);
         timeInHours = parseFloat(timeInHours);
         foundProject.usedHours = foundProject.usedHours + timeInHours;
+        //If the type of button is design also add in that variable
+        if (typeOfButton === 'design') {
+            foundProject.timeInDesign = foundProject.timeInDesign + timeInHours;
+        }
         allProjects.updateProjectsJson();
         res.send({ message: "The time was added to the project" });
     }

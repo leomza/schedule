@@ -1,7 +1,6 @@
 //Cronometer
 function init() {
     try {
-        document.querySelector("#stop").addEventListener("click", stop);
         document.querySelector("#saveTime").addEventListener("click", saveTime);
         h = 0;
         m = 0;
@@ -50,14 +49,6 @@ function write() {
     }
 }
 
-function stop() {
-    try {
-        clearInterval(id);
-    } catch (error) {
-        console.error(error);
-    }
-}
-
 async function saveTime() {
     try {
         const userActivities = document.getElementsByName('activity');
@@ -75,7 +66,7 @@ async function saveTime() {
         timeInHours = parseFloat(timeInHours);
 
         if (idProject) {
-            const message = await axios.post(`/projects/setTimeInProject/${idProject}/${timeInHours}`);
+            const message = await axios.post(`/projects/setTimeInProject/${idProject}/${timeInHours}/${typeOfButton}`);
             await axios.post(`/clients/setTimeInClient/${idProject}/${typeOfButton}`);
             swal(`${message.data.message}!`);
         }
@@ -114,8 +105,8 @@ async function renderProjects() {
                     <p> ${element.projectName} </p>
                     
                     <div>
-                        <button name="activity" onclick="cronometer(event, '${element.projectUuid}', 'design')"><img src="img/design.png" alt=""></button>
-                        <button name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call')"><img src="img/call.png" alt=""></button>
+                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'design')"><img src="img/design.png" alt=""></button>
+                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call')"><img src="img/call.png" alt=""></button>
                         <img src="img/task.png" alt="">
                         <img src="img/calendar.png" alt="">
                     </div>

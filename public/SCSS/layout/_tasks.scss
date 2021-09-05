@@ -86,7 +86,7 @@
   cursor: not-allowed;
 }
 
-.button__height{
+.button__height {
   height: 50px;
 }
 
@@ -94,4 +94,14 @@
   display: flex;
   justify-content: center;
   padding: 10px;
+}
+
+.button__cronometer {
+  background: none;
+  border: none;
+  height: fit-content;
+
+  &:hover {
+    filter: brightness(150%);
+  }
 }

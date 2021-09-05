@@ -621,4 +621,17 @@ button {
           justify-content: center;
   padding: 10px;
 }
+
+.button__cronometer {
+  background: none;
+  border: none;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.button__cronometer:hover {
+  -webkit-filter: brightness(150%);
+          filter: brightness(150%);
+}
 /*# sourceMappingURL=app.css.map */

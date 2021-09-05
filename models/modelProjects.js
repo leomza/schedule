@@ -57,6 +57,7 @@ var Project = /** @class */ (function () {
         this.createdDate = Date.now();
         this.totalHours = totalHours;
         this.usedHours = 0;
+        this.timeInDesign = 0;
         this.tasks = [];
     }
     return Project;
