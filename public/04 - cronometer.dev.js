@@ -2,67 +2,85 @@
 
 //Cronometer
 function init() {
-  document.querySelector("#stop").addEventListener("click", stop);
-  document.querySelector("#saveTime").addEventListener("click", saveTime);
-  h = 0;
-  m = 0;
-  s = 0;
-  document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                <p class=\"cronometer--number\">00</p>";
+  try {
+    document.querySelector("#stop").addEventListener("click", stop);
+    document.querySelector("#saveTime").addEventListener("click", saveTime);
+    h = 0;
+    m = 0;
+    s = 0;
+    document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                    <p class=\"cronometer--number\">00</p>";
+  } catch (error) {
+    console.error(error);
+  }
 } //To know what button I press and the id of the project
 
 
 var eventTarget;
 var idProject;
+var typeOfButton;
 
-function cronometer(event, projectId) {
-  eventTarget = event.target;
-  idProject = projectId;
-  disabledButtons(event);
-  write();
-  id = setInterval(write, 1000);
+function cronometer(event, projectId, typeActivity) {
+  try {
+    eventTarget = event.target;
+    idProject = projectId;
+    typeOfButton = typeActivity;
+    disabledButtons(event);
+    write();
+    id = setInterval(write, 1000);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function write() {
-  var hAux, mAux, sAux;
-  s++;
+  try {
+    var hAux, mAux, sAux;
+    s++;
 
-  if (s > 59) {
-    m++;
-    s = 0;
+    if (s > 59) {
+      m++;
+      s = 0;
+    }
+
+    if (m > 59) {
+      h++;
+      m = 0;
+    }
+
+    if (h > 24) {
+      h = 0;
+    }
+
+    if (s < 10) {
+      sAux = "0" + s;
+    } else {
+      sAux = s;
+    }
+
+    if (m < 10) {
+      mAux = "0" + m;
+    } else {
+      mAux = m;
+    }
+
+    if (h < 10) {
+      hAux = "0" + h;
+    } else {
+      hAux = h;
+    }
+
+    document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">".concat(sAux, "</p>\n                                                    <p class=\"cronometer--number\">").concat(mAux, "</p>");
+  } catch (error) {
+    console.error(error);
   }
-
-  if (m > 59) {
-    h++;
-    m = 0;
-  }
-
-  if (h > 24) {
-    h = 0;
-  }
-
-  if (s < 10) {
-    sAux = "0" + s;
-  } else {
-    sAux = s;
-  }
-
-  if (m < 10) {
-    mAux = "0" + m;
-  } else {
-    mAux = m;
-  }
-
-  if (h < 10) {
-    hAux = "0" + h;
-  } else {
-    hAux = h;
-  }
-
-  document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">".concat(sAux, "</p>\n                                                <p class=\"cronometer--number\">").concat(mAux, "</p>");
 }
 
 function stop() {
-  clearInterval(id);
+  try {
+    clearInterval(id);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 function saveTime() {
@@ -71,9 +89,10 @@ function saveTime() {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
+          _context.prev = 0;
           userActivities = document.getElementsByName('activity');
           clearInterval(id);
-          document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                <p class=\"cronometer--number\">00</p>";
+          document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                    <p class=\"cronometer--number\">00</p>";
           eventTarget.classList.remove('button__height');
           userActivities.forEach(function (activity) {
             activity.disabled = false;
@@ -83,37 +102,52 @@ function saveTime() {
           timeInHours = parseFloat(timeInHours);
 
           if (!idProject) {
-            _context.next = 12;
+            _context.next = 15;
             break;
           }
 
-          _context.next = 10;
+          _context.next = 11;
           return regeneratorRuntime.awrap(axios.post("/projects/setTimeInProject/".concat(idProject, "/").concat(timeInHours)));
 
-        case 10:
+        case 11:
           message = _context.sent;
+          _context.next = 14;
+          return regeneratorRuntime.awrap(axios.post("/clients/setTimeInClient/".concat(idProject, "/").concat(typeOfButton)));
+
+        case 14:
           swal("".concat(message.data.message, "!"));
 
-        case 12:
+        case 15:
           h = 0;
           m = 0;
           s = 0;
+          _context.next = 23;
+          break;
 
-        case 15:
+        case 20:
+          _context.prev = 20;
+          _context.t0 = _context["catch"](0);
+          console.error(_context.t0);
+
+        case 23:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[0, 20]]);
 }
 
 function disabledButtons(event) {
-  var userActivities = document.getElementsByName('activity');
-  userActivities.forEach(function (activity) {
-    activity.disabled = true;
-    activity.classList.add('button__disabled');
-  });
-  event.target.classList.add('button__height');
+  try {
+    var userActivities = document.getElementsByName('activity');
+    userActivities.forEach(function (activity) {
+      activity.disabled = true;
+      activity.classList.add('button__disabled');
+    });
+    event.target.classList.add('button__height');
+  } catch (error) {
+    console.error(error);
+  }
 } //Render all the projects
 
 
@@ -141,7 +175,7 @@ function renderProjects() {
           projectsInfo = _context2.sent;
           projects = projectsInfo.data.allProjects.projects;
           html = projects.map(function (element) {
-            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div>\n                        <button name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "')\"><img src=\"img/call.png\" alt=\"\"></button>\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                    </div>\n                </div>\n                ");
+            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div>\n                        <button name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call')\"><img src=\"img/call.png\" alt=\"\"></button>\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                    </div>\n                </div>\n                ");
           }).join('');
           root.innerHTML = html;
           _context2.next = 16;

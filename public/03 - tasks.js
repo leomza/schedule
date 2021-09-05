@@ -313,3 +313,18 @@ async function uploadProjectNamesEdit() {
         console.error(error);
     }
 }
+
+//Function to do a filter in the search input
+async function handleSearch() {
+    try {
+        const searchTask = document.querySelector('#search');
+        const regEx = searchTask.value;
+        const searching = new RegExp(regEx, 'i');
+        const allTasks = await axios.get(`/tasks/getAllTasks`);
+        const { tasks } = allTasks.data.allTasks;
+        const tasksFiltered = tasks.filter(task => searching.test(task.taskName));
+        renderTasks(tasksFiltered)
+    } catch (error) {
+        console.error(error);
+    };
+};

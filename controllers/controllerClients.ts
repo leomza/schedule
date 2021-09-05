@@ -1,4 +1,4 @@
-    export { };
+export { };
 
 //I import the classes (with Methods) of the Models that Im going to use here
 import { Client, Clients } from "../models/modelClients";
@@ -65,6 +65,23 @@ export function getAClient(req, res) {
         const allClients = new Clients();
         const foundClient = allClients.findClientByUuid(idClient)
         res.send({ message: "The client was founded", foundClient })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export function setClientTime(req, res) {
+    try {
+        const { idProject, typeOfButton } = req.params;
+        const allClients = new Clients();
+        const client = allClients.findClientByProyectId(idProject);
+        if (typeOfButton === 'design'){
+            client.lastDesignDate = new Date();
+        } else if (typeOfButton === 'call'){
+            client.lastCallDate = new Date();
+        }
+        allClients.updateClientsJson();
+        res.send({ message: "The client time was updated" })
     } catch (error) {
         console.error(error);
     }

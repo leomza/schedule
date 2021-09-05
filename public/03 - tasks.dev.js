@@ -177,15 +177,15 @@ function renderTasks(tasksToShow) {
           todayDay = setTodayDay();
           tomorrowDay = setTomorrowDay();
           htmlToday = tasksToShow.map(function (element) {
-            if (element.limitDate === todayDay) return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
+            if (element.limitDate === todayDay) return " <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(element.limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                   \n                </div>\n                ");
           }).join('');
           taskToday.innerHTML = htmlToday;
           htmlTommorow = tasksToShow.map(function (element) {
-            if (element.limitDate === tomorrowDay) return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
+            if (element.limitDate === tomorrowDay) return " <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(element.limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                   \n                </div>\n                    ");
           }).join('');
           taskTomorrow.innerHTML = htmlTommorow;
           htmlGeneral = tasksToShow.map(function (element) {
-            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) return "<div style=\"background-color: green;\">\n                    <p>".concat(element.taskName, "</p>\n                    <p>").concat(element.projectName, "</p>\n                    <p>").concat(element.limitDate, "</p>\n                    <i class=\"fas fa-edit table__edit\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"></i>\n                    <i class=\"fas fa-trash table__remove\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"></i>\n                </div>");
+            if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) return "\n                    <div class=\"task\">\n                    <div class=\"task-titles\">\n                    <h5>".concat(element.taskName, "</h5>\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(element.limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                   \n                </div>\n                  \n                ");
           }).join('');
           taskGeneral.innerHTML = htmlGeneral;
           _context3.next = 37;
@@ -473,4 +473,46 @@ function uploadProjectNamesEdit() {
       }
     }
   }, null, null, [[0, 10]]);
+} //Function to do a filter in the search input
+
+
+function handleSearch() {
+  var searchTask, regEx, searching, allTasks, tasks, tasksFiltered;
+  return regeneratorRuntime.async(function handleSearch$(_context9) {
+    while (1) {
+      switch (_context9.prev = _context9.next) {
+        case 0:
+          _context9.prev = 0;
+          searchTask = document.querySelector('#search');
+          regEx = searchTask.value;
+          searching = new RegExp(regEx, 'i');
+          _context9.next = 6;
+          return regeneratorRuntime.awrap(axios.get("/tasks/getAllTasks"));
+
+        case 6:
+          allTasks = _context9.sent;
+          tasks = allTasks.data.allTasks.tasks;
+          tasksFiltered = tasks.filter(function (task) {
+            return searching.test(task.taskName);
+          });
+          renderTasks(tasksFiltered);
+          _context9.next = 15;
+          break;
+
+        case 12:
+          _context9.prev = 12;
+          _context9.t0 = _context9["catch"](0);
+          console.error(_context9.t0);
+
+        case 15:
+          ;
+
+        case 16:
+        case "end":
+          return _context9.stop();
+      }
+    }
+  }, null, null, [[0, 12]]);
 }
+
+;

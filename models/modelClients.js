@@ -5,6 +5,7 @@ var uuidv4 = require("uuid").v4;
 var fs = require("fs");
 var path = require("path");
 var clientsJsonPath = path.resolve(__dirname, "./clients.json");
+var modelProjects_1 = require("../models/modelProjects");
 //Function to read the JSON of created clients
 var readJsonClients = function () {
     try {
@@ -31,6 +32,8 @@ var Client = /** @class */ (function () {
         this.dealTime = dealTime;
         this.callLimitPerDay = callLimitPerDay;
         this.createdDate = Date.now();
+        this.lastDesignDate = '';
+        this.lastCallDate = '';
     }
     return Client;
 }());
@@ -69,6 +72,17 @@ var Clients = /** @class */ (function () {
         try {
             this.clients = this.clients.filter(function (client) { return client.uuid !== id; });
             this.updateClientsJson();
+        }
+        catch (error) {
+            console.error(error);
+        }
+    };
+    Clients.prototype.findClientByProyectId = function (projectId) {
+        try {
+            var allProjects = new modelProjects_1.Projects();
+            var projectFound_1 = allProjects.findProjectByUuid(projectId);
+            var clientFound = this.clients.find(function (client) { return client.uuid === projectFound_1.clientId; });
+            return clientFound;
         }
         catch (error) {
             console.error(error);

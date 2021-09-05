@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getAClient = exports.editClient = exports.deleteClient = exports.getAllClients = exports.registerClient = void 0;
+exports.setClientTime = exports.getAClient = exports.editClient = exports.deleteClient = exports.getAllClients = exports.registerClient = void 0;
 //I import the classes (with Methods) of the Models that Im going to use here
 var modelClients_1 = require("../models/modelClients");
 function registerClient(req, res) {
@@ -72,3 +72,22 @@ function getAClient(req, res) {
     }
 }
 exports.getAClient = getAClient;
+function setClientTime(req, res) {
+    try {
+        var _a = req.params, idProject = _a.idProject, typeOfButton = _a.typeOfButton;
+        var allClients = new modelClients_1.Clients();
+        var client = allClients.findClientByProyectId(idProject);
+        if (typeOfButton === 'design') {
+            client.lastDesignDate = new Date();
+        }
+        else if (typeOfButton === 'call') {
+            client.lastCallDate = new Date();
+        }
+        allClients.updateClientsJson();
+        res.send({ message: "The client time was updated" });
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+exports.setClientTime = setClientTime;

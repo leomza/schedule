@@ -15,17 +15,21 @@
     <link rel="stylesheet" href="./SCSS/app.css">
 </head>
 
-<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects()">
-    <a href="01- clients.html">Go to clients</a>
-    <a href="02 - projects.html">Go to projects</a>
+<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients()">
+
+    <section class="section">
+        <form onkeyup="handleSearch()">
+            <input class="form__search" type="text" name="search" id="search" placeholder="Search by task name" />
+        </form>
+        <a href="01- clients.html">Go to clients</a>
+        <a href="02 - projects.html">Go to projects</a>
+    </section>
+
     <div class="container">
-
-
 
         <button id="buttonCreate" class="button-talbe">
             חדשk
         </button>
-
 
         <div class="tasks">
             <div>
@@ -94,30 +98,36 @@
         </div>
     </div>
 
-
     <div>
-        <div class="cronometer" id="hms"></div>
-        <div id="stop">Pause</div>
-        <div id="saveTime">Save time</div>
+        <div>
+            <div class="cronometer" id="hms"></div>
+            <div id="stop">Pause</div>
+            <div id="saveTime">Save time</div>
+        </div>
+
+        <div>
+            <button name="activity" onclick="cronometer(event)"><img src="img/recreation.png" alt=""></button>
+            <button name="activity" onclick="cronometer(event)"><img src="img/eat.png" alt=""></button>
+            <button name="activity" onclick="cronometer(event)"><img src="img/call.png" alt=""></button>
+            <img src="img/task.png" alt="">
+            <img src="img/calendar.png" alt="">
+        </div>
+
+        <button id="buttonCreate1" class="button-talbe">
+            השדח המישמ
+        </button>
+
+        <div id="root"></div>
     </div>
 
     <div>
-        <button name="activity" onclick="cronometer(event)"><img  src="img/recreation.png" alt=""></button>
-        <button name="activity" onclick="cronometer(event)"><img src="img/eat.png" alt=""></button>
-        <button name="activity" onclick="cronometer(event)"><img  src="img/call.png" alt=""></button>
-        <img src="img/task.png" alt="">
-        <img src="img/calendar.png" alt="">
+        <div id="rootProjectsDate"></div>
     </div>
-
-    <button id="buttonCreate1" class="button-talbe">
-        השדח המישמ
-    </button>
-
-    <div id="root"></div>
 
     <script src="helperModal.js"></script>
     <script src="03 - tasks.js"></script>
     <script src="04 - cronometer.js"></script>
+    <script src="05 - projectsDate.js"></script>
 </body>
 
 </html>

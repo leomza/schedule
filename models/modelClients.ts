@@ -3,6 +3,7 @@ const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const path = require("path");
 const clientsJsonPath = path.resolve(__dirname, "./clients.json");
+import { Projects } from "../models/modelProjects";
 
 //Function to read the JSON of created clients
 const readJsonClients = () => {
@@ -29,7 +30,8 @@ export class Client {
     dealTime: DealTime;
     callLimitPerDay: string;
     createdDate: any;
-
+    lastDesignDate: any;
+    lastCallDate: any;
 
     constructor(clientname: string, phone: string, email: string, dealTime: DealTime, callLimitPerDay: string) {
         this.uuid = uuidv4();
@@ -39,6 +41,8 @@ export class Client {
         this.dealTime = dealTime;
         this.callLimitPerDay = callLimitPerDay;
         this.createdDate = Date.now();
+        this.lastDesignDate = '';
+        this.lastCallDate = '';
     }
 }
 
@@ -79,6 +83,17 @@ export class Clients {
         try {
             this.clients = this.clients.filter(client => client.uuid !== id);
             this.updateClientsJson();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    findClientByProyectId(projectId) {
+        try {
+            const allProjects = new Projects();
+            const projectFound = allProjects.findProjectByUuid(projectId)
+            const clientFound = this.clients.find(client => client.uuid === projectFound.clientId);
+            return clientFound;
         } catch (error) {
             console.error(error);
         }
