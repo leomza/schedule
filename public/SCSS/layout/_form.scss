@@ -11,8 +11,12 @@
     height: 47px;
     box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
     border: 1px solid #7784ee;
-    border-radius: 8rem;
+    border-radius: 0.8rem;
+
     margin-bottom: 2rem;
+    &:focus{
+      outline:none;
+  } 
   }
 
   input[type="radio"] {
@@ -49,7 +53,7 @@
     height: 47px;
     box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
     border: 1px solid #7784ee;
-    border-radius: 8rem;
+    border-radius: 0.8rem;
     margin-bottom: 2rem;
   }
 

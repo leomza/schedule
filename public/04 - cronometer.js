@@ -5,8 +5,10 @@ function init() {
         h = 0;
         m = 0;
         s = 0;
-        document.getElementById("hms").innerHTML = `<p class="cronometer--number">00</p>
-                                                    <p class="cronometer--number">00</p>`;
+        document.getElementById("hms").innerHTML = `<div class="cronometer--number">
+                                                    <p >00</p>
+                                                    <p >00</p>
+                                                    </div>`;
     } catch (error) {
         console.error(error);
     }
@@ -42,8 +44,10 @@ function write() {
         if (m < 10) { mAux = "0" + m; } else { mAux = m; }
         if (h < 10) { hAux = "0" + h; } else { hAux = h; }
 
-        document.getElementById("hms").innerHTML = `<p class="cronometer--number">${sAux}</p>
-                                                    <p class="cronometer--number">${mAux}</p>`;
+        document.getElementById("hms").innerHTML = `<div class="cronometer--number">
+                                                    <p class="cronometer--number">${sAux}</p>
+                                                    <p class="cronometer--number">${mAux}</p>
+                                                    </div>`;
     } catch (error) {
         console.error(error);
     }
@@ -53,10 +57,12 @@ async function saveTime() {
     try {
         const userActivities = document.getElementsByName('activity');
         clearInterval(id);
-        document.getElementById("hms").innerHTML = `<p class="cronometer--number">00</p>
-                                                    <p class="cronometer--number">00</p>`;
+        document.getElementById("hms").innerHTML = `<div class="cronometer--number">
+        <p >00</p>
+        <p >00</p>
+        </div>`;
 
-        eventTarget.classList.remove('button__height')
+        eventTarget.classList.remove('button__brightness')
 
         userActivities.forEach(activity => {
             activity.disabled = false;
@@ -84,7 +90,7 @@ function disabledButtons(event) {
             activity.disabled = true;
             activity.classList.add('button__disabled')
         })
-        event.target.classList.add('button__height')
+        event.target.classList.add('button__brightness')
     } catch (error) {
         console.error(error);
     }
@@ -104,11 +110,18 @@ async function renderProjects() {
                 `<div class="projects__list" >
                     <p> ${element.projectName} </p>
                     
-                    <div>
+                    <div class="projects__list__buttons">
+
+                      <div class="projects__list__buttons__couple-one">
                         <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'design')"><img src="img/design.png" alt=""></button>
-                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call')"><img src="img/call.png" alt=""></button>
+                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call')"><img src="img/Group 674.png" alt=""></button>
+                        </div>
+
+
+                        <div class="projects__list__buttons__couple-two">
                         <img src="img/task.png" alt="">
                         <img src="img/calendar.png" alt="">
+                        </div>
                     </div>
                 </div>
                 `

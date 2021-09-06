@@ -84,7 +84,7 @@ function saveTime() {
           userActivities = document.getElementsByName('activity');
           clearInterval(id);
           document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                    <p class=\"cronometer--number\">00</p>";
-          eventTarget.classList.remove('button__height');
+          eventTarget.classList.remove('button__brightness');
           userActivities.forEach(function (activity) {
             activity.disabled = false;
             activity.classList.remove('button__disabled');
@@ -135,7 +135,7 @@ function disabledButtons(event) {
       activity.disabled = true;
       activity.classList.add('button__disabled');
     });
-    event.target.classList.add('button__height');
+    event.target.classList.add('button__brightness');
   } catch (error) {
     console.error(error);
   }
