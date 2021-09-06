@@ -13,13 +13,16 @@ var clientRoute = require('./routes/routeClients');
 
 var projectRoute = require('./routes/routeProjects');
 
-var taskRoute = require('./routes/routeTasks'); //Use of that Routes that I imported
+var taskRoute = require('./routes/routeTasks');
+
+var calendarRoute = require('./routes/routeCalendar'); //Use of that Routes that I imported
 
 
 app.use('/activity', activityRoute);
 app.use('/clients', clientRoute);
 app.use('/projects', projectRoute);
 app.use('/tasks', taskRoute);
+app.use('/calendar', calendarRoute);
 app.listen(port, function () {
   console.log("Listening on port: ".concat(port));
 });
