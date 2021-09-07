@@ -3,6 +3,7 @@ require('dotenv').config();
 
 // Provide the required configuration
 const CREDENTIALS = JSON.parse(process.env.CREDENTIALS);
+ 
 const calendarId = process.env.CALENDAR_ID;
 
 // Google calendar API settings
