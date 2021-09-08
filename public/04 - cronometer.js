@@ -43,6 +43,14 @@ function write() {
         if (s < 10) { sAux = "0" + s; } else { sAux = s; }
         if (m < 10) { mAux = "0" + m; } else { mAux = m; }
         if (h < 10) { hAux = "0" + h; } else { hAux = h; }
+        if(sAux > 10){
+           const backColorsnumbers = document.querySelector('.cronometer');
+           backColorsnumbers.classList.add('alertRed')
+          
+        }else if(sAux >= 10)  {
+            swal("Alert", "Error 10 Min","warning");
+          
+        }
 
         document.getElementById("hms").innerHTML = `<div class="cronometer--number">
                                                     <p class="cronometer--number">${sAux}</p>

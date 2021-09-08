@@ -28,7 +28,7 @@ p {
 
 .container {
   width: 95%;
-  max-width: 120.5rem;
+  max-width: 144rem;
   margin: 0 auto;
 }
 
@@ -503,7 +503,7 @@ button {
   display: none;
 }
 
-.schedule {
+.schedule--container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -601,8 +601,18 @@ button {
 }
 
 .activity {
+  position: relative;
   width: 131px;
   height: 100%;
+  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+}
+
+.activity .activity--bar {
+  position: absolute;
+  top: -6rem;
+  left: 1;
+  background: #FFFFFF;
   -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
           box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
 }
@@ -680,14 +690,43 @@ button {
           filter: brightness(150%);
 }
 
-.section {
+.navigation {
+  width: 1204px;
+  height: 60px;
+}
+
+.navigation__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  padding: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10vw;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  border-radius: .8rem;
+  padding-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.navigation__container__search-bar input {
+  width: 626px;
+  height: 36px;
+  background: #F4F7FC;
+  border-radius: 200px;
+  border-style: none;
+}
+
+.navigation__container__page {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 6rem;
 }
 
 .button__cronometer {
@@ -702,5 +741,10 @@ button {
 .button__cronometer:hover {
   -webkit-filter: brightness(150%);
           filter: brightness(150%);
+}
+
+.alertRed {
+  -webkit-text-stroke: 1px red;
+  color: transparent;
 }
 /*# sourceMappingURL=app.css.map */

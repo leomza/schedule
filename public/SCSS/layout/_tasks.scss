@@ -1,4 +1,4 @@
-.schedule {
+.schedule--container {
   display: flex;
   gap: 5rem;
 
@@ -72,6 +72,19 @@
   }
 }
 .activity {
+  position: relative;
+  
+
+  .activity--bar{
+    position: absolute;
+    top: -6rem;
+    left: 1;
+    background: #FFFFFF;
+box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  }
+  
+  
+  
   width: 131px;
    height: 100%;
   box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
@@ -137,10 +150,45 @@ align-items: center;
   filter: brightness(150%);
 }
 
-.section {
-  display: flex;
-  justify-content: center;
-  padding: 10px;
+.navigation {
+
+  width: 1204px;
+  height: 60px;
+
+  &__container{
+    
+    display: flex;
+    justify-content: center;
+     align-items: center;
+     gap: 10vw;
+     background: #FFFFFF;
+box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+border-radius: .8rem;
+     padding-top: 1rem;
+     margin-bottom: 3rem ;
+    // gap: 6rem;
+   
+   &__search-bar{
+      
+  
+input{
+  width: 626px;
+  height: 36px;
+  background: #F4F7FC;
+  border-radius: 200px;
+  border-style: none;
+}
+   }
+   &__page{
+    display: flex;
+    gap: 6rem;
+  }
+  }
+  
+//  &__search-bar{
+   
+//  }
+ 
 }
 
 .button__cronometer {
@@ -152,4 +200,9 @@ align-items: center;
   &:hover {
     filter: brightness(150%);
   }
+}
+
+.alertRed{
+  -webkit-text-stroke: 1px red;
+  color: transparent;
 }
