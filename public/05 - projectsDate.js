@@ -11,22 +11,28 @@ async function renderClients() {
             .map((element) => {
                 const callDate = formatDate(element.lastCallDate);
                 const designDate = formatDate(element.lastDesignDate);
-                return `<div>
-              <div>
-                <p>${element.clientname}</p>
-                <div>
-                    <div>
-                        <img src="img/design.png" alt="">
-                        <p>${designDate}</p>
-                    </div>
-
-                    <div>
-                        <img src="img/call.png" alt="">
-                        <p>${callDate}</p>
-                    </div>
+                return ` 
+                <div class="projectDate-container">
+            
+                        <div class="projectDate__name">
+                            <p>${element.clientname}</p>
+                            
+                        </div>
+                        <div class="projectDate__image">
+                                 <div class="projectDate__image__design">
+                                    <img src="img/call.png" alt="">
+                                    <p>${designDate}</p>
+                                </div>
+                
+                                <div class="projectDate__image__call">
+                                    <img src="img/call.png" alt="">
+                                    <p>${callDate}</p>
+                                 </div>
+                       </div>
                 </div>
-              </div>
-              </div>`;
+               
+              
+               `;
             })
             .join("");
 

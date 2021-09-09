@@ -34,11 +34,11 @@
   <body
     onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients()"
   >
-    <div class="pepe container">
+    <div class="template-tasks container">
       <div class="nav">
         <nav class="navigation__container">
           <div class="navigation__container__search-bar">
-            <input type="text" placeholder="חיפוש משימה לפי טקסט"/>
+            <input type="text" placeholder="חיפוש משימה לפי טקסט" />
           </div>
           <div class="navigation__container__page">
             <div class="navigation__container__page__client">
@@ -52,9 +52,8 @@
             </div>
           </div>
         </nav>
-
       </div>
-      
+
       <div class="sidebar">
         <div class="activity">
           <div>
@@ -104,19 +103,16 @@
           <div id="root"></div>
         </div>
       </div>
-    
+
       <div class="column1">
-       
         <div>
           <div class="task-title">
-          
             <h3>General</h3>
             <button id="buttonCreate" class="button-talbe">חדשk</button>
           </div>
 
           <div id="taskGeneral" class="task-container"></div>
         </div>
-       
       </div>
       <div class="column2">
         <div>
@@ -137,9 +133,16 @@
         </div>
       </div>
       <div class="column4"></div>
-      <div class="columnBottom"></div>
+      <div class="columnBottom">
+        <div class="task-title">
+          <h3>לקוחות</h3>
+          <button id="buttonCreate" class="button-talbe">חדשk</button>
+        </div>
+        <div id="rootProjectsDate"></div>
+     
+      </div>
     </div>
-
+    <!-- 
     <section class="schedule">
       <div class="navigation container">
 
@@ -148,27 +151,27 @@
         <div class="schedule-task container">
          
 
-          <div class="tasks">
-            <!-- <div>
+          <div class="tasks"> -->
+    <!-- <div>
               <div class="task-title">
                 <h3>General</h3>
               </div>
 
               <div id="taskGeneral" class="task-container"></div>
             </div> -->
-            <!-- <div>
+    <!-- <div>
               <div class="task-title">
                 <h3>Tomorrow</h3>
               </div>
               <div id="taskTomorrow" class="task-container"></div>
             </div> -->
-            <!-- <div>
+    <!-- <div>
               <div class="task-title">
                 <h3>Today</h3>
               </div>
               <div id="taskToday" class="task-container"></div>
             </div> -->
-            <div>
+    <!-- <div>
               <button id="authorize_button" style="display: none">
                 Authorize
               </button>
@@ -181,10 +184,10 @@
           </div>
         </div>
       </div>
-    </section>
-    <div>
+    </section> -->
+    <!-- <div>
       <div id="rootProjectsDate"></div>
-    </div>
+    </div> -->
     <section class="modals container">
       <!-- Modal to create a task -->
       <div id="modalCreate" class="modal">
@@ -244,7 +247,7 @@
       </div>
     </section>
 
-    <div>
+    <!-- <div>
       <form onsubmit="handleCreateEvent(event)">
         <h3>Create an event</h3>
         <label for="eventTitle">Tite</label>
@@ -267,7 +270,7 @@
       <button onclick="getEvents()">
         Get all the events between two dates
       </button>
-    </div>
+    </div> -->
     <script
       async
       defer

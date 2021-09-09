@@ -507,7 +507,7 @@ button {
   display: none;
 }
 
-.pepe {
+.template-tasks {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -519,7 +519,7 @@ button {
       grid-template-areas: "sidebar nav nav nav nav" "sidebar column4 column1 column2 column3" ". column4 columnBottom . .";
 }
 
-.pepe .nav {
+.template-tasks .nav {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
   -ms-grid-column-span: 4;
@@ -539,7 +539,7 @@ button {
   border-radius: 8px;
 }
 
-.pepe .nav .navigation__container {
+.template-tasks .nav .navigation__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -553,7 +553,7 @@ button {
   background: #ffffff;
 }
 
-.pepe .nav .navigation__container__search-bar input {
+.template-tasks .nav .navigation__container__search-bar input {
   width: 626px;
   height: 36px;
   background: #f4f7fc;
@@ -561,26 +561,26 @@ button {
   border-style: none;
 }
 
-.pepe .nav .navigation__container__page {
+.template-tasks .nav .navigation__container__page {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   gap: 6rem;
 }
 
-.pepe .nav .navigation__container__page__client a {
+.template-tasks .nav .navigation__container__page__client a {
   color: #ab08f7;
 }
 
-.pepe .nav .navigation__container__page__project a {
+.template-tasks .nav .navigation__container__page__project a {
   color: #08a0f7;
 }
 
-.pepe .nav .navigation__container__page__definitions a {
+.template-tasks .nav .navigation__container__page__definitions a {
   color: #121212;
 }
 
-.pepe .sidebar {
+.template-tasks .sidebar {
   -ms-grid-row: 1;
   -ms-grid-row-span: 2;
   -ms-grid-column: 1;
@@ -592,7 +592,7 @@ button {
   border-radius: 8px;
 }
 
-.pepe .sidebar .activity .activity-buttons {
+.template-tasks .sidebar .activity .activity-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -603,12 +603,12 @@ button {
   margin-top: 0.5rem;
 }
 
-.pepe .sidebar .activity .cronometer {
+.template-tasks .sidebar .activity .cronometer {
   -webkit-text-stroke: 1px #46b8f9;
   color: transparent;
 }
 
-.pepe .sidebar .activity .cronometer .cronometer--number p {
+.template-tasks .sidebar .activity .cronometer .cronometer--number p {
   margin: 0;
   text-align: center;
   font-family: "Montserrat", sans-serif;
@@ -617,7 +617,7 @@ button {
   font-weight: 500;
 }
 
-.pepe .sidebar .projects__list {
+.template-tasks .sidebar .projects__list {
   width: 131px;
   height: 50px;
   margin-top: 1.4rem;
@@ -629,13 +629,13 @@ button {
           box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
 }
 
-.pepe .sidebar .projects__list p {
+.template-tasks .sidebar .projects__list p {
   font-size: 1.2rem;
   font-weight: 400;
   margin: 0 1.6rem 0.7rem 0;
 }
 
-.pepe .sidebar .projects__list .projects__list__buttons {
+.template-tasks .sidebar .projects__list .projects__list__buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -647,7 +647,7 @@ button {
           align-items: center;
 }
 
-.pepe .column1 {
+.template-tasks .column1 {
   -ms-grid-row: 2;
   -ms-grid-column: 3;
   grid-area: column1;
@@ -659,7 +659,7 @@ button {
   border-radius: 8px;
 }
 
-.pepe .column2 {
+.template-tasks .column2 {
   -ms-grid-row: 2;
   -ms-grid-column: 4;
   grid-area: column2;
@@ -671,7 +671,7 @@ button {
   border-radius: 8px;
 }
 
-.pepe .column3 {
+.template-tasks .column3 {
   -ms-grid-row: 2;
   -ms-grid-column: 5;
   grid-area: column3;
@@ -683,7 +683,7 @@ button {
   border-radius: 8px;
 }
 
-.pepe .column4 {
+.template-tasks .column4 {
   -ms-grid-row: 2;
   -ms-grid-row-span: 2;
   -ms-grid-column: 2;
@@ -696,7 +696,7 @@ button {
   border-radius: 8px;
 }
 
-.pepe .columnBottom {
+.template-tasks .columnBottom {
   -ms-grid-row: 3;
   -ms-grid-column: 3;
   grid-area: columnBottom;
@@ -815,6 +815,43 @@ button {
 .button__cronometer:hover {
   -webkit-filter: brightness(150%);
           filter: brightness(150%);
+}
+
+#rootProjectsDate {
+  margin: 6rem 0;
+}
+
+#rootProjectsDate .projectDate-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#rootProjectsDate .projectDate-container p {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: #41475E;
+  margin: 0;
+}
+
+#rootProjectsDate .projectDate-container .projectDate__image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+#rootProjectsDate .projectDate-container .projectDate__image p {
+  font-weight: 700;
+  color: #BD5C46;
 }
 
 .button__disabled {
