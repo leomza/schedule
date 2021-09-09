@@ -51,7 +51,7 @@
 //             <td>${element.email}</td>
 //             <td>${element.dealTime}</td>  
 //             <td>${element.callLimitPerDay}</td>  
-             
+
 //             <td class="icons">
 // <div class="icons__update">
 //             <img  src="./img/update.svg" alt="" class="table__edit" onclick='editClient("${element.uuid}")' title="Edit"> 
@@ -60,7 +60,7 @@
 //           <img src="./img/delete.svg" alt="" class="table__remove" onclick='removeClient("${element.uuid}", "${element.clientname}")' title="Remove"> 
 //           </div>
 //           </td> 
-             
+
 //             </tr>`;
 //       })
 //       .join("");
@@ -174,17 +174,17 @@
 //                     <input type="radio" id="retainer2" name="dealTime" value="retainer" />
 //                     <label for="retainer">Retainer </label>
 //                   </div>
-    
+
 //                   <div class="option-edit">
 //                     <input type="radio" id="hourly2" name="dealTime" value="hourly" />
 //                     <label for="hourly">Hourly </label>
 //                   </div>
-    
+
 //                   <div class="option-edit">
 //                     <input type="radio" id="project2" name="dealTime" value="project" />
 //                     <label for="project">Project </label>
 //                   </div>
-    
+
 //                   <div class="option-edit">
 //                     <input type="radio" id="all2" name="dealTime" value="all" />
 //                     <label for="all">All </label>
@@ -217,7 +217,7 @@
 //                     <input type="radio" id="withOutLimit" name="callLimitPerDay" value="withOutLimit">
 //                 <label for="withOutLimit">With Out Limits:</label>
 //                     </div>
-               
+
 //                 </div>
 //                 <div class="selected-edit">
 //               <div class="selected__img">
@@ -227,9 +227,9 @@
 //                 <p>סוג עסקה</p>
 //               </div>
 //             </div>
-              
+
 //               </div>
-           
+
 
 
 
@@ -240,7 +240,7 @@
 //     formEdit.innerHTML = html;
 //     clientIdEdit = foundClient.uuid;
 
-   
+
 //     const selectedAllEdit = document.querySelectorAll(".selected-edit");
 
 //     selectedAllEdit.forEach((selected) => {
@@ -276,7 +276,7 @@
 //     console.error(error);
 //   }
 // }
- 
+
 
 // //! In the "form Edit" I stablish the previous checked value that the element already has
 // function radioButtonCheck(dealTime) {
@@ -365,7 +365,7 @@
 //     console.error(error);
 //   }
 // }
- 
+
 
 
 
@@ -378,25 +378,19 @@ handleForm.addEventListener("submit", handleNewClient);
 async function handleNewClient(ev) {
   try {
     ev.preventDefault();
-    let { clientname, phone, email, dealTime, callLimitPerDay } =
-      ev.target.elements;
+    let { clientname, phone, email, dealTime, callLimitPerDay } = ev.target.elements;
+
     clientname = clientname.value;
     phone = phone.value;
     email = email.value;
     dealTime = dealTime.value;
     callLimitPerDay = callLimitPerDay.value;
-
+    
     modalCreate.style.display = "none";
     ev.target.reset();
 
-    const clientDetails = {
-      clientname,
-      phone,
-      email,
-      dealTime,
-      callLimitPerDay,
-    };
-    const clientsCreated = await axios.post("/clients/register", clientDetails);
+    const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };
+    const clientsCreated = await axios.post('/clients/register', clientDetails);
     swal("Good job!", "New user added succesfully!", "success");
     renderClients(clientsCreated.data.allClients.clients);
   } catch (error) {

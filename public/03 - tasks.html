@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="./SCSS/app.css" />
+  <link rel="shortcut icon" href="./img/faviconTask.png" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
   <script>
     moment().format();
@@ -26,8 +27,8 @@
   <div class="template-tasks container">
     <div class="nav">
       <nav class="navigation__container">
-        <div class="navigation__container__search-bar">
-          <input type="text" placeholder="חיפוש משימה לפי טקסט" />
+        <div class="navigation__container__search-bar" onkeyup="handleSearch()">
+          <input type="text" id="search" placeholder="חיפוש משימה לפי טקסט" />
         </div>
         <div class="navigation__container__page">
           <div class="navigation__container__page__client">

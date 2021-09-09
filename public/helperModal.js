@@ -12,7 +12,10 @@ const closeEdit = document.getElementById("closeEdit");
 
 // When the user clicks the button, open the modal
 buttonUpload.addEventListener('click', openModal);
-buttonUpload1.addEventListener('click', openModal);
+
+if (buttonUpload1) {
+    buttonUpload1.addEventListener('click', openModal);
+}
 
 function openModal() {
     try {

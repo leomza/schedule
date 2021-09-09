@@ -202,7 +202,7 @@ function listUpcomingEvents() {
     }).then(function (response) {
         const events = response.result.items;
         renderCalendarInfo(events);
-        renderCalendarInfoToday(events);
+        //renderCalendarInfoToday(events);
     });
 }
 

@@ -261,7 +261,7 @@ async function handleEdit(ev) {
 
         const projectDetails = { projectName, clientId, projectType, status, totalHours };
         const allProjects = await axios.put(`/projects/editProject/${projectIdEdit}`, projectDetails);
-        renderClients(allProjects);
+        renderProjects(allProjects.data.allProjects.projects);
     } catch (error) {
         swal("Ohhh no!", `${error}`, "warning");
         console.error(error);

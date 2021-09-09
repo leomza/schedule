@@ -374,7 +374,7 @@ function handleEdit(ev) {
 
         case 16:
           allProjects = _context7.sent;
-          renderClients(allProjects);
+          renderProjects(allProjects.data.allProjects.projects);
           _context7.next = 24;
           break;
 
