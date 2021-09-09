@@ -34,22 +34,11 @@
   <body
     onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients()"
   >
-   
-    <section class="schedule">
-      <div class="navigation container">
+    <div class="pepe container">
+      <div class="nav">
         <nav class="navigation__container">
-          <!-- <form onkeyup="handleSearch()">
-          <input
-            class="form__search"
-            type="text"
-            name="search"
-            id="search"
-            placeholder="Search by task name"
-          />
-        </form> -->
-  
           <div class="navigation__container__search-bar">
-            <input type="text" />
+            <input type="text" placeholder="חיפוש משימה לפי טקסט"/>
           </div>
           <div class="navigation__container__page">
             <div class="navigation__container__page__client">
@@ -63,80 +52,122 @@
             </div>
           </div>
         </nav>
+
+      </div>
+      
+      <div class="sidebar">
+        <div class="activity">
+          <div>
+            <div class="cronometer" id="hms"></div>
+            <div id="saveTime">הפסקה</div>
+          </div>
+
+          <div class="activity-buttons">
+            <div class="activity-buttons__recreation">
+              <button
+                class="button__cronometer"
+                name="activity"
+                onclick="cronometer(event)"
+              >
+                <img src="img/recreation.png" alt="" />
+              </button>
+            </div>
+            <div class="activity-buttons__eat">
+              <button
+                class="button__cronometer"
+                name="activity"
+                onclick="cronometer(event)"
+              >
+                <img src="img/eat.png" alt="" />
+              </button>
+            </div>
+            <div class="activity-buttons__call">
+              <button
+                class="button__cronometer"
+                name="activity"
+                onclick="cronometer(event)"
+              >
+                <img src="img/Group 674.png" alt="" />
+              </button>
+            </div>
+            <div class="activity-buttons__task">
+              <img src="img/task.png" alt="" />
+            </div>
+            <div class="activity-buttons__calendar">
+              <img src="img/calendar.png" alt="" />
+            </div>
+          </div>
+          <div id="buttonCreate1">
+            <button class="button-talbe">השדח המישמ</button>
+          </div>
+
+          <div id="root"></div>
+        </div>
+      </div>
+    
+      <div class="column1">
+       
+        <div>
+          <div class="task-title">
+          
+            <h3>General</h3>
+            <button id="buttonCreate" class="button-talbe">חדשk</button>
+          </div>
+
+          <div id="taskGeneral" class="task-container"></div>
+        </div>
+       
+      </div>
+      <div class="column2">
+        <div>
+          <div class="task-title">
+            <h3>Tomorrow</h3>
+            <button id="buttonCreate" class="button-talbe">חדשk</button>
+          </div>
+          <div id="taskTomorrow" class="task-container"></div>
+        </div>
+      </div>
+      <div class="column3">
+        <div>
+          <div class="task-title">
+            <h3>Today</h3>
+            <button id="buttonCreate" class="button-talbe">חדשk</button>
+          </div>
+          <div id="taskToday" class="task-container"></div>
+        </div>
+      </div>
+      <div class="column4"></div>
+      <div class="columnBottom"></div>
+    </div>
+
+    <section class="schedule">
+      <div class="navigation container">
+
       </div>
       <div class="schedule--container">
-        <div class="activity">
-          <div class="activity--bar">
-            <div>
-              <div class="cronometer" id="hms"></div>
-              <div id="saveTime">הפסקה</div>
-            </div>
-
-            <div class="activity-buttons">
-              <div class="activity-buttons__recreation">
-                <button
-                  class="button__cronometer"
-                  name="activity"
-                  onclick="cronometer(event)"
-                >
-                  <img src="img/recreation.png" alt="" />
-                </button>
-              </div>
-              <div class="activity-buttons__eat">
-                <button
-                  class="button__cronometer"
-                  name="activity"
-                  onclick="cronometer(event)"
-                >
-                  <img src="img/eat.png" alt="" />
-                </button>
-              </div>
-              <div class="activity-buttons__call">
-                <button
-                  class="button__cronometer"
-                  name="activity"
-                  onclick="cronometer(event)"
-                >
-                  <img src="img/Group 674.png" alt="" />
-                </button>
-              </div>
-              <div class="activity-buttons__task">
-                <img src="img/task.png" alt="" />
-              </div>
-              <div class="activity-buttons__calendar">
-                <img src="img/calendar.png" alt="" />
-              </div>
-            </div>
-            <div id="buttonCreate1">
-              <button class="button-talbe">השדח המישמ</button>
-            </div>
-
-            <div id="root"></div>
-          </div>
-        </div>
         <div class="schedule-task container">
-          <button id="buttonCreate" class="button-talbe">חדשk</button>
+         
 
           <div class="tasks">
-            <div>
+            <!-- <div>
               <div class="task-title">
                 <h3>General</h3>
               </div>
 
               <div id="taskGeneral" class="task-container"></div>
-            </div>
-            <div>
+            </div> -->
+            <!-- <div>
               <div class="task-title">
                 <h3>Tomorrow</h3>
               </div>
               <div id="taskTomorrow" class="task-container"></div>
-            </div>
-            <div>
+            </div> -->
+            <!-- <div>
               <div class="task-title">
                 <h3>Today</h3>
               </div>
               <div id="taskToday" class="task-container"></div>
-            </div>
+            </div> -->
             <div>
               <button id="authorize_button" style="display: none">
                 Authorize
