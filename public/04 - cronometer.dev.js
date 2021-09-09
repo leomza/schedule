@@ -7,7 +7,7 @@ function init() {
     h = 0;
     m = 0;
     s = 0;
-    document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                    <p class=\"cronometer--number\">00</p>";
+    document.getElementById("hms").innerHTML = "<div class=\"cronometer--number\">\n                                                    <p >00</p>\n                                                    <p >00</p>\n                                                    </div>";
   } catch (error) {
     console.error(error);
   }
@@ -68,7 +68,14 @@ function write() {
       hAux = h;
     }
 
-    document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">".concat(sAux, "</p>\n                                                    <p class=\"cronometer--number\">").concat(mAux, "</p>");
+    if (sAux > 10) {
+      var backColorsnumbers = document.querySelector('.cronometer');
+      backColorsnumbers.classList.add('alertRed');
+    } else if (sAux >= 10) {
+      swal("Alert", "Error 10 Min", "warning");
+    }
+
+    document.getElementById("hms").innerHTML = "<div class=\"cronometer--number\">\n                                                    <p class=\"cronometer--number\">".concat(sAux, "</p>\n                                                    <p class=\"cronometer--number\">").concat(mAux, "</p>\n                                                    </div>");
   } catch (error) {
     console.error(error);
   }
@@ -83,7 +90,7 @@ function saveTime() {
           _context.prev = 0;
           userActivities = document.getElementsByName('activity');
           clearInterval(id);
-          document.getElementById("hms").innerHTML = "<p class=\"cronometer--number\">00</p>\n                                                    <p class=\"cronometer--number\">00</p>";
+          document.getElementById("hms").innerHTML = "<div class=\"cronometer--number\">\n        <p >00</p>\n        <p >00</p>\n        </div>";
           eventTarget.classList.remove('button__brightness');
           userActivities.forEach(function (activity) {
             activity.disabled = false;
@@ -106,7 +113,9 @@ function saveTime() {
           return regeneratorRuntime.awrap(axios.post("/clients/setTimeInClient/".concat(idProject, "/").concat(typeOfButton)));
 
         case 14:
-          swal("".concat(message.data.message, "!"));
+          swal("".concat(message.data.message, "!")).then(function () {
+            location.reload();
+          });
 
         case 15:
           h = 0;
@@ -166,7 +175,7 @@ function renderProjects() {
           projectsInfo = _context2.sent;
           projects = projectsInfo.data.allProjects.projects;
           html = projects.map(function (element) {
-            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call')\"><img src=\"img/call.png\" alt=\"\"></button>\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                    </div>\n                </div>\n                ");
+            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div class=\"projects__list__buttons\">\n\n                      <div class=\"projects__list__buttons__couple-one\">\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call')\"><img src=\"img/Group 674.png\" alt=\"\"></button>\n                        </div>\n\n\n                        <div class=\"projects__list__buttons__couple-two\">\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                        </div>\n                    </div>\n                </div>\n                ");
           }).join('');
           root.innerHTML = html;
           _context2.next = 16;
