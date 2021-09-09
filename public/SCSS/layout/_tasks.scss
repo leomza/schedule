@@ -7,9 +7,7 @@
   grid-template-areas:
     "sidebar nav nav nav nav"
     "sidebar column4 column1 column2 column3"
-    ". column4 columnBottom . ."; 
-    ; 
-
+    ". column4 columnBottom . .";
   .nav {
     grid-area: nav;
     width: 1155px;
@@ -69,6 +67,7 @@
   .sidebar {
     grid-area: sidebar;
     width: 131px;
+    // height: 100vh;
 
     background: #ffffff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
@@ -147,16 +146,16 @@
 
   .column4 {
     grid-area: column4;
-    width: 319px;
-    height:1155px;
+    width: 281px;
+    height: 1155px;
     background: #ffffff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
     border-radius: 8px;
   }
   .columnBottom {
-    grid-area: columnBottom; 
-    width: 281px; 
-    height: 500px; 
+    grid-area: columnBottom;
+    width: 281px;
+    height: 500px;
     background: #ffffff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
     border-radius: 8px;
@@ -169,7 +168,7 @@
   position: absolute;
   width: 281px;
   height: 59.5px;
-border-radius: .8rem;
+  border-radius: 0.8rem;
   background-color: #ffffff;
   h3 {
     font-size: 1.5rem;
@@ -245,34 +244,127 @@ border-radius: .8rem;
     filter: brightness(150%);
   }
 }
-#rootProjectsDate{
+#rootProjectsDate {
   margin: 6rem 0;
-  .projectDate-container{
+  .projectDate-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-  
-    p{
+
+    p {
       font-size: 1.2rem;
       font-weight: $regular;
-      color: #41475E;
+      color: #41475e;
       margin: 0;
     }
-    .projectDate__image{
+    .projectDate__image {
       display: flex;
       align-items: center;
       gap: 2rem;
-      p{
+      p {
         font-weight: $bold;
-        color: #BD5C46;
-  
+        color: #bd5c46;
       }
-      
     }
   }
 }
 
+.task-container-calendar {
+  height: 1145px;
+  overflow-y: scroll;
+  .task-calendar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 3.3rem;
+    .task-titles-calendar {
+      width: 70%;
+      p {
+        font-size: 1.2rem;
+        font-weight: $semi-bold;
+        color: #41475e;
+      }
+    }
+    .task-date-calendar {
+      p {
+        font-size: 1.2rem;
+        font-weight: $bold;
+        color: #41475e;
+      }
+    }
+  }
+  //  .task-titles-calendar {
+  //   display: flex;
+  //   justify-content: space-around;
+  //   align-items: center;
 
+  // }
+
+  // .task-date-calendar {
+  //   display: flex;
+  //   align-items: center;
+  //   gap: 1rem;
+  //   margin-top: 3.3rem;
+  //   p {
+  //     font-size: 1.2rem;
+  //     font-weight: $regular;
+  //     color: #41475e;
+  //   }
+  // }
+}
+.task-container-calendar::-webkit-scrollbar {
+  width: 8px;
+
+  background: #ffffff;
+  border-radius: 0 8px 8px 0;
+}
+.task-container-calendar::-webkit-scrollbar-thumb {
+  background: #c9c9c9;
+  border-radius: 0 8px 8px 0;
+  height: 5px;
+}
+
+.clock {
+  &__container {
+    text-align: center;
+    &__hour {
+     
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        font-size: 6.6rem;
+        margin: 0;
+        color: #08a0f7;
+     
+    
+    }
+    &__min {
+   
+        font-family: "Montserrat", sans-serif;
+        font-weight: 500;
+        font-size: 6.6rem;
+        margin: 0;
+        color: #08a0f7;
+   
+    }
+  }
+}
+
+// .calendarContent {
+//   display: flex;
+//   .summary-calendar {
+//     p {
+//       font-size: 1.2rem;
+//       font-weight: $semi-bold;
+//       color: #41475e;
+//     }
+
+//   }
+//   .date-calendar {
+//     p {
+
+//     }
+//   }
+// }
 // #sidebar{
 //   width: 281px;
 // height: 596px;

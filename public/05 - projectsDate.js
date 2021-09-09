@@ -20,7 +20,7 @@ async function renderClients() {
                         </div>
                         <div class="projectDate__image">
                                  <div class="projectDate__image__design">
-                                    <img src="img/call.png" alt="">
+                                 <img src="./img/Group BBB(2).png" alt="">
                                     <p>${designDate}</p>
                                 </div>
                 
