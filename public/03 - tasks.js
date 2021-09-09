@@ -316,11 +316,11 @@ async function handleSearch() {
     try {
         const searchTask = document.querySelector('#search');
         const regEx = searchTask.value;
-        const searching = new RegExp(regEx, 'gmi');
+        const searching = new RegExp(regEx, 'i');
         const allTasks = await axios.get(`/tasks/getAllTasks`);
         const { tasks } = allTasks.data.allTasks;
         const tasksFiltered = tasks.filter(task => searching.test(task.taskName));
-        renderTasks(tasksFiltered)
+        renderTasks(tasksFiltered);
     } catch (error) {
         console.error(error);
     };

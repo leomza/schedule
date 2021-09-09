@@ -31,14 +31,41 @@
     </script>
   </head>
 
-  <body
-    onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients()"
-  >
-    <div class="template-tasks container">
-      <div class="nav">
-        <nav class="navigation__container">
-          <div class="navigation__container__search-bar">
-            <input type="text" placeholder="חיפוש משימה לפי טקסט" />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tasks</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+    integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./SCSS/app.css" />
+  <link rel="shortcut icon" href="./img/faviconTask.png" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+  <script>
+    moment().format();
+  </script>
+</head>
+
+<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients()">
+  <div class="template-tasks container">
+    <div class="nav">
+      <nav class="navigation__container">
+        <div class="navigation__container__search-bar" onkeyup="handleSearch()">
+          <input type="text" id="search" placeholder="חיפוש משימה לפי טקסט" />
+        </div>
+        <div class="navigation__container__page">
+          <div class="navigation__container__page__client">
+            <a href="01- clients.html">לקוחות</a>
+          </div>
+          <div class="navigation__container__page__project">
+            <a href="02 - projects.html">פרויקטים</a>
           </div>
           <div class="navigation__container__page">
             <div class="navigation__container__page__client">

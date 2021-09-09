@@ -141,3 +141,160 @@ function getEvents() {
     }
   }, null, null, [[0, 9]]);
 }
+
+var CLIENT_ID = "737686618954-d0k28hcsdajurnrt1mj4v7rhv3p87bd4.apps.googleusercontent.com";
+var API_KEY = "AIzaSyBT-xOdFVT38YxGiOY3fbnblgVlbQ0kfO0"; // Array of API discovery doc URLs for APIs used by the quickstart
+
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]; // Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+
+var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+var authorizeButton = document.getElementById('authorize_button');
+var signoutButton = document.getElementById('signout_button');
+/**
+*  On load, called to load the auth2 library and API client library.
+*/
+
+function handleClientLoad() {
+  gapi.load('client:auth2', initClient);
+}
+/**
+*  Initializes the API client library and sets up sign-in state
+*  listeners.
+*/
+
+
+function initClient() {
+  gapi.client.init({
+    apiKey: API_KEY,
+    clientId: CLIENT_ID,
+    discoveryDocs: DISCOVERY_DOCS,
+    scope: SCOPES
+  }).then(function () {
+    // Listen for sign-in state changes.
+    gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus); // Handle the initial sign-in state.
+
+    updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+    authorizeButton.onclick = handleAuthClick;
+    signoutButton.onclick = handleSignoutClick;
+  }, function (error) {
+    renderCalendarInfo(JSON.stringify(error, null, 2));
+  });
+}
+/**
+*  Called when the signed in status changes, to update the UI
+*  appropriately. After a sign-in, the API is called.
+*/
+
+
+function updateSigninStatus(isSignedIn) {
+  if (isSignedIn) {
+    authorizeButton.style.display = 'none';
+    signoutButton.style.display = 'block';
+    listUpcomingEvents();
+  } else {
+    authorizeButton.style.display = 'block';
+    signoutButton.style.display = 'none';
+  }
+}
+/**
+*  Sign in the user upon button click.
+*/
+
+
+function handleAuthClick(event) {
+  gapi.auth2.getAuthInstance().signIn();
+}
+/**
+*  Sign out the user upon button click.
+*/
+
+
+function handleSignoutClick(event) {
+  gapi.auth2.getAuthInstance().signOut();
+}
+/**
+* Print the summary and start datetime/date of the next ten events in
+* the authorized user's calendar. If no events are found an
+* appropriate message is printed.
+*/
+
+
+function listUpcomingEvents() {
+  gapi.client.calendar.events.list({
+    'calendarId': 'primary',
+    'timeMin': new Date().toISOString(),
+    'showDeleted': false,
+    'singleEvents': true,
+    'maxResults': 10,
+    'orderBy': 'startTime'
+  }).then(function (response) {
+    var events = response.result.items;
+    renderCalendarInfo(events); //renderCalendarInfoToday(events);
+  });
+}
+
+function renderCalendarInfo(events) {
+  try {
+    var calendarInfo = document.querySelector('#calendarInfo');
+    var html = '';
+    html = events.map(function (element) {
+      var calendarStartDate = formatCalendarDate(element.start);
+      return "\n            <div>\n                <div>\n                    <p>".concat(element.summary, "</p>\n                </div>\n\n                <div>\n                    <p>").concat(calendarStartDate, "</p>\n                </div>\n            </div>");
+    }).join('');
+    calendarInfo.innerHTML = html;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function formatCalendarDate(startDate) {
+  try {
+    if (startDate.dateTime) {
+      startDate.dateTime = moment(startDate.dateTime).format('lll');
+      return startDate.dateTime;
+    } else if (startDate.date) {
+      startDate.date = moment(startDate.date).format("MMM Do YY");
+      return startDate.date;
+    } else {
+      startDate = 'No specified';
+      return startDate;
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+/* //Show the events that are going to happen today
+function renderCalendarInfoToday(events) {
+    try {
+        const eventsToday = document.querySelector('#eventsToday');
+        let html = '';
+        html = events.map(element => {
+            const startTime = formatHour(element.start.dateTime);
+            return (`
+            <div>
+                <div>
+                    <p>${element.summary}</p>
+                </div>
+
+                <div>
+                    <p>${startTime}</p>
+                </div>
+            </div>`
+            )
+        }).join('');
+        eventsToday.innerHTML = html;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function formatHour(element){
+    try {
+        let today = moment().format('MMMM Do YYYY');
+        if (moment(element).format('MMMM Do YYYY') === today){
+        }   
+    } catch (error) {
+        console.error(error);
+    }
+} */

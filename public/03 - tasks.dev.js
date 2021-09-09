@@ -496,7 +496,7 @@ function handleSearch() {
           _context9.prev = 0;
           searchTask = document.querySelector('#search');
           regEx = searchTask.value;
-          searching = new RegExp(regEx, 'gmi');
+          searching = new RegExp(regEx, 'i');
           _context9.next = 6;
           return regeneratorRuntime.awrap(axios.get("/tasks/getAllTasks"));
 
