@@ -908,12 +908,4 @@ input[type="radio"] {
 .alertRed {
   -webkit-text-stroke: 1px red !important;
 }
-
-.table__remove {
-  cursor: pointer;
-}
-
-.table__edit {
-  cursor: pointer !important;
-}
 /*# sourceMappingURL=app.css.map */
