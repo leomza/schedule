@@ -906,8 +906,7 @@ input[type="radio"] {
 }
 
 .alertRed {
-  -webkit-text-stroke: 1px red;
-  color: transparent;
+  -webkit-text-stroke: 1px red !important;
 }
 
 .table__remove {
