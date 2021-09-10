@@ -18,12 +18,14 @@ function init() {
 let eventTarget;
 let idProject;
 let typeOfButton;
+let limitCallForTheClient;
 
-function cronometer(event, projectId, typeActivity) {
+async function cronometer(event, projectId, typeActivity, limitPerDay) {
     try {
         eventTarget = event.target;
         idProject = projectId;
         typeOfButton = typeActivity;
+        limitCallForTheClient = limitPerDay;
 
         disabledButtons(event);
         write();
@@ -32,7 +34,8 @@ function cronometer(event, projectId, typeActivity) {
         console.error(error);
     }
 }
-function write() {
+
+async function write() {
     try {
         let hAux, mAux, sAux;
         s++;
@@ -43,13 +46,29 @@ function write() {
         if (s < 10) { sAux = "0" + s; } else { sAux = s; }
         if (m < 10) { mAux = "0" + m; } else { mAux = m; }
         if (h < 10) { hAux = "0" + h; } else { hAux = h; }
-        if (sAux > 10) {
+
+        if (m == limitCallForTheClient && s == 0 && typeOfButton === 'call') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
+            swal("Alert", "You have been in a call for more than 10 minutes", "warning");
 
-        } else if (sAux >= 10) {
-            swal("Alert", "Error 10 Min", "warning");
+        } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'recreation') {
+            const backColorsnumbers = document.querySelector('.cronometer');
+            backColorsnumbers.classList.add('alertRed')
+            swal("Alert", "You have been at rest for more than 30 minutes", "warning");
 
+        } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'eat') {
+            const backColorsnumbers = document.querySelector('.cronometer');
+            backColorsnumbers.classList.add('alertRed')
+            swal("Alert", "You have been eating for more than 45 minutes", "warning");
+        }
+
+        //Condition to send an email
+        if (h == 1 && m == 0 && s == 0 && typeOfButton === 'call') {
+            await axios.post(`/tasks/sendEmail/${typeOfButton}`);
+
+        } else if (h == 1 && m == 30 && s == 0 && typeOfButton === 'recreation' || typeOfButton === 'eat') {
+            await axios.post(`/tasks/sendEmail/${typeOfButton}`);
         }
 
         document.getElementById("hms").innerHTML = `<div class="cronometer--number">
@@ -76,14 +95,18 @@ async function saveTime() {
             activity.disabled = false;
             activity.classList.remove('button__disabled')
         })
+
         let timeInHours = h + (m / 60) + (s / 60 / 60);
         timeInHours = parseFloat(timeInHours);
+
+        const backColorsnumbers = document.querySelector('.cronometer');
+        backColorsnumbers.classList.remove('alertRed')
 
         if (idProject) {
             const message = await axios.post(`/projects/setTimeInProject/${idProject}/${timeInHours}/${typeOfButton}`);
             await axios.post(`/clients/setTimeInClient/${idProject}/${typeOfButton}`);
             swal(`${message.data.message}!`).then(() => {
-                location.reload();
+                renderClients();
             })
         }
         h = 0; m = 0; s = 0;
@@ -112,10 +135,25 @@ async function renderProjects() {
         const root = document.querySelector('#root');
         if (!root) throw new Error('There is a problem finding the HTML to show the projects');
 
+        const clientsInfo = await axios.get(`/clients/getAllClients`);
+        const { clients } = clientsInfo.data.allClients;
+
         const projectsInfo = await axios.get(`/projects/getAllprojects`);
         const { projects } = projectsInfo.data.allProjects;
+        projectsToShow = projects;
 
-        let html = projects.map(element => {
+        //Add the information of the user to the project
+        for (let index = 0; index < projectsToShow.length; index++) {
+            const project = projectsToShow[index];
+
+            clients.forEach(client => {
+                if (client.uuid === project.clientId) {
+                    Object.assign(projectsToShow[index], client);
+                }
+            });
+        };
+
+        let html = projectsToShow.map(element => {
             return (
                 `<div class="projects__list" >
                     <p> ${element.projectName} </p>
@@ -123,8 +161,8 @@ async function renderProjects() {
                     <div class="projects__list__buttons">
 
                       <div class="projects__list__buttons__couple-one">
-                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'design')"><img src="img/design.png" alt=""></button>
-                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call')"><img src="img/Group 674.png" alt=""></button>
+                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'design', '${element.callLimitPerDay}')"><img src="img/design.png" alt=""></button>
+                        <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call', '${element.callLimitPerDay}')"><img src="img/Group 674.png" alt=""></button>
                         </div>
 
 

@@ -6,7 +6,9 @@ var router = express.Router();
 var userCookie_1 = require("../middleware/userCookie");
 //I import the function of the Controlers that Im going to use here
 var controllerTasks_1 = require("../controllers/controllerTasks");
+var sendEmail_1 = require("../middleware/sendEmail");
 router.post('/newTask', userCookie_1.userCookieRead, controllerTasks_1.createTask);
+router.post('/sendEmail/:typeButton', sendEmail_1.sendEmail);
 router.get('/getAllTasks', userCookie_1.userCookieRead, controllerTasks_1.getAllTasks);
 router.get('/findTask/:idTask', userCookie_1.userCookieRead, controllerTasks_1.getATask);
 router["delete"]('/deleteTask/:idTask/:idProject', userCookie_1.userCookieRead, controllerTasks_1.deleteTask);
