@@ -170,20 +170,21 @@ async function editProject(uuidProject) {
         //Set the client Name
         showClientNameInDOM(foundProject.clientId).then((data) => {
             let html = `
+            <h3>Edit Porject</h3>
         <div>
-        <label for="projectName">Project Name:</label>
+      
         <input type="text" name="projectName" value="${foundProject.projectName}" placeholder="Project name" required>
         </div>
 
         <div>
-        <label for="selectClientName">Select a client name</label>
+      
         <select onclick="uploadClientNamesEdit()" name="selectClientName" id="selectClientNameEdit">
         <option id="option${foundProject.clientId}" value="${foundProject.clientId}" selected disabled hidden>${data}</option>    
         </select>
         </div>
 
         <div>
-        <label for="projectType">Project Type:</label>
+   
         <select name="projectType" id="projectType">
             <option value="${foundProject.projectType}" selected disabled hidden>${foundProject.projectType}</option>
             <option value="logo">Logo</option>
@@ -207,7 +208,7 @@ async function editProject(uuidProject) {
         </div>
 
         <div>
-        <label for="status">Status:</label>
+       
         <select name="status" id="status">
             <option value="${foundProject.status}" selected disabled hidden>${foundProject.status}</option>
             <option value="offerPending">Offer Pending</option>
@@ -223,10 +224,10 @@ async function editProject(uuidProject) {
         </div>
 
         <div>
-            <label for="totalHours">Total hours for the project</label>
+     
             <input type="number" name="totalHours" value="${foundProject.totalHours}" placeholder="Total Hours for the project">
         </div>
-                <input type="submit" value="Update project">
+                     <input type="submit" value="Update project" class="button-form" />
         `
             formEdit.innerHTML = html;
             projectIdEdit = foundProject.projectUuid;

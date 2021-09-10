@@ -52,19 +52,19 @@
         <form id="formCreate">
           <h3>Add a new project</h3>
           <div>
-            <label for="projectName">Project Name:</label>
-            <input type="text" name="projectName" placeholder="Project name" required />
+            
+            <input type="text" name="projectName" placeholder="שם הפרויקט" required />
           </div>
 
           <div>
-            <label for="selectClientName">Select a client name</label>
+            <!-- <label for="selectClientName">Select a client name</label> -->
             <select name="selectClientName" id="selectClientName">
-              <option selected disabled>Select a client name...</option>
+              <option selected disabled>שם לקוח בחירה מרובה...</option>
             </select>
           </div>
 
           <div>
-            <label for="projectType">Project Type:</label>
+            <!-- <label for="projectType">Project Type:</label> -->
             <select name="projectType" id="projectType">
               <option selected disabled>Select a project type...</option>
               <option value="logo">Logo</option>
@@ -88,7 +88,7 @@
           </div>
 
           <div>
-            <label for="status">Status:</label>
+            <!-- <label for="status">Status:</label> -->
             <select name="status" id="status">
               <option selected disabled>Select a status...</option>
               <option value="offerPending">Offer Pending</option>
@@ -106,11 +106,11 @@
           </div>
 
           <div>
-            <label for="totalHours">Total hours for the project</label>
+            <!-- <label for="totalHours">Total hours for the project</label> -->
             <input type="number" name="totalHours" placeholder="Total Hours for the project" />
           </div>
 
-          <input type="submit" value="Create project" />
+          <input type="submit" value="Create project" class="button-form" />
         </form>
       </div>
     </div>

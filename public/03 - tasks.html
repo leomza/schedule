@@ -1,35 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tasks</title>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-      crossorigin="anonymous"
-    />
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./SCSS/app.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
-    <script>
-      moment().format();
-    </script>
-  </head>
+   
 
 <head>
   <meta charset="UTF-8" />
@@ -78,10 +49,16 @@
       <div class="sidebar">
         <div class="activity">
           <div id="clock"></div>
-          <div id="eventToday"></div>
-          <div class="noEvent">
-            <p>There no Events Today</p>
+          <div class="googel-events">
+            <h5>היום:</h5>
+            <div id="eventToday">
+              
+            </div>
+            <div class="noEvent">
+              <p>There no Events Today</p>
+            </div>
           </div>
+        
 
           <div>
             <div class="cronometer" id="hms"></div>
@@ -236,7 +213,7 @@
           <form id="formCreate">
             <h3>Add a new task</h3>
             <div>
-              <label for="taskName">Task Name:</label>
+              <!-- <label for="taskName">Task Name:</label> -->
               <input
                 type="text"
                 name="taskName"
@@ -246,7 +223,7 @@
             </div>
 
             <div>
-              <label for="description">Description:</label>
+              <!-- <label for="description">Description:</label> -->
               <input
                 type="text"
                 name="description"
@@ -256,18 +233,18 @@
             </div>
 
             <div>
-              <label for="selectProjectName">Select a project</label>
+              <!-- <label for="selectProjectName">Select a project</label> -->
               <select name="selectProjectName" id="selectProjectName">
                 <option selected disabled>Select a project...</option>
               </select>
             </div>
 
             <div>
-              <label for="limitDate">Select a limit date:</label>
+              <!-- <label for="limitDate">Select a limit date:</label> -->
               <input type="date" name="limitDate" required />
             </div>
 
-            <input type="submit" value="Create task" />
+            <input type="submit" value="Create task" class="button-form"/>
           </form>
         </div>
       </div>

@@ -1,5 +1,5 @@
 //Handle the form to login an existing user:
-const handleFormCreate = document.querySelector("#existingForm");
+const handleFormCreate = document.querySelector("#loginUser");
 handleFormCreate.addEventListener('submit', doingSubmitLogin);
 
 async function doingSubmitLogin(ev) {

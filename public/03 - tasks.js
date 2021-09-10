@@ -230,28 +230,27 @@ async function editTask(idTask) {
             let html = `
             <h3>Edit the task</h3>
             <div>
-                <label for="taskName">Task Name:</label>
+                 
                 <input type="text" name="taskName" placeholder="Task Name" value="${foundTask.taskName}" required>
             </div>
 
             <div>
-                <label for="description">Description:</label>
+              
                 <input type="text" name="description" placeholder="Description" value="${foundTask.description}" required>
             </div>
 
             <div>
-                <label for="selectProjectName">Select a project</label>
+   
                 <select onclick="uploadProjectNamesEdit()" name="projectId" id="selectProjectNameEdit">
                     <option id="option${foundTask.projectId}" value="${foundTask.projectId}" selected disabled hidden>${data}</option>
                 </select>
             </div>
 
-            <div>
-                <label for="limitDate">Select a limit date:</label>
+            <div> 
                 <input type="date" name="limitDate" value="${foundTask.limitDate}" required>
             </div>
 
-            <input type="submit" value="Update task">
+            <input type="submit" value="Update task"class="button-form">
         `
             formEdit.innerHTML = html;
             taskIdEdit = foundTask.uuid;

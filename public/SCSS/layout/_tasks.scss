@@ -348,7 +348,33 @@
     }
   }
 }
+.googel-events{
+  text-align: center;
+  h5{
+    text-align: right;
+    margin-right: 3rem;
+    font-size: 1.2rem;
+    font-weight: $regular;
+  }
+#eventToday{
 
+    p{
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.7rem;
+      font-weight: $regular;
+    }
+    
+  }
+
+  .noEvent{
+    
+    p{
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.7rem;
+      font-weight: $regular;
+    }
+  }
+}
 // .calendarContent {
 //   display: flex;
 //   .summary-calendar {

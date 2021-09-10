@@ -10,26 +10,27 @@
         integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="shortcut icon" href="./img/faviconTask.png" />
-    <link rel="stylesheet" href="styles.min.css">
+  
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="./SCSS/app.css">
 </head>
 
 <body>
 
-    <form id="existingForm">
+    <form id="loginUser">
         <h3>Enter your login data</h3>
 
         <div>
-            <label for="email">Email:</label>
+            <label for="email">Email</label>
             <input type="email" name="email" placeholder="Enter your email" required>
         </div>
 
         <div>
-            <label for="password">Password:</label>
+            <label for="password">Password</label>
             <input type="password" name="password" placeholder="Enter your password" autocomplete="off" required>
         </div>
 
-        <input type="submit" value="Login">
+        <input type="submit" value="Login"  class="button-form">
     </form>
 
     <script src="script.js"></script>

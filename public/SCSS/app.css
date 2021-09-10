@@ -324,102 +324,56 @@ button {
   left: 50px;
 }
 
-#formCreate label {
-  font-weight: 700;
-  text-transform: uppercase;
-  display: block;
-}
-
-#formCreate input:not([type="submit"]) {
-  padding: 1rem;
-  display: block;
-  width: 292px;
-  height: 47px;
-  -webkit-box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
-          box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
-  border: 1px solid #7784ee;
-  border-radius: 0.8rem;
-  margin-bottom: 2rem;
-}
-
-#formCreate input:not([type="submit"]):focus {
-  outline: none;
-}
-
-#formCreate input[type="radio"] {
-  display: none;
-}
-
-.select-box .options-container .option:hover {
-  background-color: #F0F5FC;
-  border-right: 2px solid  #08A0F7;
-}
-
-.select-box .options-container .option label {
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 21px;
-}
-
-#formEdit label {
-  font-weight: 700;
-  text-transform: uppercase;
-  display: block;
-}
-
-#formEdit input:not([type="submit"]) {
-  padding: 1rem;
-  display: block;
-  width: 292px;
-  height: 47px;
-  -webkit-box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
-          box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
-  border: 1px solid #7784ee;
-  border-radius: 0.8rem;
-  margin-bottom: 2rem;
-}
-
-#formEdit input[type="radio"] {
-  display: none;
-}
-
-.select-box .options-container .option:hover {
-  background-color: #F0F5FC;
-  border-right: 2px solid  #08A0F7;
-}
-
-.select-box .options-container .option label {
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 21px;
-}
-
-.select-box-edit {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 292px;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.select-box-edit .options-container-edit {
-  background: #ffffff;
-  color: #000000;
-  max-height: 0;
-  width: 100%;
-  opacity: 0;
-  -webkit-transition: all 0.4s;
-  transition: all 0.4s;
+#loginUser {
+  margin: auto;
+  padding: 20px;
+  width: 348px;
+  height: 472px;
+  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
   border-radius: 8px;
-  overflow: hidden;
-  -webkit-box-ordinal-group: 2;
-      -ms-flex-order: 1;
-          order: 1;
-  position: absolute;
-  z-index: 100;
+}
+
+#loginUser h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+#loginUser label {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+label {
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+}
+
+select, input:not([type="submit"]) {
+  padding: 1rem;
+  display: block;
+  width: 292px;
+  height: 47px;
+  -webkit-box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
+          box-shadow: 0px 5px 15px rgba(119, 132, 238, 0.3);
+  border: 1px solid #7784ee;
+  border-radius: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#formCreate h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+#formEdit h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 .selected-edit {
@@ -917,6 +871,29 @@ button {
   font-size: 6.6rem;
   margin: 0;
   color: #08a0f7;
+}
+
+.googel-events {
+  text-align: center;
+}
+
+.googel-events h5 {
+  text-align: right;
+  margin-right: 3rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.googel-events #eventToday p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
+.googel-events .noEvent p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  font-weight: 400;
 }
 
 .button__disabled {

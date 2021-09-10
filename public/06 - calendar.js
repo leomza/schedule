@@ -199,11 +199,9 @@ function listUpcomingEvents() {
     .then(function (response) {
       const events = response.result.items;
 
-     
       renderCalendarInfo(events);
-      pepe(events)
-    //   renderCalendarInfoToday(events);
-
+      pepe(events);
+      //   renderCalendarInfoToday(events);
     });
 }
 
@@ -239,35 +237,31 @@ function renderCalendarInfo(events) {
   }
 }
 
+const pepe = (event) => {
+  const date = new Date();
+  const momentsHour =  moment(date).format('LT');
+  // "9:00 PM";
+  const eventToday = document.getElementById("eventToday");
+  const noEvent = document.querySelector(".noEvent");
+  //  moment(date).format('LT');;
+  let html = "";
 
-const pepe = (event)=> {
-    const date = new Date()
-    const momentsHour = '9:00 PM'
-  const eventToday = document.getElementById('eventToday');
-  const noEvent = document.querySelector('.noEvent')
-    //  moment(date).format('LT');;
-    let html =''
+  html = event
+    .map((el) => {
+      if (momentsHour === el.start.dateTime) {
+        noEvent.style.display = "none";
 
-    html = event.map((el)=> {
-       if(momentsHour === el.start.dateTime){
-noEvent.style.display = "none";
-
-       return `
+        return `
         <p>${el.start.dateTime}</p>
-        `
-     
-       } 
+        `;
+      }
+    })
+    .join("");
 
-     
-
-       
-
-    }).join("");
-
-    eventToday.innerHTML = html
-// const date = new Date();
-// let hour = date.getHours()
-}
+  eventToday.innerHTML = html;
+  // const date = new Date();
+  // let hour = date.getHours()
+};
 function formatCalendarDate(startDate) {
   try {
     if (startDate.dateTime) {
@@ -313,7 +307,7 @@ function formatCalendarDate(startDate) {
 const currentTime = () => {
   const date = new Date();
   let hour = date.getHours();
- 
+
   let min = date.getMinutes();
   hour = hour == 0 ? 12 : hour > 12 ? hour - 12 : hour;
   hour = updatetime(hour);

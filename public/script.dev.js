@@ -1,7 +1,7 @@
 "use strict";
 
 //Handle the form to login an existing user:
-var handleFormCreate = document.querySelector("#existingForm");
+var handleFormCreate = document.querySelector("#loginUser");
 handleFormCreate.addEventListener('submit', doingSubmitLogin);
 
 function doingSubmitLogin(ev) {
