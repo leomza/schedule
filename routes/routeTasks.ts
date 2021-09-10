@@ -7,10 +7,10 @@ import { userCookieRead } from '../middleware/userCookie';
 
 //I import the function of the Controlers that Im going to use here
 import { createTask, getAllTasks, deleteTask, getATask, editTask } from '../controllers/controllerTasks';
-import { sendEmail } from '../middleware/sendEmail';
+import { sendEmail, sendWhatsApp } from '../middleware/sendEmail';
 
 router.post('/newTask', userCookieRead, createTask);
-router.post('/sendEmail/:typeButton', sendEmail);
+router.post('/sendEmail/:typeButton', sendWhatsApp, sendEmail);
 router.get('/getAllTasks', userCookieRead, getAllTasks);
 router.get('/findTask/:idTask', userCookieRead, getATask);
 router.delete('/deleteTask/:idTask/:idProject', userCookieRead, deleteTask);
