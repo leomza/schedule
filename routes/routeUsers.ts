@@ -7,7 +7,7 @@ import { userCookieWrite } from '../middleware/userCookie';
 import { doesUserExistLogin } from '../middleware/doesUserExist';
 
 //I import the function of the Controlers that Im going to use here
-import { login } from '../controllers/controllerUsers'
+import { login } from '../controllers/controllerUsers';
 
 router.post('/login', doesUserExistLogin, userCookieWrite, login);
 
