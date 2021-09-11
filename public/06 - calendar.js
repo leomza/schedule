@@ -205,15 +205,15 @@ function listUpcomingEvents() {
 
 function renderCalendarInfo(events) {
   try {
-    console.log(events)
     const calendarInfo = document.querySelector("#calendarInfo");
     let html = "";
-    html = events.map((element) => {
-      // console.log(element.start.dateTime);
-      const calendarStartDate = formatCalendarDate(element.start);
-      // console.log(calendarStartDate.dateTime);
+    html = events
+      .map((element) => {
+        // console.log(element.start.dateTime);
+        const calendarStartDate = formatCalendarDate(element.start);
+        // console.log(calendarStartDate.dateTime);
 
-      return `
+        return `
            <div class="task-calendar">
                     <div class="task-titles-calendar">
                         <p>${element.summary}</p>
@@ -225,7 +225,7 @@ function renderCalendarInfo(events) {
 
                 </div>
              `;
-    })
+      })
       .join("");
 
     calendarInfo.innerHTML = html;
@@ -236,7 +236,7 @@ function renderCalendarInfo(events) {
 
 const pepe = (event) => {
   const date = new Date();
-  const momentsHour = moment(date).format('LT');
+  const momentsHour =  moment(date).format('LT');
   // "9:00 PM";
   const eventToday = document.getElementById("eventToday");
   const noEvent = document.querySelector(".noEvent");

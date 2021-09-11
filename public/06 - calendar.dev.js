@@ -235,7 +235,6 @@ function listUpcomingEvents() {
 
 function renderCalendarInfo(events) {
   try {
-    console.log(events);
     var calendarInfo = document.querySelector("#calendarInfo");
     var html = "";
     html = events.map(function (element) {
