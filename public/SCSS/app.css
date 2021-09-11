@@ -869,9 +869,11 @@ input[type="radio"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin-top: 2rem;
 }
 
-#rootProjectsDate .projectDate-container p {
+#rootProjectsDate .projectDate-container .projectDate__name p {
+  width: 6vw;
   font-size: 1.2rem;
   font-weight: 400;
   color: #41475e;
@@ -889,8 +891,10 @@ input[type="radio"] {
 }
 
 #rootProjectsDate .projectDate-container .projectDate__image p {
+  font-size: 1.2rem;
   font-weight: 700;
   color: #bd5c46;
+  margin: 0;
 }
 
 .button__disabled {

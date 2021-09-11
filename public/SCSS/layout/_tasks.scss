@@ -327,20 +327,25 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-    p {
-      font-size: 1.2rem;
-      font-weight: $regular;
-      color: #41475e;
-      margin: 0;
-    }
+    margin-top: 2rem;
+.projectDate__name{
+  p {
+    width: 6vw;
+    font-size: 1.2rem;
+    font-weight: $regular;
+    color: #41475e;
+    margin: 0;
+  }
+}
+   
     .projectDate__image {
       display: flex;
       align-items: center;
       gap: 2rem;
-      p {
+      p {  font-size: 1.2rem;
         font-weight: $bold;
         color: #bd5c46;
+        margin: 0;
       }
     }
   }
