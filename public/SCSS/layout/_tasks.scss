@@ -1,59 +1,74 @@
-.nav-bar {
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-  padding: 1rem 0;
-  border-radius: 0.8rem;
+//GRID V2
+.container-column {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+  grid-template-rows: 0.1fr 2fr 2fr;
+  gap: 2rem;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "sidebar nav nav nav nav"
+    "sidebar column4 column1 column2 column3"
+    ". column4 columnBottom . .";
+}
 
-  &__search-bar {
-    flex-basis: calc(70% - 1rem);
-    margin-right: 2rem;
-    input {
-      width: 62.6rem;
-      background-color: #f4f7fc;
-      border-radius: 20rem;
-      border: none;
-      margin: 0;
-    }
-  }
-  &__navigation {
+.nav {
+  grid-area: nav;
+
+  .nav-bar {
     display: flex;
-    gap: 10rem;
-    flex-basis: calc(30% - 1rem);
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+    border-radius: 0.8rem;
 
-    &__client {
-      a {
-        text-decoration: none;
-        font-weight: $bold;
-        color: #08a0f7;
+    &__search-bar {
+      flex-basis: calc(70% - 1rem);
+      margin-right: 2rem;
+      input {
+        width: 62.6rem;
+        background-color: #f4f7fc;
+        border-radius: 20rem;
+        border: none;
+        margin: 0;
       }
     }
-    &__project {
-      a {
-        text-decoration: none;
-        font-weight: $bold;
-        color: #ab08f7;
+    &__navigation {
+      display: flex;
+      gap: 10rem;
+      flex-basis: calc(30% - 1rem);
+
+      &__client {
+        a {
+          text-decoration: none;
+          font-weight: $bold;
+          color: #08a0f7;
+        }
       }
-    }
-    &__page {
-      a {
-        text-decoration: none;
-        font-weight: $bold;
-        color: #121212;
+      &__project {
+        a {
+          text-decoration: none;
+          font-weight: $bold;
+          color: #ab08f7;
+        }
+      }
+      &__page {
+        a {
+          text-decoration: none;
+          font-weight: $bold;
+          color: #121212;
+        }
       }
     }
   }
 }
 
-.content {
-  display: flex;
-  justify-content: space-between;
-  gap: 5rem;
-  &__smallest-sidebar {
-    flex-basis: calc(10% - 1rem);
+.sidebar {
+  grid-area: sidebar;
+
+  .content__smallest-sidebar {
     max-width: 13.1rem;
     background: #ffffff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
@@ -174,124 +189,409 @@
       }
     }
   }
+}
 
-  &__columns {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
-    flex-basis: calc(90% - 1rem);
+.column1 {
+  grid-area: column1;
+}
 
-    &__sidebar {
-      // height: 500px;
-      overflow: hidden;
-      overflow-y: scroll;
+.column2 {
+  grid-area: column2;
+}
+
+.column3 {
+  grid-area: column3;
+}
+
+.columnBottom {
+  grid-area: columnBottom;
+}
+
+.column4 {
+  grid-area: column4;
+
+  .content__columns__sidebar-big {
+    flex-basis: calc(55% - 1rem);
+    background: #ffffff;
+    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+    border-radius: 8px;
+
+    .task-title {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      flex-basis: calc(45% - 1rem);
-      background: #ffffff;
-      box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-
-      border-radius: 8px;
-
-      &::-webkit-scrollbar {
-        width: 8px;
-
-        background: #ffffff;
-        border-radius: 0 8px 8px 0;
-      }
-      &::-webkit-scrollbar-thumb {
-        background: #c9c9c9;
-        border-radius: 0 8px 8px 0;
-        height: 5px;
-      }
-      .task-title {
-        position: sticky;
-        z-index: 1000;
-        top: 0;
-        width: 100%;
-        background-color: #ffffff;
-        &__content {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin: 0 2rem;
-           
-        }
-      }
-      .task-container {
-        padding-bottom: 5rem;
-        .task {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin: 0 2rem;
-          .task-titles {
-            margin-top: 1rem;
-            h5 {
-              display: inline;
-              font-size: 1.3rem;
-              font-weight: $regular;
-              color: #121212;
-              border-bottom: 1px solid #121212;
-            }
-            p {
-              margin: 0;
-              font-size: 1.2rem;
-              font-weight: $regular;
-              color: #41475e;
-            }
-          }
-          .task-date {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 3.3rem;
-            p {
-              font-size: 1.2rem;
-              font-weight: $regular;
-              color: #41475e;
-            }
-          }
-        }
-      }
+      margin: 0 2rem;
     }
-    &__sidebar-big {
-      flex-basis: calc(55% - 1rem);
-      background: #ffffff;
-      box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-      border-radius: 8px;
-       
-      .task-title {
+    .task-container-calendar {
+      .task-calendar {
         display: flex;
         justify-content: space-between;
-        align-items: center;
         margin: 0 2rem;
-      }
-      .task-container-calendar {
-        .task-calendar {
-          display: flex;
-          justify-content: space-between;
-          margin: 0 2rem;
-          align-items: center;
-          margin-top: 3.3rem;
-          .task-titles-calendar {
-            p {
-              font-size: 1.2rem;
-              font-weight: $semi-bold;
-              color: #41475e;
-            }
+        align-items: center;
+        margin-top: 3.3rem;
+        .task-titles-calendar {
+          p {
+            font-size: 1.2rem;
+            font-weight: $semi-bold;
+            color: #41475e;
           }
-          .task-date-calendar {
-            p {
-              font-size: 1.2rem;
-              font-weight: $bold;
-              color: #41475e;
-            }
+        }
+        .task-date-calendar {
+          p {
+            font-size: 1.2rem;
+            font-weight: $bold;
+            color: #41475e;
           }
         }
       }
     }
   }
 }
+
+.content__columns__sidebar {
+  height: 596px;
+  overflow: hidden;
+  overflow-y: scroll;
+  align-items: center;
+  flex-basis: calc(45% - 1rem);
+  background: #ffffff;
+  box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+
+  border-radius: 8px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+
+    background: #ffffff;
+    border-radius: 0 8px 8px 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c9c9c9;
+    border-radius: 0 8px 8px 0;
+    height: 5px;
+  }
+  .task-title {
+    position: sticky;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 2rem;
+    }
+  }
+  .task-container {
+    padding-bottom: 5rem;
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 2rem;
+      .task-titles {
+        margin-top: 1rem;
+        h5 {
+          display: inline;
+          font-size: 1.3rem;
+          font-weight: $regular;
+          color: #121212;
+          border-bottom: 1px solid #121212;
+        }
+        p {
+          margin: 0;
+          font-size: 1.2rem;
+          font-weight: $regular;
+          color: #41475e;
+        }
+      }
+      .task-date {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 3.3rem;
+        p {
+          font-size: 1.2rem;
+          font-weight: $regular;
+          color: #41475e;
+        }
+      }
+    }
+  }
+}
+
+#rootProjectsDate {
+ 
+  .projectDate-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    p {
+      font-size: 1.2rem;
+      font-weight: $regular;
+      color: #41475e;
+      margin: 0;
+    }
+    .projectDate__image {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      p {
+        font-weight: $bold;
+        color: #bd5c46;
+      }
+    }
+  }
+}
+
+// .content {
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 5rem;
+//   &__smallest-sidebar {
+//     flex-basis: calc(10% - 1rem);
+//     max-width: 13.1rem;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//     .activity {
+//       #buttonCreate1 {
+//         text-align: center;
+//       }
+//       .clock {
+//         &__container {
+//           text-align: center;
+//           &__hour {
+//             font-family: "Montserrat", sans-serif;
+//             font-weight: 600;
+//             font-size: 6.6rem;
+//             margin: 0;
+//             color: #08a0f7;
+//           }
+//           &__min {
+//             font-family: "Montserrat", sans-serif;
+//             font-weight: 500;
+//             font-size: 6.6rem;
+//             margin: 0;
+//             color: #08a0f7;
+//           }
+//         }
+//       }
+//       .googel-events {
+//         text-align: center;
+//         h5 {
+//           text-align: right;
+//           margin-right: 3rem;
+//           font-size: 1.2rem;
+//           font-weight: $regular;
+//         }
+//         #eventToday {
+//           p {
+//             font-family: "Montserrat", sans-serif;
+//             font-size: 1.7rem;
+//             font-weight: $regular;
+//           }
+//         }
+
+//         .noEvent {
+//           p {
+//             font-family: "Montserrat", sans-serif;
+//             font-size: 1.7rem;
+//             font-weight: $regular;
+//           }
+//         }
+//       }
+//       .activity-buttons {
+//         display: flex;
+//         justify-content: center;
+//         gap: 0.3rem;
+//         margin-top: 0.5rem;
+//         .button__cronometer {
+//           background: none;
+//           border: none;
+//           height: fit-content;
+//           text-align: center;
+
+//           &:hover {
+//             filter: brightness(150%);
+//           }
+//         }
+//       }
+//       .cronometer-container {
+//         .cronometer {
+//           -webkit-text-stroke: 1px #46b8f9;
+//           color: transparent;
+
+//           .cronometer--number {
+//             p {
+//               margin: 0;
+//               text-align: center;
+//               font-family: "Montserrat", sans-serif;
+//               font-size: 6.6rem;
+//               line-height: 55px;
+//               font-weight: 500;
+//             }
+//           }
+//         }
+//         #saveTime {
+//           p {
+//             text-align: center;
+//             font-size: 1.2rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .projects__list {
+//     margin-top: 1.4rem;
+//     text-align: center;
+//     p {
+//       font-size: 1.2rem;
+//       font-weight: $regular;
+//       margin: 0 1.6rem 0.7rem 0;
+//     }
+//     border-bottom: 0.5px solid #c6c6c6;
+//     box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
+
+//     .projects__list__buttons {
+//       display: flex;
+//       justify-content: space-evenly;
+//       align-items: center;
+//       .button__cronometer {
+//         background: none;
+//         border: none;
+//         height: fit-content;
+//         text-align: center;
+
+//         &:hover {
+//           filter: brightness(150%);
+//         }
+//       }
+//     }
+//   }
+
+//   &__columns {
+//     display: flex;
+//     justify-content: space-between;
+//     gap: 1rem;
+//     flex-basis: calc(90% - 1rem);
+
+//     &__sidebar {
+//       // height: 500px;
+//       overflow: hidden;
+//       overflow-y: scroll;
+//       align-items: center;
+//       flex-basis: calc(45% - 1rem);
+//       background: #ffffff;
+//       box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+
+//       border-radius: 8px;
+
+//       &::-webkit-scrollbar {
+//         width: 8px;
+
+//         background: #ffffff;
+//         border-radius: 0 8px 8px 0;
+//       }
+//       &::-webkit-scrollbar-thumb {
+//         background: #c9c9c9;
+//         border-radius: 0 8px 8px 0;
+//         height: 5px;
+//       }
+//       .task-title {
+//         position: sticky;
+//         z-index: 1000;
+//         top: 0;
+//         width: 100%;
+//         background-color: #ffffff;
+//         &__content {
+//           display: flex;
+//           justify-content: space-between;
+//           align-items: center;
+//           margin: 0 2rem;
+
+//         }
+//       }
+//       .task-container {
+//         padding-bottom: 5rem;
+//         .task {
+//           display: flex;
+//           justify-content: space-between;
+//           align-items: center;
+//           margin: 0 2rem;
+//           .task-titles {
+//             margin-top: 1rem;
+//             h5 {
+//               display: inline;
+//               font-size: 1.3rem;
+//               font-weight: $regular;
+//               color: #121212;
+//               border-bottom: 1px solid #121212;
+//             }
+//             p {
+//               margin: 0;
+//               font-size: 1.2rem;
+//               font-weight: $regular;
+//               color: #41475e;
+//             }
+//           }
+//           .task-date {
+//             display: flex;
+//             align-items: center;
+//             gap: 1rem;
+//             margin-top: 3.3rem;
+//             p {
+//               font-size: 1.2rem;
+//               font-weight: $regular;
+//               color: #41475e;
+//             }
+//           }
+//         }
+//       }
+//     }
+//     &__sidebar-big {
+//       flex-basis: calc(55% - 1rem);
+//       background: #ffffff;
+//       box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//       border-radius: 8px;
+
+//       .task-title {
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         margin: 0 2rem;
+//       }
+//       .task-container-calendar {
+//         .task-calendar {
+//           display: flex;
+//           justify-content: space-between;
+//           margin: 0 2rem;
+//           align-items: center;
+//           margin-top: 3.3rem;
+//           .task-titles-calendar {
+//             p {
+//               font-size: 1.2rem;
+//               font-weight: $semi-bold;
+//               color: #41475e;
+//             }
+//           }
+//           .task-date-calendar {
+//             p {
+//               font-size: 1.2rem;
+//               font-weight: $bold;
+//               color: #41475e;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+//GRID
 
 // .template-tasks {
 //   display: grid;

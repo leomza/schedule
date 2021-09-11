@@ -457,7 +457,26 @@ input[type="radio"] {
   display: none;
 }
 
-.nav-bar {
+.container-column {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+      grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+  -ms-grid-rows: 0.1fr 2fr 2fr;
+      grid-template-rows: 0.1fr 2fr 2fr;
+  gap: 2rem;
+  grid-auto-flow: row;
+      grid-template-areas: "sidebar nav nav nav nav" "sidebar column4 column1 column2 column3" ". column4 columnBottom . .";
+}
+
+.nav {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+  grid-area: nav;
+}
+
+.nav .nav-bar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -473,13 +492,13 @@ input[type="radio"] {
   border-radius: 0.8rem;
 }
 
-.nav-bar__search-bar {
+.nav .nav-bar__search-bar {
   -ms-flex-preferred-size: calc(70% - 1rem);
       flex-basis: calc(70% - 1rem);
   margin-right: 2rem;
 }
 
-.nav-bar__search-bar input {
+.nav .nav-bar__search-bar input {
   width: 62.6rem;
   background-color: #f4f7fc;
   border-radius: 20rem;
@@ -487,7 +506,7 @@ input[type="radio"] {
   margin: 0;
 }
 
-.nav-bar__navigation {
+.nav .nav-bar__navigation {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -496,37 +515,32 @@ input[type="radio"] {
       flex-basis: calc(30% - 1rem);
 }
 
-.nav-bar__navigation__client a {
+.nav .nav-bar__navigation__client a {
   text-decoration: none;
   font-weight: 700;
   color: #08a0f7;
 }
 
-.nav-bar__navigation__project a {
+.nav .nav-bar__navigation__project a {
   text-decoration: none;
   font-weight: 700;
   color: #ab08f7;
 }
 
-.nav-bar__navigation__page a {
+.nav .nav-bar__navigation__page a {
   text-decoration: none;
   font-weight: 700;
   color: #121212;
 }
 
-.content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  gap: 5rem;
+.sidebar {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: sidebar;
 }
 
-.content__smallest-sidebar {
-  -ms-flex-preferred-size: calc(10% - 1rem);
-      flex-basis: calc(10% - 1rem);
+.sidebar .content__smallest-sidebar {
   max-width: 13.1rem;
   background: #ffffff;
   -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
@@ -534,15 +548,15 @@ input[type="radio"] {
   border-radius: 8px;
 }
 
-.content__smallest-sidebar .activity #buttonCreate1 {
+.sidebar .content__smallest-sidebar .activity #buttonCreate1 {
   text-align: center;
 }
 
-.content__smallest-sidebar .activity .clock__container {
+.sidebar .content__smallest-sidebar .activity .clock__container {
   text-align: center;
 }
 
-.content__smallest-sidebar .activity .clock__container__hour {
+.sidebar .content__smallest-sidebar .activity .clock__container__hour {
   font-family: "Montserrat", sans-serif;
   font-weight: 600;
   font-size: 6.6rem;
@@ -550,7 +564,7 @@ input[type="radio"] {
   color: #08a0f7;
 }
 
-.content__smallest-sidebar .activity .clock__container__min {
+.sidebar .content__smallest-sidebar .activity .clock__container__min {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
   font-size: 6.6rem;
@@ -558,30 +572,30 @@ input[type="radio"] {
   color: #08a0f7;
 }
 
-.content__smallest-sidebar .activity .googel-events {
+.sidebar .content__smallest-sidebar .activity .googel-events {
   text-align: center;
 }
 
-.content__smallest-sidebar .activity .googel-events h5 {
+.sidebar .content__smallest-sidebar .activity .googel-events h5 {
   text-align: right;
   margin-right: 3rem;
   font-size: 1.2rem;
   font-weight: 400;
 }
 
-.content__smallest-sidebar .activity .googel-events #eventToday p {
+.sidebar .content__smallest-sidebar .activity .googel-events #eventToday p {
   font-family: "Montserrat", sans-serif;
   font-size: 1.7rem;
   font-weight: 400;
 }
 
-.content__smallest-sidebar .activity .googel-events .noEvent p {
+.sidebar .content__smallest-sidebar .activity .googel-events .noEvent p {
   font-family: "Montserrat", sans-serif;
   font-size: 1.7rem;
   font-weight: 400;
 }
 
-.content__smallest-sidebar .activity .activity-buttons {
+.sidebar .content__smallest-sidebar .activity .activity-buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -592,7 +606,7 @@ input[type="radio"] {
   margin-top: 0.5rem;
 }
 
-.content__smallest-sidebar .activity .activity-buttons .button__cronometer {
+.sidebar .content__smallest-sidebar .activity .activity-buttons .button__cronometer {
   background: none;
   border: none;
   height: -webkit-fit-content;
@@ -601,17 +615,17 @@ input[type="radio"] {
   text-align: center;
 }
 
-.content__smallest-sidebar .activity .activity-buttons .button__cronometer:hover {
+.sidebar .content__smallest-sidebar .activity .activity-buttons .button__cronometer:hover {
   -webkit-filter: brightness(150%);
           filter: brightness(150%);
 }
 
-.content__smallest-sidebar .activity .cronometer-container .cronometer {
+.sidebar .content__smallest-sidebar .activity .cronometer-container .cronometer {
   -webkit-text-stroke: 1px #46b8f9;
   color: transparent;
 }
 
-.content__smallest-sidebar .activity .cronometer-container .cronometer .cronometer--number p {
+.sidebar .content__smallest-sidebar .activity .cronometer-container .cronometer .cronometer--number p {
   margin: 0;
   text-align: center;
   font-family: "Montserrat", sans-serif;
@@ -620,12 +634,12 @@ input[type="radio"] {
   font-weight: 500;
 }
 
-.content__smallest-sidebar .activity .cronometer-container #saveTime p {
+.sidebar .content__smallest-sidebar .activity .cronometer-container #saveTime p {
   text-align: center;
   font-size: 1.2rem;
 }
 
-.content .projects__list {
+.sidebar .projects__list {
   margin-top: 1.4rem;
   text-align: center;
   border-bottom: 0.5px solid #c6c6c6;
@@ -633,13 +647,13 @@ input[type="radio"] {
           box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
 }
 
-.content .projects__list p {
+.sidebar .projects__list p {
   font-size: 1.2rem;
   font-weight: 400;
   margin: 0 1.6rem 0.7rem 0;
 }
 
-.content .projects__list .projects__list__buttons {
+.sidebar .projects__list .projects__list__buttons {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -651,7 +665,7 @@ input[type="radio"] {
           align-items: center;
 }
 
-.content .projects__list .projects__list__buttons .button__cronometer {
+.sidebar .projects__list .projects__list__buttons .button__cronometer {
   background: none;
   border: none;
   height: -webkit-fit-content;
@@ -660,24 +674,92 @@ input[type="radio"] {
   text-align: center;
 }
 
-.content .projects__list .projects__list__buttons .button__cronometer:hover {
+.sidebar .projects__list .projects__list__buttons .button__cronometer:hover {
   -webkit-filter: brightness(150%);
           filter: brightness(150%);
 }
 
-.content__columns {
+.column1 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: column1;
+}
+
+.column2 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 4;
+  grid-area: column2;
+}
+
+.column3 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 5;
+  grid-area: column3;
+}
+
+.columnBottom {
+  -ms-grid-row: 3;
+  -ms-grid-column: 3;
+  grid-area: columnBottom;
+}
+
+.column4 {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  grid-area: column4;
+}
+
+.column4 .content__columns__sidebar-big {
+  -ms-flex-preferred-size: calc(55% - 1rem);
+      flex-basis: calc(55% - 1rem);
+  background: #ffffff;
+  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  border-radius: 8px;
+}
+
+.column4 .content__columns__sidebar-big .task-title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  gap: 1rem;
-  -ms-flex-preferred-size: calc(90% - 1rem);
-      flex-basis: calc(90% - 1rem);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0 2rem;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0 2rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 3.3rem;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .task-titles-calendar p {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #41475e;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .task-date-calendar p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #41475e;
 }
 
 .content__columns__sidebar {
+  height: 596px;
   overflow: hidden;
   overflow-y: scroll;
   -webkit-box-align: center;
@@ -778,52 +860,37 @@ input[type="radio"] {
   color: #41475e;
 }
 
-.content__columns__sidebar-big {
-  -ms-flex-preferred-size: calc(55% - 1rem);
-      flex-basis: calc(55% - 1rem);
-  background: #ffffff;
-  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-  border-radius: 8px;
-}
-
-.content__columns__sidebar-big .task-title {
+#rootProjectsDate .projectDate-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 2rem;
 }
 
-.content__columns__sidebar-big .task-container-calendar .task-calendar {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  margin: 0 2rem;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-top: 3.3rem;
-}
-
-.content__columns__sidebar-big .task-container-calendar .task-calendar .task-titles-calendar p {
+#rootProjectsDate .projectDate-container p {
   font-size: 1.2rem;
-  font-weight: 600;
+  font-weight: 400;
   color: #41475e;
+  margin: 0;
 }
 
-.content__columns__sidebar-big .task-container-calendar .task-calendar .task-date-calendar p {
-  font-size: 1.2rem;
+#rootProjectsDate .projectDate-container .projectDate__image {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+#rootProjectsDate .projectDate-container .projectDate__image p {
   font-weight: 700;
-  color: #41475e;
+  color: #bd5c46;
 }
 
 .button__disabled {
