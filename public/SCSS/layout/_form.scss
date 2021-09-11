@@ -10,16 +10,16 @@
     font-size: 1.5rem;
     font-weight: $regular;
   }
-  label{
-    font-size: 1.5rem;
-    font-weight: $regular;
-  }
+   
 }
 
 label {
-  font-weight: $bold;
-  text-transform: uppercase;
   display: block;
+  font-size: 1.3rem;
+  font-weight: $regular;
+  text-transform: uppercase;
+margin-bottom: 2rem;
+ 
 }
 select, input:not([type="submit"]) {
   padding: 1rem;
@@ -30,6 +30,11 @@ select, input:not([type="submit"]) {
   border: 1px solid #7784ee;
   border-radius: 0.8rem;
   margin-bottom: 2rem;
+
+
+}
+select,input:focus{
+  outline: none;
 }
 
 input[type="radio"] {

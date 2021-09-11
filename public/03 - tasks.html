@@ -25,7 +25,162 @@
 </head>
 
 <body onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients()">
-  <div class="template-tasks container">
+
+  <section class="nav-bar container">
+    
+
+    <div class="nav-bar__search-bar">
+      <input type="text" id="search" placeholder="חיפוש משימה לפי טקסט" />
+    </div>
+    <nav class="nav-bar__navigation">
+      <div class="nav-bar__navigation__client">
+        <a href="01- clients.html">לקוחות</a>
+      </div>
+      <div class="nav-bar__navigation__project">
+        <a href="02 - projects.html">פרויקטים</a>
+      </div>
+      <div class="nav-bar__navigation__page">
+        <div class="navigation__container__page__definitions">
+          <a href="">הגדרות</a>
+        </div>
+    </nav>
+  </section>
+
+  <main class="content container">
+    <div class="contaienr content__smallest-sidebar">
+      <div class="activity">
+        <div id="clock"></div>
+        <div class="googel-events">
+          <h5>היום:</h5>
+          <div id="eventToday">
+            
+          </div>
+          <div class="noEvent">
+            <p>There no Events Today</p>
+          </div>
+        </div>
+      
+
+        <div class="cronometer-container">
+          <div class="cronometer" id="hms"></div>
+          <div id="saveTime"><p>הפסקה</p> </div>
+        </div>
+
+        <div class="activity-buttons">
+          <div class="activity-buttons__recreation">
+            <button
+              class="button__cronometer"
+              name="activity"
+              onclick="cronometer(event, '', 'recreation', '30')"
+            >
+              <img src="img/recreation.png" alt="" />
+            </button>
+          </div>
+          <div class="activity-buttons__eat">
+            <button
+              class="button__cronometer"
+              name="activity"
+              onclick="cronometer(event, '', 'eat', '45')"
+            >
+              <img src="img/eat.png" alt="" />
+            </button>
+          </div>
+          <div class="activity-buttons__call">
+            <button
+              class="button__cronometer"
+              name="activity"
+              onclick="cronometer(event, '', 'call', '10')"
+            >
+              <img src="img/Group 674.png" alt="" />
+            </button>
+          </div>
+          <div class="activity-buttons__task">
+            <img src="img/task.png" alt="" />
+          </div>
+          <div class="activity-buttons__calendar">
+            <img src="img/calendar.png" alt="" />
+          </div>
+        </div>
+        <div id="buttonCreate1">
+          <button class="button-talbe">השדח המישמ</button>
+        </div>
+
+        <div id="root"></div>
+      </div>
+    </div>
+ 
+    <div class="content__columns">
+      <div class="content__columns__sidebar-big  content__columns__sidebar-four">
+        <div class="task-title">
+          <h3>GoogleCalendar</h3>
+          <button
+            id="authorize_button"
+            class="button-talbe"
+            style="display: none"
+          >
+            Log In
+          </button>
+          <button
+            id="signout_button"
+            class="button-talbe"
+            style="display: none"
+          >
+            Sign Out
+          </button>
+  
+          <!-- <pre id="content" style="white-space: pre-wrap"></pre> -->
+        </div>
+        <div id="calendarInfo" class="task-container-calendar"></div>
+      </div>
+
+      <!-- <div class="prueba-columnas"> -->
+
+    
+        <div class="content__columns__sidebar content__columns__sidebar-one">
+          <div class="task-title">
+            <div class="task-title__content">
+              <h3>General</h3>
+              <button id="buttonCreate" class="button-talbe">חדשk</button>
+            </div>
+            
+          </div>
+        
+          <div id="taskGeneral" class="task-container"></div>
+      
+        </div>
+        <div class="content__columns__sidebar content__columns__sidebar-two">
+      
+            <div class="task-title">
+              <div class="task-title__content">
+                <h3>Tomorrow</h3>
+                <button id="buttonCreate" class="button-talbe">חדשk</button>
+              </div>
+            </div>
+            <div id="taskTomorrow" class="task-container"></div>
+          
+        </div>
+      
+        <div class="content__columns__sidebar  content__columns__sidebar-three">
+    
+          <div class="task-title">
+            <div class="task-title__content">
+              <h3>Today</h3>
+              <button id="buttonCreate" class="button-talbe">חדשk</button>
+            </div>
+          </div>
+          <div id="taskToday" class="task-container"></div>
+
+        </div>
+      </div>
+ 
+    </div>
+   
+ 
+ 
+   
+  </main>
+  
+  <!-- <div class="template-tasks container">
     <div class="nav">
       <nav class="navigation__container">
         <div class="navigation__container__search-bar" onkeyup="handleSearch()">
@@ -44,9 +199,9 @@
             </div>
           </div>
         </nav>
-      </div>
+      </div> -->
 
-      <div class="sidebar">
+     <!--  <div class="sidebar">
         <div class="activity">
           <div id="clock"></div>
           <div class="googel-events">
@@ -109,14 +264,14 @@
       </div>
 
       <div class="column1">
-        <div>
+       
           <div class="task-title">
             <h3>General</h3>
             <button id="buttonCreate" class="button-talbe">חדשk</button>
           </div>
 
           <div id="taskGeneral" class="task-container"></div>
-        </div>
+      
       </div>
       <div class="column2">
         <div>
@@ -204,16 +359,16 @@
     <!-- <div>
       <div id="rootProjectsDate"></div>
     </div> -->
-    <section class="modals container">
-      <!-- Modal to create a task -->
+  <section class="modals container">
+       <!-- Modal to create a task   -->
       <div id="modalCreate" class="modal">
-        <!-- Modal content -->
+        <!-- Modal content  -->
         <div class="modal-content">
           <span id="closeModal" class="close">&times;</span>
           <form id="formCreate">
             <h3>Add a new task</h3>
             <div>
-              <!-- <label for="taskName">Task Name:</label> -->
+                <!-- <label for="taskName">Task Name:</label>  -->
               <input
                 type="text"
                 name="taskName"
@@ -223,7 +378,7 @@
             </div>
 
             <div>
-              <!-- <label for="description">Description:</label> -->
+               <!-- <label for="description">Description:</label>   -->
               <input
                 type="text"
                 name="description"
@@ -233,25 +388,25 @@
             </div>
 
             <div>
-              <!-- <label for="selectProjectName">Select a project</label> -->
+              <!-- <label for="selectProjectName">Select a project</label>  -->
               <select name="selectProjectName" id="selectProjectName">
                 <option selected disabled>Select a project...</option>
               </select>
             </div>
 
             <div>
-              <!-- <label for="limitDate">Select a limit date:</label> -->
+             <!-- <label for="limitDate">Select a limit date:</label>   -->
               <input type="date" name="limitDate" required />
             </div>
 
             <input type="submit" value="Create task" class="button-form"/>
           </form>
         </div>
-      </div>
+      </div> 
 
-      <!-- Modal to edit a task -->
+       <!-- Modal to edit a task -->
       <div id="modalEdit" class="modal">
-        <!-- Modal content -->
+         <!-- Modal content   -->
         <div class="modal-content">
           <span id="closeEdit" class="close">&times;</span>
           <form
@@ -261,7 +416,7 @@
           ></form>
         </div>
       </div>
-    </section>
+    </section>  
 
     <!-- <div>
       <form onsubmit="handleCreateEvent(event)">
@@ -287,8 +442,8 @@
         Get all the events between two dates
       </button>
     </div> -->
-
-    <div id="eventsToday"></div>
+<!-- 
+     <div id="eventsToday"></div> -->
 
     <script
       async
@@ -296,7 +451,7 @@
       src="https://apis.google.com/js/api.js"
       onload="this.onload=function(){};handleClientLoad()"
       onreadystatechange="if (this.readyState === 'complete') this.onload()"
-    ></script>
+    ></script>  
     <script src="helperModal.js"></script>
     <script src="03 - tasks.js"></script>
     <script src="04 - cronometer.js"></script>
