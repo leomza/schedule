@@ -136,11 +136,10 @@ async function renderProjects() {
         if (!root) throw new Error('There is a problem finding the HTML to show the projects');
 
         const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { clients } = clientsInfo.data.allClients;
+        const { infoClients: clients } = clientsInfo.data;
 
         const projectsInfo = await axios.get(`/projects/getAllprojects`);
-        const { projects } = projectsInfo.data.allProjects;
-        projectsToShow = projects;
+        projectsToShow = projectsInfo.data.infoProjects;
 
         //Add the information of the user to the project
         for (let index = 0; index < projectsToShow.length; index++) {

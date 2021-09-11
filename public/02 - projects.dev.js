@@ -5,7 +5,7 @@ var handleForm = document.querySelector("#formCreate");
 handleForm.addEventListener('submit', handleNewProject);
 
 function handleNewProject(ev) {
-  var _ev$target$elements, projectName, clientId, projectType, status, totalHours, projectDetails, projectsCreated;
+  var _ev$target$elements, projectName, clientId, projectType, status, totalHours, projectDetails;
 
   return regeneratorRuntime.async(function handleNewProject$(_context) {
     while (1) {
@@ -32,23 +32,22 @@ function handleNewProject(ev) {
           return regeneratorRuntime.awrap(axios.post('/projects/addNew', projectDetails));
 
         case 13:
-          projectsCreated = _context.sent;
           swal("Good job!", "New project added succesfully!", "success");
-          renderProjects(projectsCreated.data.allProjects.projects);
-          _context.next = 21;
+          renderProjects();
+          _context.next = 20;
           break;
 
-        case 18:
-          _context.prev = 18;
+        case 17:
+          _context.prev = 17;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 21:
+        case 20:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 18]]);
+  }, null, null, [[0, 17]]);
 } //Function to get the names of the client in the "select Client Name"
 
 
@@ -64,12 +63,12 @@ function uploadClientNames() {
 
         case 3:
           clientsInfo = _context2.sent;
-          clients = clientsInfo.data.allClients.clients;
+          clients = clientsInfo.data.infoClients;
           select = document.getElementById('selectClientName');
 
           for (index = 0; index < clients.length; index++) {
             option = document.createElement('option');
-            option.value = clients[index].uuid;
+            option.value = clients[index].id;
             option.innerHTML = clients[index].clientname;
             select.appendChild(option);
           }
@@ -92,7 +91,7 @@ function uploadClientNames() {
 
 
 function renderProjects(projectsToShow) {
-  var table, clientsInfo, clients, projectsInfo, projects, _loop, index, html;
+  var table, clientsInfo, clients, projectsInfo, _loop, index, html;
 
   return regeneratorRuntime.async(function renderProjects$(_context3) {
     while (1) {
@@ -114,10 +113,10 @@ function renderProjects(projectsToShow) {
 
         case 6:
           clientsInfo = _context3.sent;
-          clients = clientsInfo.data.allClients.clients;
+          clients = clientsInfo.data.infoClients;
 
           if (projectsToShow) {
-            _context3.next = 14;
+            _context3.next = 13;
             break;
           }
 
@@ -126,14 +125,13 @@ function renderProjects(projectsToShow) {
 
         case 11:
           projectsInfo = _context3.sent;
-          projects = projectsInfo.data.allProjects.projects;
-          projectsToShow = projects;
+          projectsToShow = projectsInfo.data.infoProjects;
 
-        case 14:
+        case 13:
           _loop = function _loop(index) {
             var project = projectsToShow[index];
             clients.forEach(function (client) {
-              if (client.uuid === project.clientId) {
+              if (client.id === project.clientId) {
                 Object.assign(projectsToShow[index], client);
               }
             });
@@ -151,21 +149,21 @@ function renderProjects(projectsToShow) {
             return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(timeSpendInDesign, "</td>\n                <td>").concat(element.totalHours, ":00 / ").concat(timeInProject, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <img src=\"./img/edit.png\" alt=\"\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"> \n                <img src=\"./img/delete.png\" alt=\"\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\">\n                </td>\n            </tr>");
           }).join('');
           table.innerHTML = html;
-          _context3.next = 25;
+          _context3.next = 24;
           break;
 
-        case 21:
-          _context3.prev = 21;
+        case 20:
+          _context3.prev = 20;
           _context3.t0 = _context3["catch"](0);
           swal("Ohhh no!", _context3.t0.response.data, "warning");
           console.error(_context3.t0);
 
-        case 25:
+        case 24:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 21]]);
+  }, null, null, [[0, 20]]);
 }
 
 function convertTimeToMinuteAndHours(time) {
@@ -218,7 +216,6 @@ function removeProject(projectId, projectName) {
 }
 
 function deleteProject(projectId) {
-  var projectsInfo;
   return regeneratorRuntime.async(function deleteProject$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -228,22 +225,21 @@ function deleteProject(projectId) {
           return regeneratorRuntime.awrap(axios["delete"]("/projects/deleteProject/".concat(projectId)));
 
         case 3:
-          projectsInfo = _context4.sent;
-          renderProjects(projectsInfo.data.allProjects.projects);
-          _context4.next = 10;
+          renderProjects();
+          _context4.next = 9;
           break;
 
-        case 7:
-          _context4.prev = 7;
+        case 6:
+          _context4.prev = 6;
           _context4.t0 = _context4["catch"](0);
           console.error(_context4.t0);
 
-        case 10:
+        case 9:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 6]]);
 } //Update a project:
 //This will contain the Project Id to Edit
 
@@ -286,7 +282,7 @@ function editProject(uuidProject) {
           foundProject = projectFound.data.foundProject; //Set the client Name
 
           showClientNameInDOM(foundProject.clientId).then(function (data) {
-            var html = "\n        <div>\n        <label for=\"projectName\">Project Name:</label>\n        <input type=\"text\" name=\"projectName\" value=\"".concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n        <label for=\"selectClientName\">Select a client name</label>\n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n        <option id=\"option").concat(foundProject.clientId, "\" value=\"").concat(foundProject.clientId, "\" selected disabled hidden>").concat(data, "</option>    \n        </select>\n        </div>\n\n        <div>\n        <label for=\"projectType\">Project Type:</label>\n        <select name=\"projectType\" id=\"projectType\">\n            <option value=\"").concat(foundProject.projectType, "\" selected disabled hidden>").concat(foundProject.projectType, "</option>\n            <option value=\"logo\">Logo</option>\n            <option value=\"graphicLanguage\">Graphic Language</option>\n            <option value=\"corporateWebsite\">Corporate Website</option>\n            <option value=\"landingPage\">Landing Page</option>\n            <option value=\"ecommerce\">Ecommerce</option>\n            <option value=\"branding\">Branding</option>\n            <option value=\"post\">Post</option>\n            <option value=\"packageDesign\">Package Design</option>\n            <option value=\"banner\">Banner</option>\n            <option value=\"rollUp\">Roll Up</option>\n            <option value=\"flyer\">Flyer</option>\n            <option value=\"digitalBook\">Digital Book</option>\n            <option value=\"newsLetter\">News Letter</option>\n            <option value=\"calendar\">Calendar</option>\n            <option value=\"businessCard\">Business Card</option>\n            <option value=\"presentation\">Presentation</option>\n            <option value=\"designedPage\">Designed Page</option>\n        </select>\n        </div>\n\n        <div>\n        <label for=\"status\">Status:</label>\n        <select name=\"status\" id=\"status\">\n            <option value=\"").concat(foundProject.status, "\" selected disabled hidden>").concat(foundProject.status, "</option>\n            <option value=\"offerPending\">Offer Pending</option>\n            <option value=\"inProgress\">In Progress</option>\n            <option value=\"offerApproved\">Offer Approved</option>\n            <option value=\"stuck\">Stuck</option>\n            <option value=\"paidUp\">Paid Up</option>\n            <option value=\"waitingForSketchApproval\">Waiting for Sketch Approval</option>\n            <option value=\"postponed\">Postponed</option>\n            <option value=\"canceled\">Canceled</option>\n            <option value=\"finished\">Finished</option>\n        </select>\n        </div>\n\n        <div>\n            <label for=\"totalHours\">Total hours for the project</label>\n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                <input type=\"submit\" value=\"Update project\">\n        ");
+            var html = "\n            <h3>Edit Project</h3>\n        <div>\n      \n        <input type=\"text\" name=\"projectName\" value=\"".concat(foundProject.projectName, "\" placeholder=\"Project name\" required>\n        </div>\n\n        <div>\n      \n        <select onclick=\"uploadClientNamesEdit()\" name=\"selectClientName\" id=\"selectClientNameEdit\">\n        <option id=\"option").concat(foundProject.clientId, "\" value=\"").concat(foundProject.clientId, "\" selected disabled hidden>").concat(data, "</option>    \n        </select>\n        </div>\n\n        <div>\n   \n        <select name=\"projectType\" id=\"projectType\">\n            <option value=\"").concat(foundProject.projectType, "\" selected disabled hidden>").concat(foundProject.projectType, "</option>\n            <option value=\"logo\">Logo</option>\n            <option value=\"graphicLanguage\">Graphic Language</option>\n            <option value=\"corporateWebsite\">Corporate Website</option>\n            <option value=\"landingPage\">Landing Page</option>\n            <option value=\"ecommerce\">Ecommerce</option>\n            <option value=\"branding\">Branding</option>\n            <option value=\"post\">Post</option>\n            <option value=\"packageDesign\">Package Design</option>\n            <option value=\"banner\">Banner</option>\n            <option value=\"rollUp\">Roll Up</option>\n            <option value=\"flyer\">Flyer</option>\n            <option value=\"digitalBook\">Digital Book</option>\n            <option value=\"newsLetter\">News Letter</option>\n            <option value=\"calendar\">Calendar</option>\n            <option value=\"businessCard\">Business Card</option>\n            <option value=\"presentation\">Presentation</option>\n            <option value=\"designedPage\">Designed Page</option>\n        </select>\n        </div>\n\n        <div>\n       \n        <select name=\"status\" id=\"status\">\n            <option value=\"").concat(foundProject.status, "\" selected disabled hidden>").concat(foundProject.status, "</option>\n            <option value=\"offerPending\">Offer Pending</option>\n            <option value=\"inProgress\">In Progress</option>\n            <option value=\"offerApproved\">Offer Approved</option>\n            <option value=\"stuck\">Stuck</option>\n            <option value=\"paidUp\">Paid Up</option>\n            <option value=\"waitingForSketchApproval\">Waiting for Sketch Approval</option>\n            <option value=\"postponed\">Postponed</option>\n            <option value=\"canceled\">Canceled</option>\n            <option value=\"finished\">Finished</option>\n        </select>\n        </div>\n\n        <div>\n     \n            <input type=\"number\" name=\"totalHours\" value=\"").concat(foundProject.totalHours, "\" placeholder=\"Total Hours for the project\">\n        </div>\n                     <input type=\"submit\" value=\"Update project\" class=\"button-form\" />\n        ");
             formEdit.innerHTML = html;
             projectIdEdit = foundProject.projectUuid;
           });
@@ -330,7 +326,7 @@ function showClientNameInDOM(clientId) {
 
 
 function handleEdit(ev) {
-  var _ev$target$elements2, projectName, clientId, projectType, status, totalHours, projectDetails, allProjects;
+  var _ev$target$elements2, projectName, clientId, projectType, status, totalHours, projectDetails;
 
   return regeneratorRuntime.async(function handleEdit$(_context7) {
     while (1) {
@@ -373,26 +369,25 @@ function handleEdit(ev) {
           return regeneratorRuntime.awrap(axios.put("/projects/editProject/".concat(projectIdEdit), projectDetails));
 
         case 16:
-          allProjects = _context7.sent;
-          renderProjects(allProjects.data.allProjects.projects);
-          _context7.next = 24;
+          renderProjects();
+          _context7.next = 23;
           break;
 
-        case 20:
-          _context7.prev = 20;
+        case 19:
+          _context7.prev = 19;
           _context7.t0 = _context7["catch"](0);
           swal("Ohhh no!", "".concat(_context7.t0), "warning");
           console.error(_context7.t0);
 
-        case 24:
+        case 23:
           ;
 
-        case 25:
+        case 24:
         case "end":
           return _context7.stop();
       }
     }
-  }, null, null, [[0, 20]]);
+  }, null, null, [[0, 19]]);
 }
 
 ; //Function to get the names of the client in the "select Client Name"
@@ -410,12 +405,12 @@ function uploadClientNamesEdit() {
 
         case 3:
           clientsInfo = _context8.sent;
-          _clients = clientsInfo.data.allClients.clients;
+          _clients = clientsInfo.data.infoClients;
           select = document.getElementById('selectClientNameEdit');
 
           for (index = 0; index < _clients.length; index++) {
             option = document.createElement('option');
-            option.value = _clients[index].uuid;
+            option.value = _clients[index].id;
             option.innerHTML = _clients[index].clientname;
             select.appendChild(option);
           } //The event is going to happen just once

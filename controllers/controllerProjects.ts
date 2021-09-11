@@ -1,104 +1,130 @@
 export { };
 
-//I import the classes (with Methods) of the Models that Im going to use here
-import { Project, Projects } from "../models/modelProjects";
+const { v4: uuidv4 } = require("uuid");
 
+//This is to iniitializate Firebase
+const admin = require('firebase-admin');
+const db = admin.firestore();
 
-export function registerProject(req, res) {
+const projectsDb = db.collection('projects');
+
+export async function registerProject(req, res) {
     try {
         const { projectName, clientId, projectType, status, totalHours } = req.body;
-        const newProject = new Project(projectName, clientId, projectType, status, totalHours)
-        const allProjects = new Projects();
-        allProjects.createProject(newProject);
+        const id = uuidv4()
+        await projectsDb.doc(id).set({
+            projectName: projectName,
+            clientId: clientId,
+            projectType: projectType,
+            status: status,
+            totalHours: totalHours,
+            projectUuid: id,
+            createdDate: Date.now(),
+            usedHours: 0,
+            timeInDesign: 0,
+            tasks: []
+        });
 
-        res.send({ message: "A new Project was register", allProjects });
-
+        res.send({ message: "A new Project was register" });
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function getAllProjects(req, res) {
+export async function getAllProjects(req, res) {
     try {
-        const allProjects = new Projects();
-        res.send({ message: "Information of the projects", allProjects })
+        let infoProjects = [];
+        const allProjects = db.collection('projects');
+        const projects = await allProjects.get();
+        projects.forEach(doc => {
+            infoProjects.push(doc.data())
+        });
+        res.send({ message: "Information of the projects", infoProjects })
+
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function deleteProject(req, res) {
+export async function deleteProject(req, res) {
     try {
         const { idProject } = req.params;
-        const allProjects = new Projects();
-        allProjects.deleteProject(idProject);
-        res.send({ message: "The project was deleted", allProjects })
+        await db.collection('projects').doc(idProject).delete();
+        res.send({ message: "The project was deleted" })
+
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function editProject(req, res) {
+export async function editProject(req, res) {
     try {
         const { idProject } = req.params;
         const { projectName, clientId, projectType, status, totalHours } = req.body;
-        const allProjects = new Projects();
-        const foundProject = allProjects.findProjectByUuid(idProject)
-        foundProject.projectName = projectName;
-        foundProject.clientId = clientId;
-        foundProject.projectType = projectType;
-        foundProject.status = status;
-        foundProject.totalHours = totalHours;
-        allProjects.updateProjectsJson();
-        res.send({ message: "The project was updated", allProjects })
+
+        await db.collection('projects').doc(idProject).set({
+            projectName: projectName,
+            clientId: clientId,
+            projectType: projectType,
+            status: status,
+            totalHours: totalHours,
+        }, { merge: true });
+        res.send({ message: "The project was updated" })
+
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function getAProject(req, res) {
+export async function getAProject(req, res) {
     try {
         const { idProject } = req.params;
-        const allProjects = new Projects();
-        const foundProject = allProjects.findProjectByUuid(idProject)
+        const project = await db.collection('projects').doc(idProject).get();
+        const foundProject = project.data();
         res.send({ message: "The project was founded", foundProject })
+
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function addTask(req, res) {
+export async function addTask(req, res) {
     try {
         const { uuid, idProject } = req.body;
-        const allProjects = new Projects();
-        const foundProject = allProjects.findProjectByUuid(idProject);
-        foundProject.tasks.push(uuid);
-        allProjects.updateProjectsJson();
-        res.send({ message: "The task was added to the project", allProjects })
+        await db.collection('projects').doc(idProject).set({
+            tasks: admin.firestore.FieldValue.arrayUnion(uuid)
+        }, { merge: true });
+
+        res.send({ message: "The task was added to the project" })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function setProjectTime(req, res) {
+export async function setProjectTime(req, res) {
     try {
         let { idProject, timeInHours, typeOfButton } = req.params;
-        const allProjects = new Projects();
-        const foundProject = allProjects.findProjectByUuid(idProject);
+
+        const project = await db.collection('projects').doc(idProject).get();
+        const foundProject = project.data();
         timeInHours = parseFloat(timeInHours);
-        foundProject.usedHours = foundProject.usedHours + timeInHours;
+
+        await db.collection('projects').doc(idProject).set({
+            usedHours: foundProject.usedHours + timeInHours
+        }, { merge: true });
 
         //If the type of button is design also add in that variable
         if (typeOfButton === 'design') {
-            foundProject.timeInDesign = foundProject.timeInDesign + timeInHours;
+            await db.collection('projects').doc(idProject).set({
+                timeInDesign: foundProject.timeInDesign + timeInHours
+            }, { merge: true });
         }
-        allProjects.updateProjectsJson();
         res.send({ message: "The time was added to the project" })
     } catch (error) {
         console.error(error);

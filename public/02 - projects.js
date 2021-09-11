@@ -16,9 +16,9 @@ async function handleNewProject(ev) {
         ev.target.reset();
 
         const projectDetails = { projectName, clientId, projectType, status, totalHours };
-        const projectsCreated = await axios.post('/projects/addNew', projectDetails);
+        await axios.post('/projects/addNew', projectDetails);
         swal("Good job!", "New project added succesfully!", "success");
-        renderProjects(projectsCreated.data.allProjects.projects);
+        renderProjects();
     } catch (error) {
         console.error(error);
     }
@@ -28,12 +28,12 @@ async function handleNewProject(ev) {
 async function uploadClientNames() {
     try {
         const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { clients } = clientsInfo.data.allClients;
+        const { infoClients: clients } = clientsInfo.data;
         const select = document.getElementById('selectClientName');
 
         for (let index = 0; index < clients.length; index++) {
             const option = document.createElement('option');
-            option.value = clients[index].uuid;
+            option.value = clients[index].id;
             option.innerHTML = clients[index].clientname;
             select.appendChild(option);
         }
@@ -49,12 +49,11 @@ async function renderProjects(projectsToShow) {
         if (!table) throw new Error('There is a problem finding table from HTML');
 
         const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { clients } = clientsInfo.data.allClients;
+        const { infoClients: clients } = clientsInfo.data;
 
         if (!projectsToShow) {
             const projectsInfo = await axios.get(`/projects/getAllprojects`);
-            const { projects } = projectsInfo.data.allProjects;
-            projectsToShow = projects;
+            projectsToShow = projectsInfo.data.infoProjects;
         }
 
         //Add the information of the user to the project
@@ -62,7 +61,7 @@ async function renderProjects(projectsToShow) {
             const project = projectsToShow[index];
 
             clients.forEach(client => {
-                if (client.uuid === project.clientId) {
+                if (client.id === project.clientId) {
                     Object.assign(projectsToShow[index], client);
                 }
             });
@@ -145,8 +144,8 @@ function removeProject(projectId, projectName) {
 
 async function deleteProject(projectId) {
     try {
-        const projectsInfo = await axios.delete(`/projects/deleteProject/${projectId}`);
-        renderProjects(projectsInfo.data.allProjects.projects);
+        await axios.delete(`/projects/deleteProject/${projectId}`);
+        renderProjects();
     } catch (error) {
         console.error(error);
     }
@@ -170,7 +169,7 @@ async function editProject(uuidProject) {
         //Set the client Name
         showClientNameInDOM(foundProject.clientId).then((data) => {
             let html = `
-            <h3>Edit Porject</h3>
+            <h3>Edit Project</h3>
         <div>
       
         <input type="text" name="projectName" value="${foundProject.projectName}" placeholder="Project name" required>
@@ -261,8 +260,8 @@ async function handleEdit(ev) {
         ev.target.reset();
 
         const projectDetails = { projectName, clientId, projectType, status, totalHours };
-        const allProjects = await axios.put(`/projects/editProject/${projectIdEdit}`, projectDetails);
-        renderProjects(allProjects.data.allProjects.projects);
+        await axios.put(`/projects/editProject/${projectIdEdit}`, projectDetails);
+        renderProjects();
     } catch (error) {
         swal("Ohhh no!", `${error}`, "warning");
         console.error(error);
@@ -273,12 +272,12 @@ async function handleEdit(ev) {
 async function uploadClientNamesEdit() {
     try {
         const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { clients } = clientsInfo.data.allClients;
+        const { infoClients: clients } = clientsInfo.data;
         const select = document.getElementById('selectClientNameEdit');
 
         for (let index = 0; index < clients.length; index++) {
             const option = document.createElement('option');
-            option.value = clients[index].uuid;
+            option.value = clients[index].id;
             option.innerHTML = clients[index].clientname;
             select.appendChild(option);
         }

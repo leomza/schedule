@@ -5,7 +5,7 @@ async function renderClients() {
         if (!rootProjectsDate) throw new Error("There is a problem finding the HTML to show the clients");
 
         const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { clients } = clientsInfo.data.allClients;
+        const { infoClients: clients } = clientsInfo.data;
 
         let html = clients
             .map((element) => {

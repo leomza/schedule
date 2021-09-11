@@ -18,11 +18,11 @@ async function handleNewTask(ev) {
         const tasksCreated = await axios.post('/tasks/newTask', taskDetails);
 
         //Push the task to the project
-        const { uuid } = tasksCreated.data.newTask;
-        const { projectId: idProject } = tasksCreated.data.newTask;
+        const { uuid } = tasksCreated.data.task;
+        const { projectId: idProject } = tasksCreated.data.task;
         await axios.post(`/projects/addTask`, { uuid, idProject }),
             swal("Good job!", "New task added succesfully!", "success");
-        renderTasks(tasksCreated.data.allTasks.tasks);
+        renderTasks();
     } catch (error) {
         console.error(error);
     }
@@ -32,7 +32,7 @@ async function handleNewTask(ev) {
 async function uploadProjectNames() {
     try {
         const projectsInfo = await axios.get(`/projects/getAllProjects`);
-        const { projects } = projectsInfo.data.allProjects;
+        const { infoProjects: projects } = projectsInfo.data;
         const select = document.getElementById('selectProjectName');
 
         for (let index = 0; index < projects.length; index++) {
@@ -59,12 +59,11 @@ async function renderTasks(tasksToShow) {
         if (!taskGeneral) throw new Error('There is a problem finding the HTML element to put the data');
 
         const projectsInfo = await axios.get(`/projects/getAllProjects`);
-        const { projects } = projectsInfo.data.allProjects;
+        const { infoProjects: projects } = projectsInfo.data;
 
         if (!tasksToShow) {
             const tasksInfo = await axios.get(`/tasks/getAlltasks`);
-            const { tasks } = tasksInfo.data.allTasks;
-            tasksToShow = tasks;
+            tasksToShow = tasksInfo.data.infoTasks;
         }
 
         //Add the information of the project to the task
@@ -203,8 +202,8 @@ function removeTask(taskId, taskName, projectId) {
 
 async function deleteTask(taskId, projectId) {
     try {
-        const tasksInfo = await axios.delete(`/tasks/deleteTask/${taskId}/${projectId}`);
-        renderTasks(tasksInfo.data.allTasks.tasks);
+        await axios.delete(`/tasks/deleteTask/${taskId}/${projectId}`);
+        renderTasks();
     } catch (error) {
         console.error(error);
     }
@@ -294,7 +293,7 @@ async function handleEdit(ev) {
 async function uploadProjectNamesEdit() {
     try {
         const projectsInfo = await axios.get(`/projects/getAllProjects`);
-        const { projects } = projectsInfo.data.allProjects;
+        const { infoProjects: projects } = projectsInfo.data;
         const select = document.getElementById('selectProjectNameEdit');
 
         for (let index = 0; index < projects.length; index++) {

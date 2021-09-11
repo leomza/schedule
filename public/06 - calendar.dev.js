@@ -89,21 +89,20 @@ function createEvent(eventToCreate) {
 
         case 3:
           eventCreated = _context.sent;
-          console.log(eventCreated);
-          _context.next = 10;
+          _context.next = 9;
           break;
 
-        case 7:
-          _context.prev = 7;
+        case 6:
+          _context.prev = 6;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 10:
+        case 9:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 6]]);
 } // Get all the events between two dates in Google calendar
 
 
@@ -125,21 +124,20 @@ function getEvents() {
 
         case 5:
           eventsInfo = _context2.sent;
-          console.log(eventsInfo);
-          _context2.next = 12;
+          _context2.next = 11;
           break;
 
-        case 9:
-          _context2.prev = 9;
+        case 8:
+          _context2.prev = 8;
           _context2.t0 = _context2["catch"](0);
           console.error(_context2.t0);
 
-        case 12:
+        case 11:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 8]]);
 }
 
 var CLIENT_ID = "737686618954-d0k28hcsdajurnrt1mj4v7rhv3p87bd4.apps.googleusercontent.com";
@@ -237,7 +235,6 @@ function listUpcomingEvents() {
 
 function renderCalendarInfo(events) {
   try {
-    console.log(events);
     var calendarInfo = document.querySelector("#calendarInfo");
     var html = "";
     html = events.map(function (element) {
@@ -254,11 +251,12 @@ function renderCalendarInfo(events) {
 
 var pepe = function pepe(event) {
   var date = new Date();
-  var momentsHour = '9:00 PM';
-  var eventToday = document.getElementById('eventToday');
-  var noEvent = document.querySelector('.noEvent'); //  moment(date).format('LT');;
+  var momentsHour = moment(date).format('LT'); // "9:00 PM";
 
-  var html = '';
+  var eventToday = document.getElementById("eventToday");
+  var noEvent = document.querySelector(".noEvent"); //  moment(date).format('LT');;
+
+  var html = "";
   html = event.map(function (el) {
     if (momentsHour === el.start.dateTime) {
       noEvent.style.display = "none";

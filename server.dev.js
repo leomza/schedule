@@ -5,8 +5,17 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 3000;
 
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser'); //This is to iniitializate Firebase
 
+
+var admin = require('firebase-admin');
+
+var serviceAccount = require('./schedule-51dfa-firebase-adminsdk-l883n-2ff0688573.json');
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+var db = admin.firestore();
 app.use(express.json());
 app.use(express["static"]('public')); //I use this to read a cookie (I can create it with out this)
 

@@ -77,7 +77,6 @@ async function createEvent(eventToCreate) {
       `/calendar/createEvent`,
       eventToCreate
     );
-    console.log(eventCreated);
   } catch (error) {
     console.error(error);
   }
@@ -94,7 +93,6 @@ async function getEvents() {
       startDate,
       endDate,
     });
-    console.log(eventsInfo);
   } catch (error) {
     console.error(error);
   }
@@ -207,7 +205,6 @@ function listUpcomingEvents() {
 
 function renderCalendarInfo(events) {
   try {
-    console.log(events);
     const calendarInfo = document.querySelector("#calendarInfo");
     let html = "";
     html = events
