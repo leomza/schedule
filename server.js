@@ -3,6 +3,14 @@ const app = express();
 const port = process.env.PORT || 3000;
 const cookieParser = require('cookie-parser');
 
+//This is to iniitializate Firebase
+const admin = require('firebase-admin');
+const serviceAccount = require('./schedule-51dfa-firebase-adminsdk-l883n-2ff0688573.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount)
+})
+const db = admin.firestore();
+
 app.use(express.json());
 app.use(express.static('public'));
 

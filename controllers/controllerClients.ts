@@ -1,17 +1,30 @@
 export { };
 
-//I import the classes (with Methods) of the Models that Im going to use here
-import { Client, Clients } from "../models/modelClients";
+const { v4: uuidv4 } = require("uuid");
 
+//This is to iniitializate Firebase
+const admin = require('firebase-admin');
+const db = admin.firestore();
 
-export function registerClient(req, res) {
+const clientsDb = db.collection('clients');
+
+export async function registerClient(req, res) {
     try {
         const { clientname, phone, email, dealTime, callLimitPerDay } = req.body;
-        const newClient = new Client(clientname, phone, email, dealTime, callLimitPerDay)
-        const allClients = new Clients();
-        allClients.createClient(newClient);
+        const id = uuidv4()
+        await clientsDb.doc(id).set({
+            clientname: clientname,
+            phone: phone,
+            email: email,
+            dealTime: dealTime,
+            callLimitPerDay: callLimitPerDay,
+            createdDate: Date.now(),
+            lastDesignDate: '',
+            lastCallDate: '',
+            id: id
+        });
 
-        res.send({ message: "A new Client was register", allClients });
+        res.send({ message: "A new Client was register" });
 
     } catch (error) {
         console.error(error);
@@ -19,68 +32,81 @@ export function registerClient(req, res) {
     }
 }
 
-export function getAllClients(req, res) {
+export async function getAllClients(req, res) {
     try {
-        const allClients = new Clients();
-        res.send({ message: "Information of the clients", allClients })
+        let infoClients = [];
+        const allClients = db.collection('clients');
+        const clients = await allClients.get();
+        clients.forEach(doc => {
+            infoClients.push(doc.data())
+        });
+        res.send({ message: "Information of the clients", infoClients })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function deleteClient(req, res) {
+export async function deleteClient(req, res) {
     try {
         const { idClient } = req.params;
-        const allClients = new Clients();
-        allClients.deleteClient(idClient);
-        res.send({ message: "The client was deleted", allClients })
+        await db.collection('clients').doc(idClient).delete();
+        res.send({ message: "The client was deleted" })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function editClient(req, res) {
+export async function editClient(req, res) {
     try {
         const { idClient } = req.params;
         const { clientname, phone, email, dealTime, callLimitPerDay } = req.body;
-        const allClients = new Clients();
-        const foundClient = allClients.findClientByUuid(idClient)
-        foundClient.clientname = clientname;
-        foundClient.phone = phone;
-        foundClient.email = email;
-        foundClient.dealTime = dealTime;
-        foundClient.callLimitPerDay = callLimitPerDay;
-        allClients.updateClientsJson();
+
+        await db.collection('clients').doc(idClient).set({
+            clientname: clientname,
+            phone: phone,
+            email: email,
+            dealTime: dealTime,
+            callLimitPerDay: callLimitPerDay,
+        }, { merge: true });
+
+        res.send({ message: "The client was updated" })
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 }
 
-export function getAClient(req, res) {
+export async function getAClient(req, res) {
     try {
         const { idClient } = req.params;
-        const allClients = new Clients();
-        const foundClient = allClients.findClientByUuid(idClient)
+        const client = await db.collection('clients').doc(idClient).get();
+        const foundClient = client.data();
         res.send({ message: "The client was founded", foundClient })
     } catch (error) {
         console.error(error);
     }
 }
 
-export function setClientTime(req, res) {
+export async function setClientTime(req, res) {
     try {
         const { idProject, typeOfButton } = req.params;
-        const allClients = new Clients();
-        const client = allClients.findClientByProyectId(idProject);
-        if (typeOfButton === 'design'){
-            client.lastDesignDate = new Date();
-        } else if (typeOfButton === 'call'){
-            client.lastCallDate = new Date();
+
+        //First search the project
+        const project = await db.collection('projects').doc(idProject).get();
+        const foundProject = project.data();
+
+        //Search the client through the clientId of the Project
+        if (typeOfButton === 'design') {
+            await db.collection('clients').doc(foundProject.clientId).set({
+                lastDesignDate: new Date()
+            }, { merge: true });
+        } else if (typeOfButton === 'call') {
+            await db.collection('clients').doc(foundProject.clientId).set({
+                lastCallDate: new Date()
+            }, { merge: true });
         }
-        allClients.updateClientsJson();
         res.send({ message: "The client time was updated" })
     } catch (error) {
         console.error(error);

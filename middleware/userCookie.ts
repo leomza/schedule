@@ -1,7 +1,7 @@
 export { };
 const jwt = require('jwt-simple');
 require('dotenv').config();
-import { User, Users } from '../models/modelUsers'
+import { Users } from '../models/modelUsers'
 
 export function userCookieWrite(req, res, next) {
     try {

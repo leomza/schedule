@@ -217,7 +217,7 @@ function disabledButtons(event) {
 
 
 function renderProjects() {
-  var root, clientsInfo, clients, projectsInfo, projects, _loop, index, html;
+  var root, clientsInfo, clients, projectsInfo, _loop, index, html;
 
   return regeneratorRuntime.async(function renderProjects$(_context4) {
     while (1) {
@@ -239,14 +239,13 @@ function renderProjects() {
 
         case 6:
           clientsInfo = _context4.sent;
-          clients = clientsInfo.data.allClients.clients;
+          clients = clientsInfo.data.infoClients;
           _context4.next = 10;
           return regeneratorRuntime.awrap(axios.get("/projects/getAllprojects"));
 
         case 10:
           projectsInfo = _context4.sent;
-          projects = projectsInfo.data.allProjects.projects;
-          projectsToShow = projects; //Add the information of the user to the project
+          projectsToShow = projectsInfo.data.infoProjects; //Add the information of the user to the project
 
           _loop = function _loop(index) {
             var project = projectsToShow[index];
@@ -266,19 +265,19 @@ function renderProjects() {
             return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div class=\"projects__list__buttons\">\n\n                      <div class=\"projects__list__buttons__couple-one\">\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design', '").concat(element.callLimitPerDay, "')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call', '").concat(element.callLimitPerDay, "')\"><img src=\"img/Group 674.png\" alt=\"\"></button>\n                        </div>\n\n\n                        <div class=\"projects__list__buttons__couple-two\">\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                        </div>\n                    </div>\n                </div>\n                ");
           }).join('');
           root.innerHTML = html;
-          _context4.next = 24;
+          _context4.next = 23;
           break;
 
-        case 20:
-          _context4.prev = 20;
+        case 19:
+          _context4.prev = 19;
           _context4.t0 = _context4["catch"](0);
           swal("Ohhh no!", _context4.t0.response.data, "warning");
           console.error(_context4.t0);
 
-        case 24:
+        case 23:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 20]]);
+  }, null, null, [[0, 19]]);
 }

@@ -32,8 +32,8 @@ function handleNewTask(ev) {
         case 12:
           tasksCreated = _context.sent;
           //Push the task to the project
-          uuid = tasksCreated.data.newTask.uuid;
-          idProject = tasksCreated.data.newTask.projectId;
+          uuid = tasksCreated.data.task.uuid;
+          idProject = tasksCreated.data.task.projectId;
           _context.next = 17;
           return regeneratorRuntime.awrap(axios.post("/projects/addTask", {
             uuid: uuid,
@@ -42,7 +42,7 @@ function handleNewTask(ev) {
 
         case 17:
           swal("Good job!", "New task added succesfully!", "success");
-          renderTasks(tasksCreated.data.allTasks.tasks);
+          renderTasks();
           _context.next = 24;
           break;
 
@@ -72,7 +72,7 @@ function uploadProjectNames() {
 
         case 3:
           projectsInfo = _context2.sent;
-          projects = projectsInfo.data.allProjects.projects;
+          projects = projectsInfo.data.infoProjects;
           select = document.getElementById('selectProjectName');
 
           for (index = 0; index < projects.length; index++) {
@@ -100,7 +100,7 @@ function uploadProjectNames() {
 
 
 function renderTasks(tasksToShow) {
-  var taskToday, taskTomorrow, taskGeneral, projectsInfo, projects, tasksInfo, tasks, _loop, index, todayDay, tomorrowDay, htmlToday, htmlTommorow, htmlGeneral;
+  var taskToday, taskTomorrow, taskGeneral, projectsInfo, projects, tasksInfo, _loop, index, todayDay, tomorrowDay, htmlToday, htmlTommorow, htmlGeneral;
 
   return regeneratorRuntime.async(function renderTasks$(_context3) {
     while (1) {
@@ -142,10 +142,10 @@ function renderTasks(tasksToShow) {
 
         case 12:
           projectsInfo = _context3.sent;
-          projects = projectsInfo.data.allProjects.projects;
+          projects = projectsInfo.data.infoProjects;
 
           if (tasksToShow) {
-            _context3.next = 20;
+            _context3.next = 19;
             break;
           }
 
@@ -154,10 +154,9 @@ function renderTasks(tasksToShow) {
 
         case 17:
           tasksInfo = _context3.sent;
-          tasks = tasksInfo.data.allTasks.tasks;
-          tasksToShow = tasks;
+          tasksToShow = tasksInfo.data.infoTasks;
 
-        case 20:
+        case 19:
           _loop = function _loop(index) {
             var task = tasksToShow[index];
             projects.forEach(function (project) {
@@ -199,21 +198,21 @@ function renderTasks(tasksToShow) {
             }
           }).join('');
           taskGeneral.innerHTML = htmlGeneral;
-          _context3.next = 37;
+          _context3.next = 36;
           break;
 
-        case 33:
-          _context3.prev = 33;
+        case 32:
+          _context3.prev = 32;
           _context3.t0 = _context3["catch"](0);
           swal("Ohhh no!", _context3.t0.response.data, "warning");
           console.error(_context3.t0);
 
-        case 37:
+        case 36:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 33]]);
+  }, null, null, [[0, 32]]);
 } //Set the day of today
 
 
@@ -268,7 +267,6 @@ function removeTask(taskId, taskName, projectId) {
 }
 
 function deleteTask(taskId, projectId) {
-  var tasksInfo;
   return regeneratorRuntime.async(function deleteTask$(_context4) {
     while (1) {
       switch (_context4.prev = _context4.next) {
@@ -278,22 +276,21 @@ function deleteTask(taskId, projectId) {
           return regeneratorRuntime.awrap(axios["delete"]("/tasks/deleteTask/".concat(taskId, "/").concat(projectId)));
 
         case 3:
-          tasksInfo = _context4.sent;
-          renderTasks(tasksInfo.data.allTasks.tasks);
-          _context4.next = 10;
+          renderTasks();
+          _context4.next = 9;
           break;
 
-        case 7:
-          _context4.prev = 7;
+        case 6:
+          _context4.prev = 6;
           _context4.t0 = _context4["catch"](0);
           console.error(_context4.t0);
 
-        case 10:
+        case 9:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[0, 7]]);
+  }, null, null, [[0, 6]]);
 } //Update a task:
 //This will contain the Task Id to Edit
 
@@ -336,7 +333,7 @@ function editTask(idTask) {
           foundTask = taskFound.data.foundTask; //Set the Project Name
 
           showProjectNameInDOM(foundTask.projectId).then(function (data) {
-            var html = "\n            <h3>Edit the task</h3>\n            <div>\n                <label for=\"taskName\">Task Name:</label>\n                <input type=\"text\" name=\"taskName\" placeholder=\"Task Name\" value=\"".concat(foundTask.taskName, "\" required>\n            </div>\n\n            <div>\n                <label for=\"description\">Description:</label>\n                <input type=\"text\" name=\"description\" placeholder=\"Description\" value=\"").concat(foundTask.description, "\" required>\n            </div>\n\n            <div>\n                <label for=\"selectProjectName\">Select a project</label>\n                <select onclick=\"uploadProjectNamesEdit()\" name=\"projectId\" id=\"selectProjectNameEdit\">\n                    <option id=\"option").concat(foundTask.projectId, "\" value=\"").concat(foundTask.projectId, "\" selected disabled hidden>").concat(data, "</option>\n                </select>\n            </div>\n\n            <div>\n                <label for=\"limitDate\">Select a limit date:</label>\n                <input type=\"date\" name=\"limitDate\" value=\"").concat(foundTask.limitDate, "\" required>\n            </div>\n\n            <input type=\"submit\" value=\"Update task\">\n        ");
+            var html = "\n            <h3>Edit the task</h3>\n            <div>\n                 \n                <input type=\"text\" name=\"taskName\" placeholder=\"Task Name\" value=\"".concat(foundTask.taskName, "\" required>\n            </div>\n\n            <div>\n              \n                <input type=\"text\" name=\"description\" placeholder=\"Description\" value=\"").concat(foundTask.description, "\" required>\n            </div>\n\n            <div>\n   \n                <select onclick=\"uploadProjectNamesEdit()\" name=\"projectId\" id=\"selectProjectNameEdit\">\n                    <option id=\"option").concat(foundTask.projectId, "\" value=\"").concat(foundTask.projectId, "\" selected disabled hidden>").concat(data, "</option>\n                </select>\n            </div>\n\n            <div> \n                <input type=\"date\" name=\"limitDate\" value=\"").concat(foundTask.limitDate, "\" required>\n            </div>\n\n            <input type=\"submit\" value=\"Update task\"class=\"button-form\">\n        ");
             formEdit.innerHTML = html;
             taskIdEdit = foundTask.uuid;
           });
@@ -458,7 +455,7 @@ function uploadProjectNamesEdit() {
 
         case 3:
           projectsInfo = _context8.sent;
-          _projects = projectsInfo.data.allProjects.projects;
+          _projects = projectsInfo.data.infoProjects;
           select = document.getElementById('selectProjectNameEdit');
 
           for (index = 0; index < _projects.length; index++) {

@@ -23,11 +23,11 @@ function renderClients() {
 
         case 6:
           clientsInfo = _context.sent;
-          clients = clientsInfo.data.allClients.clients;
+          clients = clientsInfo.data.infoClients;
           html = clients.map(function (element) {
             var callDate = formatDate(element.lastCallDate);
             var designDate = formatDate(element.lastDesignDate);
-            return "<div>\n              <div>\n                <p>".concat(element.clientname, "</p>\n                <div>\n                    <div>\n                        <img src=\"img/design.png\" alt=\"\">\n                        <p>").concat(designDate, "</p>\n                    </div>\n\n                    <div>\n                        <img src=\"img/call.png\" alt=\"\">\n                        <p>").concat(callDate, "</p>\n                    </div>\n                </div>\n              </div>\n              </div>");
+            return " \n                <div class=\"projectDate-container\">\n            \n                        <div class=\"projectDate__name\">\n                            <p>".concat(element.clientname, "</p>\n                            \n                        </div>\n                        <div class=\"projectDate__image\">\n                                 <div class=\"projectDate__image__design\">\n                                 <img src=\"./img/Group BBB(2).png\" alt=\"\">\n                                    <p>").concat(designDate, "</p>\n                                </div>\n                \n                                <div class=\"projectDate__image__call\">\n                                    <img src=\"img/call.png\" alt=\"\">\n                                    <p>").concat(callDate, "</p>\n                                 </div>\n                       </div>\n                </div>\n               \n              \n               ");
           }).join("");
           rootProjectsDate.innerHTML = html;
           _context.next = 16;
