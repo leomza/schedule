@@ -200,24 +200,35 @@ function listUpcomingEvents() {
       const events = response.result.items;
 
       renderCalendarInfo(events);
-      pepe(events);
+      googleEvents(events);
       //   renderCalendarInfoToday(events);
     });
 }
 
 function renderCalendarInfo(events) {
   try {
-    console.log(events);
     const calendarInfo = document.querySelector("#calendarInfo");
     let html = "";
     html = events
       .map((element) => {
-        // console.log(element.start.dateTime);
+        console.log(element);
+
+        const calendarStartDay = moment(element.start.dateTime).format("L");
+        console.log(calendarStartDay);
+
         const calendarStartDate = formatCalendarDate(element.start);
-        // console.log(calendarStartDate.dateTime);
+        console.log(calendarStartDate);
 
         return `
            <div class="task-calendar">
+       
+   
+                  <div class = "principal-date">${calendarStartDay}</div>
+         
+
+                  </div>
+                  <div class = "task-calendar__content">
+
                     <div class="task-titles-calendar">
                         <p>${element.summary}</p>
                     </div>
@@ -225,8 +236,9 @@ function renderCalendarInfo(events) {
                     <div class="task-date-calendar">
                         <p>${calendarStartDate}</p>
                     </div>
+                  </div>
 
-                </div>
+             </div>
              `;
       })
       .join("");
@@ -237,9 +249,9 @@ function renderCalendarInfo(events) {
   }
 }
 
-const pepe = (event) => {
+const googleEvents = (event) => {
   const date = new Date();
-  const momentsHour =  moment(date).format('LT');
+  const momentsHour = moment(date).format("LT");
   // "9:00 PM";
   const eventToday = document.getElementById("eventToday");
   const noEvent = document.querySelector(".noEvent");
@@ -279,6 +291,13 @@ function formatCalendarDate(startDate) {
     console.error(error);
   }
 }
+
+// const formatDay = (startDay)=> {
+//   if(startDay.dayTime){
+//     startDay.dayTime = moment(startDay.dayTime).format('L');
+
+//   }
+// }
 
 // function currentTime() {
 //     var date = new Date(); /* creating object of Date class */

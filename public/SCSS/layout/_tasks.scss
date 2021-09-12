@@ -38,6 +38,7 @@
     &__navigation {
       display: flex;
       gap: 10rem;
+    
       flex-basis: calc(30% - 1rem);
 
       &__client {
@@ -59,6 +60,7 @@
           text-decoration: none;
           font-weight: $bold;
           color: #121212;
+        margin-left: 2rem;
         }
       }
     }
@@ -224,26 +226,56 @@
     }
     .task-container-calendar {
       .task-calendar {
-        display: flex;
-        justify-content: space-between;
-        margin: 0 2rem;
-        align-items: center;
-        margin-top: 3.3rem;
-        .task-titles-calendar {
-          p {
-            font-size: 1.2rem;
-            font-weight: $semi-bold;
-            color: #41475e;
-          }
-        }
-        .task-date-calendar {
-          p {
-            font-size: 1.2rem;
+      
+ 
+        .principal-date{
+        
+            display: flex;
+            flex-direction: row;
+            font-size: 1rem;
             font-weight: $bold;
-            color: #41475e;
+            color:#121212;
+           
+       
+          &:before, &:after{
+            content: "";
+            flex: 1 1;
+            border-bottom: 1px solid;
+            margin: auto;
+          }
+         &:before {
+            margin-right: 10px
+          }
+         &:after {
+            margin-left: 10px
+          }
+     
+        }
+        &__content{
+          display: flex;
+          justify-content: space-between;
+          margin: 0 2rem;
+          margin-bottom: 2rem;
+          align-items: center;
+          .task-titles-calendar {
+            p {
+              font-size: 1.2rem;
+              font-weight: $semi-bold;
+              color: #41475e;
+            }
+          }
+          .task-date-calendar {
+            p {
+              font-size: 1.2rem;
+              font-weight: $bold;
+              color: #41475e;
+            }
           }
         }
-      }
+          
+        }
+ 
+        
     }
   }
 }
@@ -253,7 +285,7 @@
   overflow: hidden;
   overflow-y: scroll;
   align-items: center;
-  flex-basis: calc(45% - 1rem);
+  
   background: #ffffff;
   box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
 

@@ -531,6 +531,7 @@ input[type="radio"] {
   text-decoration: none;
   font-weight: 700;
   color: #121212;
+  margin-left: 2rem;
 }
 
 .sidebar {
@@ -732,7 +733,37 @@ input[type="radio"] {
   margin: 0 2rem;
 }
 
-.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar {
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .principal-date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #121212;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .principal-date:before, .column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .principal-date:after {
+  content: "";
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1;
+          flex: 1 1;
+  border-bottom: 1px solid;
+  margin: auto;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .principal-date:before {
+  margin-right: 10px;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .principal-date:after {
+  margin-left: 10px;
+}
+
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar__content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -740,19 +771,19 @@ input[type="radio"] {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin: 0 2rem;
+  margin-bottom: 2rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 3.3rem;
 }
 
-.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .task-titles-calendar p {
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar__content .task-titles-calendar p {
   font-size: 1.2rem;
   font-weight: 600;
   color: #41475e;
 }
 
-.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar .task-date-calendar p {
+.column4 .content__columns__sidebar-big .task-container-calendar .task-calendar__content .task-date-calendar p {
   font-size: 1.2rem;
   font-weight: 700;
   color: #41475e;
@@ -765,8 +796,6 @@ input[type="radio"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-preferred-size: calc(45% - 1rem);
-      flex-basis: calc(45% - 1rem);
   background: #ffffff;
   -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
           box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
