@@ -315,8 +315,8 @@ async function handleSearch() {
         const searchTask = document.querySelector('#search');
         const regEx = searchTask.value;
         const searching = new RegExp(regEx, 'i');
-        const allTasks = await axios.get(`/tasks/getAllTasks`);
-        const { tasks } = allTasks.data.allTasks;
+        const tasksInfo = await axios.get(`/tasks/getAllTasks`);
+        const { infoTasks: tasks } = tasksInfo.data;
         const tasksFiltered = tasks.filter(task => searching.test(task.taskName));
         renderTasks(tasksFiltered);
     } catch (error) {
