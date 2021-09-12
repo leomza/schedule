@@ -1,380 +1,980 @@
-.template-tasks {
+//GRID V2
+.container-column {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: 0.1fr 1.5fr 1.4fr;
-  height: 100vh;
-  gap: 1rem;
+  grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+  grid-template-rows: 0.1fr 2fr 2fr;
+  gap: 2rem;
+  grid-auto-flow: row;
   grid-template-areas:
     "sidebar nav nav nav nav"
     "sidebar column4 column1 column2 column3"
     ". column4 columnBottom . .";
-  .nav {
-    grid-area: nav;
-    width: 1155px;
-    height: 60px;
+}
+
+.nav {
+  grid-area: nav;
+
+  .nav-bar {
     display: flex;
     align-items: center;
-    margin: 2rem 0;
-
-    background: #ffffff;
+    background-color: #fff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-    border-radius: 8px;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+    border-radius: 0.8rem;
 
-    .navigation__container {
+    &__search-bar {
+      flex-basis: calc(70% - 1rem);
+      margin-right: 2rem;
+      input {
+        width: 62.6rem;
+        background-color: #f4f7fc;
+        border-radius: 20rem;
+        border: none;
+        margin: 0;
+      }
+    }
+    &__navigation {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10vw;
-      background: #ffffff;
+      gap: 10rem;
+      flex-basis: calc(30% - 1rem);
 
-      // gap: 6rem;
-
-      &__search-bar {
-        input {
-          width: 626px;
-          height: 36px;
-          background: #f4f7fc;
-          border-radius: 200px;
-          border-style: none;
+      &__client {
+        a {
+          text-decoration: none;
+          font-weight: $bold;
+          color: #08a0f7;
+        }
+      }
+      &__project {
+        a {
+          text-decoration: none;
+          font-weight: $bold;
+          color: #ab08f7;
         }
       }
       &__page {
-        display: flex;
-        gap: 6rem;
-        &__client {
-          a {
-            color: #ab08f7;
-          }
-        }
-        &__project {
-          a {
-            color: #08a0f7;
-          }
-        }
-        &__definitions {
-          a {
-            color: #121212;
-          }
+        a {
+          text-decoration: none;
+          font-weight: $bold;
+          color: #121212;
         }
       }
-
-      //  &__search-bar{
-
-      //  }
     }
   }
+}
 
-  .sidebar {
-    grid-area: sidebar;
-    width: 131px;
-    // height: 100vh;
+.sidebar {
+  grid-area: sidebar;
 
+  .content__smallest-sidebar {
+    max-width: 13.1rem;
     background: #ffffff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
     border-radius: 8px;
     .activity {
+      #buttonCreate1 {
+        text-align: center;
+      }
+      .clock {
+        &__container {
+          text-align: center;
+          &__hour {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 600;
+            font-size: 6.6rem;
+            margin: 0;
+            color: #08a0f7;
+          }
+          &__min {
+            font-family: "Montserrat", sans-serif;
+            font-weight: 500;
+            font-size: 6.6rem;
+            margin: 0;
+            color: #08a0f7;
+          }
+        }
+      }
+      .googel-events {
+        text-align: center;
+        h5 {
+          text-align: right;
+          margin-right: 3rem;
+          font-size: 1.2rem;
+          font-weight: $regular;
+        }
+        #eventToday {
+          p {
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.7rem;
+            font-weight: $regular;
+          }
+        }
+
+        .noEvent {
+          p {
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.7rem;
+            font-weight: $regular;
+          }
+        }
+      }
       .activity-buttons {
         display: flex;
         justify-content: center;
         gap: 0.3rem;
         margin-top: 0.5rem;
-      }
-      .cronometer {
-        -webkit-text-stroke: 1px #46b8f9;
-        color: transparent;
+        .button__cronometer {
+          background: none;
+          border: none;
+          height: fit-content;
+          text-align: center;
 
-        .cronometer--number {
+          &:hover {
+            filter: brightness(150%);
+          }
+        }
+      }
+      .cronometer-container {
+        .cronometer {
+          -webkit-text-stroke: 1px #46b8f9;
+          color: transparent;
+
+          .cronometer--number {
+            p {
+              margin: 0;
+              text-align: center;
+              font-family: "Montserrat", sans-serif;
+              font-size: 6.6rem;
+              line-height: 55px;
+              font-weight: 500;
+            }
+          }
+        }
+        #saveTime {
           p {
-            margin: 0;
             text-align: center;
-            font-family: "Montserrat", sans-serif;
-            font-size: 6.6rem;
-            line-height: 55px;
-            font-weight: 500;
+            font-size: 1.2rem;
           }
         }
       }
     }
+  }
 
-    .projects__list {
-      width: 131px;
-      height: 50px;
-      margin-top: 1.4rem;
-      align-items: center;
-      p {
-        font-size: 1.2rem;
-        font-weight: $regular;
-        margin: 0 1.6rem 0.7rem 0;
-      }
-      border-bottom: 0.5px solid #c6c6c6;
-      box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
-
-      .projects__list__buttons {
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-      }
+  .projects__list {
+    margin-top: 1.4rem;
+    text-align: center;
+    p {
+      font-size: 1.2rem;
+      font-weight: $regular;
+      margin: 0 1.6rem 0.7rem 0;
     }
-  }
+    border-bottom: 0.5px solid #c6c6c6;
+    box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
 
-  .column1 {
-    grid-area: column1;
-    width: 281px;
-    height: 596px;
-    background: #ffffff;
-    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-    border-radius: 8px;
-  }
-
-  .column2 {
-    grid-area: column2;
-    width: 281px;
-    height: 596px;
-    background: #ffffff;
-    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-    border-radius: 8px;
-  }
-
-  .column3 {
-    grid-area: column3;
-    width: 281px;
-    height: 596px;
-    background: #ffffff;
-    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-    border-radius: 8px;
-  }
-
-  .column4 {
-    grid-area: column4;
-    width: 281px;
-    height: 1155px;
-    background: #ffffff;
-    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-    border-radius: 8px;
-  }
-  .columnBottom {
-    grid-area: columnBottom;
-    width: 281px;
-    height: 500px;
-    background: #ffffff;
-    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-    border-radius: 8px;
-  }
-}
-.task-title {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: absolute;
-  width: 281px;
-  height: 59.5px;
-  border-radius: 0.8rem;
-  background-color: #ffffff;
-  h3 {
-    font-size: 1.5rem;
-    font-weight: $regular;
-  }
-}
-.task-titles {
-  margin-top: 1rem;
-  h5 {
-    display: inline;
-    font-size: 1.3rem;
-    font-weight: $regular;
-    color: #121212;
-    border-bottom: 1px solid #121212;
-  }
-  p {
-    margin: 0;
-    font-size: 1.2rem;
-    font-weight: $regular;
-    color: #41475e;
-  }
-}
-
-.task-container {
-  width: 281px;
-  height: 596px;
-
-  overflow-y: scroll;
-
-  .task {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    .task-date {
+    .projects__list__buttons {
       display: flex;
+      justify-content: space-evenly;
       align-items: center;
-      gap: 1rem;
-      margin-top: 3.3rem;
-      p {
-        font-size: 1.2rem;
-        font-weight: $regular;
-        color: #41475e;
+      .button__cronometer {
+        background: none;
+        border: none;
+        height: fit-content;
+        text-align: center;
+
+        &:hover {
+          filter: brightness(150%);
+        }
       }
     }
   }
 }
-.task-container::-webkit-scrollbar {
-  width: 8px;
 
-  background: #ffffff;
-  border-radius: 0 8px 8px 0;
-}
-.task-container::-webkit-scrollbar-thumb {
-  background: #c9c9c9;
-  border-radius: 0 8px 8px 0;
-  height: 5px;
+.column1 {
+  grid-area: column1;
 }
 
-#saveTime {
-  text-align: center;
-  font-size: 1.2rem;
+.column2 {
+  grid-area: column2;
 }
-#buttonCreate1 {
-  text-align: center;
-}
-.button__cronometer {
-  background: none;
-  border: none;
-  height: fit-content;
-  text-align: center;
 
-  &:hover {
-    filter: brightness(150%);
+.column3 {
+  grid-area: column3;
+}
+
+.columnBottom {
+  grid-area: columnBottom;
+}
+
+.column4 {
+  grid-area: column4;
+
+  .content__columns__sidebar-big {
+    flex-basis: calc(55% - 1rem);
+    background: #ffffff;
+    box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+    border-radius: 8px;
+
+    .task-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 2rem;
+    }
+    .task-container-calendar {
+      .task-calendar {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 2rem;
+        align-items: center;
+        margin-top: 3.3rem;
+        .task-titles-calendar {
+          p {
+            font-size: 1.2rem;
+            font-weight: $semi-bold;
+            color: #41475e;
+          }
+        }
+        .task-date-calendar {
+          p {
+            font-size: 1.2rem;
+            font-weight: $bold;
+            color: #41475e;
+          }
+        }
+      }
+    }
   }
 }
+
+.content__columns__sidebar {
+  height: 596px;
+  overflow: hidden;
+  overflow-y: scroll;
+  align-items: center;
+  flex-basis: calc(45% - 1rem);
+  background: #ffffff;
+  box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+
+  border-radius: 8px;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+
+    background: #ffffff;
+    border-radius: 0 8px 8px 0;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #c9c9c9;
+    border-radius: 0 8px 8px 0;
+    height: 5px;
+  }
+  .task-title {
+    position: sticky;
+    z-index: 1000;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    &__content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 2rem;
+    }
+  }
+  .task-container {
+    padding-bottom: 5rem;
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 2rem;
+      .task-titles {
+        margin-top: 1rem;
+        h5 {
+          display: inline;
+          font-size: 1.3rem;
+          font-weight: $regular;
+          color: #121212;
+          border-bottom: 1px solid #121212;
+        }
+        p {
+          margin: 0;
+          font-size: 1.2rem;
+          font-weight: $regular;
+          color: #41475e;
+        }
+      }
+      .task-date {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 3.3rem;
+        p {
+          font-size: 1.2rem;
+          font-weight: $regular;
+          color: #41475e;
+        }
+      }
+    }
+  }
+}
+
 #rootProjectsDate {
-  margin: 6rem 0;
+ 
   .projectDate-container {
     display: flex;
     justify-content: space-around;
     align-items: center;
-
-    p {
-      font-size: 1.2rem;
-      font-weight: $regular;
-      color: #41475e;
-      margin: 0;
-    }
+    margin-top: 2rem;
+.projectDate__name{
+  p {
+    width: 6vw;
+    font-size: 1.2rem;
+    font-weight: $regular;
+    color: #41475e;
+    margin: 0;
+  }
+}
+   
     .projectDate__image {
       display: flex;
       align-items: center;
       gap: 2rem;
-      p {
+      p {  font-size: 1.2rem;
         font-weight: $bold;
         color: #bd5c46;
-      }
-    }
-  }
-}
-
-.task-container-calendar {
-  height: 1145px;
-  overflow-y: scroll;
-  .task-calendar {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 3.3rem;
-    .task-titles-calendar {
-      width: 70%;
-      p {
-        font-size: 1.2rem;
-        font-weight: $semi-bold;
-        color: #41475e;
-      }
-    }
-    .task-date-calendar {
-      p {
-        font-size: 1.2rem;
-        font-weight: $bold;
-        color: #41475e;
-      }
-    }
-  }
-  //  .task-titles-calendar {
-  //   display: flex;
-  //   justify-content: space-around;
-  //   align-items: center;
-
-  // }
-
-  // .task-date-calendar {
-  //   display: flex;
-  //   align-items: center;
-  //   gap: 1rem;
-  //   margin-top: 3.3rem;
-  //   p {
-  //     font-size: 1.2rem;
-  //     font-weight: $regular;
-  //     color: #41475e;
-  //   }
-  // }
-}
-.task-container-calendar::-webkit-scrollbar {
-  width: 8px;
-
-  background: #ffffff;
-  border-radius: 0 8px 8px 0;
-}
-.task-container-calendar::-webkit-scrollbar-thumb {
-  background: #c9c9c9;
-  border-radius: 0 8px 8px 0;
-  height: 5px;
-}
-
-.clock {
-  &__container {
-    text-align: center;
-    &__hour {
-     
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
-        font-size: 6.6rem;
         margin: 0;
-        color: #08a0f7;
-     
-    
-    }
-    &__min {
-   
-        font-family: "Montserrat", sans-serif;
-        font-weight: 500;
-        font-size: 6.6rem;
-        margin: 0;
-        color: #08a0f7;
-   
+      }
     }
   }
 }
-.googel-events{
-  text-align: center;
-  h5{
-    text-align: right;
-    margin-right: 3rem;
-    font-size: 1.2rem;
-    font-weight: $regular;
-  }
-#eventToday{
 
-    p{
-      font-family: "Montserrat", sans-serif;
-      font-size: 1.7rem;
-      font-weight: $regular;
-    }
-    
-  }
+// .content {
+//   display: flex;
+//   justify-content: space-between;
+//   gap: 5rem;
+//   &__smallest-sidebar {
+//     flex-basis: calc(10% - 1rem);
+//     max-width: 13.1rem;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//     .activity {
+//       #buttonCreate1 {
+//         text-align: center;
+//       }
+//       .clock {
+//         &__container {
+//           text-align: center;
+//           &__hour {
+//             font-family: "Montserrat", sans-serif;
+//             font-weight: 600;
+//             font-size: 6.6rem;
+//             margin: 0;
+//             color: #08a0f7;
+//           }
+//           &__min {
+//             font-family: "Montserrat", sans-serif;
+//             font-weight: 500;
+//             font-size: 6.6rem;
+//             margin: 0;
+//             color: #08a0f7;
+//           }
+//         }
+//       }
+//       .googel-events {
+//         text-align: center;
+//         h5 {
+//           text-align: right;
+//           margin-right: 3rem;
+//           font-size: 1.2rem;
+//           font-weight: $regular;
+//         }
+//         #eventToday {
+//           p {
+//             font-family: "Montserrat", sans-serif;
+//             font-size: 1.7rem;
+//             font-weight: $regular;
+//           }
+//         }
 
-  .noEvent{
-    
-    p{
-      font-family: "Montserrat", sans-serif;
-      font-size: 1.7rem;
-      font-weight: $regular;
-    }
-  }
-}
+//         .noEvent {
+//           p {
+//             font-family: "Montserrat", sans-serif;
+//             font-size: 1.7rem;
+//             font-weight: $regular;
+//           }
+//         }
+//       }
+//       .activity-buttons {
+//         display: flex;
+//         justify-content: center;
+//         gap: 0.3rem;
+//         margin-top: 0.5rem;
+//         .button__cronometer {
+//           background: none;
+//           border: none;
+//           height: fit-content;
+//           text-align: center;
+
+//           &:hover {
+//             filter: brightness(150%);
+//           }
+//         }
+//       }
+//       .cronometer-container {
+//         .cronometer {
+//           -webkit-text-stroke: 1px #46b8f9;
+//           color: transparent;
+
+//           .cronometer--number {
+//             p {
+//               margin: 0;
+//               text-align: center;
+//               font-family: "Montserrat", sans-serif;
+//               font-size: 6.6rem;
+//               line-height: 55px;
+//               font-weight: 500;
+//             }
+//           }
+//         }
+//         #saveTime {
+//           p {
+//             text-align: center;
+//             font-size: 1.2rem;
+//           }
+//         }
+//       }
+//     }
+//   }
+
+//   .projects__list {
+//     margin-top: 1.4rem;
+//     text-align: center;
+//     p {
+//       font-size: 1.2rem;
+//       font-weight: $regular;
+//       margin: 0 1.6rem 0.7rem 0;
+//     }
+//     border-bottom: 0.5px solid #c6c6c6;
+//     box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
+
+//     .projects__list__buttons {
+//       display: flex;
+//       justify-content: space-evenly;
+//       align-items: center;
+//       .button__cronometer {
+//         background: none;
+//         border: none;
+//         height: fit-content;
+//         text-align: center;
+
+//         &:hover {
+//           filter: brightness(150%);
+//         }
+//       }
+//     }
+//   }
+
+//   &__columns {
+//     display: flex;
+//     justify-content: space-between;
+//     gap: 1rem;
+//     flex-basis: calc(90% - 1rem);
+
+//     &__sidebar {
+//       // height: 500px;
+//       overflow: hidden;
+//       overflow-y: scroll;
+//       align-items: center;
+//       flex-basis: calc(45% - 1rem);
+//       background: #ffffff;
+//       box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+
+//       border-radius: 8px;
+
+//       &::-webkit-scrollbar {
+//         width: 8px;
+
+//         background: #ffffff;
+//         border-radius: 0 8px 8px 0;
+//       }
+//       &::-webkit-scrollbar-thumb {
+//         background: #c9c9c9;
+//         border-radius: 0 8px 8px 0;
+//         height: 5px;
+//       }
+//       .task-title {
+//         position: sticky;
+//         z-index: 1000;
+//         top: 0;
+//         width: 100%;
+//         background-color: #ffffff;
+//         &__content {
+//           display: flex;
+//           justify-content: space-between;
+//           align-items: center;
+//           margin: 0 2rem;
+
+//         }
+//       }
+//       .task-container {
+//         padding-bottom: 5rem;
+//         .task {
+//           display: flex;
+//           justify-content: space-between;
+//           align-items: center;
+//           margin: 0 2rem;
+//           .task-titles {
+//             margin-top: 1rem;
+//             h5 {
+//               display: inline;
+//               font-size: 1.3rem;
+//               font-weight: $regular;
+//               color: #121212;
+//               border-bottom: 1px solid #121212;
+//             }
+//             p {
+//               margin: 0;
+//               font-size: 1.2rem;
+//               font-weight: $regular;
+//               color: #41475e;
+//             }
+//           }
+//           .task-date {
+//             display: flex;
+//             align-items: center;
+//             gap: 1rem;
+//             margin-top: 3.3rem;
+//             p {
+//               font-size: 1.2rem;
+//               font-weight: $regular;
+//               color: #41475e;
+//             }
+//           }
+//         }
+//       }
+//     }
+//     &__sidebar-big {
+//       flex-basis: calc(55% - 1rem);
+//       background: #ffffff;
+//       box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//       border-radius: 8px;
+
+//       .task-title {
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         margin: 0 2rem;
+//       }
+//       .task-container-calendar {
+//         .task-calendar {
+//           display: flex;
+//           justify-content: space-between;
+//           margin: 0 2rem;
+//           align-items: center;
+//           margin-top: 3.3rem;
+//           .task-titles-calendar {
+//             p {
+//               font-size: 1.2rem;
+//               font-weight: $semi-bold;
+//               color: #41475e;
+//             }
+//           }
+//           .task-date-calendar {
+//             p {
+//               font-size: 1.2rem;
+//               font-weight: $bold;
+//               color: #41475e;
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+//GRID
+
+// .template-tasks {
+//   display: grid;
+//   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+//   grid-template-rows: 0.1fr 1.5fr 1.4fr;
+//   height: 100vh;
+//   gap: 1rem;
+//   grid-template-areas:
+//     "sidebar nav nav nav nav"
+//     "sidebar column4 column1 column2 column3"
+//     ". column4 columnBottom . .";
+//   .nav {
+//     grid-area: nav;
+//     width: 1155px;
+//     height: 60px;
+//     display: flex;
+//     align-items: center;
+//     margin: 2rem 0;
+
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+
+//     .navigation__container {
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       gap: 10vw;
+//       background: #ffffff;
+
+//       // gap: 6rem;
+
+//       &__search-bar {
+//         input {
+//           width: 626px;
+//           height: 36px;
+//           background: #f4f7fc;
+//           border-radius: 200px;
+//           border-style: none;
+//         }
+//       }
+//       &__page {
+//         display: flex;
+//         gap: 6rem;
+//         &__client {
+//           a {
+//             color: #ab08f7;
+//           }
+//         }
+//         &__project {
+//           a {
+//             color: #08a0f7;
+//           }
+//         }
+//         &__definitions {
+//           a {
+//             color: #121212;
+//           }
+//         }
+//       }
+
+//       //  &__search-bar{
+
+//       //  }
+//     }
+//   }
+
+//   .sidebar {
+//     grid-area: sidebar;
+//     width: 131px;
+//     // height: 100vh;
+
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//     .activity {
+//       .activity-buttons {
+//         display: flex;
+//         justify-content: center;
+//         gap: 0.3rem;
+//         margin-top: 0.5rem;
+//       }
+//       .cronometer {
+//         -webkit-text-stroke: 1px #46b8f9;
+//         color: transparent;
+
+//         .cronometer--number {
+//           p {
+//             margin: 0;
+//             text-align: center;
+//             font-family: "Montserrat", sans-serif;
+//             font-size: 6.6rem;
+//             line-height: 55px;
+//             font-weight: 500;
+//           }
+//         }
+//       }
+//     }
+
+//     .projects__list {
+//       width: 131px;
+//       height: 50px;
+//       margin-top: 1.4rem;
+//       align-items: center;
+//       p {
+//         font-size: 1.2rem;
+//         font-weight: $regular;
+//         margin: 0 1.6rem 0.7rem 0;
+//       }
+//       border-bottom: 0.5px solid #c6c6c6;
+//       box-shadow: 0px 0px 0px -2px rgba(0, 0, 0, 0.25);
+
+//       .projects__list__buttons {
+//         display: flex;
+//         justify-content: space-evenly;
+//         align-items: center;
+//       }
+//     }
+//   }
+
+//   .column1 {
+//     grid-area: column1;
+//     width: 281px;
+//     height: 596px;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//   }
+
+//   .column2 {
+//     grid-area: column2;
+//     width: 281px;
+//     height: 596px;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//   }
+
+//   .column3 {
+//     grid-area: column3;
+//     width: 281px;
+//     height: 596px;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//   }
+
+//   .column4 {
+//     grid-area: column4;
+//     width: 281px;
+//     height: 1155px;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//   }
+//   .columnBottom {
+//     grid-area: columnBottom;
+//     width: 281px;
+//     height: 500px;
+//     background: #ffffff;
+//     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+//     border-radius: 8px;
+//   }
+// }
+// .task-title {
+//   display: flex;
+//   justify-content: space-around;
+//   align-items: center;
+//   position: absolute;
+//   width: 281px;
+//   height: 59.5px;
+//   border-radius: 0.8rem;
+// background-color: #fff;
+
+//   h3 {
+//     font-size: 1.5rem;
+//     font-weight: $regular;
+//   }
+// }
+// .task-titles {
+//   margin-top: 1rem;
+//   h5 {
+//     display: inline;
+//     font-size: 1.3rem;
+//     font-weight: $regular;
+//     color: #121212;
+//     border-bottom: 1px solid #121212;
+//   }
+//   p {
+//     margin: 0;
+//     font-size: 1.2rem;
+//     font-weight: $regular;
+//     color: #41475e;
+//   }
+// }
+
+// .task-container {
+//   width: 281px;
+//   height: 596px;
+// padding-top: 5rem;
+//   overflow-y: scroll;
+
+//   .task {
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+//     .task-date {
+//       display: flex;
+//       align-items: center;
+//       gap: 1rem;
+//       margin-top: 3.3rem;
+//       p {
+//         font-size: 1.2rem;
+//         font-weight: $regular;
+//         color: #41475e;
+//       }
+//     }
+//   }
+// }
+// .task-container::-webkit-scrollbar {
+//   width: 8px;
+
+//   background: #ffffff;
+//   border-radius: 0 8px 8px 0;
+// }
+// .task-container::-webkit-scrollbar-thumb {
+//   background: #c9c9c9;
+//   border-radius: 0 8px 8px 0;
+//   height: 5px;
+// }
+
+// #saveTime {
+//   text-align: center;
+//   font-size: 1.2rem;
+// }
+// #buttonCreate1 {
+//   text-align: center;
+// }
+// .button__cronometer {
+//   background: none;
+//   border: none;
+//   height: fit-content;
+//   text-align: center;
+
+//   &:hover {
+//     filter: brightness(150%);
+//   }
+// }
+// #rootProjectsDate {
+//   margin: 6rem 0;
+//   .projectDate-container {
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+
+//     p {
+//       font-size: 1.2rem;
+//       font-weight: $regular;
+//       color: #41475e;
+//       margin: 0;
+//     }
+//     .projectDate__image {
+//       display: flex;
+//       align-items: center;
+//       gap: 2rem;
+//       p {
+//         font-weight: $bold;
+//         color: #bd5c46;
+//       }
+//     }
+//   }
+// }
+
+// .task-container-calendar {
+//   height: 1145px;
+//   overflow-y: scroll;
+//   .task-calendar {
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+//     margin-top: 3.3rem;
+//     .task-titles-calendar {
+//       width: 70%;
+//       p {
+//         font-size: 1.2rem;
+//         font-weight: $semi-bold;
+//         color: #41475e;
+//       }
+//     }
+//     .task-date-calendar {
+//       p {
+//         font-size: 1.2rem;
+//         font-weight: $bold;
+//         color: #41475e;
+//       }
+//    }
+//   }
+//    .task-titles-calendar {
+//     display: flex;
+//     justify-content: space-around;
+//     align-items: center;
+
+//   }
+
+//   .task-date-calendar {
+//     display: flex;
+//     align-items: center;
+//     gap: 1rem;
+//     margin-top: 3.3rem;
+//     p {
+//       font-size: 1.2rem;
+//       font-weight: $regular;
+//       color: #41475e;
+//     }
+//   }
+// }
+// .task-container-calendar::-webkit-scrollbar {
+//   width: 8px;
+
+//   background: #ffffff;
+// //   border-radius: 0 8px 8px 0;
+// }
+// .task-container-calendar::-webkit-scrollbar-thumb {
+//   background: #c9c9c9;
+//   border-radius: 0 8px 8px 0;
+//   he ight: 5px;
+// }
+
+// .clock {
+//   &__container {
+//     text-align: center;
+//     &__hour {
+
+//         font-family: "Montserrat", sans-serif;
+//         font-weight: 600;
+//         font-size: 6.6rem;
+//         margin: 0;
+//         color: #08a0f7;
+
+//     }
+//     &__min {
+
+//         font-family: "Montserrat", sans-serif;
+//         font-weight: 500;
+//         font-size: 6.6rem;
+//         margin: 0;
+//         color: #08a0f7;
+
+//     }
+//   }
+// }
+// .googel-events{
+//   text-align: center;
+//   h5{
+//     text-align: right;
+//     margin-right: 3rem;
+//     font-size: 1.2rem;
+//     font-weight: $regular;
+//   }
+// #eventToday{
+
+//     p{
+//       font-family: "Montserrat", sans-serif;
+//       font-size: 1.7rem;
+//       font-weight: $regular;
+//     }
+
+//   }
+
+//   .noEvent{
+
+//     p{
+//       font-family: "Montserrat", sans-serif;
+//       font-size: 1.7rem;
+//       font-weight: $regular;
+//     }
+//   }
+// }
 // .calendarContent {
 //   display: flex;
 //   .summary-calendar {

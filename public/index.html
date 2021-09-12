@@ -1,39 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
-        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+      integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <link rel="shortcut icon" href="./img/faviconTask.png" />
-  
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <link rel="stylesheet" href="./SCSS/app.css">
-</head>
+    <link rel="stylesheet" href="./SCSS/app.css" />
+  </head>
 
-<body>
+  <body>
+      <div class="container">
 
+  
     <form id="loginUser">
+      <div class="loginUser__container">
         <h3>Enter your login data</h3>
 
         <div>
-            <label for="email">Email</label>
-            <input type="email" name="email" placeholder="Enter your email" required>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
         </div>
 
         <div>
-            <label for="password">Password</label>
-            <input type="password" name="password" placeholder="Enter your password" autocomplete="off" required>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            autocomplete="off"
+            required
+          />
         </div>
 
-        <input type="submit" value="Login"  class="button-form">
+        <input type="submit" value="Login" class="button-form" />
+      </div>
     </form>
-
+</div>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
