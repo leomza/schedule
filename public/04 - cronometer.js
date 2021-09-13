@@ -27,6 +27,7 @@ async function cronometer(event, projectId, typeActivity, limitPerDay) {
         typeOfButton = typeActivity;
         limitCallForTheClient = limitPerDay;
 
+        setTextHTMLSaveTime(eventTarget, idProject);
         disabledButtons(event);
         write();
         id = setInterval(write, 1000);
@@ -46,28 +47,28 @@ async function write() {
         if (s < 10) { sAux = "0" + s; } else { sAux = s; }
         if (m < 10) { mAux = "0" + m; } else { mAux = m; }
         if (h < 10) { hAux = "0" + h; } else { hAux = h; }
-
+        
         if (m == limitCallForTheClient && s == 0 && typeOfButton === 'call') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
             swal("Alert", "You have been in a call for more than 10 minutes", "warning");
-
+            
         } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'recreation') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
             swal("Alert", "You have been at rest for more than 30 minutes", "warning");
-
+            
         } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'eat') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
             swal("Alert", "You have been eating for more than 45 minutes", "warning");
         }
-
+        
         //Condition to send an email
         if (h == 1 && m == 0 && s == 0 && typeOfButton === 'call') {
             await axios.post(`/tasks/sendEmail/${typeOfButton}`);
 
-        } else if (h == 1 && m == 30 && s == 0 && typeOfButton === 'recreation' || typeOfButton === 'eat') {
+        } else if (h == 1 && m == 30 && s == 0 && (typeOfButton === 'recreation' || typeOfButton === 'eat')) {
             await axios.post(`/tasks/sendEmail/${typeOfButton}`);
         }
 
@@ -109,6 +110,9 @@ async function saveTime() {
                 renderClients();
             })
         }
+
+        const buttonSaveTime = document.getElementById('saveTime');
+        buttonSaveTime.innerHTML = '';
         h = 0; m = 0; s = 0;
     } catch (error) {
         console.error(error);
@@ -182,3 +186,25 @@ async function renderProjects() {
         console.error(error);
     }
 }
+
+//Function to set in the HTML a custom buttom to save the time
+async function setTextHTMLSaveTime(eventTarget, idProject) {
+    try {
+        //Get the element to insert the text
+        const buttonSaveTime = document.getElementById('saveTime');
+
+        let nameOfTheProject;
+        if (idProject) {
+            const projectFound = await axios.get(`projects/findProject/${idProject}`);
+            console.log(projectFound);
+            nameOfTheProject = projectFound.data.foundProject.projectName;
+        } else {
+            nameOfTheProject = 'General'
+        }
+
+        buttonSaveTime.innerHTML = `<img src="${eventTarget.attributes.src.nodeValue}" alt="" />
+                                    <p> ${nameOfTheProject} </p>`
+    } catch (error) {
+        console.error(error);
+    }
+};

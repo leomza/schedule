@@ -229,7 +229,7 @@ function listUpcomingEvents() {
   }).then(function (response) {
     var events = response.result.items;
     renderCalendarInfo(events);
-    pepe(events); //   renderCalendarInfoToday(events);
+    googleEvents(events); //   renderCalendarInfoToday(events);
   });
 }
 
@@ -238,10 +238,9 @@ function renderCalendarInfo(events) {
     var calendarInfo = document.querySelector("#calendarInfo");
     var html = "";
     html = events.map(function (element) {
-      // console.log(element.start.dateTime);
-      var calendarStartDate = formatCalendarDate(element.start); // console.log(calendarStartDate.dateTime);
-
-      return "\n           <div class=\"task-calendar\">\n                    <div class=\"task-titles-calendar\">\n                        <p>".concat(element.summary, "</p>\n                    </div>\n\n                    <div class=\"task-date-calendar\">\n                        <p>").concat(calendarStartDate, "</p>\n                    </div>\n\n                </div>\n             ");
+      var calendarStartDay = moment(element.start.dateTime).format('DD/MM/YY');
+      var calendarStartDate = formatCalendarDate(element.start);
+      return "\n           <div class=\"task-calendar\">\n       \n   \n                  <div class = \"principal-date\">".concat(calendarStartDay, "</div>\n         \n\n                  </div>\n                  <div class = \"task-calendar__content\">\n\n                    <div class=\"task-titles-calendar\">\n                        <p>").concat(element.summary, "</p>\n                    </div>\n\n                    <div class=\"task-date-calendar\">\n                        <p>").concat(calendarStartDate, "</p>\n                    </div>\n                  </div>\n\n             </div>\n             ");
     }).join("");
     calendarInfo.innerHTML = html;
   } catch (error) {
@@ -249,9 +248,9 @@ function renderCalendarInfo(events) {
   }
 }
 
-var pepe = function pepe(event) {
+var googleEvents = function googleEvents(event) {
   var date = new Date();
-  var momentsHour = moment(date).format('LT'); // "9:00 PM";
+  var momentsHour = moment(date).format("LT"); // "9:00 PM";
 
   var eventToday = document.getElementById("eventToday");
   var noEvent = document.querySelector(".noEvent"); //  moment(date).format('LT');;
@@ -282,7 +281,12 @@ function formatCalendarDate(startDate) {
   } catch (error) {
     console.error(error);
   }
-} // function currentTime() {
+} // const formatDay = (startDay)=> {
+//   if(startDay.dayTime){
+//     startDay.dayTime = moment(startDay.dayTime).format('L');
+//   }
+// }
+// function currentTime() {
 //     var date = new Date(); /* creating object of Date class */
 //     var hour = date.getHours();
 //     var min = date.getMinutes();

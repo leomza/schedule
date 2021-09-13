@@ -922,7 +922,7 @@ input[type="radio"] {
 #rootProjectsDate .projectDate-container .projectDate__image p {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #bd5c46;
+  color: #41475e;
   margin: 0;
 }
 
@@ -937,5 +937,20 @@ input[type="radio"] {
 
 .alertRed {
   -webkit-text-stroke: 1px red !important;
+}
+
+#saveTime {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background: firebrick;
+  margin: 7px 0px;
+  cursor: pointer;
+}
+
+#saveTime p {
+  font-weight: bolder;
 }
 /*# sourceMappingURL=app.css.map */

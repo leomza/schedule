@@ -209,13 +209,10 @@ function renderCalendarInfo(events) {
     let html = "";
     html = events
       .map((element) => {
-        console.log(element);
 
-        const calendarStartDay = moment(element.start.dateTime).format("L");
-        console.log(calendarStartDay);
+        const calendarStartDay = moment(element.start.dateTime).format('DD/MM/YY');
 
         const calendarStartDate = formatCalendarDate(element.start);
-        console.log(calendarStartDate);
 
         return `
            <div class="task-calendar">

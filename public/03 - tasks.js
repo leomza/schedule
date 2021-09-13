@@ -123,7 +123,14 @@ async function renderTasks(tasksToShow) {
 
         taskTomorrow.innerHTML = htmlTommorow;
 
-        let htmlGeneral = tasksToShow.map(element => {
+        //This is to sort the tasks by date
+        const sortTasksToShow = tasksToShow.sort(function (a, b) {
+            a = a.limitDate.split('/').reverse().join('');
+            b = b.limitDate.split('/').reverse().join('');
+            return a.localeCompare(b);
+        });
+
+        let htmlGeneral = sortTasksToShow.map(element => {
             if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) {
                 const limitDate = formatDate(element.limitDate);
                 return (
