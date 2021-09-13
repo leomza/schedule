@@ -5,18 +5,21 @@ var modalUpload = document.getElementById("modalCreate");
 var modalEdit = document.getElementById("modalEdit");
 var modalDescription = document.getElementById("modalDescription");
 var modalClient = document.getElementById("modalClient");
-var modalProject = document.getElementById("modalProject"); // Get the button that opens the modal
+var modalProject = document.getElementById("modalProject");
+var modalSetting = document.getElementById("modalSetting"); // Get the button that opens the modal
 
 var buttonUpload = document.getElementById("buttonCreate");
 var buttonUpload1 = document.getElementById("buttonCreate1");
 var buttonClient = document.getElementById("buttonModalClient");
-var buttonProject = document.getElementById("buttonModalProject"); // Get the <span> element that closes the modal
+var buttonProject = document.getElementById("buttonModalProject");
+var buttonSetting = document.getElementById("buttonModalSetting"); // Get the <span> element that closes the modal
 
 var closeUpload = document.getElementById("closeModal");
 var closeEdit = document.getElementById("closeEdit");
 var closeDescription = document.getElementById("closeDescription");
 var closeClient = document.getElementById("closeClient");
-var closeProject = document.getElementById("closeProject"); // When the user clicks the button, open the modal
+var closeProject = document.getElementById("closeProject");
+var closeSetting = document.getElementById("closeSetting"); // When the user clicks the button, open the modal
 
 buttonUpload.addEventListener('click', openModal);
 
@@ -69,6 +72,23 @@ if (buttonProject) {
   buttonProject.addEventListener('click', openModalProject);
 }
 
+;
+
+if (buttonSetting) {
+  var openModalSetting = function openModalSetting() {
+    try {
+      modalSetting.style.display = "block";
+      modalSetting.classList.add("showModal");
+    } catch (error) {
+      console.error(error);
+    }
+
+    ;
+  };
+
+  buttonSetting.addEventListener('click', openModalSetting);
+}
+
 ; // When the user clicks on <span> (x), close the modal
 
 closeUpload.addEventListener('click', closeModal);
@@ -83,6 +103,10 @@ if (closeClient) {
 
 if (closeProject) {
   closeProject.addEventListener('click', closeModalProject);
+}
+
+if (closeSetting) {
+  closeSetting.addEventListener('click', closeModalSetting);
 }
 
 closeEdit.addEventListener('click', closeModalEdit);
@@ -145,16 +169,29 @@ function closeModalEdit() {
   ;
 }
 
+;
+
+function closeModalSetting() {
+  try {
+    modalSetting.style.display = "none";
+  } catch (error) {
+    console.error(error);
+  }
+
+  ;
+}
+
 ; // When the user clicks anywhere outside of the modal, close it
 
 window.onclick = function (event) {
   try {
-    if (event.target === modalUpload || event.target === modalEdit || event.target === modalDescription || event.target === modalClient || event.target === modalProject) {
+    if (event.target === modalUpload || event.target === modalEdit || event.target === modalDescription || event.target === modalClient || event.target === modalProject || event.target === modalSetting) {
       modalUpload.style.display = "none";
       modalDescription.style.display = "none";
       modalEdit.style.display = "none";
       modalClient.style.display = "none";
       modalProject.style.display = "none";
+      modalSetting.style.display = "none";
     }
   } catch (error) {
     console.error(error);
