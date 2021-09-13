@@ -86,7 +86,7 @@ async function renderTasks(tasksToShow) {
                 const limitDate = formatDate(element.limitDate);
                 return (
                     ` <div class="task">
-                    <div class="task-titles" onclick='showModalDescription("${element.taskName}, ${element.limitDate}, ${element.description}")'>
+                    <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
@@ -107,7 +107,7 @@ async function renderTasks(tasksToShow) {
                 const limitDate = formatDate(element.limitDate);
                 return (
                     `<div class="task">
-                    <div class="task-titles" onclick='showModalDescription("${element.taskName}, ${element.limitDate}, ${element.description}")'>
+                    <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
@@ -355,3 +355,4 @@ function showModalDescription(taskName, limitDate, description) {
         console.error(error);
     }
 }
+

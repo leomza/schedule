@@ -954,4 +954,14 @@ input[type="radio"] {
 #saveTime p {
   font-weight: bolder;
 }
+
+.showClients {
+  width: 80%;
+  height: 100%;
+  margin-top: 10%;
+}
+
+.showClients object {
+  height: 100%;
+}
 /*# sourceMappingURL=app.css.map */

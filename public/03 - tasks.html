@@ -33,13 +33,13 @@
         </div>
         <nav class="nav-bar__navigation">
           <div class="nav-bar__navigation__client">
-            <a href="01- clients.html">לקוחות</a>
+            <a id="buttonModalClient">לקוחות</a>
           </div>
           <div class="nav-bar__navigation__project">
-            <a href="02 - projects.html">פרויקטים</a>
+            <a id="buttonModalProject">פרויקטים</a>
           </div>
           <div class="nav-bar__navigation__page">
-            <a href="">הגדרות</a>
+            <a >הגדרות</a>
           </div>
         </nav>
 
@@ -544,6 +544,26 @@
       <div class="modal-content">
         <span id="closeDescription" class="close">&times;</span>
         <div id="showTaskDescriptionInfo"></div>
+      </div>
+    </div>
+
+    <!-- Modal to show all the clients -->
+    <div id="modalClient" class="modal">
+      <!-- Modal content   -->
+      <div class="modal-content showClients">
+        <span id="closeClient" class="close">&times;</span>
+        <object data="01- clients.html" height="100px" width="100%" name="contenedor">
+        </object>
+      </div>
+    </div>
+
+     <!-- Modal to show all the projects -->
+     <div id="modalProject" class="modal">
+      <!-- Modal content   -->
+      <div class="modal-content showClients">
+        <span id="closeProject" class="close">&times;</span>
+        <object data="02 - projects.html" height="100px" width="100%" name="contenedor">
+        </object>
       </div>
     </div>
   </section>
