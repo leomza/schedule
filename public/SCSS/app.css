@@ -855,6 +855,7 @@ input[type="radio"] {
 
 .content__columns__sidebar .task-container .task .task-titles {
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 .content__columns__sidebar .task-container .task .task-titles h5 {
