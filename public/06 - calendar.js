@@ -250,7 +250,8 @@ function renderCalendarInfo(events) {
 const googleEvents = (event) => {
   const date = new Date();
   const momentsHour = moment(date).format("LT");
-  // "9:00 PM";
+
+ 
   const eventToday = document.getElementById("eventToday");
   const noEvent = document.querySelector(".noEvent");
   //  moment(date).format('LT');;
