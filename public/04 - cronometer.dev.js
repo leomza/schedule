@@ -29,6 +29,7 @@ function cronometer(event, projectId, typeActivity, limitPerDay) {
             idProject = projectId;
             typeOfButton = typeActivity;
             limitCallForTheClient = limitPerDay;
+            setTextHTMLSaveTime(eventTarget, idProject);
             disabledButtons(event);
             write();
             id = setInterval(write, 1000);
@@ -118,7 +119,7 @@ function write() {
           break;
 
         case 14:
-          if (!(h == 1 && m == 30 && s == 0 && typeOfButton === 'recreation' || typeOfButton === 'eat')) {
+          if (!(h == 1 && m == 30 && s == 0 && (typeOfButton === 'recreation' || typeOfButton === 'eat'))) {
             _context2.next = 17;
             break;
           }
@@ -145,7 +146,7 @@ function write() {
 }
 
 function saveTime() {
-  var userActivities, timeInHours, backColorsnumbers, message;
+  var userActivities, timeInHours, backColorsnumbers, message, buttonSaveTime;
   return regeneratorRuntime.async(function saveTime$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -183,23 +184,25 @@ function saveTime() {
           });
 
         case 17:
+          buttonSaveTime = document.getElementById('saveTime');
+          buttonSaveTime.innerHTML = '';
           h = 0;
           m = 0;
           s = 0;
-          _context3.next = 25;
+          _context3.next = 27;
           break;
 
-        case 22:
-          _context3.prev = 22;
+        case 24:
+          _context3.prev = 24;
           _context3.t0 = _context3["catch"](0);
           console.error(_context3.t0);
 
-        case 25:
+        case 27:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 22]]);
+  }, null, null, [[0, 24]]);
 }
 
 function disabledButtons(event) {
@@ -280,4 +283,53 @@ function renderProjects() {
       }
     }
   }, null, null, [[0, 19]]);
+} //Function to set in the HTML a custom buttom to save the time
+
+
+function setTextHTMLSaveTime(eventTarget, idProject) {
+  var buttonSaveTime, nameOfTheProject, projectFound;
+  return regeneratorRuntime.async(function setTextHTMLSaveTime$(_context5) {
+    while (1) {
+      switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          //Get the element to insert the text
+          buttonSaveTime = document.getElementById('saveTime');
+
+          if (!idProject) {
+            _context5.next = 10;
+            break;
+          }
+
+          _context5.next = 5;
+          return regeneratorRuntime.awrap(axios.get("projects/findProject/".concat(idProject)));
+
+        case 5:
+          projectFound = _context5.sent;
+          console.log(projectFound);
+          nameOfTheProject = projectFound.data.foundProject.projectName;
+          _context5.next = 11;
+          break;
+
+        case 10:
+          nameOfTheProject = 'General';
+
+        case 11:
+          buttonSaveTime.innerHTML = "<img src=\"".concat(eventTarget.attributes.src.nodeValue, "\" alt=\"\" />\n                                    <p> ").concat(nameOfTheProject, " </p>");
+          _context5.next = 17;
+          break;
+
+        case 14:
+          _context5.prev = 14;
+          _context5.t0 = _context5["catch"](0);
+          console.error(_context5.t0);
+
+        case 17:
+        case "end":
+          return _context5.stop();
+      }
+    }
+  }, null, null, [[0, 14]]);
 }
+
+;

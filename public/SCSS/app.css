@@ -855,6 +855,7 @@ input[type="radio"] {
 
 .content__columns__sidebar .task-container .task .task-titles {
   margin-top: 1rem;
+  cursor: pointer;
 }
 
 .content__columns__sidebar .task-container .task .task-titles h5 {
@@ -922,7 +923,7 @@ input[type="radio"] {
 #rootProjectsDate .projectDate-container .projectDate__image p {
   font-size: 1.2rem;
   font-weight: 700;
-  color: #bd5c46;
+  color: #41475e;
   margin: 0;
 }
 
@@ -937,5 +938,30 @@ input[type="radio"] {
 
 .alertRed {
   -webkit-text-stroke: 1px red !important;
+}
+
+#saveTime {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  background: firebrick;
+  margin: 7px 0px;
+  cursor: pointer;
+}
+
+#saveTime p {
+  font-weight: bolder;
+}
+
+.showClients {
+  width: 80%;
+  height: 100%;
+  margin-top: 10%;
+}
+
+.showClients object {
+  height: 100%;
 }
 /*# sourceMappingURL=app.css.map */

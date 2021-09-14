@@ -86,7 +86,7 @@ async function renderTasks(tasksToShow) {
                 const limitDate = formatDate(element.limitDate);
                 return (
                     ` <div class="task">
-                    <div class="task-titles">
+                    <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
@@ -107,7 +107,7 @@ async function renderTasks(tasksToShow) {
                 const limitDate = formatDate(element.limitDate);
                 return (
                     `<div class="task">
-                    <div class="task-titles">
+                    <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
@@ -123,12 +123,19 @@ async function renderTasks(tasksToShow) {
 
         taskTomorrow.innerHTML = htmlTommorow;
 
-        let htmlGeneral = tasksToShow.map(element => {
+        //This is to sort the tasks by date
+        const sortTasksToShow = tasksToShow.sort(function (a, b) {
+            a = a.limitDate.split('/').reverse().join('');
+            b = b.limitDate.split('/').reverse().join('');
+            return a.localeCompare(b);
+        });
+
+        let htmlGeneral = sortTasksToShow.map(element => {
             if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) {
                 const limitDate = formatDate(element.limitDate);
                 return (
                     `<div class="task">
-                    <div class="task-titles">
+                    <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
                     <h5>${element.taskName}</h5>
                     <p>${element.projectName}</p>
                     </div>
@@ -323,3 +330,29 @@ async function handleSearch() {
         console.error(error);
     };
 };
+
+function showModalDescription(taskName, limitDate, description) {
+    try {
+        if (!modalDescription)
+            throw new Error("There is a problem finding the modal in the HTML");
+        modalDescription.style.display = "block";
+        modalDescription.classList.add("showModal");
+
+        const taskDescriptionInfo = document.querySelector("#showTaskDescriptionInfo");
+        if (!taskDescriptionInfo) throw new Error("There is a problem finding modal from HTML");
+        
+        limitDate = moment(limitDate).format('DD/MM/YYYY')
+        
+        let html = `
+        <div>
+        <div>${taskName}</div>
+        <div>${limitDate}</div>
+        <div>${description}</div>
+        </div>`
+        taskDescriptionInfo.innerHTML = html;
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
