@@ -88,8 +88,8 @@ function listUpcomingEvents() {
     orderBy: "startTime"
   }).then(function (response) {
     var events = response.result.items;
-    renderCalendarInfo(events);
-    googleEvents(events); //   renderCalendarInfoToday(events);
+    googleEvents(events);
+    renderCalendarInfo(events); //   renderCalendarInfoToday(events);
   });
 }
 
@@ -110,16 +110,19 @@ function renderCalendarInfo(events) {
 
 var googleEvents = function googleEvents(event) {
   var date = new Date();
-  var momentsHour = moment(date).format("LT"); // "9:00 PM";
+  var momentsHour = moment(date).format("L"); // "9:00 PM"
 
+  console.log(momentsHour);
   var eventToday = document.getElementById("eventToday");
   var noEvent = document.querySelector(".noEvent"); //  moment(date).format('LT');;
 
   var html = "";
   html = event.map(function (el) {
-    if (momentsHour === el.start.dateTime) {
+    var formatHourEvent = moment(el.start.dateTime).format("L");
+
+    if (momentsHour === formatHourEvent) {
       noEvent.style.display = "none";
-      return "\n        <p>".concat(el.start.dateTime, "</p>\n        ");
+      return "\n        <p>".concat(formatHourEvent, "</p>\n        ");
     }
   }).join("");
   eventToday.innerHTML = html; // const date = new Date();
@@ -147,7 +150,6 @@ var currentTime = function currentTime() {
   var date = new Date();
   var hour = date.getHours();
   var min = date.getMinutes();
-  hour = hour == 0 ? 12 : hour > 12 ? hour - 12 : hour;
   hour = updatetime(hour);
   min = updatetime(min);
   var timeOut = setTimeout(currentTime, 1000);
