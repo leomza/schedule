@@ -23,7 +23,7 @@
   </script>
 </head>
 
-<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients(); handleClientLoad()">
+<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients(); handleClientLoad(); setColor()">
   <!-- FLEX -->
   <div class="container container-column">
     <div class="nav">
@@ -240,7 +240,7 @@
     <!-- Modal to edit general settings -->
     <div id="modalSetting" class="modal">
       <!-- Modal content   -->
-      <div class="modal-content">
+      <div class="modal-content settings">
         <span id="closeSetting" class="close">&times;</span>
         <form id="generalSettings" onsubmit="handleSettings(event)"></form>
       </div>
