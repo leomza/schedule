@@ -22,11 +22,13 @@ const clientRoute = require('./routes/routeClients');
 const projectRoute = require('./routes/routeProjects');
 const taskRoute = require('./routes/routeTasks');
 const userRoute = require('./routes/routeUsers');
+const settingsRoute = require('./routes/routeSettings');
 
 //Use of that Routes that I imported
 app.use('/clients', clientRoute);
 app.use('/projects', projectRoute);
 app.use('/tasks', taskRoute);
 app.use('/users', userRoute);
+app.use('/settings', settingsRoute);
 
 app.listen(port, () => { console.log(`Listening on port: ${port}`) });

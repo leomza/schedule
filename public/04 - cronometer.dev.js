@@ -18,31 +18,72 @@ var eventTarget;
 var idProject;
 var typeOfButton;
 var limitCallForTheClient;
+var generalCallTime;
+var generalRecreationTime;
+var generalEatTime;
 
 function cronometer(event, projectId, typeActivity, limitPerDay) {
+  var generalTime, infoSettings;
   return regeneratorRuntime.async(function cronometer$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          try {
-            eventTarget = event.target;
-            idProject = projectId;
-            typeOfButton = typeActivity;
-            limitCallForTheClient = limitPerDay;
-            setTextHTMLSaveTime(eventTarget, idProject);
-            disabledButtons(event);
-            write();
-            id = setInterval(write, 1000);
-          } catch (error) {
-            console.error(error);
+          _context.prev = 0;
+          eventTarget = event.target;
+          idProject = projectId;
+          typeOfButton = typeActivity;
+
+          if (!(limitPerDay === 'general')) {
+            _context.next = 21;
+            break;
           }
 
-        case 1:
+          _context.next = 7;
+          return regeneratorRuntime.awrap(axios.get("settings/getGeneralTimeInformation"));
+
+        case 7:
+          generalTime = _context.sent;
+          infoSettings = generalTime.data.infoSettings;
+          _context.t0 = typeOfButton;
+          _context.next = _context.t0 === 'call' ? 12 : _context.t0 === 'recreation' ? 15 : _context.t0 === 'eat' ? 18 : 21;
+          break;
+
+        case 12:
+          limitPerDay = infoSettings[0].generalTimeCall;
+          generalCallTime = infoSettings[0].generalTimeCall;
+          return _context.abrupt("break", 21);
+
+        case 15:
+          limitPerDay = infoSettings[0].generalTimeRecreation;
+          generalRecreationTime = infoSettings[0].generalTimeRecreation;
+          return _context.abrupt("break", 21);
+
+        case 18:
+          limitPerDay = infoSettings[0].generalTimeEat;
+          generalEatTime = infoSettings[0].generalTimeEat;
+          return _context.abrupt("break", 21);
+
+        case 21:
+          limitCallForTheClient = limitPerDay;
+          console.log(limitPerDay);
+          setTextHTMLSaveTime(eventTarget, idProject);
+          disabledButtons(event);
+          write();
+          id = setInterval(write, 1000);
+          _context.next = 32;
+          break;
+
+        case 29:
+          _context.prev = 29;
+          _context.t1 = _context["catch"](0);
+          console.error(_context.t1);
+
+        case 32:
         case "end":
           return _context.stop();
       }
     }
-  });
+  }, null, null, [[0, 29]]);
 }
 
 function write() {
@@ -87,22 +128,22 @@ function write() {
             hAux = h;
           }
 
-          if (m == limitCallForTheClient && s == 0 && typeOfButton === 'call') {
+          if (m == generalCallTime && s == 0 && typeOfButton === 'call') {
             backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed');
-            swal("Alert", "You have been in a call for more than 10 minutes", "warning");
-          } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'recreation') {
+            swal("Alert", "You have been in a call for more than ".concat(generalCallTime, " minutes"), "warning");
+          } else if (m == generalRecreationTime && s == 0 && typeOfButton === 'recreation') {
             _backColorsnumbers = document.querySelector('.cronometer');
 
             _backColorsnumbers.classList.add('alertRed');
 
-            swal("Alert", "You have been at rest for more than 30 minutes", "warning");
-          } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'eat') {
+            swal("Alert", "You have been at rest for more than ".concat(generalRecreationTime, " minutes"), "warning");
+          } else if (m == generalEatTime && s == 0 && typeOfButton === 'eat') {
             _backColorsnumbers2 = document.querySelector('.cronometer');
 
             _backColorsnumbers2.classList.add('alertRed');
 
-            swal("Alert", "You have been eating for more than 45 minutes", "warning");
+            swal("Alert", "You have been eating for more than ".concat(generalEatTime, " minutes"), "warning");
           } //Condition to send an email
 
 
@@ -253,7 +294,7 @@ function renderProjects() {
           _loop = function _loop(index) {
             var project = projectsToShow[index];
             clients.forEach(function (client) {
-              if (client.uuid === project.clientId) {
+              if (client.id === project.clientId) {
                 Object.assign(projectsToShow[index], client);
               }
             });
@@ -297,7 +338,7 @@ function setTextHTMLSaveTime(eventTarget, idProject) {
           buttonSaveTime = document.getElementById('saveTime');
 
           if (!idProject) {
-            _context5.next = 10;
+            _context5.next = 9;
             break;
           }
 
@@ -306,30 +347,29 @@ function setTextHTMLSaveTime(eventTarget, idProject) {
 
         case 5:
           projectFound = _context5.sent;
-          console.log(projectFound);
           nameOfTheProject = projectFound.data.foundProject.projectName;
-          _context5.next = 11;
+          _context5.next = 10;
           break;
 
-        case 10:
+        case 9:
           nameOfTheProject = 'General';
 
-        case 11:
+        case 10:
           buttonSaveTime.innerHTML = "<img src=\"".concat(eventTarget.attributes.src.nodeValue, "\" alt=\"\" />\n                                    <p> ").concat(nameOfTheProject, " </p>");
-          _context5.next = 17;
+          _context5.next = 16;
           break;
 
-        case 14:
-          _context5.prev = 14;
+        case 13:
+          _context5.prev = 13;
           _context5.t0 = _context5["catch"](0);
           console.error(_context5.t0);
 
-        case 17:
+        case 16:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 14]]);
+  }, null, null, [[0, 13]]);
 }
 
 ;

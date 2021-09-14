@@ -19,13 +19,38 @@ let eventTarget;
 let idProject;
 let typeOfButton;
 let limitCallForTheClient;
+let generalCallTime;
+let generalRecreationTime;
+let generalEatTime;
 
 async function cronometer(event, projectId, typeActivity, limitPerDay) {
     try {
         eventTarget = event.target;
         idProject = projectId;
         typeOfButton = typeActivity;
+
+        if (limitPerDay === 'general') {
+            const generalTime = await axios.get(`settings/getGeneralTimeInformation`);
+            const { infoSettings } = generalTime.data;
+
+            switch (typeOfButton) {
+                case 'call':
+                    limitPerDay = infoSettings[0].generalTimeCall;
+                    generalCallTime = infoSettings[0].generalTimeCall;
+                    break;
+                case 'recreation':
+                    limitPerDay = infoSettings[0].generalTimeRecreation;
+                    generalRecreationTime = infoSettings[0].generalTimeRecreation;
+                    break;
+                case 'eat':
+                    limitPerDay = infoSettings[0].generalTimeEat;
+                    generalEatTime = infoSettings[0].generalTimeEat;
+                    break;
+            }
+        }
+
         limitCallForTheClient = limitPerDay;
+        console.log(limitPerDay);
 
         setTextHTMLSaveTime(eventTarget, idProject);
         disabledButtons(event);
@@ -47,23 +72,23 @@ async function write() {
         if (s < 10) { sAux = "0" + s; } else { sAux = s; }
         if (m < 10) { mAux = "0" + m; } else { mAux = m; }
         if (h < 10) { hAux = "0" + h; } else { hAux = h; }
-        
-        if (m == limitCallForTheClient && s == 0 && typeOfButton === 'call') {
+
+        if (m == generalCallTime && s == 0 && typeOfButton === 'call') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
-            swal("Alert", "You have been in a call for more than 10 minutes", "warning");
-            
-        } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'recreation') {
+            swal("Alert", `You have been in a call for more than ${generalCallTime} minutes`, "warning");
+
+        } else if (m == generalRecreationTime && s == 0 && typeOfButton === 'recreation') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
-            swal("Alert", "You have been at rest for more than 30 minutes", "warning");
-            
-        } else if (m == limitCallForTheClient && s == 0 && typeOfButton === 'eat') {
+            swal("Alert", `You have been at rest for more than ${generalRecreationTime} minutes`, "warning");
+
+        } else if (m == generalEatTime && s == 0 && typeOfButton === 'eat') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
-            swal("Alert", "You have been eating for more than 45 minutes", "warning");
+            swal("Alert", `You have been eating for more than ${generalEatTime} minutes`, "warning");
         }
-        
+
         //Condition to send an email
         if (h == 1 && m == 0 && s == 0 && typeOfButton === 'call') {
             await axios.post(`/tasks/sendEmail/${typeOfButton}`);
@@ -150,7 +175,7 @@ async function renderProjects() {
             const project = projectsToShow[index];
 
             clients.forEach(client => {
-                if (client.uuid === project.clientId) {
+                if (client.id === project.clientId) {
                     Object.assign(projectsToShow[index], client);
                 }
             });
@@ -196,7 +221,6 @@ async function setTextHTMLSaveTime(eventTarget, idProject) {
         let nameOfTheProject;
         if (idProject) {
             const projectFound = await axios.get(`projects/findProject/${idProject}`);
-            console.log(projectFound);
             nameOfTheProject = projectFound.data.foundProject.projectName;
         } else {
             nameOfTheProject = 'General'

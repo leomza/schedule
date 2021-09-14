@@ -39,7 +39,7 @@
             <a id="buttonModalProject">פרויקטים</a>
           </div>
           <div class="nav-bar__navigation__page">
-            <a id="buttonModalSetting">הגדרות</a>
+            <a id="buttonModalSetting" onclick="editSettings()">הגדרות</a>
           </div>
         </nav>
 
@@ -64,17 +64,17 @@
 
           <div class="activity-buttons">
             <div class="activity-buttons__recreation">
-              <button class="button__cronometer" name="activity" onclick="cronometer(event, '', 'recreation', '30')">
+              <button class="button__cronometer" name="activity" onclick="cronometer(event, '', 'recreation', 'general')">
                 <img src="img/recreation.png" alt="" />
               </button>
             </div>
             <div class="activity-buttons__eat">
-              <button class="button__cronometer" name="activity" onclick="cronometer(event, '', 'eat', '45')">
+              <button class="button__cronometer" name="activity" onclick="cronometer(event, '', 'eat', 'general')">
                 <img src="img/eat.png" alt="" />
               </button>
             </div>
             <div class="activity-buttons__call">
-              <button class="button__cronometer" name="activity" onclick="cronometer(event, '', 'call', '10')">
+              <button class="button__cronometer" name="activity" onclick="cronometer(event, '', 'call', 'general')">
                 <img src="img/Group 674.png" alt="" />
               </button>
             </div>
@@ -229,7 +229,7 @@
       <!-- Modal content   -->
       <div class="modal-content">
         <span id="closeSetting" class="close">&times;</span>
-        <div>TIEMPOS GENERALES DE LLAMADA, RECREO Y COMIDA</div>
+        <form id="generalSettings" onsubmit="handleSettings(event)"></form>
       </div>
     </div>
   </section>
@@ -242,6 +242,7 @@
   <script src="04 - cronometer.js"></script>
   <script src="05 - projectsDate.js"></script>
   <script src="06 - calendar.js"></script>
+  <script src="07 - settings.js"></script>
 </body>
 
 </html>
