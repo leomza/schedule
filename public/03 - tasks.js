@@ -84,11 +84,25 @@ async function renderTasks(tasksToShow) {
         let htmlToday = tasksToShow.map(element => {
             if (element.limitDate === todayDay) {
                 const limitDate = formatDate(element.limitDate);
+                limitStrLength = (text, max_length) => {
+                    if(text.length > max_length - 3){
+                        return text.substring(0, max_length).trimEnd() + "..."
+                    }
+                    else{
+                        return text
+                    }
+                }
+                const taskName = element.taskName;
+                
                 return (
                     ` <div class="task">
                     <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
-                    <h5>${element.taskName}</h5>
+                    <div class="task-titles__taskName">
+                    <h5>${limitStrLength(taskName,15)}</h5>
+                    </div>
+                    <div class="task-titles__projectName">
                     <p>${element.projectName}</p>
+                    </div>
                     </div>
                     <div class="task-date">
                     <p>${limitDate}</p>
@@ -105,11 +119,25 @@ async function renderTasks(tasksToShow) {
         let htmlTommorow = tasksToShow.map(element => {
             if (element.limitDate === tomorrowDay) {
                 const limitDate = formatDate(element.limitDate);
+                 
+                limitStrLength = (text, max_length) => {
+                    if(text.length > max_length - 3){
+                        return text.substring(0, max_length).trimEnd() + "..."
+                    }
+                    else{
+                        return text
+                    }
+                }
+                const taskName = element.taskName;
                 return (
                     `<div class="task">
                     <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
-                    <h5>${element.taskName}</h5>
+                    <div class="task-titles__taskName">
+                    <h5>${limitStrLength(taskName,15)}</h5>
+                    </div>
+                    <div class="task-titles__projectName">
                     <p>${element.projectName}</p>
+                    </div>
                     </div>
                     <div class="task-date">
                     <p>${limitDate}</p>
@@ -133,11 +161,25 @@ async function renderTasks(tasksToShow) {
         let htmlGeneral = sortTasksToShow.map(element => {
             if (element.limitDate !== todayDay && element.limitDate !== tomorrowDay) {
                 const limitDate = formatDate(element.limitDate);
+                
+                limitStrLength = (text, max_length) => {
+                    if(text.length > max_length - 3){
+                        return text.substring(0, max_length).trimEnd() + "..."
+                    }
+                    else{
+                        return text
+                    }
+                }
+                const taskName = element.taskName;
                 return (
                     `<div class="task">
                     <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
-                    <h5>${element.taskName}</h5>
+                    <div class="task-titles__taskName">
+                    <h5>${limitStrLength(taskName,15)}</h5>
+                    </div>
+                    <div class="task-titles__projectName">
                     <p>${element.projectName}</p>
+                    </div>
                     </div>
                     <div class="task-date">
                     <p>${limitDate}</p>
@@ -344,10 +386,10 @@ function showModalDescription(taskName, limitDate, description) {
         limitDate = moment(limitDate).format('DD/MM/YYYY')
         
         let html = `
-        <div>
-        <div>${taskName}</div>
-        <div>${limitDate}</div>
-        <div>${description}</div>
+        <div class="content">
+        <div class="content__name"><h4> ${taskName}</h4></div>
+        <div class="content__date">${limitDate}</div>
+        <div class="content__description">${description}</div>
         </div>`
         taskDescriptionInfo.innerHTML = html;
 

@@ -2,7 +2,6 @@
 .container-column {
   display: grid;
   grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
-  grid-template-rows: 0.1fr 2fr 2fr;
   gap: 2rem;
   grid-auto-flow: row;
   grid-template-areas:
@@ -16,6 +15,7 @@
 
   .nav-bar {
     display: flex;
+    gap: 2rem;
     align-items: center;
     background-color: #fff;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
@@ -25,8 +25,22 @@
     border-radius: 0.8rem;
 
     &__search-bar {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
       flex-basis: calc(70% - 1rem);
       margin-right: 2rem;
+
+      &__logo {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        &__name {
+          font-size: 1.2rem;
+          font-weight: $bold;
+          color: #08a0f7;
+        }
+      }
       input {
         width: 62.6rem;
         background-color: #f4f7fc;
@@ -37,7 +51,7 @@
     }
     &__navigation {
       display: flex;
-      gap: 10rem;
+      gap: 5vw;
 
       flex-basis: calc(30% - 1rem);
 
@@ -318,7 +332,7 @@
       .task-titles {
         margin-top: 1rem;
         cursor: pointer;
-        
+
         h5 {
           display: inline;
           font-size: 1.3rem;
@@ -1185,10 +1199,35 @@
 
 .showClients {
   width: 80%;
-  height: 100%;
-  margin-top: 10%;
+
+  margin-top: 5rem;
 
   object {
     height: 100%;
+  }
+}
+.modal-content {
+  display: flex;
+   justify-content: space-between;
+  margin: auto;
+  padding: 20px;
+ 
+  -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+          box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
+  border-radius: 8px;
+  position: relative;
+  bottom: 100px;
+  background: #ffffff;
+ 
+  #showTaskDescriptionInfo {
+    .content {
+      &name {
+        h4 {
+          font-size: 1.8rem;
+          font-weight: $regular;
+          line-height: 2.7rem;
+        }
+      }
+    }
   }
 }

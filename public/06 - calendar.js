@@ -96,9 +96,9 @@ function listUpcomingEvents() {
     })
     .then(function (response) {
       const events = response.result.items;
-
-      renderCalendarInfo(events);
       googleEvents(events);
+      renderCalendarInfo(events);
+   
       //   renderCalendarInfoToday(events);
     });
 }
@@ -146,8 +146,8 @@ function renderCalendarInfo(events) {
 
 const googleEvents = (event) => {
   const date = new Date();
-  const momentsHour = moment(date).format("LT");
-
+  const momentsHour = moment(date).format("L");
+  // "9:00 PM"
  
   const eventToday = document.getElementById("eventToday");
   const noEvent = document.querySelector(".noEvent");
@@ -156,11 +156,17 @@ const googleEvents = (event) => {
 
   html = event
     .map((el) => {
-      if (momentsHour === el.start.dateTime) {
+      console.log(el.start);
+      const formatHourEvent =  moment(el.start.dateTime).format("L"); 
+      const reFormat  = moment(el.start.dateTime).format("HH:mm"); 
+   
+      console.log(reFormat);
+      if (momentsHour === formatHourEvent) {
+   
         noEvent.style.display = "none";
 
         return `
-        <p>${el.start.dateTime}</p>
+        <p>${reFormat}</p>
         `;
       }
     })
@@ -173,7 +179,7 @@ const googleEvents = (event) => {
 function formatCalendarDate(startDate) {
   try {
     if (startDate.dateTime) {
-      startDate.dateTime = moment(startDate.dateTime).format("LT");
+      startDate.dateTime = moment(startDate.dateTime).format("HH:mm");
 
       return startDate.dateTime;
     } else if (startDate.date) {
@@ -191,9 +197,7 @@ function formatCalendarDate(startDate) {
 const currentTime = () => {
   const date = new Date();
   let hour = date.getHours();
-
   let min = date.getMinutes();
-  hour = hour == 0 ? 12 : hour > 12 ? hour - 12 : hour;
   hour = updatetime(hour);
   min = updatetime(min);
 
