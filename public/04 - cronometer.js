@@ -50,7 +50,6 @@ async function cronometer(event, projectId, typeActivity, limitPerDay) {
         }
 
         limitCallForTheClient = limitPerDay;
-        console.log(limitPerDay);
 
         setTextHTMLSaveTime(eventTarget, idProject);
         disabledButtons(event);
