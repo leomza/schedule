@@ -27,6 +27,12 @@ async function editSettings() {
                         <input type="text" name="timeCall" value="${infoSettings[0].generalTimeCall}" placeholder="Call time" required>
                     </div>
 
+                    <div class="form__wrapper">
+                        <label for="color">Background color:</label>
+                        <input type="color" name="color" id="color" value="#FFFFFF">
+                    </div>
+
+
                     <input type="submit" value="Update settings" class="button-form">
                     </div>
                     `
@@ -39,10 +45,13 @@ async function editSettings() {
 
 async function handleSettings(ev) {
     try {
-        let { timeRecreation, timeEat, timeCall } = ev.target.elements;
+        let { timeRecreation, timeEat, timeCall, color } = ev.target.elements;
         timeRecreation = timeRecreation.value;
         timeEat = timeEat.value;
         timeCall = timeCall.value;
+        color = color.value;
+
+        localStorage.setItem('backgroundColor', color);
 
         if (!timeRecreation || !timeEat || !timeCall)
             throw new Error("You need to complete all the fields");
@@ -56,6 +65,15 @@ async function handleSettings(ev) {
         await axios.put(`/settings/editGeneralSettings`, settingDetails);
     } catch (error) {
         swal("Ohhh no!", `${error}`, "warning");
+        console.error(error);
+    }
+}
+
+function setColor() {
+    try {
+        const color = localStorage.getItem('backgroundColor');
+        document.body.style.backgroundColor = `${color}`;
+    } catch (error) {
         console.error(error);
     }
 }

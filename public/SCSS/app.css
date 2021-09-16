@@ -1029,4 +1029,8 @@ input[type="radio"] {
   font-size: 1.3rem;
   font-weight: 400;
 }
+
+.settings {
+  height: auto;
+}
 /*# sourceMappingURL=app.css.map */
