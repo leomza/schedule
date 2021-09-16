@@ -990,9 +990,10 @@ input[type="radio"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
   margin: auto;
   padding: 20px;
   -webkit-box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
@@ -1003,9 +1004,29 @@ input[type="radio"] {
   background: #ffffff;
 }
 
-.modal-content #showTaskDescriptionInfo .contentname h4 {
+.modal-content #showTaskDescriptionInfo {
+  width: 100%;
+}
+
+.modal-content #showTaskDescriptionInfo .content {
+  margin-top: 5rem;
+}
+
+.modal-content #showTaskDescriptionInfo .content__name {
+  margin-bottom: 2rem;
+}
+
+.modal-content #showTaskDescriptionInfo .content__name h4 {
   font-size: 1.8rem;
   font-weight: 400;
-  line-height: 2.7rem;
+}
+
+.modal-content #showTaskDescriptionInfo .content__description {
+  width: 100%;
+}
+
+.modal-content #showTaskDescriptionInfo .content__description p {
+  font-size: 1.3rem;
+  font-weight: 400;
 }
 /*# sourceMappingURL=app.css.map */

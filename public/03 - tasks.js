@@ -388,8 +388,8 @@ function showModalDescription(taskName, limitDate, description) {
         let html = `
         <div class="content">
         <div class="content__name"><h4> ${taskName}</h4></div>
-        <div class="content__date">${limitDate}</div>
-        <div class="content__description">${description}</div>
+        <div class="content__date"><span> ${limitDate}</span></div>
+        <div class="content__description"><p>${description}</p></div>
         </div>`
         taskDescriptionInfo.innerHTML = html;
 

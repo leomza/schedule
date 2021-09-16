@@ -1208,7 +1208,8 @@
 }
 .modal-content {
   display: flex;
-   justify-content: space-between;
+ 
+    flex-direction: row-reverse;
   margin: auto;
   padding: 20px;
  
@@ -1220,13 +1221,25 @@
   background: #ffffff;
  
   #showTaskDescriptionInfo {
+    width: 100%;
     .content {
-      &name {
+    
+      margin-top: 5rem;
+      &__name {
+        margin-bottom: 2rem;
         h4 {
           font-size: 1.8rem;
           font-weight: $regular;
-          line-height: 2.7rem;
+         
         }
+      }
+      &__description{
+        width: 100%;
+        p{
+          font-size: 1.3rem;
+          font-weight: $regular;
+        }
+    
       }
     }
   }
