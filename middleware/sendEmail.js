@@ -28,7 +28,7 @@ function sendEmail(req, res, next) {
         }
         var mailOptions = {
             from: 'Schedule App',
-            to: 'storeargento4@gmail.com',
+            to: 'matan.alkalay@gmail.com',
             subject: 'Warning for the Schedule App',
             html: message
         };
@@ -38,7 +38,7 @@ function sendEmail(req, res, next) {
             }
             else {
                 console.log('Email sended: ' + info.response);
-                return;
+                next();
             }
         });
     }
@@ -58,7 +58,7 @@ function sendWhatsApp(req, res, next) {
             to: 'whatsapp:+5492616736217' //Number that I want to notify
         }).then(function (message) {
             console.log('WhatsApp sended: ' + message.sid);
-            return;
+            next();
         });
     }
     catch (error) {

@@ -65,25 +65,24 @@ function cronometer(event, projectId, typeActivity, limitPerDay) {
 
         case 21:
           limitCallForTheClient = limitPerDay;
-          console.log(limitPerDay);
           setTextHTMLSaveTime(eventTarget, idProject);
           disabledButtons(event);
           write();
           id = setInterval(write, 1000);
-          _context.next = 32;
+          _context.next = 31;
           break;
 
-        case 29:
-          _context.prev = 29;
+        case 28:
+          _context.prev = 28;
           _context.t1 = _context["catch"](0);
           console.error(_context.t1);
 
-        case 32:
+        case 31:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 29]]);
+  }, null, null, [[0, 28]]);
 }
 
 function write() {
@@ -128,10 +127,10 @@ function write() {
             hAux = h;
           }
 
-          if (m == generalCallTime && s == 0 && typeOfButton === 'call') {
+          if ((m == generalCallTime || m == limitCallForTheClient) && s == 0 && typeOfButton === 'call') {
             backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed');
-            swal("Alert", "You have been in a call for more than ".concat(generalCallTime, " minutes"), "warning");
+            limitCallForTheClient ? swal("Alert", "You have been in a call for more than ".concat(limitCallForTheClient, " minutes"), "warning") : swal("Alert", "You have been in a call for more than ".concat(generalCallTime, " minutes"), "warning");
           } else if (m == generalRecreationTime && s == 0 && typeOfButton === 'recreation') {
             _backColorsnumbers = document.querySelector('.cronometer');
 
@@ -221,7 +220,7 @@ function saveTime() {
 
         case 16:
           swal("".concat(message.data.message, "!")).then(function () {
-            renderClients();
+            location.reload();
           });
 
         case 17:
@@ -306,7 +305,7 @@ function renderProjects() {
 
           ;
           html = projectsToShow.map(function (element) {
-            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    \n                    <div class=\"projects__list__buttons\">\n\n                      <div class=\"projects__list__buttons__couple-one\">\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design', '").concat(element.callLimitPerDay, "')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call', '").concat(element.callLimitPerDay, "')\"><img src=\"img/Group 674.png\" alt=\"\"></button>\n                        </div>\n\n\n                        <div class=\"projects__list__buttons__couple-two\">\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                        </div>\n                    </div>\n                </div>\n                ");
+            return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    <p> ").concat(element.clientname, " </p>\n\n                    \n                    <div class=\"projects__list__buttons\">\n\n                      <div class=\"projects__list__buttons__couple-one\">\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design', '").concat(element.callLimitPerDay, "')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call', '").concat(element.callLimitPerDay, "')\"><img src=\"img/Group 674.png\" alt=\"\"></button>\n                        </div>\n\n\n                        <div class=\"projects__list__buttons__couple-two\">\n                        <img src=\"img/task.png\" alt=\"\">\n                        <img src=\"img/calendar.png\" alt=\"\">\n                        </div>\n                    </div>\n                </div>\n                ");
           }).join('');
           root.innerHTML = html;
           _context4.next = 23;

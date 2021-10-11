@@ -72,10 +72,10 @@ async function write() {
         if (m < 10) { mAux = "0" + m; } else { mAux = m; }
         if (h < 10) { hAux = "0" + h; } else { hAux = h; }
 
-        if (m == generalCallTime && s == 0 && typeOfButton === 'call') {
+        if ((m == generalCallTime || m == limitCallForTheClient) && s == 0 && typeOfButton === 'call') {
             const backColorsnumbers = document.querySelector('.cronometer');
             backColorsnumbers.classList.add('alertRed')
-            swal("Alert", `You have been in a call for more than ${generalCallTime} minutes`, "warning");
+            limitCallForTheClient ? swal("Alert", `You have been in a call for more than ${limitCallForTheClient} minutes`, "warning") : swal("Alert", `You have been in a call for more than ${generalCallTime} minutes`, "warning")
 
         } else if (m == generalRecreationTime && s == 0 && typeOfButton === 'recreation') {
             const backColorsnumbers = document.querySelector('.cronometer');
@@ -131,7 +131,7 @@ async function saveTime() {
             const message = await axios.post(`/projects/setTimeInProject/${idProject}/${timeInHours}/${typeOfButton}`);
             await axios.post(`/clients/setTimeInClient/${idProject}/${typeOfButton}`);
             swal(`${message.data.message}!`).then(() => {
-                renderClients();
+                location.reload();
             })
         }
 

@@ -10,7 +10,7 @@ import { createTask, getAllTasks, deleteTask, getATask, editTask } from '../cont
 import { sendEmail, sendWhatsApp } from '../middleware/sendEmail';
 
 router.post('/newTask', userCookieRead, createTask);
-router.post('/sendEmail/:typeButton', sendWhatsApp, sendEmail);
+router.post('/sendEmail/:typeButton', sendEmail, sendWhatsApp);
 router.get('/getAllTasks', userCookieRead, getAllTasks);
 router.get('/findTask/:idTask', userCookieRead, getATask);
 router.delete('/deleteTask/:idTask/:idProject', userCookieRead, deleteTask);

@@ -37,7 +37,7 @@ export function sendEmail(req, res, next) {
 
         const mailOptions = {
             from: 'Schedule App',
-            to: 'storeargento4@gmail.com',
+            to: 'matan.alkalay@gmail.com',
             subject: 'Warning for the Schedule App',
             html: message
         };
@@ -47,7 +47,7 @@ export function sendEmail(req, res, next) {
                 res.status(500).send(error.message);
             } else {
                 console.log('Email sended: ' + info.response);
-                return;
+                next();
             }
         })
     } catch (error) {
@@ -67,7 +67,7 @@ export function sendWhatsApp(req, res, next) {
             to: 'whatsapp:+5492616736217' //Number that I want to notify
         }).then(message => {
             console.log('WhatsApp sended: ' + message.sid)
-            return;
+            next();
         });
     } catch (error) {
         console.error(error);

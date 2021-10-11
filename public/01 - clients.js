@@ -18,8 +18,9 @@ async function handleNewClient(ev) {
 
     const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };
     await axios.post('/clients/register', clientDetails);
-    swal("Good job!", "New user added succesfully!", "success");
-    renderClients();
+    swal("Good job!", "New user added succesfully!", "success").then(() => {
+      renderClients();
+    })
   } catch (error) {
     console.error(error);
   }
@@ -117,11 +118,11 @@ async function editClient(uuidClient) {
                 </div>
 
                 <div class="form__wrapper">
-                    <input type="text" name="phone" value="${foundClient.phone}" placeholder="Phone" required>
+                    <input type="text" name="phone" value="${foundClient.phone}" placeholder="Phone">
                 </div>
 
                 <div class="form__wrapper">
-                    <input type="email" name="email" value="${foundClient.email}" placeholder="Email" required>
+                    <input type="email" name="email" value="${foundClient.email}" placeholder="Email">
                 </div>
 
                 <div class="form__wrapper">
@@ -165,7 +166,7 @@ async function handleEdit(ev) {
     dealTime = dealTime.value;
     callLimitPerDay = callLimitPerDay.value;
 
-    if (!clientname || !phone || !email || !dealTime || !callLimitPerDay)
+    if (!clientname || !dealTime || !callLimitPerDay)
       throw new Error("You need to complete all the fields");
 
     if (!modalEdit)

@@ -8,7 +8,7 @@ var userCookie_1 = require("../middleware/userCookie");
 var controllerTasks_1 = require("../controllers/controllerTasks");
 var sendEmail_1 = require("../middleware/sendEmail");
 router.post('/newTask', userCookie_1.userCookieRead, controllerTasks_1.createTask);
-router.post('/sendEmail/:typeButton', sendEmail_1.sendWhatsApp, sendEmail_1.sendEmail);
+router.post('/sendEmail/:typeButton', sendEmail_1.sendEmail, sendEmail_1.sendWhatsApp);
 router.get('/getAllTasks', userCookie_1.userCookieRead, controllerTasks_1.getAllTasks);
 router.get('/findTask/:idTask', userCookie_1.userCookieRead, controllerTasks_1.getATask);
 router["delete"]('/deleteTask/:idTask/:idProject', userCookie_1.userCookieRead, controllerTasks_1.deleteTask);
