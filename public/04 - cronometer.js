@@ -184,6 +184,8 @@ async function renderProjects() {
             return (
                 `<div class="projects__list" >
                     <p> ${element.projectName} </p>
+                    <p> ${element.clientname} </p>
+
                     
                     <div class="projects__list__buttons">
 

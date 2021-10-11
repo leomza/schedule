@@ -156,11 +156,9 @@ const googleEvents = (event) => {
 
   html = event
     .map((el) => {
-      console.log(el.start);
       const formatHourEvent =  moment(el.start.dateTime).format("L"); 
       const reFormat  = moment(el.start.dateTime).format("HH:mm"); 
    
-      console.log(reFormat);
       if (momentsHour === formatHourEvent) {
    
         noEvent.style.display = "none";
