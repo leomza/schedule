@@ -1,6 +1,6 @@
 //Handle the form to create a new Project:
-const handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener('submit', handleNewProject);
+const handleFormProject = document.querySelector("#formCreate");
+handleFormProject.addEventListener('submit', handleNewProject);
 
 async function handleNewProject(ev) {
     try {
@@ -203,6 +203,7 @@ async function editProject(uuidProject) {
             <option value="businessCard">Business Card</option>
             <option value="presentation">Presentation</option>
             <option value="designedPage">Designed Page</option>
+            <option value="all">All</option>
         </select>
         </div>
 

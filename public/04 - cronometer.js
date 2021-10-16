@@ -194,11 +194,6 @@ async function renderProjects() {
                         <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call', '${element.callLimitPerDay}')"><img src="img/Group 674.png" alt=""></button>
                         </div>
 
-
-                        <div class="projects__list__buttons__couple-two">
-                        <img src="img/task.png" alt="">
-                        <img src="img/calendar.png" alt="">
-                        </div>
                     </div>
                 </div>
                 `

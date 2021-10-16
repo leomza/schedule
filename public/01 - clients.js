@@ -1,6 +1,6 @@
 //Handle the form to create a new Client:
-const handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener("submit", handleNewClient);
+const handleFormClient = document.querySelector("#formCreate");
+handleFormClient.addEventListener("submit", handleNewClient);
 
 async function handleNewClient(ev) {
   try {

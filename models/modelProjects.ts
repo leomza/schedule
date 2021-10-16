@@ -32,6 +32,7 @@ enum projectType {
     businessCard = 'businessCard',
     presentation = 'presentation',
     designedPage = 'designedPage',
+    all = 'all',
 }
 
 export class Project {
