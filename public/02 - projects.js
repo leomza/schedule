@@ -1,6 +1,6 @@
 //Handle the form to create a new Project:
-const handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener('submit', handleNewProject);
+const handleFormProject = document.querySelector("#formCreateProject");
+handleFormProject.addEventListener('submit', handleNewProject);
 
 async function handleNewProject(ev) {
     try {
@@ -12,7 +12,11 @@ async function handleNewProject(ev) {
         status = status.value;
         totalHours = totalHours.valueAsNumber;
 
+        //When I create from the project Dashboard
         modalCreate.style.display = "none";
+        //When I create from the task Dashboard
+        modalCreateProject.style.display = "none";
+
         ev.target.reset();
 
         const projectDetails = { projectName, clientId, projectType, status, totalHours };
@@ -203,6 +207,7 @@ async function editProject(uuidProject) {
             <option value="businessCard">Business Card</option>
             <option value="presentation">Presentation</option>
             <option value="designedPage">Designed Page</option>
+            <option value="all">All</option>
         </select>
         </div>
 
@@ -238,8 +243,13 @@ async function editProject(uuidProject) {
 
 //Function to show the client name in the Edit DOM
 async function showClientNameInDOM(clientId) {
-    const clientFound = await axios.get(`clients/findClient/${clientId}`);
-    return clientFound.data.foundClient.clientname;
+    let clientFound = await axios.get(`clients/findClient/${clientId}`);
+    if (!clientFound.data.foundClient) {
+        clientFound = 'No client assigned'
+        return clientFound;
+    } else {
+        return clientFound.data.foundClient.clientname;
+    }
 }
 
 //Handle Edit
@@ -252,8 +262,8 @@ async function handleEdit(ev) {
         status = status.value;
         totalHours = totalHours.valueAsNumber;
 
-        if (!projectName || !clientId || !projectType || !status || !totalHours)
-            throw new Error("You need to complete all the fields");
+        if (!projectName)
+            throw new Error("You need to complete the project name");
 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";

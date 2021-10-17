@@ -23,7 +23,8 @@
   </script>
 </head>
 
-<body onload="uploadProjectNames(); renderTasks(); init(); renderProjects(); renderClients(); handleClientLoad(); setColor()">
+<body
+  onload="uploadProjectNames();uploadClientNames(); renderTasks(); init(); renderProjects(); renderClients(); handleClientLoad(); setColor()">
   <!-- FLEX -->
   <div class="container container-column">
     <div class="nav">
@@ -50,9 +51,15 @@
         <nav class="nav-bar__navigation">
           <div class="nav-bar__navigation__client">
             <a id="buttonModalClient">לקוחות</a>
+            <button id="buttonModalCreateClient" class="button-talbe">
+              הוסף לקוח
+            </button>
           </div>
           <div class="nav-bar__navigation__project">
             <a id="buttonModalProject">פרויקטים</a>
+            <button id="buttonModalCreateProject" class="button-talbe">
+              הוסף פרויקט
+            </button>
           </div>
           <div class="nav-bar__navigation__page">
             <a id="buttonModalSetting" onclick="editSettings()">הגדרות</a>
@@ -94,12 +101,6 @@
                 <img src="img/Group 674.png" alt="" />
               </button>
             </div>
-            <div class="activity-buttons__task">
-              <img src="img/task.png" alt="" />
-            </div>
-            <div class="activity-buttons__calendar">
-              <img src="img/calendar.png" alt="" />
-            </div>
           </div>
           <div id="buttonCreate1">
             <button class="button-talbe">השדח המישמ</button>
@@ -114,7 +115,6 @@
         <div class="task-title">
           <div class="task-title__content">
             <h3>General</h3>
-            <button id="buttonCreate" class="button-talbe">חדשk</button>
           </div>
         </div>
 
@@ -126,7 +126,6 @@
         <div class="task-title">
           <div class="task-title__content">
             <h3>Tomorrow</h3>
-            <button id="buttonCreate" class="button-talbe">חדשk</button>
           </div>
         </div>
         <div id="taskTomorrow" class="task-container"></div>
@@ -137,7 +136,6 @@
         <div class="task-title">
           <div class="task-title__content">
             <h3>Today</h3>
-            <button id="buttonCreate" class="button-talbe">חדשk</button>
           </div>
         </div>
         <div id="taskToday" class="task-container"></div>
@@ -246,8 +244,134 @@
       </div>
   </section>
 
+  <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- Modal to create a project -->
+  <div id="modalCreateProject" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span id="closeCreateProject" class="close">&times;</span>
+      <form id="formCreateProject">
+        <h3>Add a new project</h3>
+        <div>
+
+          <input type="text" name="projectName" placeholder="שם הפרויקט" required />
+        </div>
+
+        <div>
+          <!-- <label for="selectClientName">Select a client name</label> -->
+          <select name="selectClientName" id="selectClientName">
+            <option selected disabled>שם לקוח בחירה מרובה...</option>
+          </select>
+        </div>
+
+        <div>
+          <!-- <label for="projectType">Project Type:</label> -->
+          <select name="projectType" id="projectType">
+            <option selected disabled>Select a project type...</option>
+            <option value="logo">Logo</option>
+            <option value="graphicLanguage">Graphic Language</option>
+            <option value="corporateWebsite">Corporate Website</option>
+            <option value="landingPage">Landing Page</option>
+            <option value="ecommerce">Ecommerce</option>
+            <option value="branding">Branding</option>
+            <option value="post">Post</option>
+            <option value="packageDesign">Package Design</option>
+            <option value="banner">Banner</option>
+            <option value="rollUp">Roll Up</option>
+            <option value="flyer">Flyer</option>
+            <option value="digitalBook">Digital Book</option>
+            <option value="newsLetter">News Letter</option>
+            <option value="calendar">Calendar</option>
+            <option value="businessCard">Business Card</option>
+            <option value="presentation">Presentation</option>
+            <option value="designedPage">Designed Page</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <div>
+          <!-- <label for="status">Status:</label> -->
+          <select name="status" id="status">
+            <option selected disabled>Select a status...</option>
+            <option value="offerPending">Offer Pending</option>
+            <option value="inProgress">In Progress</option>
+            <option value="offerApproved">Offer Approved</option>
+            <option value="stuck">Stuck</option>
+            <option value="paidUp">Paid Up</option>
+            <option value="waitingForSketchApproval">
+              Waiting for Sketch Approval
+            </option>
+            <option value="postponed">Postponed</option>
+            <option value="canceled">Canceled</option>
+            <option value="finished">Finished</option>
+          </select>
+        </div>
+
+        <div>
+          <!-- <label for="totalHours">Total hours for the project</label> -->
+          <input type="number" name="totalHours" placeholder="Total Hours for the project" />
+        </div>
+
+        <input type="submit" value="Create project" class="button-form" />
+      </form>
+    </div>
+  </div>
+
+  <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- Modal to create a client -->
+  <div id="modalCreateClient" class="modal">
+    <!-- Modal content -->
+
+    <div class="modal-content">
+
+
+      <span id="closeModalClient" class="close">&times;</span>
+
+
+      <form id="formCreateClient">
+        <h3>לקוח חדש</h3>
+        <div>
+          <input type="text" name="clientname" placeholder="שם לקוח" required />
+        </div>
+
+        <div>
+          <input type="text" name="phone" placeholder="מספר טלפון" />
+        </div>
+
+        <div>
+          <input type="email" name="email" placeholder="כתובת אימייל" autocomplete="off" />
+        </div>
+
+
+        <select class="form__wrapper--select  " name="dealTime" id="dealTime" data-content="./img//tag.png">
+
+          <option selected disabled hidden>סוג עסקה</option>
+          <option value="retainer" data-imagesrc="https://i.imgur.com/XkuTj3B.png">Retainer</option>
+          <option value="hourly">Hourly</option>
+          <option value="project">Project</option>
+          <option value="all">All</option>
+        </select>
+
+
+
+        <select class="form__wrapper--select selected select-box" name="callLimitPerDay" id="callLimitPerDay">
+          <option selected disabled hidden>סוג עסקה</option>
+          <option value="10">10 minutes per day</option>
+          <option value="30">30 minutes per day</option>
+          <option value="withOutLimit">With Out Limits</option>
+        </select>
+
+        <input type="submit" value="Create client" class="button-form" />
+      </form>
+    </div>
+  </div>
+
   <script src="https://apis.google.com/js/api.js"></script>
   <script src="helperModal.js"></script>
+  <script src="01 - clients.js"></script>
+  <script src="02 - projects.js"></script>
   <script src="03 - tasks.js"></script>
   <script src="04 - cronometer.js"></script>
   <script src="05 - projectsDate.js"></script>

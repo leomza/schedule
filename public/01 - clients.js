@@ -1,6 +1,6 @@
 //Handle the form to create a new Client:
-const handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener("submit", handleNewClient);
+const handleFormClient = document.querySelector("#formCreateClient");
+handleFormClient.addEventListener("submit", handleNewClient);
 
 async function handleNewClient(ev) {
   try {
@@ -13,7 +13,10 @@ async function handleNewClient(ev) {
     dealTime = dealTime.value;
     callLimitPerDay = callLimitPerDay.value;
 
+    //When I create from the client Dashboard
     modalCreate.style.display = "none";
+    //When I create from the task Dashboard
+    modalCreateClient.style.display = "none";
     ev.target.reset();
 
     const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };

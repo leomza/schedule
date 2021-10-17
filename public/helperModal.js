@@ -1,5 +1,7 @@
 // Get the modal
 const modalUpload = document.getElementById("modalCreate");
+const modalCreateProject = document.getElementById("modalCreateProject");
+const modalCreateClient = document.getElementById("modalCreateClient");
 const modalEdit = document.getElementById("modalEdit");
 const modalDescription = document.getElementById("modalDescription");
 const modalClient = document.getElementById("modalClient");
@@ -12,6 +14,8 @@ const buttonUpload1 = document.getElementById("buttonCreate1");
 const buttonClient = document.getElementById("buttonModalClient");
 const buttonProject = document.getElementById("buttonModalProject");
 const buttonSetting = document.getElementById("buttonModalSetting");
+const buttonCreateProject = document.getElementById("buttonModalCreateProject");
+const buttonCreateClient = document.getElementById("buttonModalCreateClient");
 
 // Get the <span> element that closes the modal
 const closeUpload = document.getElementById("closeModal");
@@ -20,6 +24,8 @@ const closeDescription = document.getElementById("closeDescription");
 const closeClient = document.getElementById("closeClient");
 const closeProject = document.getElementById("closeProject");
 const closeSetting = document.getElementById("closeSetting");
+const closeCreateProject = document.getElementById("closeCreateProject");
+const closeCreateClient = document.getElementById("closeCreateClient");
 
 //*Columns
 const columnOne = document.querySelector(".column1");
@@ -81,6 +87,30 @@ if (buttonSetting) {
   }
 }
 
+if (buttonCreateProject) {
+    buttonCreateProject.addEventListener('click', openModalCreateProject);
+    function openModalCreateProject() {
+        try {
+            modalCreateProject.style.display = "block";
+            modalCreateProject.classList.add("showModal");
+        } catch (error) {
+            console.error(error);
+        };
+    }
+};
+
+if (buttonCreateClient) {
+    buttonCreateClient.addEventListener('click', openModalCreateClient);
+    function openModalCreateClient() {
+        try {
+            modalCreateClient.style.display = "block";
+            modalCreateClient.classList.add("showModal");
+        } catch (error) {
+            console.error(error);
+        };
+    }
+};
+
 // When the user clicks on <span> (x), close the modal
 closeUpload.addEventListener("click", closeModal);
 
@@ -100,7 +130,15 @@ if (closeSetting) {
   closeSetting.addEventListener("click", closeModalSetting);
 }
 
-closeEdit.addEventListener("click", closeModalEdit);
+if (closeCreateProject) {
+    closeCreateProject.addEventListener('click', closeModalCreateProject);
+}
+
+if (closeCreateClient) {
+    closeCreateClient.addEventListener('click', closeModalCreateClient);
+}
+
+closeEdit.addEventListener('click', closeModalEdit);
 
 function closeModal() {
   try {
@@ -148,31 +186,42 @@ function closeModalEdit() {
 }
 
 function closeModalSetting() {
-  try {
-    modalSetting.style.display = "none";
-  } catch (error) {
-    console.error(error);
-  }
-}
+    try {
+        modalSetting.style.display = "none";
+    } catch (error) {
+        console.error(error);
+    };
+};
+
+function closeModalCreateProject() {
+    try {
+        modalCreateProject.style.display = "none";
+    } catch (error) {
+        console.error(error);
+    };
+};
+
+function closeModalCreateClient() {
+    try {
+        modalCreateClient.style.display = "none";
+    } catch (error) {
+        console.error(error);
+    };
+};
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-  try {
-    if (
-      event.target === modalUpload ||
-      event.target === modalEdit ||
-      event.target === modalDescription ||
-      event.target === modalClient ||
-      event.target === modalProject ||
-      event.target === modalSetting
-    ) {
-      modalUpload.style.display = "none";
-      modalDescription.style.display = "none";
-      modalEdit.style.display = "none";
-      modalClient.style.display = "none";
-      modalProject.style.display = "none";
-      modalSetting.style.display = "none";
-    }
-  } catch (error) {
-    console.error(error);
-  }
+    try {
+        if (event.target === modalUpload || event.target === modalEdit || event.target === modalDescription || event.target === modalClient || event.target === modalProject || event.target === modalSetting || event.target === modalCreateProject || event.target === modalCreateClient) {
+            modalUpload.style.display = "none";
+            modalDescription.style.display = "none";
+            modalEdit.style.display = "none";
+            modalClient.style.display = "none";
+            modalProject.style.display = "none";
+            modalSetting.style.display = "none";
+            modalCreateProject.style.display = "none";
+            modalCreateClient.style.display = "none";
+        }s
+    } catch (error) {
+        console.error(error);
+    };
 };

@@ -32,6 +32,7 @@ var projectType;
     projectType["businessCard"] = "businessCard";
     projectType["presentation"] = "presentation";
     projectType["designedPage"] = "designedPage";
+    projectType["all"] = "all";
 })(projectType || (projectType = {}));
 var Project = /** @class */ (function () {
     function Project(projectUuid, projectName, clientId, projectType, status, totalHours) {

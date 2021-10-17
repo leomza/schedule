@@ -133,6 +133,12 @@ async function saveTime() {
             swal(`${message.data.message}!`).then(() => {
                 location.reload();
             })
+        } else {
+            console.log(typeOfButton);
+            const message = await axios.post(`/projects/setTimeInProject/461ace80-d817-484c-83ac-395871e95478/${timeInHours}/${typeOfButton}`);
+            swal(`${message.data.message}!`).then(() => {
+                location.reload();
+            })
         }
 
         const buttonSaveTime = document.getElementById('saveTime');
@@ -194,11 +200,6 @@ async function renderProjects() {
                         <button class="button__cronometer" name="activity" onclick="cronometer(event, '${element.projectUuid}', 'call', '${element.callLimitPerDay}')"><img src="img/Group 674.png" alt=""></button>
                         </div>
 
-
-                        <div class="projects__list__buttons__couple-two">
-                        <img src="img/task.png" alt="">
-                        <img src="img/calendar.png" alt="">
-                        </div>
                     </div>
                 </div>
                 `

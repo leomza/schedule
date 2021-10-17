@@ -1,8 +1,8 @@
 "use strict";
 
 //Handle the form to create a new Client:
-var handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener("submit", handleNewClient);
+var handleFormClient = document.querySelector("#formCreateClient");
+handleFormClient.addEventListener("submit", handleNewClient);
 
 function handleNewClient(ev) {
   var _ev$target$elements, clientname, phone, email, dealTime, callLimitPerDay, clientDetails;
@@ -18,8 +18,11 @@ function handleNewClient(ev) {
           phone = phone.value;
           email = email.value;
           dealTime = dealTime.value;
-          callLimitPerDay = callLimitPerDay.value;
-          modalCreate.style.display = "none";
+          callLimitPerDay = callLimitPerDay.value; //When I create from the client Dashboard
+
+          modalCreate.style.display = "none"; //When I create from the task Dashboard
+
+          modalCreateClient.style.display = "none";
           ev.target.reset();
           clientDetails = {
             clientname: clientname,
@@ -28,12 +31,13 @@ function handleNewClient(ev) {
             dealTime: dealTime,
             callLimitPerDay: callLimitPerDay
           };
-          _context.next = 13;
+          _context.next = 14;
           return regeneratorRuntime.awrap(axios.post('/clients/register', clientDetails));
 
-        case 13:
-          swal("Good job!", "New user added succesfully!", "success");
-          renderClients();
+        case 14:
+          swal("Good job!", "New user added succesfully!", "success").then(function () {
+            renderClients();
+          });
           _context.next = 20;
           break;
 
@@ -188,7 +192,7 @@ function editClient(uuidClient) {
         case 10:
           clientFound = _context4.sent;
           foundClient = clientFound.data.foundClient;
-          html = "\n                <div>\n                 <h3>Edit client</h3>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"clientname\" value=\"".concat(foundClient.clientname, "\" placeholder=\"Clientname\" required>\n                </div>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"phone\" value=\"").concat(foundClient.phone, "\" placeholder=\"Phone\" required>\n                </div>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"email\" name=\"email\" value=\"").concat(foundClient.email, "\" placeholder=\"Email\" required>\n                </div>\n\n                <div class=\"form__wrapper\">\n                <select class=\"form__wrapper--select\" name=\"dealTime\" id=\"dealTime\">\n                      <option value=\"").concat(foundClient.dealTime, "\" selected disabled hidden>").concat(foundClient.dealTime, "</option>\n                      <option value=\"retainer\">Retainer</option>\n                      <option value=\"hourly\">Hourly</option>\n                      <option value=\"project\">Project</option>\n                      <option value=\"all\">All</option>\n                </select>\n                </div>\n\n                <div class=\"form__wrapper\">\n                <select class=\"form__wrapper--select\" name=\"callLimitPerDay\" id=\"callLimitPerDay\">\n                      <option value=\"").concat(foundClient.callLimitPerDay, "\" selected disabled hidden>").concat(foundClient.callLimitPerDay, " minutes per day</option>\n                      <option value=\"10\">10 minutes per day</option>\n                      <option value=\"30\">30 minutes per day</option>\n                      <option value=\"withOutLimits\">With Out Limits</option>\n                </select>\n                </div>\n\n              <input type=\"submit\" value=\"Update client\" class=\"button-form\">\n              </div>\n              ");
+          html = "\n                <div>\n                 <h3>Edit client</h3>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"clientname\" value=\"".concat(foundClient.clientname, "\" placeholder=\"Clientname\" required>\n                </div>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"text\" name=\"phone\" value=\"").concat(foundClient.phone, "\" placeholder=\"Phone\">\n                </div>\n\n                <div class=\"form__wrapper\">\n                    <input type=\"email\" name=\"email\" value=\"").concat(foundClient.email, "\" placeholder=\"Email\">\n                </div>\n\n                <div class=\"form__wrapper\">\n                <select class=\"form__wrapper--select\" name=\"dealTime\" id=\"dealTime\">\n                      <option value=\"").concat(foundClient.dealTime, "\" selected disabled hidden>").concat(foundClient.dealTime, "</option>\n                      <option value=\"retainer\">Retainer</option>\n                      <option value=\"hourly\">Hourly</option>\n                      <option value=\"project\">Project</option>\n                      <option value=\"all\">All</option>\n                </select>\n                </div>\n\n                <div class=\"form__wrapper\">\n                <select class=\"form__wrapper--select\" name=\"callLimitPerDay\" id=\"callLimitPerDay\">\n                      <option value=\"").concat(foundClient.callLimitPerDay, "\" selected disabled hidden>").concat(foundClient.callLimitPerDay, " minutes per day</option>\n                      <option value=\"10\">10 minutes per day</option>\n                      <option value=\"30\">30 minutes per day</option>\n                      <option value=\"withOutLimits\">With Out Limits</option>\n                </select>\n                </div>\n\n              <input type=\"submit\" value=\"Update client\" class=\"button-form\">\n              </div>\n              ");
           formEdit.innerHTML = html;
           clientIdEdit = foundClient.id;
           _context4.next = 20;
@@ -223,7 +227,7 @@ function handleEdit(ev) {
           dealTime = dealTime.value;
           callLimitPerDay = callLimitPerDay.value;
 
-          if (!(!clientname || !phone || !email || !dealTime || !callLimitPerDay)) {
+          if (!(!clientname || !dealTime || !callLimitPerDay)) {
             _context5.next = 9;
             break;
           }
