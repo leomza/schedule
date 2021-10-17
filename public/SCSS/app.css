@@ -467,6 +467,16 @@ input[type="radio"] {
       grid-template-areas: "sidebar nav nav nav nav" "sidebar column4 column1 column2 column3" ". column4 columnBottom . .";
 }
 
+.container-column-b {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+      grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+  gap: 2rem;
+  grid-auto-flow: row;
+      grid-template-areas: "sidebar nav nav nav nav" "sidebar column4 column1 column2 column3" ". column4 columnBottom . .";
+}
+
 .nav {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
