@@ -133,6 +133,12 @@ async function saveTime() {
             swal(`${message.data.message}!`).then(() => {
                 location.reload();
             })
+        } else {
+            console.log(typeOfButton);
+            const message = await axios.post(`/projects/setTimeInProject/461ace80-d817-484c-83ac-395871e95478/${timeInHours}/${typeOfButton}`);
+            swal(`${message.data.message}!`).then(() => {
+                location.reload();
+            })
         }
 
         const buttonSaveTime = document.getElementById('saveTime');

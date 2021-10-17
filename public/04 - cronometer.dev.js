@@ -186,7 +186,8 @@ function write() {
 }
 
 function saveTime() {
-  var userActivities, timeInHours, backColorsnumbers, message, buttonSaveTime;
+  var userActivities, timeInHours, backColorsnumbers, message, _message, buttonSaveTime;
+
   return regeneratorRuntime.async(function saveTime$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
@@ -206,7 +207,7 @@ function saveTime() {
           backColorsnumbers.classList.remove('alertRed');
 
           if (!idProject) {
-            _context3.next = 17;
+            _context3.next = 19;
             break;
           }
 
@@ -222,27 +223,40 @@ function saveTime() {
           swal("".concat(message.data.message, "!")).then(function () {
             location.reload();
           });
+          _context3.next = 24;
+          break;
 
-        case 17:
+        case 19:
+          console.log(typeOfButton);
+          _context3.next = 22;
+          return regeneratorRuntime.awrap(axios.post("/projects/setTimeInProject/461ace80-d817-484c-83ac-395871e95478/".concat(timeInHours, "/").concat(typeOfButton)));
+
+        case 22:
+          _message = _context3.sent;
+          swal("".concat(_message.data.message, "!")).then(function () {
+            location.reload();
+          });
+
+        case 24:
           buttonSaveTime = document.getElementById('saveTime');
           buttonSaveTime.innerHTML = '';
           h = 0;
           m = 0;
           s = 0;
-          _context3.next = 27;
+          _context3.next = 34;
           break;
 
-        case 24:
-          _context3.prev = 24;
+        case 31:
+          _context3.prev = 31;
           _context3.t0 = _context3["catch"](0);
           console.error(_context3.t0);
 
-        case 27:
+        case 34:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 24]]);
+  }, null, null, [[0, 31]]);
 }
 
 function disabledButtons(event) {
