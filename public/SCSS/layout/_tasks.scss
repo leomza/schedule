@@ -7,7 +7,8 @@
   grid-template-areas:
     "sidebar nav nav nav nav"
     "sidebar column4 column1 column2 column3"
-    ". column4 columnBottom . .";
+    "sidebar column4 columnBottom . ."
+    "sidebar . . . . ";
 }
 
 .nav {
