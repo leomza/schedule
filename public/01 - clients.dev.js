@@ -22,7 +22,10 @@ function handleNewClient(ev) {
 
           modalCreate.style.display = "none"; //When I create from the task Dashboard
 
-          modalCreateClient.style.display = "none";
+          if (modalCreateClient) {
+            modalCreateClient.style.display = "none";
+          }
+
           ev.target.reset();
           clientDetails = {
             clientname: clientname,

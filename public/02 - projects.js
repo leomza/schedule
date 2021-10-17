@@ -15,7 +15,9 @@ async function handleNewProject(ev) {
         //When I create from the project Dashboard
         modalCreate.style.display = "none";
         //When I create from the task Dashboard
+        if (modalCreateProject){
         modalCreateProject.style.display = "none";
+        }
 
         ev.target.reset();
 
