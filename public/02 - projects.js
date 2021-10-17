@@ -243,8 +243,13 @@ async function editProject(uuidProject) {
 
 //Function to show the client name in the Edit DOM
 async function showClientNameInDOM(clientId) {
-    const clientFound = await axios.get(`clients/findClient/${clientId}`);
-    return clientFound.data.foundClient.clientname;
+    let clientFound = await axios.get(`clients/findClient/${clientId}`);
+    if (!clientFound.data.foundClient) {
+        clientFound = 'No client assigned'
+        return clientFound;
+    } else {
+        return clientFound.data.foundClient.clientname;
+    }
 }
 
 //Handle Edit
@@ -257,8 +262,8 @@ async function handleEdit(ev) {
         status = status.value;
         totalHours = totalHours.valueAsNumber;
 
-        if (!projectName || !clientId || !projectType || !status || !totalHours)
-            throw new Error("You need to complete all the fields");
+        if (!projectName)
+            throw new Error("You need to complete the project name");
 
         if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
         modalEdit.style.display = "none";

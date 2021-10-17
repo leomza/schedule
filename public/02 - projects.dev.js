@@ -317,9 +317,19 @@ function showClientNameInDOM(clientId) {
 
         case 2:
           clientFound = _context6.sent;
+
+          if (clientFound.data.foundClient) {
+            _context6.next = 8;
+            break;
+          }
+
+          clientFound = 'No client assigned';
+          return _context6.abrupt("return", clientFound);
+
+        case 8:
           return _context6.abrupt("return", clientFound.data.foundClient.clientname);
 
-        case 4:
+        case 9:
         case "end":
           return _context6.stop();
       }
@@ -343,12 +353,12 @@ function handleEdit(ev) {
           status = status.value;
           totalHours = totalHours.valueAsNumber;
 
-          if (!(!projectName || !clientId || !projectType || !status || !totalHours)) {
+          if (projectName) {
             _context7.next = 9;
             break;
           }
 
-          throw new Error("You need to complete all the fields");
+          throw new Error("You need to complete the project name");
 
         case 9:
           if (modalEdit) {
