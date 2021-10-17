@@ -1,7 +1,7 @@
 "use strict";
 
 //Handle the form to create a new Project:
-var handleFormProject = document.querySelector("#formCreate");
+var handleFormProject = document.querySelector("#formCreateProject");
 handleFormProject.addEventListener('submit', handleNewProject);
 
 function handleNewProject(ev) {
@@ -18,8 +18,11 @@ function handleNewProject(ev) {
           clientId = selectClientName.value;
           projectType = projectType.value;
           status = status.value;
-          totalHours = totalHours.valueAsNumber;
-          modalCreate.style.display = "none";
+          totalHours = totalHours.valueAsNumber; //When I create from the project Dashboard
+
+          modalCreate.style.display = "none"; //When I create from the task Dashboard
+
+          modalCreateProject.style.display = "none";
           ev.target.reset();
           projectDetails = {
             projectName: projectName,
@@ -28,26 +31,26 @@ function handleNewProject(ev) {
             status: status,
             totalHours: totalHours
           };
-          _context.next = 13;
+          _context.next = 14;
           return regeneratorRuntime.awrap(axios.post('/projects/addNew', projectDetails));
 
-        case 13:
+        case 14:
           swal("Good job!", "New project added succesfully!", "success");
           renderProjects();
-          _context.next = 20;
+          _context.next = 21;
           break;
 
-        case 17:
-          _context.prev = 17;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 20:
+        case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 18]]);
 } //Function to get the names of the client in the "select Client Name"
 
 

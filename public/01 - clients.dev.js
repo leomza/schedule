@@ -1,7 +1,7 @@
 "use strict";
 
 //Handle the form to create a new Client:
-var handleFormClient = document.querySelector("#formCreate");
+var handleFormClient = document.querySelector("#formCreateClient");
 handleFormClient.addEventListener("submit", handleNewClient);
 
 function handleNewClient(ev) {
@@ -18,8 +18,11 @@ function handleNewClient(ev) {
           phone = phone.value;
           email = email.value;
           dealTime = dealTime.value;
-          callLimitPerDay = callLimitPerDay.value;
-          modalCreate.style.display = "none";
+          callLimitPerDay = callLimitPerDay.value; //When I create from the client Dashboard
+
+          modalCreate.style.display = "none"; //When I create from the task Dashboard
+
+          modalCreateClient.style.display = "none";
           ev.target.reset();
           clientDetails = {
             clientname: clientname,
@@ -28,27 +31,27 @@ function handleNewClient(ev) {
             dealTime: dealTime,
             callLimitPerDay: callLimitPerDay
           };
-          _context.next = 13;
+          _context.next = 14;
           return regeneratorRuntime.awrap(axios.post('/clients/register', clientDetails));
 
-        case 13:
+        case 14:
           swal("Good job!", "New user added succesfully!", "success").then(function () {
             renderClients();
           });
-          _context.next = 19;
+          _context.next = 20;
           break;
 
-        case 16:
-          _context.prev = 16;
+        case 17:
+          _context.prev = 17;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 19:
+        case 20:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 16]]);
+  }, null, null, [[0, 17]]);
 } //Render all the clients
 
 

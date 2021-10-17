@@ -1,5 +1,5 @@
 //Handle the form to create a new Project:
-const handleFormProject = document.querySelector("#formCreate");
+const handleFormProject = document.querySelector("#formCreateProject");
 handleFormProject.addEventListener('submit', handleNewProject);
 
 async function handleNewProject(ev) {
@@ -12,7 +12,11 @@ async function handleNewProject(ev) {
         status = status.value;
         totalHours = totalHours.valueAsNumber;
 
+        //When I create from the project Dashboard
         modalCreate.style.display = "none";
+        //When I create from the task Dashboard
+        modalCreateProject.style.display = "none";
+
         ev.target.reset();
 
         const projectDetails = { projectName, clientId, projectType, status, totalHours };
