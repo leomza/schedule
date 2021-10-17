@@ -16,7 +16,10 @@ async function handleNewClient(ev) {
     //When I create from the client Dashboard
     modalCreate.style.display = "none";
     //When I create from the task Dashboard
-    modalCreateClient.style.display = "none";
+    if (modalCreateClient) {
+      modalCreateClient.style.display = "none";
+    }
+    
     ev.target.reset();
 
     const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };

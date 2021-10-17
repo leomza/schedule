@@ -22,7 +22,10 @@ function handleNewProject(ev) {
 
           modalCreate.style.display = "none"; //When I create from the task Dashboard
 
-          modalCreateProject.style.display = "none";
+          if (modalCreateProject) {
+            modalCreateProject.style.display = "none";
+          }
+
           ev.target.reset();
           projectDetails = {
             projectName: projectName,
