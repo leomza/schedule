@@ -97,8 +97,8 @@ async function write() {
         }
 
         document.getElementById("hms").innerHTML = `<div class="cronometer--number">
-                                                    <p class="cronometer--number">${sAux}</p>
-                                                    <p class="cronometer--number">${mAux}</p>
+        <p class="cronometer--number">${mAux}</p>
+        <p class="cronometer--number">${sAux}</p>
                                                     </div>`;
     } catch (error) {
         console.error(error);
