@@ -134,8 +134,7 @@ async function saveTime() {
                 location.reload();
             })
         } else {
-            console.log(typeOfButton);
-            const message = await axios.post(`/projects/setTimeInProject/461ace80-d817-484c-83ac-395871e95478/${timeInHours}/${typeOfButton}`);
+            const message = await axios.post(`/projects/setTimeInProject/cb89b206-cad9-4e8f-bb41-7496c937798d/${timeInHours}/${typeOfButton}`);
             swal(`${message.data.message}!`).then(() => {
                 location.reload();
             })
