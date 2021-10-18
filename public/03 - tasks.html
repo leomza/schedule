@@ -31,8 +31,10 @@
       <section class="nav-bar container">
         <div class="nav-bar__search-bar" onkeyup="handleSearch()">
           <div class="nav-bar__search-bar__logo">
-          
-
+             
+            <div class="nav-bar__search-bar__logo__upnext">
+              <img src="./img/logo.png" alt="UpNext Logo">
+            </div>
 
             <div class="nav-bar__search-bar__logo__notification">
               <img src="./img/Group 706.png" alt="">
@@ -46,15 +48,15 @@
         <nav class="nav-bar__navigation">
           <div class="nav-bar__navigation__client">
             <a id="buttonModalClient">לקוחות</a>
-            <button id="buttonModalCreateClient" class="button-talbe">
+            <!-- <button id="buttonModalCreateClient" class="button-talbe">
               הוסף לקוח
-            </button>
+            </button> -->
           </div>
           <div class="nav-bar__navigation__project">
             <a id="buttonModalProject">פרויקטים</a>
-            <button id="buttonModalCreateProject" class="button-talbe">
+            <!-- <button id="buttonModalCreateProject" class="button-talbe">
               הוסף פרויקט
-            </button>
+            </button> -->
           </div>
           <div class="nav-bar__navigation__page">
             <a id="buttonModalSetting" onclick="editSettings()">הגדרות</a>
@@ -98,7 +100,7 @@
             </div>
           </div>
           <div id="buttonCreate1">
-            <button class="button-talbe">השדח המישמ</button>
+            <button class="button-talbe">משימה חדשה</button>
           </div>
 
           <div id="root"></div>
@@ -141,7 +143,7 @@
         <div class="task-title">
           <div class="task-title__content">
             <h3>לקוחות</h3>
-            <button id="buttonCreate" class="button-talbe">חדשk</button>
+            <button id="buttonCreate" class="button-talbe">חדש</button>
           </div>
         </div>
         <div id="rootProjectsDate"></div>
@@ -322,7 +324,7 @@
     <div class="modal-content">
 
 
-      <span id="closeCreateClient" class="close">&times;</span>
+      <span id="closeModalClient" class="close">&times;</span>
 
 
       <form id="formCreateClient">

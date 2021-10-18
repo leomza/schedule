@@ -230,6 +230,7 @@ async function setTextHTMLSaveTime(eventTarget, idProject) {
 
         buttonSaveTime.innerHTML = `<img src="${eventTarget.attributes.src.nodeValue}" alt="" />
                                     <p> ${nameOfTheProject} </p>`
+                                    console.log(eventTarget );
     } catch (error) {
         console.error(error);
     }

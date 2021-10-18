@@ -499,8 +499,8 @@ input[type="radio"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-preferred-size: calc(70% - 1rem);
-      flex-basis: calc(70% - 1rem);
+  -ms-flex-preferred-size: calc(80% - 1rem);
+      flex-basis: calc(80% - 1rem);
   margin-right: 2rem;
 }
 
@@ -512,16 +512,27 @@ input[type="radio"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -ms-flex-preferred-size: calc(30% - 1rem);
+      flex-basis: calc(30% - 1rem);
 }
 
-.nav .nav-bar__search-bar__logo__name {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #08a0f7;
+.nav .nav-bar__search-bar__logo__upnext {
+  -ms-flex-preferred-size: calc(80% - 1rem);
+      flex-basis: calc(80% - 1rem);
+  min-width: 10rem;
+  max-width: 15rem;
+}
+
+.nav .nav-bar__search-bar__logo__notification {
+  -ms-flex-preferred-size: calc(20% - 1rem);
+      flex-basis: calc(20% - 1rem);
+  min-width: 1.7rem;
 }
 
 .nav .nav-bar__search-bar input {
   width: 62.6rem;
+  -ms-flex-preferred-size: calc(70% - 1rem);
+      flex-basis: calc(70% - 1rem);
   background-color: #f4f7fc;
   border-radius: 20rem;
   border: none;
@@ -532,9 +543,9 @@ input[type="radio"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 5vw;
-  -ms-flex-preferred-size: calc(30% - 1rem);
-      flex-basis: calc(30% - 1rem);
+  gap: 2vw;
+  -ms-flex-preferred-size: calc(20% - 1rem);
+      flex-basis: calc(20% - 1rem);
 }
 
 .nav .nav-bar__navigation__client a {
@@ -657,9 +668,23 @@ input[type="radio"] {
   font-weight: 500;
 }
 
+.sidebar .content__smallest-sidebar .activity .cronometer-container #saveTime {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: 7px 0px;
+  cursor: pointer;
+}
+
 .sidebar .content__smallest-sidebar .activity .cronometer-container #saveTime p {
   text-align: center;
   font-size: 1.2rem;
+  font-weight: 700;
 }
 
 .sidebar .projects__list {
@@ -960,21 +985,6 @@ input[type="radio"] {
 
 .alertRed {
   -webkit-text-stroke: 1px red !important;
-}
-
-#saveTime {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
-  background: firebrick;
-  margin: 7px 0px;
-  cursor: pointer;
-}
-
-#saveTime p {
-  font-weight: bolder;
 }
 
 .showClients {
