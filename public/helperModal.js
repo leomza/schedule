@@ -66,10 +66,7 @@ buttonProject.addEventListener("click", openModalProject);
 function openModalProject() {
   try {
     modalProject.style.display = "block";
-    columnOne.style.display = "none";
-    columnTwo.style.display = "none";
-    columnThree.style.display = "none";
-    columnFour.style.display = "none";
+    
   } catch (error) {
     console.error(error);
   }
@@ -168,10 +165,7 @@ function closeModalProject() {
   try {
     modalProject.style.display = "none";
 
-    columnOne.style.display = "block";
-    columnTwo.style.display = "block";
-    columnThree.style.display = "block";
-    columnFour.style.display = "block";
+  
   } catch (error) {
     console.error(error);
   }
