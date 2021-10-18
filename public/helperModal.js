@@ -61,17 +61,18 @@ if (buttonClient) {
   }
 }
 
-buttonProject.addEventListener("click", openModalProject);
-
-function openModalProject() {
-  try {
-    modalProject.style.display = "block";
-    columnOne.style.display = "none";
-    columnTwo.style.display = "none";
-    columnThree.style.display = "none";
-    columnFour.style.display = "none";
-  } catch (error) {
-    console.error(error);
+if (buttonProject) {
+  buttonProject.addEventListener("click", openModalProject);
+  function openModalProject() {
+    try {
+      modalProject.style.display = "block";
+      columnOne.style.display = "none";
+      columnTwo.style.display = "none";
+      columnThree.style.display = "none";
+      columnFour.style.display = "none";
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 
@@ -88,27 +89,27 @@ if (buttonSetting) {
 }
 
 if (buttonCreateProject) {
-    buttonCreateProject.addEventListener('click', openModalCreateProject);
-    function openModalCreateProject() {
-        try {
-            modalCreateProject.style.display = "block";
-            modalCreateProject.classList.add("showModal");
-        } catch (error) {
-            console.error(error);
-        };
-    }
+  buttonCreateProject.addEventListener('click', openModalCreateProject);
+  function openModalCreateProject() {
+    try {
+      modalCreateProject.style.display = "block";
+      modalCreateProject.classList.add("showModal");
+    } catch (error) {
+      console.error(error);
+    };
+  }
 };
 
 if (buttonCreateClient) {
-    buttonCreateClient.addEventListener('click', openModalCreateClient);
-    function openModalCreateClient() {
-        try {
-            modalCreateClient.style.display = "block";
-            modalCreateClient.classList.add("showModal");
-        } catch (error) {
-            console.error(error);
-        };
-    }
+  buttonCreateClient.addEventListener('click', openModalCreateClient);
+  function openModalCreateClient() {
+    try {
+      modalCreateClient.style.display = "block";
+      modalCreateClient.classList.add("showModal");
+    } catch (error) {
+      console.error(error);
+    };
+  }
 };
 
 // When the user clicks on <span> (x), close the modal
@@ -131,11 +132,11 @@ if (closeSetting) {
 }
 
 if (closeCreateProject) {
-    closeCreateProject.addEventListener('click', closeModalCreateProject);
+  closeCreateProject.addEventListener('click', closeModalCreateProject);
 }
 
 if (closeCreateClient) {
-    closeCreateClient.addEventListener('click', closeModalCreateClient);
+  closeCreateClient.addEventListener('click', closeModalCreateClient);
 }
 
 closeEdit.addEventListener('click', closeModalEdit);
@@ -186,42 +187,42 @@ function closeModalEdit() {
 }
 
 function closeModalSetting() {
-    try {
-        modalSetting.style.display = "none";
-    } catch (error) {
-        console.error(error);
-    };
+  try {
+    modalSetting.style.display = "none";
+  } catch (error) {
+    console.error(error);
+  };
 };
 
 function closeModalCreateProject() {
-    try {
-        modalCreateProject.style.display = "none";
-    } catch (error) {
-        console.error(error);
-    };
+  try {
+    modalCreateProject.style.display = "none";
+  } catch (error) {
+    console.error(error);
+  };
 };
 
 function closeModalCreateClient() {
-    try {
-        modalCreateClient.style.display = "none";
-    } catch (error) {
-        console.error(error);
-    };
+  try {
+    modalCreateClient.style.display = "none";
+  } catch (error) {
+    console.error(error);
+  };
 };
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
-    try {
-        if (event.target === modalUpload || event.target === modalEdit || event.target === modalDescription || event.target === modalClient || event.target === modalProject || event.target === modalSetting || event.target === modalCreateProject || event.target === modalCreateClient) {
-            modalUpload.style.display = "none";
-            modalDescription.style.display = "none";
-            modalEdit.style.display = "none";
-            modalClient.style.display = "none";
-            modalProject.style.display = "none";
-            modalSetting.style.display = "none";
-            modalCreateProject.style.display = "none";
-            modalCreateClient.style.display = "none";
-        }s
-    } catch (error) {
-        console.error(error);
-    };
+  try {
+    if (event.target === modalUpload || event.target === modalEdit || event.target === modalDescription || event.target === modalClient || event.target === modalProject || event.target === modalSetting || event.target === modalCreateProject || event.target === modalCreateClient) {
+      modalUpload.style.display = "none";
+      modalDescription.style.display = "none";
+      modalEdit.style.display = "none";
+      modalClient.style.display = "none";
+      modalProject.style.display = "none";
+      modalSetting.style.display = "none";
+      modalCreateProject.style.display = "none";
+      modalCreateClient.style.display = "none";
+    }
+  } catch (error) {
+    console.error(error);
+  };
 };
