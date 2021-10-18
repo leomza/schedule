@@ -185,7 +185,9 @@ async function renderProjects() {
             });
         };
 
-        let html = projectsToShow.map(element => {
+        const projectsToShowSorted = projectsToShow.sort((a, b) => a.projectName.localeCompare(b.projectName))
+
+        let html = projectsToShowSorted.map(element => {
             return (
                 `<div class="projects__list" >
                     <p> ${element.projectName} </p>

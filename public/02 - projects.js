@@ -73,7 +73,9 @@ async function renderProjects(projectsToShow) {
             });
         };
 
-        let html = projectsToShow.map(element => {
+        const projectToShowSorted = projectsToShow.sort((a, b) => a.projectName.localeCompare(b.projectName))
+
+        let html = projectToShowSorted.map(element => {
             timeInProject = convertTimeToMinuteAndHours(element.usedHours);
             timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
             return (
