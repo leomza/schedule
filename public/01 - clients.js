@@ -43,7 +43,9 @@ async function renderClients(clientsToShow) {
       clientsToShow = clientsInfo.data.infoClients;
     }
 
-    let html = clientsToShow.map((element) => {
+    const clientsToShowSorted = clientsToShow.sort((a, b) => a.clientname.localeCompare(b.clientname))
+
+    let html = clientsToShowSorted.map((element) => {
       return `<tr>
             <td>${element.clientname}</td>
             <td>${element.phone}</td> 

@@ -98,7 +98,7 @@ async function write() {
 
         document.getElementById("hms").innerHTML = `<div class="cronometer--number">
         <p class="cronometer--number">${mAux}</p>
-        <p class="cronometer--number">${sAux}</p>
+        <p class="cronometer--number">${hAux}</p>
                                                     </div>`;
     } catch (error) {
         console.error(error);
@@ -185,7 +185,9 @@ async function renderProjects() {
             });
         };
 
-        let html = projectsToShow.map(element => {
+        const projectsToShowSorted = projectsToShow.sort((a, b) => a.projectName.localeCompare(b.projectName))
+
+        let html = projectsToShowSorted.map(element => {
             return (
                 `<div class="projects__list" >
                     <p> ${element.projectName} </p>
@@ -229,7 +231,6 @@ async function setTextHTMLSaveTime(eventTarget, idProject) {
 
         buttonSaveTime.innerHTML = `<img src="${eventTarget.attributes.src.nodeValue}" alt="" />
                                     <p> ${nameOfTheProject} </p>`
-                                    console.log(eventTarget );
     } catch (error) {
         console.error(error);
     }
