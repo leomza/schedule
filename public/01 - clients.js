@@ -14,11 +14,11 @@ async function handleNewClient(ev) {
     callLimitPerDay = callLimitPerDay.value;
 
     //When I create from the client Dashboard
-    modalCreate.style.display = "none";
-    //When I create from the task Dashboard
-    if (modalCreateClient) {
-      modalCreateClient.style.display = "none";
-    }
+    // modalCreate.style.display = "none";
+    // //When I create from the task Dashboard
+    // if (modalCreateClient) {
+    //   modalCreateClient.style.display = "none";
+    // }
     
     ev.target.reset();
 

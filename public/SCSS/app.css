@@ -212,12 +212,12 @@ button {
 
 .select-box .options-container::-webkit-scrollbar {
   width: 8px;
-  background: #E4E4E4;
+  background: #e4e4e4;
   border-radius: 0 8px 8px 0;
 }
 
 .select-box .options-container::-webkit-scrollbar-thumb {
-  background: #E4E4E4;
+  background: #e4e4e4;
   border-radius: 0 8px 8px 0;
 }
 
@@ -234,7 +234,7 @@ button {
 }
 
 .select-box .option:hover {
-  background: #E4E4E4;
+  background: #e4e4e4;
 }
 
 .select-box label {
@@ -255,18 +255,18 @@ button {
 
 #tblData th {
   font-weight: 400;
-  background-color: #E8E8E8;
-  color: #25282B;
+  background-color: #e8e8e8;
+  color: #25282b;
 }
 
 #tblData td {
-  color: #52575C;
+  color: #52575c;
 }
 
 #tblData td,
 #tblData th {
   padding: 1.2rem;
-  border-bottom: 1px solid #DBDDE0;
+  border-bottom: 1px solid #dbdde0;
   height: 56px;
 }
 
@@ -309,7 +309,7 @@ button {
 }
 
 .modal-content .close {
-  color: #95A3B9;
+  color: #95a3b9;
 }
 
 /* Close Button */
@@ -465,6 +465,25 @@ input[type="radio"] {
   gap: 2rem;
   grid-auto-flow: row;
       grid-template-areas: "sidebar nav nav nav nav" "sidebar column4 column1 column2 column3" "sidebar column4 columnBottom . ." "sidebar . . . . ";
+}
+
+.container-table {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+      grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+  gap: 2rem;
+  grid-auto-flow: row;
+      grid-template-areas: "sidebar nav nav nav nav" "sidebar tables tables tables tables" "sidebar tables tables tables tables" "sidebar . . . . ";
+}
+
+.tables {
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 4;
+  grid-area: tables;
+  display: none;
 }
 
 .nav {

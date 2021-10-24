@@ -11,6 +11,21 @@
     "sidebar . . . . ";
 }
 
+.container-table {
+  display: grid;
+  grid-template-columns: 1fr 2.5fr 2.1fr 2.1fr 2.1fr;
+  gap: 2rem;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "sidebar nav nav nav nav"
+    "sidebar tables tables tables tables"
+    "sidebar tables tables tables tables"
+    "sidebar . . . . ";
+}
+.tables {
+  grid-area: tables;
+  display: none;
+}
 .nav {
   grid-area: nav;
 
@@ -178,7 +193,7 @@
         #saveTime {
           display: flex;
           align-items: center;
-           justify-content: space-around;
+          justify-content: space-around;
           // background: firebrick;
           margin: 7px 0px;
           cursor: pointer;

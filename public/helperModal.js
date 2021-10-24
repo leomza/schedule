@@ -32,9 +32,59 @@ const columnOne = document.querySelector(".column1");
 const columnTwo = document.querySelector(".column2");
 const columnThree = document.querySelector(".column3");
 const columnFour = document.querySelector(".column4");
+const columnGrid = document.querySelector(".container-column");
+const columnBottom = document.querySelector(".columnBottom");
+const tableGrid = document.querySelector(".container-table");
+const gridColumns = document.getElementById("grid-columns");
+const tables = document.querySelector(".tables");
+const clientsHtml = document.querySelector(".clients");
+const projectsHtml = document.querySelector(".projects");
 
+//*Close Tables
+const closeTables = document.getElementById("closeTable");
 // When the user clicks the button, open the modal
 buttonUpload.addEventListener("click", openModal);
+
+const openTableClients = () => {
+  gridColumns.classList.remove("container-column");
+  gridColumns.classList.add("container-table");
+  columnOne.style.display = "none";
+  columnTwo.style.display = "none";
+  columnThree.style.display = "none";
+  columnFour.style.display = "none";
+  columnBottom.style.display = "none";
+  tables.style.display = "block";
+  clientsHtml.style.display = "block";
+  projectsHtml.style.display = "none";
+};
+buttonClient.addEventListener("click", openTableClients);
+const openTableProjects = () => {
+  gridColumns.classList.remove("container-column");
+  gridColumns.classList.add("container-table");
+  columnOne.style.display = "none";
+  columnTwo.style.display = "none";
+  columnThree.style.display = "none";
+  columnFour.style.display = "none";
+  columnBottom.style.display = "none";
+  tables.style.display = "block";
+  clientsHtml.style.display = "none";
+  projectsHtml.style.display = "block";
+};
+buttonProject.addEventListener("click", openTableProjects);
+
+const closAllTables = () => {
+  gridColumns.classList.remove("container-table");
+  gridColumns.classList.add("container-column");
+  columnOne.style.display = "block";
+  columnTwo.style.display = "block";
+  columnThree.style.display = "block";
+  columnFour.style.display = "block";
+  columnBottom.style.display = "block";
+  tables.style.display = "none";
+};
+
+closeTables.addEventListener("click", closAllTables);
+
 
 if (buttonUpload1) {
   buttonUpload1.addEventListener("click", openModal);
@@ -66,7 +116,6 @@ buttonProject.addEventListener("click", openModalProject);
 function openModalProject() {
   try {
     modalProject.style.display = "block";
-    
   } catch (error) {
     console.error(error);
   }
@@ -85,28 +134,28 @@ if (buttonSetting) {
 }
 
 if (buttonCreateProject) {
-  buttonCreateProject.addEventListener('click', openModalCreateProject);
+  buttonCreateProject.addEventListener("click", openModalCreateProject);
   function openModalCreateProject() {
     try {
       modalCreateProject.style.display = "block";
       modalCreateProject.classList.add("showModal");
     } catch (error) {
       console.error(error);
-    };
+    }
   }
-};
+}
 
 if (buttonCreateClient) {
-  buttonCreateClient.addEventListener('click', openModalCreateClient);
+  buttonCreateClient.addEventListener("click", openModalCreateClient);
   function openModalCreateClient() {
     try {
       modalCreateClient.style.display = "block";
       modalCreateClient.classList.add("showModal");
     } catch (error) {
       console.error(error);
-    };
+    }
   }
-};
+}
 
 // When the user clicks on <span> (x), close the modal
 closeUpload.addEventListener("click", closeModal);
@@ -128,14 +177,14 @@ if (closeSetting) {
 }
 
 if (closeCreateProject) {
-  closeCreateProject.addEventListener('click', closeModalCreateProject);
+  closeCreateProject.addEventListener("click", closeModalCreateProject);
 }
 
 if (closeCreateClient) {
-  closeCreateClient.addEventListener('click', closeModalCreateClient);
+  closeCreateClient.addEventListener("click", closeModalCreateClient);
 }
 
-closeEdit.addEventListener('click', closeModalEdit);
+closeEdit.addEventListener("click", closeModalEdit);
 
 function closeModal() {
   try {
@@ -164,8 +213,6 @@ function closeModalClient() {
 function closeModalProject() {
   try {
     modalProject.style.display = "none";
-
-  
   } catch (error) {
     console.error(error);
   }
@@ -184,28 +231,37 @@ function closeModalSetting() {
     modalSetting.style.display = "none";
   } catch (error) {
     console.error(error);
-  };
-};
+  }
+}
 
 function closeModalCreateProject() {
   try {
     modalCreateProject.style.display = "none";
   } catch (error) {
     console.error(error);
-  };
-};
+  }
+}
 
 function closeModalCreateClient() {
   try {
     modalCreateClient.style.display = "none";
   } catch (error) {
     console.error(error);
-  };
-};
+  }
+}
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
   try {
-    if (event.target === modalUpload || event.target === modalEdit || event.target === modalDescription || event.target === modalClient || event.target === modalProject || event.target === modalSetting || event.target === modalCreateProject || event.target === modalCreateClient) {
+    if (
+      event.target === modalUpload ||
+      event.target === modalEdit ||
+      event.target === modalDescription ||
+      event.target === modalClient ||
+      event.target === modalProject ||
+      event.target === modalSetting ||
+      event.target === modalCreateProject ||
+      event.target === modalCreateClient
+    ) {
       modalUpload.style.display = "none";
       modalDescription.style.display = "none";
       modalEdit.style.display = "none";
@@ -217,5 +273,5 @@ window.onclick = function (event) {
     }
   } catch (error) {
     console.error(error);
-  };
+  }
 };

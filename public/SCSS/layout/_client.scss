@@ -25,7 +25,6 @@ button {
   cursor: not-allowed;
 }
 
-
 .select-box {
   display: flex;
   width: 292px;
@@ -33,7 +32,7 @@ button {
   flex-direction: column;
 }
 
-.select-box   .options-container {
+.select-box .options-container {
   background: #ffffff;
   color: #000000;
   max-height: 0;
@@ -42,7 +41,7 @@ button {
   transition: all 0.4s;
   border-radius: 8px;
   overflow: hidden;
-  
+
   order: 1;
   position: absolute;
   z-index: 100;
@@ -56,7 +55,7 @@ button {
 //   transition: all 0.4s;
 //   border-radius: 8px;
 //   // overflow: hidden;
-  
+
 //   order: 2;
 // }
 
@@ -66,16 +65,15 @@ button {
   margin-bottom: 8px;
   color: #000000;
   position: relative;
-display: flex;
-align-items: center;
-gap: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
   order: 0;
-  &__work{
-    p{
+  &__work {
+    p {
       font-size: 1.2rem;
       font-weight: $regular;
     }
-    
   }
 }
 
@@ -96,7 +94,7 @@ gap: 2rem;
 
 .select-box .options-container.active {
   max-height: 240px;
-   max-width: 296px;
+  max-width: 296px;
   opacity: 1;
   overflow-y: scroll;
   margin-top: 54px;
@@ -109,27 +107,27 @@ gap: 2rem;
 
 .select-box .options-container::-webkit-scrollbar {
   width: 8px;
-  background: #E4E4E4;
+  background: #e4e4e4;
   border-radius: 0 8px 8px 0;
 }
 
 .select-box .options-container::-webkit-scrollbar-thumb {
-  background: #E4E4E4;
+  background: #e4e4e4;
   border-radius: 0 8px 8px 0;
 }
 
 .select-box .option,
 .selected {
-  padding: 12px ;
+  padding: 12px;
   cursor: pointer;
 }
-.selected{
+.selected {
   display: flex;
 }
 .select-box .option:hover {
-  background: #E4E4E4;
+  background: #e4e4e4;
 }
- 
+
 .select-box label {
   cursor: pointer;
 }
@@ -144,38 +142,29 @@ gap: 2rem;
   text-align: right;
   border-collapse: collapse;
   margin: 0 0 1rem 0;
- 
+
   caption-side: top;
-  
- 
-  th{
+
+  th {
     font-weight: $regular;
-    background-color: #E8E8E8;
-    color: #25282B;
-   
+    background-color: #e8e8e8;
+    color: #25282b;
   }
-  td{
-   
-   
-    color: #52575C;
-  
+  td {
+    color: #52575c;
   }
   td,
   th {
     padding: 1.2rem;
-    
-    border-bottom: 1px solid #DBDDE0;
+
+    border-bottom: 1px solid #dbdde0;
     height: 56px;
-    
   }
-  
 }
 // .icons{
-   
+
 //     display: flex;
 //     justify-content: space-between;
-    
-  
 
 // }
 // .activity {
@@ -196,7 +185,7 @@ gap: 2rem;
   top: 0;
   width: 100%;
   height: 100%;
-  
+
   overflow: auto;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.4);
@@ -211,25 +200,24 @@ gap: 2rem;
     width: 348px;
     height: 472px;
     box-shadow: 0px 30px 60px rgba(32, 56, 85, 0.15);
-border-radius: 8px;
+    border-radius: 8px;
     position: relative;
     bottom: 100px;
     background: #ffffff;
-    .close{
-      color: #95A3B9;
-      
+    .close {
+      color: #95a3b9;
     }
-  }
+  } 
 }
 
 /* Close Button */
- .close {
-//   color: white;
-//   float: right;
-   font-size: 28px;
-    font-weight: bold;
-   cursor: pointer;
-//   position: relative;
-//   bottom: 15px;
-//   left: 50px;
-  }
+.close {
+  //   color: white;
+  //   float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  //   position: relative;
+  //   bottom: 15px;
+  //   left: 50px;
+}
