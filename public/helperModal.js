@@ -57,7 +57,11 @@ const openTableClients = () => {
   clientsHtml.style.display = "block";
   projectsHtml.style.display = "none";
 };
-buttonClient.addEventListener("click", openTableClients);
+
+if (buttonClient) {
+  buttonClient.addEventListener("click", openTableClients);
+}
+
 const openTableProjects = () => {
   gridColumns.classList.remove("container-column");
   gridColumns.classList.add("container-table");
@@ -70,9 +74,12 @@ const openTableProjects = () => {
   clientsHtml.style.display = "none";
   projectsHtml.style.display = "block";
 };
-buttonProject.addEventListener("click", openTableProjects);
 
-const closAllTables = () => {
+if (buttonProject) {
+  buttonProject.addEventListener("click", openTableProjects);
+}
+
+const closeAllTables = () => {
   gridColumns.classList.remove("container-table");
   gridColumns.classList.add("container-column");
   columnOne.style.display = "block";
@@ -83,8 +90,9 @@ const closAllTables = () => {
   tables.style.display = "none";
 };
 
-closeTables.addEventListener("click", closAllTables);
-
+if (closeTables) {
+  closeTables.addEventListener("click", closeAllTables);
+}
 
 if (buttonUpload1) {
   buttonUpload1.addEventListener("click", openModal);
@@ -101,17 +109,21 @@ function openModal() {
 
 if (buttonClient) {
   buttonClient.addEventListener("click", openModalClient);
-  function openModalClient() {
-    try {
-      modalClient.style.display = "block";
-      modalClient.classList.add("showModal");
-    } catch (error) {
-      console.error(error);
-    }
+}
+
+function openModalClient() {
+  try {
+    modalClient.style.display = "block";
+    modalClient.classList.add("showModal");
+  } catch (error) {
+    console.error(error);
   }
 }
 
-buttonProject.addEventListener("click", openModalProject);
+
+if (buttonProject) {
+  buttonProject.addEventListener("click", openModalProject);
+}
 
 function openModalProject() {
   try {
