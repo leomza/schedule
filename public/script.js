@@ -12,6 +12,7 @@ async function doingSubmitLogin(ev) {
         ev.target.reset();
         const userDetails = { email, password }
         const userLogin = await axios.post('/users/login', userDetails);
+        localStorage.setItem('userInformation', JSON.stringify(email));
         location.href = `03 - tasks.html`;
     } catch (error) {
         swal("Ohhh no!", error.response.data, "warning");

@@ -89,3 +89,19 @@ export class Users {
         }
     }
 }
+
+export class TimerUser {
+    uuid: string;
+    idProject: string;
+    typeOfButton: string;
+    userEmail: string;
+    timeInHours: number;
+
+    constructor(idProject: string, typeOfButton: string, userEmail: string, timeInHours: number) {
+        this.uuid = uuidv4();
+        this.idProject = idProject;
+        this.typeOfButton = typeOfButton;
+        this.userEmail = userEmail;
+        this.timeInHours = timeInHours;
+    }
+}

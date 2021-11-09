@@ -2,4 +2,10 @@
     "uuid": "13390d3f-db61-4b03-acff-a9ef3fbf301c",
     "email": "pepe@pepe.com",
     "password": "123"
+}, {
+    "email": "juan@juan.com",
+    "password": "123"
+}, {
+    "email": "leo@leo.com",
+    "password": "123"
 }]

@@ -1,14 +1,32 @@
 //Cronometer
-function init() {
+async function init() {
     try {
         document.querySelector("#saveTime").addEventListener("click", saveTime);
-        h = 0;
-        m = 0;
-        s = 0;
-        document.getElementById("hms").innerHTML = `<div class="cronometer--number">
-                                                    <p >00</p>
-                                                    <p >00</p>
-                                                    </div>`;
+        await checkCronometer()
+        if (previousClock.data.foundTimer) {
+            h = previousClock.data.foundTimer.hours;
+            m = previousClock.data.foundTimer.minutes;
+            s = previousClock.data.foundTimer.seconds;
+            document.getElementById("hms").innerHTML = `<div class="cronometer--number">
+            <p >${h}</p>
+            <p >${m}</p>
+            </div>`;
+
+            //Get the element to insert the text
+            const buttonSaveTime = document.getElementById('saveTime');
+            const projectFound = await axios.get(`projects/findProject/${previousClock.data.foundTimer.idProject}`);
+            nameOfTheProject = projectFound.data.foundProject.projectName;
+            buttonSaveTime.innerHTML = `<p> ${nameOfTheProject} </p>`
+            write(event, previousClock.data.foundTimer.idProject, previousClock.data.foundTimer.typeOfButton, 999)
+        } else {
+            h = 0;
+            m = 0;
+            s = 0;
+            document.getElementById("hms").innerHTML = `<div class="cronometer--number">
+                                                        <p >00</p>
+                                                        <p >00</p>
+                                                        </div>`;
+        }
     } catch (error) {
         console.error(error);
     }
@@ -22,6 +40,12 @@ let limitCallForTheClient;
 let generalCallTime;
 let generalRecreationTime;
 let generalEatTime;
+
+//Get the email of the user from the localStorage to save the time second by second
+const userEmail = JSON.parse(localStorage.getItem('userInformation'));
+
+//This variable is going to contain all the information when I load the page for the first time and I already have information in the clock
+let previousClock;
 
 async function cronometer(event, projectId, typeActivity, limitPerDay) {
     try {
@@ -54,7 +78,7 @@ async function cronometer(event, projectId, typeActivity, limitPerDay) {
         setTextHTMLSaveTime(eventTarget, idProject);
         disabledButtons(event);
         write();
-        id = setInterval(write, 1000);
+        id = setInterval(write, 100);
     } catch (error) {
         console.error(error);
     }
@@ -88,17 +112,22 @@ async function write() {
             swal("Alert", `You have been eating for more than ${generalEatTime} minutes`, "warning");
         }
 
-        //Condition to send an email
-        if (h == 1 && m == 0 && s == 0 && typeOfButton === 'call') {
-            await axios.post(`/tasks/sendEmail/${typeOfButton}`);
+        /*         //Condition to send an email
+                if (h == 1 && m == 0 && s == 0 && typeOfButton === 'call') {
+                    await axios.post(`/tasks/sendEmail/${typeOfButton}`);
+        
+                } else if (h == 1 && m == 30 && s == 0 && (typeOfButton === 'recreation' || typeOfButton === 'eat')) {
+                    await axios.post(`/tasks/sendEmail/${typeOfButton}`);
+                } */
 
-        } else if (h == 1 && m == 30 && s == 0 && (typeOfButton === 'recreation' || typeOfButton === 'eat')) {
-            await axios.post(`/tasks/sendEmail/${typeOfButton}`);
-        }
+        //Save the time in the server second by second for the user that is logged in
+        let timeInHours = [h, m, s]
+        const information = { idProject, typeOfButton, userEmail, timeInHours }
+        await axios.post(`/users/saveTime`, information)
 
         document.getElementById("hms").innerHTML = `<div class="cronometer--number">
-        <p class="cronometer--number">${mAux}</p>
-        <p class="cronometer--number">${hAux}</p>
+                                                        <p class="cronometer--number">${mAux}</p>
+                                                        <p class="cronometer--number">${hAux}</p>
                                                     </div>`;
     } catch (error) {
         console.error(error);
@@ -114,12 +143,14 @@ async function saveTime() {
         <p >00</p>
         </div>`;
 
-        eventTarget.classList.remove('button__brightness')
+        if (!previousClock.data.foundTimer) {
+            eventTarget.classList.remove('button__brightness')
 
-        userActivities.forEach(activity => {
-            activity.disabled = false;
-            activity.classList.remove('button__disabled')
-        })
+            userActivities.forEach(activity => {
+                activity.disabled = false;
+                activity.classList.remove('button__disabled')
+            })
+        }
 
         let timeInHours = h + (m / 60) + (s / 60 / 60);
         timeInHours = parseFloat(timeInHours);
@@ -134,10 +165,14 @@ async function saveTime() {
                 location.reload();
             })
         } else {
-            const message = await axios.post(`/projects/setTimeInProject/cb89b206-cad9-4e8f-bb41-7496c937798d/${timeInHours}/${typeOfButton}`);
+            const message = await axios.post(`/projects/setTimeInProject/e62aea63-9e38-463f-a4fa-13eb982b9ddc/${timeInHours}/${typeOfButton}`);
             swal(`${message.data.message}!`).then(() => {
                 location.reload();
             })
+        }
+
+        if (previousClock) {
+            await axios.delete(`/users/previousClock/${userEmail}`);
         }
 
         const buttonSaveTime = document.getElementById('saveTime');
@@ -235,3 +270,15 @@ async function setTextHTMLSaveTime(eventTarget, idProject) {
         console.error(error);
     }
 };
+
+//When the page load for first time is going to check the cronometer:
+async function checkCronometer() {
+    try {
+        const timeData = await axios.get(`users/checkTime/${userEmail}`);
+        if (timeData) {
+            previousClock = timeData;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
