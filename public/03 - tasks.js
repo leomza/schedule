@@ -5,16 +5,18 @@ handleForm.addEventListener('submit', handleNewTask);
 async function handleNewTask(ev) {
     try {
         ev.preventDefault();
-        let { taskName, description, limitDate, projectId } = ev.target.elements
+        let { taskName, description, limitDate, projectId, status, flag } = ev.target.elements
         taskName = taskName.value;
         description = description.value;
         limitDate = limitDate.value;
         projectId = selectProjectName.value;
+        status = status.value;
+        flag = flag.value
 
         modalCreate.style.display = "none";
         ev.target.reset();
 
-        const taskDetails = { taskName, description, limitDate, projectId };
+        const taskDetails = { taskName, description, limitDate, projectId, status, flag };
         const tasksCreated = await axios.post('/tasks/newTask', taskDetails);
 
         //Push the task to the project

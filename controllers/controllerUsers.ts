@@ -64,7 +64,7 @@ export async function saveTimeUser(req, res) {
     try {
         //Initialice a new instance of Users (the initialization will read the JSON of Users)
         const { idProject, typeOfButton, userEmail, timeInHours } = req.body;
-console.log(req.body);
+
         switch (userEmail) {
             case 'pepe@pepe.com':
                 await timerUsersDb.doc('b8d9c5b2-72b3-4510-8d19-8c686fcfd098').set({

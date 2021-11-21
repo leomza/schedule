@@ -23,7 +23,7 @@ function init() {
           s = previousClock.data.foundTimer.seconds;
           document.getElementById("hms").innerHTML = "<div class=\"cronometer--number\">\n            <p >".concat(h, "</p>\n            <p >").concat(m, "</p>\n            </div>"); //Get the element to insert the text
 
-          buttonSaveTime = document.getElementById('saveTime');
+          buttonSaveTime = document.getElementById("saveTime");
           _context.next = 12;
           return regeneratorRuntime.awrap(axios.get("projects/findProject/".concat(previousClock.data.foundTimer.idProject)));
 
@@ -67,7 +67,7 @@ var generalCallTime;
 var generalRecreationTime;
 var generalEatTime; //Get the email of the user from the localStorage to save the time second by second
 
-var userEmail = JSON.parse(localStorage.getItem('userInformation')); //This variable is going to contain all the information when I load the page for the first time and I already have information in the clock
+var userEmail = JSON.parse(localStorage.getItem("userInformation")); //This variable is going to contain all the information when I load the page for the first time and I already have information in the clock
 
 var previousClock;
 
@@ -82,7 +82,7 @@ function cronometer(event, projectId, typeActivity, limitPerDay) {
           idProject = projectId;
           typeOfButton = typeActivity;
 
-          if (!(limitPerDay === 'general')) {
+          if (!(limitPerDay === "general")) {
             _context2.next = 21;
             break;
           }
@@ -94,7 +94,7 @@ function cronometer(event, projectId, typeActivity, limitPerDay) {
           generalTime = _context2.sent;
           infoSettings = generalTime.data.infoSettings;
           _context2.t0 = typeOfButton;
-          _context2.next = _context2.t0 === 'call' ? 12 : _context2.t0 === 'recreation' ? 15 : _context2.t0 === 'eat' ? 18 : 21;
+          _context2.next = _context2.t0 === "call" ? 12 : _context2.t0 === "recreation" ? 15 : _context2.t0 === "eat" ? 18 : 21;
           break;
 
         case 12:
@@ -117,7 +117,7 @@ function cronometer(event, projectId, typeActivity, limitPerDay) {
           setTextHTMLSaveTime(eventTarget, idProject);
           disabledButtons(event);
           write();
-          id = setInterval(write, 100);
+          id = setInterval(write, 1000);
           _context2.next = 31;
           break;
 
@@ -176,33 +176,48 @@ function write() {
             hAux = h;
           }
 
-          if ((m == generalCallTime || m == limitCallForTheClient) && s == 0 && typeOfButton === 'call') {
-            backColorsnumbers = document.querySelector('.cronometer');
-            backColorsnumbers.classList.add('alertRed');
+          if ((m == generalCallTime || m == limitCallForTheClient) && s == 0 && typeOfButton === "call") {
+            backColorsnumbers = document.querySelector(".cronometer");
+            backColorsnumbers.classList.add("alertRed");
             limitCallForTheClient ? swal("Alert", "You have been in a call for more than ".concat(limitCallForTheClient, " minutes"), "warning") : swal("Alert", "You have been in a call for more than ".concat(generalCallTime, " minutes"), "warning");
-          } else if (m == generalRecreationTime && s == 0 && typeOfButton === 'recreation') {
-            _backColorsnumbers = document.querySelector('.cronometer');
+          } else if (m == generalRecreationTime && s == 0 && typeOfButton === "recreation") {
+            _backColorsnumbers = document.querySelector(".cronometer");
 
-            _backColorsnumbers.classList.add('alertRed');
+            _backColorsnumbers.classList.add("alertRed");
 
             swal("Alert", "You have been at rest for more than ".concat(generalRecreationTime, " minutes"), "warning");
-          } else if (m == generalEatTime && s == 0 && typeOfButton === 'eat') {
-            _backColorsnumbers2 = document.querySelector('.cronometer');
+          } else if (m == generalEatTime && s == 0 && typeOfButton === "eat") {
+            _backColorsnumbers2 = document.querySelector(".cronometer");
 
-            _backColorsnumbers2.classList.add('alertRed');
+            _backColorsnumbers2.classList.add("alertRed");
 
             swal("Alert", "You have been eating for more than ".concat(generalEatTime, " minutes"), "warning");
+          } //Condition to send an email
+
+
+          if (!(h == 1 && m == 0 && s == 0 && typeOfButton === "call")) {
+            _context3.next = 14;
+            break;
           }
-          /*         //Condition to send an email
-                  if (h == 1 && m == 0 && s == 0 && typeOfButton === 'call') {
-                      await axios.post(`/tasks/sendEmail/${typeOfButton}`);
-          
-                  } else if (h == 1 && m == 30 && s == 0 && (typeOfButton === 'recreation' || typeOfButton === 'eat')) {
-                      await axios.post(`/tasks/sendEmail/${typeOfButton}`);
-                  } */
+
+          _context3.next = 12;
+          return regeneratorRuntime.awrap(axios.post("/tasks/sendEmail/".concat(typeOfButton)));
+
+        case 12:
+          _context3.next = 17;
+          break;
+
+        case 14:
+          if (!(h == 1 && m == 30 && s == 0 && (typeOfButton === "recreation" || typeOfButton === "eat"))) {
+            _context3.next = 17;
+            break;
+          }
+
+          _context3.next = 17;
+          return regeneratorRuntime.awrap(axios.post("/tasks/sendEmail/".concat(typeOfButton)));
+
+        case 17:
           //Save the time in the server second by second for the user that is logged in
-
-
           timeInHours = [h, m, s];
           information = {
             idProject: idProject,
@@ -210,25 +225,25 @@ function write() {
             userEmail: userEmail,
             timeInHours: timeInHours
           };
-          _context3.next = 13;
+          _context3.next = 21;
           return regeneratorRuntime.awrap(axios.post("/users/saveTime", information));
 
-        case 13:
+        case 21:
           document.getElementById("hms").innerHTML = "<div class=\"cronometer--number\">\n                                                        <p class=\"cronometer--number\">".concat(mAux, "</p>\n                                                        <p class=\"cronometer--number\">").concat(hAux, "</p>\n                                                    </div>");
-          _context3.next = 19;
+          _context3.next = 27;
           break;
 
-        case 16:
-          _context3.prev = 16;
+        case 24:
+          _context3.prev = 24;
           _context3.t0 = _context3["catch"](0);
           console.error(_context3.t0);
 
-        case 19:
+        case 27:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 16]]);
+  }, null, null, [[0, 24]]);
 }
 
 function saveTime() {
@@ -239,22 +254,22 @@ function saveTime() {
       switch (_context4.prev = _context4.next) {
         case 0:
           _context4.prev = 0;
-          userActivities = document.getElementsByName('activity');
+          userActivities = document.getElementsByName("activity");
           clearInterval(id);
           document.getElementById("hms").innerHTML = "<div class=\"cronometer--number\">\n        <p >00</p>\n        <p >00</p>\n        </div>";
 
           if (!previousClock.data.foundTimer) {
-            eventTarget.classList.remove('button__brightness');
+            eventTarget.classList.remove("button__brightness");
             userActivities.forEach(function (activity) {
               activity.disabled = false;
-              activity.classList.remove('button__disabled');
+              activity.classList.remove("button__disabled");
             });
           }
 
           timeInHours = h + m / 60 + s / 60 / 60;
           timeInHours = parseFloat(timeInHours);
-          backColorsnumbers = document.querySelector('.cronometer');
-          backColorsnumbers.classList.remove('alertRed');
+          backColorsnumbers = document.querySelector(".cronometer");
+          backColorsnumbers.classList.remove("alertRed");
 
           if (!idProject) {
             _context4.next = 18;
@@ -296,8 +311,8 @@ function saveTime() {
           return regeneratorRuntime.awrap(axios["delete"]("/users/previousClock/".concat(userEmail)));
 
         case 25:
-          buttonSaveTime = document.getElementById('saveTime');
-          buttonSaveTime.innerHTML = '';
+          buttonSaveTime = document.getElementById("saveTime");
+          buttonSaveTime.innerHTML = "";
           h = 0;
           m = 0;
           s = 0;
@@ -319,12 +334,12 @@ function saveTime() {
 
 function disabledButtons(event) {
   try {
-    var userActivities = document.getElementsByName('activity');
+    var userActivities = document.getElementsByName("activity");
     userActivities.forEach(function (activity) {
       activity.disabled = true;
-      activity.classList.add('button__disabled');
+      activity.classList.add("button__disabled");
     });
-    event.target.classList.add('button__brightness');
+    event.target.classList.add("button__brightness");
   } catch (error) {
     console.error(error);
   }
@@ -339,14 +354,14 @@ function renderProjects() {
       switch (_context5.prev = _context5.next) {
         case 0:
           _context5.prev = 0;
-          root = document.querySelector('#root');
+          root = document.querySelector("#root");
 
           if (root) {
             _context5.next = 4;
             break;
           }
 
-          throw new Error('There is a problem finding the HTML to show the projects');
+          throw new Error("There is a problem finding the HTML to show the projects");
 
         case 4:
           _context5.next = 6;
@@ -375,29 +390,28 @@ function renderProjects() {
             _loop(index);
           }
 
-          ;
           projectsToShowSorted = projectsToShow.sort(function (a, b) {
             return a.projectName.localeCompare(b.projectName);
           });
           html = projectsToShowSorted.map(function (element) {
             return "<div class=\"projects__list\" >\n                    <p> ".concat(element.projectName, " </p>\n                    <p> ").concat(element.clientname, " </p>\n\n                    \n                    <div class=\"projects__list__buttons\">\n\n                      <div class=\"projects__list__buttons__couple-one\">\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'design', '").concat(element.callLimitPerDay, "')\"><img src=\"img/design.png\" alt=\"\"></button>\n                        <button class=\"button__cronometer\" name=\"activity\" onclick=\"cronometer(event, '").concat(element.projectUuid, "', 'call', '").concat(element.callLimitPerDay, "')\"><img src=\"img/Group 674.png\" alt=\"\"></button>\n                        </div>\n\n                    </div>\n                </div>\n                ");
-          }).join('');
+          }).join("");
           root.innerHTML = html;
-          _context5.next = 24;
+          _context5.next = 23;
           break;
 
-        case 20:
-          _context5.prev = 20;
+        case 19:
+          _context5.prev = 19;
           _context5.t0 = _context5["catch"](0);
           swal("Ohhh no!", _context5.t0.response.data, "warning");
           console.error(_context5.t0);
 
-        case 24:
+        case 23:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[0, 20]]);
+  }, null, null, [[0, 19]]);
 } //Function to set in the HTML a custom buttom to save the time
 
 
@@ -410,7 +424,7 @@ function setTextHTMLSaveTime(eventTarget, idProject) {
         case 0:
           _context6.prev = 0;
           //Get the element to insert the text
-          buttonSaveTime = document.getElementById('saveTime');
+          buttonSaveTime = document.getElementById("saveTime");
 
           if (!idProject) {
             _context6.next = 9;
@@ -427,7 +441,7 @@ function setTextHTMLSaveTime(eventTarget, idProject) {
           break;
 
         case 9:
-          _nameOfTheProject = 'General';
+          _nameOfTheProject = "General";
 
         case 10:
           buttonSaveTime.innerHTML = "<img src=\"".concat(eventTarget.attributes.src.nodeValue, "\" alt=\"\" />\n                                    <p> ").concat(_nameOfTheProject, " </p>");
@@ -445,9 +459,8 @@ function setTextHTMLSaveTime(eventTarget, idProject) {
       }
     }
   }, null, null, [[0, 13]]);
-}
+} //When the page load for first time is going to check the cronometer:
 
-; //When the page load for first time is going to check the cronometer:
 
 function checkCronometer() {
   var timeData;

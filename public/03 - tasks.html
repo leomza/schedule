@@ -25,13 +25,13 @@
 
 <body
   onload="uploadProjectNames();uploadClientNames(); renderTasks(); init(); renderProjects(); renderClients(); handleClientLoad(); setColor()">
-  
+
   <div id="grid-columns" class="container container-column ">
     <div class="nav">
       <section class="nav-bar container">
         <div class="nav-bar__search-bar" onkeyup="handleSearch()">
           <div class="nav-bar__search-bar__logo">
-             
+
             <div class="nav-bar__search-bar__logo__upnext">
               <img src="./img/logo.png" alt="UpNext Logo">
             </div>
@@ -107,7 +107,7 @@
         </div>
       </div>
     </div>
-    <div class="tables"  >
+    <div class="tables">
       <span id="closeTable">&times;</span>
       <object class="clients" data="01- clients.html" height="500px" width="100%" name="contenedor"></object>
 
@@ -276,6 +276,30 @@
           </div>
 
           <div>
+            <select name="status" id="status">
+              <option selected disabled>Select a status...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </div>
+
+          <div>
+            <select name="flag" id="flag">
+              <option selected disabled>Select a flag...</option>
+              <option value="now">Now</option>
+              <option value="urgent">Urgent</option>
+              <option value="needChat">Need to chat before</option>
+              <option value="fastImprovement">Fast improvement</option>
+            </select>
+          </div>
+
+          <div>
             <input type="date" name="limitDate" required />
           </div>
 
@@ -300,9 +324,9 @@
         <span id="closeDescription" class="close">&times;</span>
         <div id="showTaskDescriptionInfo"></div>
       </div>
-    </div> 
+    </div>
 
-   
+
 
     <!-- Modal to edit general settings -->
     <div id="modalSetting" class="modal">

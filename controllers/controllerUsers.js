@@ -99,7 +99,6 @@ function saveTimeUser(req, res) {
                 case 0:
                     _c.trys.push([0, 9, , 10]);
                     _a = req.body, idProject = _a.idProject, typeOfButton = _a.typeOfButton, userEmail = _a.userEmail, timeInHours = _a.timeInHours;
-                    console.log(req.body);
                     _b = userEmail;
                     switch (_b) {
                         case 'pepe@pepe.com': return [3 /*break*/, 1];

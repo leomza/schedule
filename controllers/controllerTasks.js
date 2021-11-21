@@ -44,12 +44,12 @@ var db = admin.firestore();
 var tasksDb = db.collection('tasks');
 function createTask(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var _a, taskName, description, limitDate, projectId, id, newTask, task, error_1;
+        var _a, taskName, description, limitDate, projectId, status, flag, id, newTask, task, error_1;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 3, , 4]);
-                    _a = req.body, taskName = _a.taskName, description = _a.description, limitDate = _a.limitDate, projectId = _a.projectId;
+                    _a = req.body, taskName = _a.taskName, description = _a.description, limitDate = _a.limitDate, projectId = _a.projectId, status = _a.status, flag = _a.flag;
                     id = uuidv4();
                     return [4 /*yield*/, tasksDb.doc(id).set({
                             uuid: id,
@@ -57,7 +57,9 @@ function createTask(req, res) {
                             description: description,
                             limitDate: limitDate,
                             createdDate: Date.now(),
-                            projectId: projectId
+                            projectId: projectId,
+                            status: status,
+                            flag: flag
                         })];
                 case 1:
                     _b.sent();
@@ -166,13 +168,13 @@ function getATask(req, res) {
 exports.getATask = getATask;
 function editTask(req, res) {
     return __awaiter(this, void 0, void 0, function () {
-        var idTask, _a, taskName, description, limitDate, projectId, task, foundTask, project, foundProject, error_5;
+        var idTask, _a, taskName, description, limitDate, projectId, status, flag, task, foundTask, project, foundProject, error_5;
         return __generator(this, function (_b) {
             switch (_b.label) {
                 case 0:
                     _b.trys.push([0, 7, , 8]);
                     idTask = req.params.idTask;
-                    _a = req.body, taskName = _a.taskName, description = _a.description, limitDate = _a.limitDate, projectId = _a.projectId;
+                    _a = req.body, taskName = _a.taskName, description = _a.description, limitDate = _a.limitDate, projectId = _a.projectId, status = _a.status, flag = _a.flag;
                     return [4 /*yield*/, db.collection('tasks').doc(idTask).get()];
                 case 1:
                     task = _b.sent();
@@ -203,7 +205,9 @@ function editTask(req, res) {
                         taskName: taskName,
                         description: description,
                         limitDate: limitDate,
-                        projectId: projectId
+                        projectId: projectId,
+                        status: status,
+                        flag: flag
                     }, { merge: true })];
                 case 6:
                     //Edit the task
