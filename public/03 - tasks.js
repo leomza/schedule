@@ -98,19 +98,28 @@ async function renderTasks(tasksToShow) {
                 
                 return (
                     ` <div class="task">
-                    <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
-                    <div class="task-titles__taskName">
-                    <h5>${limitStrLength(taskName,15)}</h5>
-                    </div>
-                    <div class="task-titles__projectName">
-                    <p>${element.projectName}</p>
-                    </div>
-                    </div>
-                    <div class="task-date">
-                    <p>${limitDate}</p>
-                    <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
-                    <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
-                    </div>
+                        <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
+                        <div class="task-titles__container">
+                            <div class="task-titles__container__oval">
+                                <img src="./img/Oval 8.png" alt="">
+                            </div>
+                            <div class="task-titles__container__content">
+                                <div class="task-titles__container__content__taskName">
+                                <h5>${limitStrLength(taskName,15)}</h5>
+                                </div>
+                                <div class="task-titles__container__content__projectName">
+                                <p>${element.projectName}</p>
+                                </div>
+                            </div>
+
+                           
+                        </div>
+                        </div>
+                        <div class="task-date">
+                            <p>${limitDate}</p>
+                            <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
+                            <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
+                        </div>
                     </div>`
                 )
             };
@@ -132,21 +141,30 @@ async function renderTasks(tasksToShow) {
                 }
                 const taskName = element.taskName;
                 return (
-                    `<div class="task">
+                    ` <div class="task">
                     <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
-                    <div class="task-titles__taskName">
-                    <h5>${limitStrLength(taskName,15)}</h5>
-                    </div>
-                    <div class="task-titles__projectName">
-                    <p>${element.projectName}</p>
+                    <div class="task-titles__container">
+                        <div class="task-titles__container__oval">
+                            <img src="./img/Oval 8.png" alt="">
+                        </div>
+                        <div class="task-titles__container__content">
+                            <div class="task-titles__container__content__taskName">
+                            <h5>${limitStrLength(taskName,15)}</h5>
+                            </div>
+                            <div class="task-titles__container__content__projectName">
+                            <p>${element.projectName}</p>
+                            </div>
+                        </div>
+
+                       
                     </div>
                     </div>
                     <div class="task-date">
-                    <p>${limitDate}</p>
-                    <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
-                    <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
+                        <p>${limitDate}</p>
+                        <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
+                        <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
                     </div>
-                    </div>`
+                </div>`
                 );
             }
         }).join('');
@@ -174,21 +192,30 @@ async function renderTasks(tasksToShow) {
                 }
                 const taskName = element.taskName;
                 return (
-                    `<div class="task">
+                    ` <div class="task">
                     <div class="task-titles" onclick='showModalDescription("${element.taskName}", "${element.limitDate}", "${element.description}")'>
-                    <div class="task-titles__taskName">
-                    <h5>${limitStrLength(taskName,15)}</h5>
-                    </div>
-                    <div class="task-titles__projectName">
-                    <p>${element.projectName}</p>
+                    <div class="task-titles__container">
+                        <div class="task-titles__container__oval">
+                            <img src="./img/Oval 8.png" alt="">
+                        </div>
+                        <div class="task-titles__container__content">
+                            <div class="task-titles__container__content__taskName">
+                            <h5>${limitStrLength(taskName,15)}</h5>
+                            </div>
+                            <div class="task-titles__container__content__projectName">
+                            <p>${element.projectName}</p>
+                            </div>
+                        </div>
+
+                       
                     </div>
                     </div>
                     <div class="task-date">
-                    <p>${limitDate}</p>
-                    <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
-                    <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
-                    </div>  
-                    </div>`
+                        <p>${limitDate}</p>
+                        <img src="./img/edit.png" alt="" onclick='editTask("${element.uuid}")' title="Edit"> 
+                        <img src="./img/delete.png" alt="" onclick='removeTask("${element.uuid}", "${element.taskName}", "${element.projectId}")' title="Remove"> 
+                    </div>
+                </div>`
                 );
             }
         }).join('');

@@ -518,8 +518,8 @@ input[type="radio"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-preferred-size: calc(80% - 1rem);
-      flex-basis: calc(80% - 1rem);
+  -ms-flex-preferred-size: calc(70% - 1rem);
+      flex-basis: calc(70% - 1rem);
   margin-right: 2rem;
 }
 
@@ -531,8 +531,8 @@ input[type="radio"] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -ms-flex-preferred-size: calc(30% - 1rem);
-      flex-basis: calc(30% - 1rem);
+  -ms-flex-preferred-size: calc(20% - 1rem);
+      flex-basis: calc(20% - 1rem);
 }
 
 .nav .nav-bar__search-bar__logo__upnext {
@@ -549,9 +549,9 @@ input[type="radio"] {
 }
 
 .nav .nav-bar__search-bar input {
-  width: 62.6rem;
-  -ms-flex-preferred-size: calc(70% - 1rem);
-      flex-basis: calc(70% - 1rem);
+  width: 41.6vw;
+  -ms-flex-preferred-size: calc(80% - 1rem);
+      flex-basis: calc(80% - 1rem);
   background-color: #f4f7fc;
   border-radius: 20rem;
   border: none;
@@ -562,9 +562,9 @@ input[type="radio"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  gap: 2vw;
-  -ms-flex-preferred-size: calc(20% - 1rem);
-      flex-basis: calc(20% - 1rem);
+  gap: 3vw;
+  -ms-flex-preferred-size: calc(30% - 1rem);
+      flex-basis: calc(30% - 1rem);
 }
 
 .nav .nav-bar__navigation__client a {
@@ -584,6 +584,13 @@ input[type="radio"] {
   font-weight: 700;
   color: #121212;
   margin-left: 2rem;
+}
+
+.nav .nav-bar__chat {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 2rem;
 }
 
 .sidebar {
@@ -910,9 +917,7 @@ input[type="radio"] {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  gap: 2rem;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -924,7 +929,17 @@ input[type="radio"] {
   cursor: pointer;
 }
 
-.content__columns__sidebar .task-container .task .task-titles h5 {
+.content__columns__sidebar .task-container .task .task-titles__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 2rem;
+}
+
+.content__columns__sidebar .task-container .task .task-titles__container h5 {
   display: inline;
   font-size: 1.3rem;
   font-weight: 400;
@@ -932,7 +947,7 @@ input[type="radio"] {
   border-bottom: 1px solid #121212;
 }
 
-.content__columns__sidebar .task-container .task .task-titles p {
+.content__columns__sidebar .task-container .task .task-titles__container p {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 400;
