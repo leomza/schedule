@@ -59,7 +59,7 @@ async function uploadProjectNames() {
 //Render all the tasks
 async function renderTasks(tasksToShow) {
   try {
-    console.log(tasksToShow)
+    console.log(tasksToShow);
     const taskToday = document.querySelector("#taskToday");
     if (!taskToday)
       throw new Error(
@@ -113,6 +113,25 @@ async function renderTasks(tasksToShow) {
             }
           };
           const taskName = element.taskName;
+          
+          let changeOval =
+            element.statusTask === "starting"
+              ? "./img/Oval 8.png"
+              : element.statusTask === "characterization"
+              ? "./img/Oval 9.png"
+              : element.statusTask === "design"
+              ? "./img/Oval 10.png"
+              : element.statusTask === "repairs"
+              ? "./img/Oval 16.png"
+              : element.statusTask === "toSend"
+              ? "./img/Oval 12.png"
+              : element.statusTask === "waiting"
+              ? "./img/Oval 13.png"
+              : element.statusTask === "stuck"
+              ? "./img/Oval 14.png"
+              : element.statusTask === "freeText"
+              ? "./img/Oval 15.png"
+              : null;
 
           return ` <div class="task">
                         <div class="task-titles" onclick='showModalDescription("${
@@ -120,7 +139,7 @@ async function renderTasks(tasksToShow) {
                         }", "${element.limitDate}", "${element.description}")'>
                         <div class="task-titles__container">
                             <div class="task-titles__container__oval">
-                                <img src="./img/Oval 8.png" alt="">
+                            <img src="${changeOval}" alt="">
                             </div>
                             <div class="task-titles__container__content">
                                 <div class="task-titles__container__content__taskName">
@@ -165,13 +184,31 @@ async function renderTasks(tasksToShow) {
             }
           };
           const taskName = element.taskName;
+          let changeOval =
+            element.statusTask === "starting"
+              ? "./img/Oval 8.png"
+              : element.statusTask === "characterization"
+              ? "./img/Oval 9.png"
+              : element.statusTask === "design"
+              ? "./img/Oval 10.png"
+              : element.statusTask === "repairs"
+              ? "./img/Oval 16.png"
+              : element.statusTask === "toSend"
+              ? "./img/Oval 12.png"
+              : element.statusTask === "waiting"
+              ? "./img/Oval 13.png"
+              : element.statusTask === "stuck"
+              ? "./img/Oval 14.png"
+              : element.statusTask === "freeText"
+              ? "./img/Oval 15.png"
+              : null;
           return ` <div class="task">
                     <div class="task-titles" onclick='showModalDescription("${
                       element.taskName
                     }", "${element.limitDate}", "${element.description}")'>
                     <div class="task-titles__container">
                         <div class="task-titles__container__oval">
-                            <img src="./img/Oval 8.png" alt="">
+                        <img src="${changeOval}" alt="">
                         </div>
                         <div class="task-titles__container__content">
                             <div class="task-titles__container__content__taskName">
@@ -226,15 +263,24 @@ async function renderTasks(tasksToShow) {
             }
           };
           const taskName = element.taskName;
+
           let changeOval =
-            element.flag === "urgent"
+            element.statusTask === "starting"
+              ? "./img/Oval 8.png"
+              : element.statusTask === "characterization"
               ? "./img/Oval 9.png"
-              : element.flag === "fastImprovement"
-              ? "./img/Oval 14.png"
-              : element.flag === "needChat"
+              : element.statusTask === "design"
+              ? "./img/Oval 10.png"
+              : element.statusTask === "repairs"
+              ? "./img/Oval 16.png"
+              : element.statusTask === "toSend"
+              ? "./img/Oval 12.png"
+              : element.statusTask === "waiting"
               ? "./img/Oval 13.png"
-              : element.flag === "now"
+              : element.statusTask === "stuck"
               ? "./img/Oval 14.png"
+              : element.statusTask === "freeText"
+              ? "./img/Oval 15.png"
               : null;
 
           return ` <div class="task">
@@ -381,15 +427,15 @@ async function editTask(idTask) {
 
             <div>
             <select name="statusTask" id="statusTask">
-              <option selected disabled>Select a status...</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
+                <option selected disabled>Select a status...</option>
+                <option value="starting">Starting</option>
+                <option value="characterization">Characterization</option>
+                <option value="design">Design</option>
+                <option value="repairs">Repairs</option>
+                <option value="toSend">To send</option>
+                <option value="waiting">Waiting</option>
+                <option value="stuck">Stuck</option>
+                <option value="freeText ">Free text </option>
             </select>
           </div>
 
@@ -422,13 +468,14 @@ async function showProjectNameInDOM(projectId) {
 //Handle Edit
 async function handleEdit(ev) {
   try {
-    let { taskName, description, projectId, limitDate, statusTask, flag } = ev.target.elements;
+    let { taskName, description, projectId, limitDate, statusTask, flag } =
+      ev.target.elements;
     taskName = taskName.value;
     description = description.value;
     projectId = projectId.value;
     limitDate = limitDate.value;
     statusTask = statusTask.value;
-    flag = flag.value
+    flag = flag.value;
 
     if (!taskName || !description || !limitDate || !projectId)
       throw new Error("You need to complete all the fields");
@@ -436,7 +483,14 @@ async function handleEdit(ev) {
     if (!modalEdit)
       throw new Error("There is a problem finding modalEdit from HTML");
     modalEdit.style.display = "none";
-    const tasksDetails = { taskName, description, projectId, limitDate, statusTask, flag };
+    const tasksDetails = {
+      taskName,
+      description,
+      projectId,
+      limitDate,
+      statusTask,
+      flag,
+    };
     const allTasks = await axios.put(
       `/tasks/editTask/${taskIdEdit}`,
       tasksDetails
