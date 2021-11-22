@@ -12,5 +12,6 @@ router.get('/getAllProjects', userCookie_1.userCookieRead, controllerProjects_1.
 router.get('/findProject/:idProject', userCookie_1.userCookieRead, controllerProjects_1.getAProject);
 router["delete"]('/deleteProject/:idProject', userCookie_1.userCookieRead, controllerProjects_1.deleteProject);
 router.put('/editProject/:idProject', userCookie_1.userCookieRead, controllerProjects_1.editProject);
+router.put('/resetRetailerInfo/:idProject', userCookie_1.userCookieRead, controllerProjects_1.resetRetailerInfo);
 router.post('/setTimeInProject/:idProject/:timeInHours/:typeOfButton', userCookie_1.userCookieRead, controllerProjects_1.setProjectTime);
 module.exports = router;

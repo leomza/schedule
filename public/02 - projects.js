@@ -1,85 +1,94 @@
 //Handle the form to create a new Project:
 const handleFormProject = document.querySelector("#formCreateProject");
-handleFormProject.addEventListener('submit', handleNewProject);
+handleFormProject.addEventListener("submit", handleNewProject);
 
 async function handleNewProject(ev) {
-    try {
-        ev.preventDefault();
-        let { projectName, clientId, projectType, status, totalHours } = ev.target.elements
-        projectName = projectName.value;
-        clientId = selectClientName.value;
-        projectType = projectType.value;
-        status = status.value;
-        totalHours = totalHours.valueAsNumber;
+  try {
+    ev.preventDefault();
+    let { projectName, clientId, projectType, status, totalHours } =
+      ev.target.elements;
+    projectName = projectName.value;
+    clientId = selectClientName.value;
+    projectType = projectType.value;
+    status = status.value;
+    totalHours = totalHours.valueAsNumber;
 
-        //When I create from the project Dashboard
-        modalCreate.style.display = "none";
-        //When I create from the task Dashboard
-        if (modalCreateProject){
-        modalCreateProject.style.display = "none";
-        }
-
-        ev.target.reset();
-
-        const projectDetails = { projectName, clientId, projectType, status, totalHours };
-        await axios.post('/projects/addNew', projectDetails);
-        swal("Good job!", "New project added succesfully!", "success");
-        renderProjects();
-    } catch (error) {
-        console.error(error);
+    //When I create from the project Dashboard
+    modalCreate.style.display = "none";
+    //When I create from the task Dashboard
+    if (modalCreateProject) {
+      modalCreateProject.style.display = "none";
     }
+
+    ev.target.reset();
+
+    const projectDetails = {
+      projectName,
+      clientId,
+      projectType,
+      status,
+      totalHours,
+    };
+    await axios.post("/projects/addNew", projectDetails);
+    swal("Good job!", "New project added succesfully!", "success");
+    renderProjects();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Function to get the names of the client in the "select Client Name"
 async function uploadClientNames() {
-    try {
-        const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { infoClients: clients } = clientsInfo.data;
-        const select = document.getElementById('selectClientName');
+  try {
+    const clientsInfo = await axios.get(`/clients/getAllClients`);
+    const { infoClients: clients } = clientsInfo.data;
+    const select = document.getElementById("selectClientName");
 
-        for (let index = 0; index < clients.length; index++) {
-            const option = document.createElement('option');
-            option.value = clients[index].id;
-            option.innerHTML = clients[index].clientname;
-            select.appendChild(option);
-        }
-    } catch (error) {
-        console.error(error);
+    for (let index = 0; index < clients.length; index++) {
+      const option = document.createElement("option");
+      option.value = clients[index].id;
+      option.innerHTML = clients[index].clientname;
+      select.appendChild(option);
     }
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Render all the projects
 async function renderProjects(projectsToShow) {
-    try {
-        const table = document.querySelector('.table');
-        if (!table) throw new Error('There is a problem finding table from HTML');
+  try {
+    const table = document.querySelector(".table");
+    if (!table) throw new Error("There is a problem finding table from HTML");
 
-        const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { infoClients: clients } = clientsInfo.data;
+    const clientsInfo = await axios.get(`/clients/getAllClients`);
+    const { infoClients: clients } = clientsInfo.data;
 
-        if (!projectsToShow) {
-            const projectsInfo = await axios.get(`/projects/getAllprojects`);
-            projectsToShow = projectsInfo.data.infoProjects;
+    if (!projectsToShow) {
+      const projectsInfo = await axios.get(`/projects/getAllprojects`);
+      projectsToShow = projectsInfo.data.infoProjects;
+    }
+
+    //Add the information of the user to the project
+    for (let index = 0; index < projectsToShow.length; index++) {
+      const project = projectsToShow[index];
+
+      clients.forEach((client) => {
+        if (client.id === project.clientId) {
+          Object.assign(projectsToShow[index], client);
         }
+      });
+    }
 
-        //Add the information of the user to the project
-        for (let index = 0; index < projectsToShow.length; index++) {
-            const project = projectsToShow[index];
+    const projectToShowSorted = projectsToShow.sort((a, b) =>
+      a.projectName.localeCompare(b.projectName)
+    );
 
-            clients.forEach(client => {
-                if (client.id === project.clientId) {
-                    Object.assign(projectsToShow[index], client);
-                }
-            });
-        };
-
-        const projectToShowSorted = projectsToShow.sort((a, b) => a.projectName.localeCompare(b.projectName))
-
-        let html = projectToShowSorted.map(element => {
-            timeInProject = convertTimeToMinuteAndHours(element.usedHours);
-            timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
-            return (
-                `<tr>
+    let html = projectToShowSorted
+      .map((element) => {
+        timeInProject = convertTimeToMinuteAndHours(element.usedHours);
+        timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
+        return `<tr>
                 <td>${element.projectName}</td>
                 <td>${element.clientname}</td>
                 <td>${element.projectType}</td>
@@ -91,72 +100,70 @@ async function renderProjects(projectsToShow) {
                 <img src="./img/edit.png" alt="" onclick='editProject("${element.projectUuid}")' title="Edit"> 
                 <img src="./img/delete.png" alt="" onclick='removeProject("${element.projectUuid}", "${element.projectName}")' title="Remove">
                 </td>
-            </tr>`
-            );
-        }).join('');
+            </tr>`;
+      })
+      .join("");
 
-        table.innerHTML = html;
-
-    } catch (error) {
-        swal("Ohhh no!", error.response.data, "warning");
-        console.error(error);
-    }
+    table.innerHTML = html;
+  } catch (error) {
+    swal("Ohhh no!", error.response.data, "warning");
+    console.error(error);
+  }
 }
 
 function convertTimeToMinuteAndHours(time) {
-    try {
-        let secondTime = time * 3600;
-        let minuteTime = 0;
-        let hourTime = 0;
-        if (secondTime > 60) {
-            minuteTime = parseInt(secondTime / 60);
-            secondTime = parseInt(secondTime % 60);
-            if (minuteTime > 60) {
-                hourTime = parseInt(minuteTime / 60);
-                minuteTime = parseInt(minuteTime % 60);
-            }
-        }
-
-        if (minuteTime < 10) {
-            result = `${hourTime}:0${minuteTime}`;
-        } else {
-            result = `${hourTime}:${minuteTime}`;
-        }
-        return result;
-    } catch (error) {
-        console.error(error);
+  try {
+    let secondTime = time * 3600;
+    let minuteTime = 0;
+    let hourTime = 0;
+    if (secondTime > 60) {
+      minuteTime = parseInt(secondTime / 60);
+      secondTime = parseInt(secondTime % 60);
+      if (minuteTime > 60) {
+        hourTime = parseInt(minuteTime / 60);
+        minuteTime = parseInt(minuteTime % 60);
+      }
     }
+
+    if (minuteTime < 10) {
+      result = `${hourTime}:0${minuteTime}`;
+    } else {
+      result = `${hourTime}:${minuteTime}`;
+    }
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Delete a project
 function removeProject(projectId, projectName) {
-    try {
-        swal({
-            title: "Are you sure?",
-            text: `Once deleted, you will not be able to recover this project ${projectName}!`,
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    deleteProject(projectId);
-                } else {
-                    swal("Your project is safe!");
-                }
-            });
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    swal({
+      title: "Are you sure?",
+      text: `Once deleted, you will not be able to recover this project ${projectName}!`,
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        deleteProject(projectId);
+      } else {
+        swal("Your project is safe!");
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function deleteProject(projectId) {
-    try {
-        await axios.delete(`/projects/deleteProject/${projectId}`);
-        renderProjects();
-    } catch (error) {
-        console.error(error);
-    }
+  try {
+    await axios.delete(`/projects/deleteProject/${projectId}`);
+    renderProjects();
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Update a project:
@@ -164,19 +171,20 @@ async function deleteProject(projectId) {
 let projectIdEdit;
 
 async function editProject(uuidProject) {
-    try {
-        if (!modalEdit) throw new Error('There is a problem finding the modal in the HTML');
-        modalEdit.style.display = "block";
-        modalEdit.classList.add("showModal");
+  try {
+    if (!modalEdit)
+      throw new Error("There is a problem finding the modal in the HTML");
+    modalEdit.style.display = "block";
+    modalEdit.classList.add("showModal");
 
-        const formEdit = document.querySelector("#formEdit");
-        if (!formEdit) throw new Error('There is a problem finding form from HTML');
-        const projectFound = await axios.get(`projects/findProject/${uuidProject}`);
-        const { foundProject } = projectFound.data;
+    const formEdit = document.querySelector("#formEdit");
+    if (!formEdit) throw new Error("There is a problem finding form from HTML");
+    const projectFound = await axios.get(`projects/findProject/${uuidProject}`);
+    const { foundProject } = projectFound.data;
 
-        //Set the client Name
-        showClientNameInDOM(foundProject.clientId).then((data) => {
-            let html = `
+    //Set the client Name
+    showClientNameInDOM(foundProject.clientId).then((data) => {
+      let html = `
             <h3>Edit Project</h3>
         <div>
       
@@ -236,68 +244,116 @@ async function editProject(uuidProject) {
             <input type="number" name="totalHours" value="${foundProject.totalHours}" placeholder="Total Hours for the project">
         </div>
                      <input type="submit" value="Update project" class="button-form" />
-        `
-            formEdit.innerHTML = html;
-            projectIdEdit = foundProject.projectUuid;
-        });
-    } catch (error) {
-        console.error(error);
-    }
+        `;
+      formEdit.innerHTML = html;
+      projectIdEdit = foundProject.projectUuid;
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 //Function to show the client name in the Edit DOM
 async function showClientNameInDOM(clientId) {
-    let clientFound = await axios.get(`clients/findClient/${clientId}`);
-    if (!clientFound.data.foundClient) {
-        clientFound = 'No client assigned'
-        return clientFound;
-    } else {
-        return clientFound.data.foundClient.clientname;
-    }
+  let clientFound = await axios.get(`clients/findClient/${clientId}`);
+  if (!clientFound.data.foundClient) {
+    clientFound = "No client assigned";
+    return clientFound;
+  } else {
+    return clientFound.data.foundClient.clientname;
+  }
 }
 
 //Handle Edit
 async function handleEdit(ev) {
-    try {
-        let { projectName, clientId, projectType, status, totalHours } = ev.target.elements
-        projectName = projectName.value;
-        clientId = selectClientNameEdit.value;
-        projectType = projectType.value;
-        status = status.value;
-        totalHours = totalHours.valueAsNumber;
+  try {
+    let { projectName, clientId, projectType, status, totalHours } =
+      ev.target.elements;
+    projectName = projectName.value;
+    clientId = selectClientNameEdit.value;
+    projectType = projectType.value;
+    status = status.value;
+    totalHours = totalHours.valueAsNumber;
 
-        if (!projectName)
-            throw new Error("You need to complete the project name");
+    if (!projectName) throw new Error("You need to complete the project name");
 
-        if (!modalEdit) throw new Error('There is a problem finding modalEdit from HTML');
-        modalEdit.style.display = "none";
-        ev.target.reset();
+    if (!modalEdit)
+      throw new Error("There is a problem finding modalEdit from HTML");
+    modalEdit.style.display = "none";
+    ev.target.reset();
 
-        const projectDetails = { projectName, clientId, projectType, status, totalHours };
-        await axios.put(`/projects/editProject/${projectIdEdit}`, projectDetails);
-        renderProjects();
-    } catch (error) {
-        swal("Ohhh no!", `${error}`, "warning");
-        console.error(error);
+    const projectDetails = {
+      projectName,
+      clientId,
+      projectType,
+      status,
+      totalHours,
     };
-};
+    await axios.put(`/projects/editProject/${projectIdEdit}`, projectDetails);
+    renderProjects();
+  } catch (error) {
+    swal("Ohhh no!", `${error}`, "warning");
+    console.error(error);
+  }
+}
 
 //Function to get the names of the client in the "select Client Name"
 async function uploadClientNamesEdit() {
-    try {
-        const clientsInfo = await axios.get(`/clients/getAllClients`);
-        const { infoClients: clients } = clientsInfo.data;
-        const select = document.getElementById('selectClientNameEdit');
+  try {
+    const clientsInfo = await axios.get(`/clients/getAllClients`);
+    const { infoClients: clients } = clientsInfo.data;
+    const select = document.getElementById("selectClientNameEdit");
 
-        for (let index = 0; index < clients.length; index++) {
-            const option = document.createElement('option');
-            option.value = clients[index].id;
-            option.innerHTML = clients[index].clientname;
-            select.appendChild(option);
-        }
-        //The event is going to happen just once
-        select.onclick = null;
-    } catch (error) {
-        console.error(error);
+    for (let index = 0; index < clients.length; index++) {
+      const option = document.createElement("option");
+      option.value = clients[index].id;
+      option.innerHTML = clients[index].clientname;
+      select.appendChild(option);
     }
+    //The event is going to happen just once
+    select.onclick = null;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+//Delete the information of the hours just for the "retailers" curstomers
+async function deleteInfoRetailer() {
+  try {
+    //Check if is the first day of the month to reset the information for the "retail" curstomers
+    if (new Date().getDate() === 1) {
+      const clientsInfo = await axios.get(`/clients/getAllClients`);
+      const { infoClients: clients } = clientsInfo.data;
+
+      const projectsInfo = await axios.get(`/projects/getAllprojects`);
+      projectsToShow = projectsInfo.data.infoProjects;
+
+      //Add the information of the user to the project
+      for (let index = 0; index < projectsToShow.length; index++) {
+        const project = projectsToShow[index];
+
+        clients.forEach((client) => {
+          if (client.id === project.clientId) {
+            Object.assign(projectsToShow[index], client);
+          }
+        });
+      }
+
+      projectsToShow.forEach((element) => {
+        if (element.dealTime === "retainer") {
+          restartInfoInProject(element);
+        }
+      });
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+async function restartInfoInProject(element) {
+  try {
+    await axios.put(`/projects/resetRetailerInfo/${element.projectUuid}`);
+  } catch (error) {
+    console.error(error);
+  }
 }

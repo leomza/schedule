@@ -19,12 +19,11 @@ function handleNewClient(ev) {
           email = email.value;
           dealTime = dealTime.value;
           callLimitPerDay = callLimitPerDay.value; //When I create from the client Dashboard
-
-          modalCreate.style.display = "none"; //When I create from the task Dashboard
-
-          if (modalCreateClient) {
-            modalCreateClient.style.display = "none";
-          }
+          // modalCreate.style.display = "none";
+          // //When I create from the task Dashboard
+          // if (modalCreateClient) {
+          //   modalCreateClient.style.display = "none";
+          // }
 
           ev.target.reset();
           clientDetails = {
@@ -34,32 +33,32 @@ function handleNewClient(ev) {
             dealTime: dealTime,
             callLimitPerDay: callLimitPerDay
           };
-          _context.next = 14;
-          return regeneratorRuntime.awrap(axios.post('/clients/register', clientDetails));
+          _context.next = 12;
+          return regeneratorRuntime.awrap(axios.post("/clients/register", clientDetails));
 
-        case 14:
+        case 12:
           swal("Good job!", "New user added succesfully!", "success").then(function () {
             renderClients();
           });
-          _context.next = 20;
+          _context.next = 18;
           break;
 
-        case 17:
-          _context.prev = 17;
+        case 15:
+          _context.prev = 15;
           _context.t0 = _context["catch"](0);
           console.error(_context.t0);
 
-        case 20:
+        case 18:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 17]]);
+  }, null, null, [[0, 15]]);
 } //Render all the clients
 
 
 function renderClients(clientsToShow) {
-  var table, clientsInfo, html;
+  var table, clientsInfo, clientsToShowSorted, html;
   return regeneratorRuntime.async(function renderClients$(_context2) {
     while (1) {
       switch (_context2.prev = _context2.next) {
@@ -88,25 +87,28 @@ function renderClients(clientsToShow) {
           clientsToShow = clientsInfo.data.infoClients;
 
         case 9:
-          html = clientsToShow.map(function (element) {
+          clientsToShowSorted = clientsToShow.sort(function (a, b) {
+            return a.clientname.localeCompare(b.clientname);
+          });
+          html = clientsToShowSorted.map(function (element) {
             return "<tr>\n            <td>".concat(element.clientname, "</td>\n            <td>").concat(element.phone, "</td> \n            <td>").concat(element.email, "</td>\n            <td>").concat(element.dealTime, "</td>  \n            <td>").concat(element.callLimitPerDay, "</td>  \n             \n            <td class=\"icons\">\n             \n            <img  src=\"./img/update.svg\" alt=\"\" class=\"table__edit\" onclick='editClient(\"").concat(element.id, "\")' title=\"Edit\"> \n            \n          <img src=\"./img/delete.svg\" alt=\"\" class=\"table__remove\" onclick='removeClient(\"").concat(element.id, "\", \"").concat(element.clientname, "\")' title=\"Remove\"> \n          \n          </td> \n             \n            </tr>");
           }).join("");
           table.innerHTML = html;
-          _context2.next = 17;
+          _context2.next = 18;
           break;
 
-        case 13:
-          _context2.prev = 13;
+        case 14:
+          _context2.prev = 14;
           _context2.t0 = _context2["catch"](0);
           swal("Ohhh no!", _context2.t0.response.data, "warning");
           console.error(_context2.t0);
 
-        case 17:
+        case 18:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 13]]);
+  }, null, null, [[0, 14]]);
 } //Delete a client
 
 

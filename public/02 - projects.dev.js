@@ -2,7 +2,7 @@
 
 //Handle the form to create a new Project:
 var handleFormProject = document.querySelector("#formCreateProject");
-handleFormProject.addEventListener('submit', handleNewProject);
+handleFormProject.addEventListener("submit", handleNewProject);
 
 function handleNewProject(ev) {
   var _ev$target$elements, projectName, clientId, projectType, status, totalHours, projectDetails;
@@ -35,7 +35,7 @@ function handleNewProject(ev) {
             totalHours: totalHours
           };
           _context.next = 14;
-          return regeneratorRuntime.awrap(axios.post('/projects/addNew', projectDetails));
+          return regeneratorRuntime.awrap(axios.post("/projects/addNew", projectDetails));
 
         case 14:
           swal("Good job!", "New project added succesfully!", "success");
@@ -70,10 +70,10 @@ function uploadClientNames() {
         case 3:
           clientsInfo = _context2.sent;
           clients = clientsInfo.data.infoClients;
-          select = document.getElementById('selectClientName');
+          select = document.getElementById("selectClientName");
 
           for (index = 0; index < clients.length; index++) {
-            option = document.createElement('option');
+            option = document.createElement("option");
             option.value = clients[index].id;
             option.innerHTML = clients[index].clientname;
             select.appendChild(option);
@@ -104,14 +104,14 @@ function renderProjects(projectsToShow) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          table = document.querySelector('.table');
+          table = document.querySelector(".table");
 
           if (table) {
             _context3.next = 4;
             break;
           }
 
-          throw new Error('There is a problem finding table from HTML');
+          throw new Error("There is a problem finding table from HTML");
 
         case 4:
           _context3.next = 6;
@@ -148,7 +148,6 @@ function renderProjects(projectsToShow) {
             _loop(index);
           }
 
-          ;
           projectToShowSorted = projectsToShow.sort(function (a, b) {
             return a.projectName.localeCompare(b.projectName);
           });
@@ -156,23 +155,23 @@ function renderProjects(projectsToShow) {
             timeInProject = convertTimeToMinuteAndHours(element.usedHours);
             timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
             return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(timeSpendInDesign, "</td>\n                <td>").concat(element.totalHours, ":00 / ").concat(timeInProject, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <img src=\"./img/edit.png\" alt=\"\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"> \n                <img src=\"./img/delete.png\" alt=\"\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\">\n                </td>\n            </tr>");
-          }).join('');
+          }).join("");
           table.innerHTML = html;
-          _context3.next = 25;
+          _context3.next = 24;
           break;
 
-        case 21:
-          _context3.prev = 21;
+        case 20:
+          _context3.prev = 20;
           _context3.t0 = _context3["catch"](0);
           swal("Ohhh no!", _context3.t0.response.data, "warning");
           console.error(_context3.t0);
 
-        case 25:
+        case 24:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 21]]);
+  }, null, null, [[0, 20]]);
 }
 
 function convertTimeToMinuteAndHours(time) {
@@ -268,7 +267,7 @@ function editProject(uuidProject) {
             break;
           }
 
-          throw new Error('There is a problem finding the modal in the HTML');
+          throw new Error("There is a problem finding the modal in the HTML");
 
         case 3:
           modalEdit.style.display = "block";
@@ -280,7 +279,7 @@ function editProject(uuidProject) {
             break;
           }
 
-          throw new Error('There is a problem finding form from HTML');
+          throw new Error("There is a problem finding form from HTML");
 
         case 8:
           _context5.next = 10;
@@ -329,7 +328,7 @@ function showClientNameInDOM(clientId) {
             break;
           }
 
-          clientFound = 'No client assigned';
+          clientFound = "No client assigned";
           return _context6.abrupt("return", clientFound);
 
         case 8:
@@ -372,7 +371,7 @@ function handleEdit(ev) {
             break;
           }
 
-          throw new Error('There is a problem finding modalEdit from HTML');
+          throw new Error("There is a problem finding modalEdit from HTML");
 
         case 11:
           modalEdit.style.display = "none";
@@ -399,17 +398,13 @@ function handleEdit(ev) {
           console.error(_context7.t0);
 
         case 23:
-          ;
-
-        case 24:
         case "end":
           return _context7.stop();
       }
     }
   }, null, null, [[0, 19]]);
-}
+} //Function to get the names of the client in the "select Client Name"
 
-; //Function to get the names of the client in the "select Client Name"
 
 function uploadClientNamesEdit() {
   var clientsInfo, _clients, select, index, option;
@@ -425,10 +420,10 @@ function uploadClientNamesEdit() {
         case 3:
           clientsInfo = _context8.sent;
           _clients = clientsInfo.data.infoClients;
-          select = document.getElementById('selectClientNameEdit');
+          select = document.getElementById("selectClientNameEdit");
 
           for (index = 0; index < _clients.length; index++) {
-            option = document.createElement('option');
+            option = document.createElement("option");
             option.value = _clients[index].id;
             option.innerHTML = _clients[index].clientname;
             select.appendChild(option);
@@ -450,4 +445,95 @@ function uploadClientNamesEdit() {
       }
     }
   }, null, null, [[0, 10]]);
+} //Delete the information of the hours just for the "retailers" curstomers
+
+
+function deleteInfoRetailer() {
+  var clientsInfo, _clients2, projectsInfo, _loop2, index;
+
+  return regeneratorRuntime.async(function deleteInfoRetailer$(_context9) {
+    while (1) {
+      switch (_context9.prev = _context9.next) {
+        case 0:
+          _context9.prev = 0;
+
+          if (!(new Date().getDate() === 1)) {
+            _context9.next = 13;
+            break;
+          }
+
+          _context9.next = 4;
+          return regeneratorRuntime.awrap(axios.get("/clients/getAllClients"));
+
+        case 4:
+          clientsInfo = _context9.sent;
+          _clients2 = clientsInfo.data.infoClients;
+          _context9.next = 8;
+          return regeneratorRuntime.awrap(axios.get("/projects/getAllprojects"));
+
+        case 8:
+          projectsInfo = _context9.sent;
+          projectsToShow = projectsInfo.data.infoProjects; //Add the information of the user to the project
+
+          _loop2 = function _loop2(index) {
+            var project = projectsToShow[index];
+
+            _clients2.forEach(function (client) {
+              if (client.id === project.clientId) {
+                Object.assign(projectsToShow[index], client);
+              }
+            });
+          };
+
+          for (index = 0; index < projectsToShow.length; index++) {
+            _loop2(index);
+          }
+
+          projectsToShow.forEach(function (element) {
+            if (element.dealTime === "retainer") {
+              restartInfoInProject(element);
+            }
+          });
+
+        case 13:
+          _context9.next = 18;
+          break;
+
+        case 15:
+          _context9.prev = 15;
+          _context9.t0 = _context9["catch"](0);
+          console.error(_context9.t0);
+
+        case 18:
+        case "end":
+          return _context9.stop();
+      }
+    }
+  }, null, null, [[0, 15]]);
+}
+
+function restartInfoInProject(element) {
+  return regeneratorRuntime.async(function restartInfoInProject$(_context10) {
+    while (1) {
+      switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.prev = 0;
+          _context10.next = 3;
+          return regeneratorRuntime.awrap(axios.put("/projects/resetRetailerInfo/".concat(element.projectUuid)));
+
+        case 3:
+          _context10.next = 8;
+          break;
+
+        case 5:
+          _context10.prev = 5;
+          _context10.t0 = _context10["catch"](0);
+          console.error(_context10.t0);
+
+        case 8:
+        case "end":
+          return _context10.stop();
+      }
+    }
+  }, null, null, [[0, 5]]);
 }

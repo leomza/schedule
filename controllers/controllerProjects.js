@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.setProjectTime = exports.addTask = exports.getAProject = exports.editProject = exports.deleteProject = exports.getAllProjects = exports.registerProject = void 0;
+exports.resetRetailerInfo = exports.setProjectTime = exports.addTask = exports.getAProject = exports.editProject = exports.deleteProject = exports.getAllProjects = exports.registerProject = void 0;
 var uuidv4 = require("uuid").v4;
 //This is to iniitializate Firebase
 var admin = require('firebase-admin');
@@ -250,3 +250,28 @@ function setProjectTime(req, res) {
     });
 }
 exports.setProjectTime = setProjectTime;
+function resetRetailerInfo(req, res) {
+    return __awaiter(this, void 0, void 0, function () {
+        var idProject, error_8;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    idProject = req.params.idProject;
+                    return [4 /*yield*/, db.collection('projects').doc(idProject).set({
+                            usedHours: 0,
+                            timeInDesign: 0
+                        }, { merge: true })];
+                case 1:
+                    _a.sent();
+                    return [3 /*break*/, 3];
+                case 2:
+                    error_8 = _a.sent();
+                    console.error(error_8);
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.resetRetailerInfo = resetRetailerInfo;
