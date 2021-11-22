@@ -44,7 +44,7 @@
       display: flex;
       gap: 2rem;
       align-items: center;
-      flex-basis: calc(70% - 1rem);
+      flex-basis: calc(80% - 1rem);
       margin-right: 2rem;
 
       &__logo {
@@ -63,7 +63,7 @@
         }
       }
       input {
-      width:41.6vw;
+        width: 33.3vw;
         flex-basis: calc(80% - 1rem);
         background-color: #f4f7fc;
         border-radius: 20rem;
@@ -73,8 +73,8 @@
     }
     &__navigation {
       display: flex;
-      gap: 3vw;
-      flex-basis: calc(30% - 1rem);
+      gap: 2vw;
+      flex-basis: calc(20% - 1rem);
 
       &__client {
         a {
@@ -99,9 +99,10 @@
         }
       }
     }
-    &__chat{
+    &__chat {
       display: flex;
       gap: 2rem;
+      margin-left: 2rem;
     }
   }
 }
@@ -366,7 +367,7 @@
     padding-bottom: 5rem;
     .task {
       display: flex;
-    gap: 2rem;
+      gap: 2rem;
       align-items: center;
       margin: 0 2rem;
       .task-titles {
@@ -376,7 +377,7 @@
           display: flex;
           align-items: center;
           gap: 2rem;
-          
+
           h5 {
             display: inline;
             font-size: 1.3rem;
@@ -436,8 +437,6 @@
     }
   }
 }
-
-
 
 .button__disabled {
   cursor: not-allowed;
