@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"
+        integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <link rel="shortcut icon" href="./img/faviconTask.png" />
+</head>
+
+<body onload="getProjectNames()">
+    <div>
+        <select name="selectProjectName" id="selectProjectName" onchange="changeProjectOption()">
+            <option selected disabled>Select project...</option>
+        </select>
+    </div>
+
+    <div>
+        <div id="messages"></div>
+        <form id="send_message">
+            <input name="chatTxt" type="text" />
+            <input type="submit" value="Send">
+        </form>
+    </div>
+
+    <a href="03 - tasks.html">Volver</a>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+    <script src="08 - chat.js"></script>
+</body>
+
+</html>
