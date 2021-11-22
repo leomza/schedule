@@ -5,13 +5,13 @@ handleForm.addEventListener("submit", handleNewTask);
 async function handleNewTask(ev) {
   try {
     ev.preventDefault();
-    let { taskName, description, limitDate, projectId, status, flag } =
+    let { taskName, description, limitDate, projectId, statusTask, flag } =
       ev.target.elements;
     taskName = taskName.value;
     description = description.value;
     limitDate = limitDate.value;
     projectId = selectProjectName.value;
-    status = status.value;
+    statusTask = statusTask.value;
     flag = flag.value;
 
     modalCreate.style.display = "none";
@@ -22,7 +22,7 @@ async function handleNewTask(ev) {
       description,
       limitDate,
       projectId,
-      status,
+      statusTask,
       flag,
     };
     const tasksCreated = await axios.post("/tasks/newTask", taskDetails);
@@ -59,6 +59,7 @@ async function uploadProjectNames() {
 //Render all the tasks
 async function renderTasks(tasksToShow) {
   try {
+    console.log(tasksToShow)
     const taskToday = document.querySelector("#taskToday");
     if (!taskToday)
       throw new Error(
@@ -235,7 +236,6 @@ async function renderTasks(tasksToShow) {
               : element.flag === "now"
               ? "./img/Oval 14.png"
               : null;
-console.log(changeOval);
 
           return ` <div class="task">
                     <div class="task-titles" onclick='showModalDescription("${
@@ -379,6 +379,30 @@ async function editTask(idTask) {
                 <input type="date" name="limitDate" value="${foundTask.limitDate}" required>
             </div>
 
+            <div>
+            <select name="statusTask" id="statusTask">
+              <option selected disabled>Select a status...</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+            </select>
+          </div>
+
+          <div>
+            <select name="flag" id="flag">
+              <option selected disabled>Select a flag...</option>
+              <option value="now">Now</option>
+              <option value="urgent">Urgent</option>
+              <option value="needChat">Need to chat before</option>
+              <option value="fastImprovement">Fast improvement</option>
+            </select>
+          </div>
+
             <input type="submit" value="Update task"class="button-form">
         `;
       formEdit.innerHTML = html;
@@ -398,11 +422,13 @@ async function showProjectNameInDOM(projectId) {
 //Handle Edit
 async function handleEdit(ev) {
   try {
-    let { taskName, description, projectId, limitDate } = ev.target.elements;
+    let { taskName, description, projectId, limitDate, statusTask, flag } = ev.target.elements;
     taskName = taskName.value;
     description = description.value;
     projectId = projectId.value;
     limitDate = limitDate.value;
+    statusTask = statusTask.value;
+    flag = flag.value
 
     if (!taskName || !description || !limitDate || !projectId)
       throw new Error("You need to complete all the fields");
@@ -410,7 +436,7 @@ async function handleEdit(ev) {
     if (!modalEdit)
       throw new Error("There is a problem finding modalEdit from HTML");
     modalEdit.style.display = "none";
-    const tasksDetails = { taskName, description, projectId, limitDate };
+    const tasksDetails = { taskName, description, projectId, limitDate, statusTask, flag };
     const allTasks = await axios.put(
       `/tasks/editTask/${taskIdEdit}`,
       tasksDetails

@@ -97,7 +97,7 @@ function uploadClientNames() {
 
 
 function renderProjects(projectsToShow) {
-  var table, clientsInfo, clients, projectsInfo, _loop, index, html;
+  var table, clientsInfo, clients, projectsInfo, _loop, index, projectToShowSorted, html;
 
   return regeneratorRuntime.async(function renderProjects$(_context3) {
     while (1) {
@@ -149,27 +149,30 @@ function renderProjects(projectsToShow) {
           }
 
           ;
-          html = projectsToShow.map(function (element) {
+          projectToShowSorted = projectsToShow.sort(function (a, b) {
+            return a.projectName.localeCompare(b.projectName);
+          });
+          html = projectToShowSorted.map(function (element) {
             timeInProject = convertTimeToMinuteAndHours(element.usedHours);
             timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
             return "<tr>\n                <td>".concat(element.projectName, "</td>\n                <td>").concat(element.clientname, "</td>\n                <td>").concat(element.projectType, "</td>\n                <td>").concat(element.callLimitPerDay, "</td>\n                <td>").concat(timeSpendInDesign, "</td>\n                <td>").concat(element.totalHours, ":00 / ").concat(timeInProject, "</td>\n                <td>").concat(element.status, "</td>\n                <td>\n                <img src=\"./img/edit.png\" alt=\"\" onclick='editProject(\"").concat(element.projectUuid, "\")' title=\"Edit\"> \n                <img src=\"./img/delete.png\" alt=\"\" onclick='removeProject(\"").concat(element.projectUuid, "\", \"").concat(element.projectName, "\")' title=\"Remove\">\n                </td>\n            </tr>");
           }).join('');
           table.innerHTML = html;
-          _context3.next = 24;
+          _context3.next = 25;
           break;
 
-        case 20:
-          _context3.prev = 20;
+        case 21:
+          _context3.prev = 21;
           _context3.t0 = _context3["catch"](0);
           swal("Ohhh no!", _context3.t0.response.data, "warning");
           console.error(_context3.t0);
 
-        case 24:
+        case 25:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 20]]);
+  }, null, null, [[0, 21]]);
 }
 
 function convertTimeToMinuteAndHours(time) {

@@ -2,10 +2,10 @@
 
 //Handle the form to create a new Task:
 var handleForm = document.querySelector("#formCreate");
-handleForm.addEventListener('submit', handleNewTask);
+handleForm.addEventListener("submit", handleNewTask);
 
 function handleNewTask(ev) {
-  var _ev$target$elements, taskName, description, limitDate, projectId, status, flag, taskDetails, tasksCreated, uuid, idProject;
+  var _ev$target$elements, taskName, description, limitDate, projectId, statusTask, flag, taskDetails, tasksCreated, uuid, idProject;
 
   return regeneratorRuntime.async(function handleNewTask$(_context) {
     while (1) {
@@ -13,12 +13,12 @@ function handleNewTask(ev) {
         case 0:
           _context.prev = 0;
           ev.preventDefault();
-          _ev$target$elements = ev.target.elements, taskName = _ev$target$elements.taskName, description = _ev$target$elements.description, limitDate = _ev$target$elements.limitDate, projectId = _ev$target$elements.projectId, status = _ev$target$elements.status, flag = _ev$target$elements.flag;
+          _ev$target$elements = ev.target.elements, taskName = _ev$target$elements.taskName, description = _ev$target$elements.description, limitDate = _ev$target$elements.limitDate, projectId = _ev$target$elements.projectId, statusTask = _ev$target$elements.statusTask, flag = _ev$target$elements.flag;
           taskName = taskName.value;
           description = description.value;
           limitDate = limitDate.value;
           projectId = selectProjectName.value;
-          status = status.value;
+          statusTask = statusTask.value;
           flag = flag.value;
           modalCreate.style.display = "none";
           ev.target.reset();
@@ -27,11 +27,11 @@ function handleNewTask(ev) {
             description: description,
             limitDate: limitDate,
             projectId: projectId,
-            status: status,
+            statusTask: statusTask,
             flag: flag
           };
           _context.next = 14;
-          return regeneratorRuntime.awrap(axios.post('/tasks/newTask', taskDetails));
+          return regeneratorRuntime.awrap(axios.post("/tasks/newTask", taskDetails));
 
         case 14:
           tasksCreated = _context.sent;
@@ -77,10 +77,10 @@ function uploadProjectNames() {
         case 3:
           projectsInfo = _context2.sent;
           projects = projectsInfo.data.infoProjects;
-          select = document.getElementById('selectProjectName');
+          select = document.getElementById("selectProjectName");
 
           for (index = 0; index < projects.length; index++) {
-            option = document.createElement('option');
+            option = document.createElement("option");
             option.value = projects[index].projectUuid;
             option.innerHTML = projects[index].projectName;
             select.appendChild(option);
@@ -111,56 +111,57 @@ function renderTasks(tasksToShow) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          taskToday = document.querySelector('#taskToday');
+          console.log(tasksToShow);
+          taskToday = document.querySelector("#taskToday");
 
           if (taskToday) {
-            _context3.next = 4;
+            _context3.next = 5;
             break;
           }
 
-          throw new Error('There is a problem finding the HTML element to put the data');
+          throw new Error("There is a problem finding the HTML element to put the data");
 
-        case 4:
-          taskTomorrow = document.querySelector('#taskTomorrow');
+        case 5:
+          taskTomorrow = document.querySelector("#taskTomorrow");
 
           if (taskTomorrow) {
-            _context3.next = 7;
+            _context3.next = 8;
             break;
           }
 
-          throw new Error('There is a problem finding the HTML element to put the data');
+          throw new Error("There is a problem finding the HTML element to put the data");
 
-        case 7:
-          taskGeneral = document.querySelector('#taskGeneral');
+        case 8:
+          taskGeneral = document.querySelector("#taskGeneral");
 
           if (taskGeneral) {
-            _context3.next = 10;
+            _context3.next = 11;
             break;
           }
 
-          throw new Error('There is a problem finding the HTML element to put the data');
+          throw new Error("There is a problem finding the HTML element to put the data");
 
-        case 10:
-          _context3.next = 12;
+        case 11:
+          _context3.next = 13;
           return regeneratorRuntime.awrap(axios.get("/projects/getAllProjects"));
 
-        case 12:
+        case 13:
           projectsInfo = _context3.sent;
           projects = projectsInfo.data.infoProjects;
 
           if (tasksToShow) {
-            _context3.next = 19;
+            _context3.next = 20;
             break;
           }
 
-          _context3.next = 17;
+          _context3.next = 18;
           return regeneratorRuntime.awrap(axios.get("/tasks/getAlltasks"));
 
-        case 17:
+        case 18:
           tasksInfo = _context3.sent;
           tasksToShow = tasksInfo.data.infoTasks;
 
-        case 19:
+        case 20:
           _loop = function _loop(index) {
             var task = tasksToShow[index];
             projects.forEach(function (project) {
@@ -173,9 +174,8 @@ function renderTasks(tasksToShow) {
           //Add the information of the project to the task
           for (index = 0; index < tasksToShow.length; index++) {
             _loop(index);
-          }
+          } //Set the today date
 
-          ; //Set the today date
 
           todayDay = setTodayDay();
           tomorrowDay = setTomorrowDay();
@@ -192,11 +192,9 @@ function renderTasks(tasksToShow) {
               };
 
               var taskName = element.taskName;
-              return " <div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__taskName\">\n                    <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                    </div>\n                    <div class=\"task-titles__projectName\">\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                    </div>");
+              return " <div class=\"task\">\n                        <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                        <div class=\"task-titles__container\">\n                            <div class=\"task-titles__container__oval\">\n                                <img src=\"./img/Oval 8.png\" alt=\"\">\n                            </div>\n                            <div class=\"task-titles__container__content\">\n                                <div class=\"task-titles__container__content__taskName\">\n                                <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                                </div>\n                                <div class=\"task-titles__container__content__projectName\">\n                                <p>").concat(element.projectName, "</p>\n                                </div>\n                            </div>\n\n                           \n                        </div>\n                        </div>\n                        <div class=\"task-date\">\n                            <p>").concat(limitDate, "</p>\n                            <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                            <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                        </div>\n                    </div>");
             }
-
-            ;
-          }).join('');
+          }).join("");
           taskToday.innerHTML = htmlToday;
           htmlTommorow = tasksToShow.map(function (element) {
             if (element.limitDate === tomorrowDay) {
@@ -211,14 +209,14 @@ function renderTasks(tasksToShow) {
               };
 
               var taskName = element.taskName;
-              return "<div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__taskName\">\n                    <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                    </div>\n                    <div class=\"task-titles__projectName\">\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                    </div>");
+              return " <div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__container\">\n                        <div class=\"task-titles__container__oval\">\n                            <img src=\"./img/Oval 8.png\" alt=\"\">\n                        </div>\n                        <div class=\"task-titles__container__content\">\n                            <div class=\"task-titles__container__content__taskName\">\n                            <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                            </div>\n                            <div class=\"task-titles__container__content__projectName\">\n                            <p>").concat(element.projectName, "</p>\n                            </div>\n                        </div>\n\n                       \n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                        <p>").concat(limitDate, "</p>\n                        <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                        <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                </div>");
             }
-          }).join('');
+          }).join("");
           taskTomorrow.innerHTML = htmlTommorow; //This is to sort the tasks by date
 
           sortTasksToShow = tasksToShow.sort(function (a, b) {
-            a = a.limitDate.split('/').reverse().join('');
-            b = b.limitDate.split('/').reverse().join('');
+            a = a.limitDate.split("/").reverse().join("");
+            b = b.limitDate.split("/").reverse().join("");
             return a.localeCompare(b);
           });
           htmlGeneral = sortTasksToShow.map(function (element) {
@@ -234,9 +232,10 @@ function renderTasks(tasksToShow) {
               };
 
               var taskName = element.taskName;
-              return "<div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__taskName\">\n                    <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                    </div>\n                    <div class=\"task-titles__projectName\">\n                    <p>").concat(element.projectName, "</p>\n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                    <p>").concat(limitDate, "</p>\n                    <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                    <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>  \n                    </div>");
+              var changeOval = element.flag === "urgent" ? "./img/Oval 9.png" : element.flag === "fastImprovement" ? "./img/Oval 14.png" : element.flag === "needChat" ? "./img/Oval 13.png" : element.flag === "now" ? "./img/Oval 14.png" : null;
+              return " <div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__container\">\n                        <div class=\"task-titles__container__oval\">\n                            <img src=\"").concat(changeOval, "\" alt=\"\">\n                        </div>\n                        <div class=\"task-titles__container__content\">\n                            <div class=\"task-titles__container__content__taskName\">\n                            <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                            </div>\n                            <div class=\"task-titles__container__content__projectName\">\n                            <p>").concat(element.projectName, "</p>\n                            </div>\n                        </div>\n\n                       \n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                        <p>").concat(limitDate, "</p>\n                        <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                        <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                </div>");
             }
-          }).join('');
+          }).join("");
           taskGeneral.innerHTML = htmlGeneral;
           _context3.next = 37;
           break;
@@ -259,11 +258,11 @@ function renderTasks(tasksToShow) {
 function setTodayDay() {
   try {
     var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 
     var yyyy = today.getFullYear();
-    today = yyyy + '-' + mm + '-' + dd;
+    today = yyyy + "-" + mm + "-" + dd;
     return today;
   } catch (error) {
     console.error(error);
@@ -274,11 +273,11 @@ function setTodayDay() {
 function setTomorrowDay() {
   try {
     var today = new Date();
-    var dd = String(today.getDate() + 1).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var dd = String(today.getDate() + 1).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
 
     var yyyy = today.getFullYear();
-    tomorrow = yyyy + '-' + mm + '-' + dd;
+    tomorrow = yyyy + "-" + mm + "-" + dd;
     return tomorrow;
   } catch (error) {
     console.error(error);
@@ -350,7 +349,7 @@ function editTask(idTask) {
             break;
           }
 
-          throw new Error('There is a problem finding the modal in the HTML');
+          throw new Error("There is a problem finding the modal in the HTML");
 
         case 3:
           modalEdit.style.display = "block";
@@ -362,7 +361,7 @@ function editTask(idTask) {
             break;
           }
 
-          throw new Error('There is a problem finding form from HTML');
+          throw new Error("There is a problem finding form from HTML");
 
         case 8:
           _context5.next = 10;
@@ -373,7 +372,7 @@ function editTask(idTask) {
           foundTask = taskFound.data.foundTask; //Set the Project Name
 
           showProjectNameInDOM(foundTask.projectId).then(function (data) {
-            var html = "\n            <h3>Edit the task</h3>\n            <div>\n                 \n                <input type=\"text\" name=\"taskName\" placeholder=\"Task Name\" value=\"".concat(foundTask.taskName, "\" required>\n            </div>\n\n            <div>\n              \n                <input type=\"text\" name=\"description\" placeholder=\"Description\" value=\"").concat(foundTask.description, "\" required>\n            </div>\n\n            <div>\n   \n                <select onclick=\"uploadProjectNamesEdit()\" name=\"projectId\" id=\"selectProjectNameEdit\">\n                    <option id=\"option").concat(foundTask.projectId, "\" value=\"").concat(foundTask.projectId, "\" selected disabled hidden>").concat(data, "</option>\n                </select>\n            </div>\n\n            <div> \n                <input type=\"date\" name=\"limitDate\" value=\"").concat(foundTask.limitDate, "\" required>\n            </div>\n\n            <input type=\"submit\" value=\"Update task\"class=\"button-form\">\n        ");
+            var html = "\n            <h3>Edit the task</h3>\n            <div>\n                 \n                <input type=\"text\" name=\"taskName\" placeholder=\"Task Name\" value=\"".concat(foundTask.taskName, "\" required>\n            </div>\n\n            <div>\n              \n                <input type=\"text\" name=\"description\" placeholder=\"Description\" value=\"").concat(foundTask.description, "\" required>\n            </div>\n\n            <div>\n   \n                <select onclick=\"uploadProjectNamesEdit()\" name=\"projectId\" id=\"selectProjectNameEdit\">\n                    <option id=\"option").concat(foundTask.projectId, "\" value=\"").concat(foundTask.projectId, "\" selected disabled hidden>").concat(data, "</option>\n                </select>\n            </div>\n\n            <div> \n                <input type=\"date\" name=\"limitDate\" value=\"").concat(foundTask.limitDate, "\" required>\n            </div>\n\n            <div>\n            <select name=\"statusTask\" id=\"statusTask\">\n              <option selected disabled>Select a status...</option>\n              <option value=\"1\">1</option>\n              <option value=\"2\">2</option>\n              <option value=\"3\">3</option>\n              <option value=\"4\">4</option>\n              <option value=\"5\">5</option>\n              <option value=\"6\">6</option>\n              <option value=\"7\">7</option>\n              <option value=\"8\">8</option>\n            </select>\n          </div>\n\n          <div>\n            <select name=\"flag\" id=\"flag\">\n              <option selected disabled>Select a flag...</option>\n              <option value=\"now\">Now</option>\n              <option value=\"urgent\">Urgent</option>\n              <option value=\"needChat\">Need to chat before</option>\n              <option value=\"fastImprovement\">Fast improvement</option>\n            </select>\n          </div>\n\n            <input type=\"submit\" value=\"Update task\"class=\"button-form\">\n        ");
             formEdit.innerHTML = html;
             taskIdEdit = foundTask.uuid;
           });
@@ -417,70 +416,70 @@ function showProjectNameInDOM(projectId) {
 
 
 function handleEdit(ev) {
-  var _ev$target$elements2, taskName, description, projectId, limitDate, tasksDetails, allTasks;
+  var _ev$target$elements2, taskName, description, projectId, limitDate, statusTask, flag, tasksDetails, allTasks;
 
   return regeneratorRuntime.async(function handleEdit$(_context7) {
     while (1) {
       switch (_context7.prev = _context7.next) {
         case 0:
           _context7.prev = 0;
-          _ev$target$elements2 = ev.target.elements, taskName = _ev$target$elements2.taskName, description = _ev$target$elements2.description, projectId = _ev$target$elements2.projectId, limitDate = _ev$target$elements2.limitDate;
+          _ev$target$elements2 = ev.target.elements, taskName = _ev$target$elements2.taskName, description = _ev$target$elements2.description, projectId = _ev$target$elements2.projectId, limitDate = _ev$target$elements2.limitDate, statusTask = _ev$target$elements2.statusTask, flag = _ev$target$elements2.flag;
           taskName = taskName.value;
           description = description.value;
           projectId = projectId.value;
           limitDate = limitDate.value;
+          statusTask = statusTask.value;
+          flag = flag.value;
 
           if (!(!taskName || !description || !limitDate || !projectId)) {
-            _context7.next = 8;
+            _context7.next = 10;
             break;
           }
 
           throw new Error("You need to complete all the fields");
 
-        case 8:
+        case 10:
           if (modalEdit) {
-            _context7.next = 10;
+            _context7.next = 12;
             break;
           }
 
-          throw new Error('There is a problem finding modalEdit from HTML');
+          throw new Error("There is a problem finding modalEdit from HTML");
 
-        case 10:
+        case 12:
           modalEdit.style.display = "none";
           tasksDetails = {
             taskName: taskName,
             description: description,
             projectId: projectId,
-            limitDate: limitDate
+            limitDate: limitDate,
+            statusTask: statusTask,
+            flag: flag
           };
-          _context7.next = 14;
+          _context7.next = 16;
           return regeneratorRuntime.awrap(axios.put("/tasks/editTask/".concat(taskIdEdit), tasksDetails));
 
-        case 14:
+        case 16:
           allTasks = _context7.sent;
           ev.target.reset();
           renderTasks(allTasks);
-          _context7.next = 23;
+          _context7.next = 25;
           break;
 
-        case 19:
-          _context7.prev = 19;
+        case 21:
+          _context7.prev = 21;
           _context7.t0 = _context7["catch"](0);
           swal("Ohhh no!", "".concat(_context7.t0), "warning");
           console.error(_context7.t0);
 
-        case 23:
-          ;
-
-        case 24:
+        case 25:
         case "end":
           return _context7.stop();
       }
     }
-  }, null, null, [[0, 19]]);
-}
+  }, null, null, [[0, 21]]);
+} //Function to get the names of the project in the "select Project Name"
 
-; //Function to get the names of the project in the "select Project Name"
 
 function uploadProjectNamesEdit() {
   var projectsInfo, _projects, select, index, option;
@@ -496,10 +495,10 @@ function uploadProjectNamesEdit() {
         case 3:
           projectsInfo = _context8.sent;
           _projects = projectsInfo.data.infoProjects;
-          select = document.getElementById('selectProjectNameEdit');
+          select = document.getElementById("selectProjectNameEdit");
 
           for (index = 0; index < _projects.length; index++) {
-            option = document.createElement('option');
+            option = document.createElement("option");
             option.value = _projects[index].projectUuid;
             option.innerHTML = _projects[index].projectName;
             select.appendChild(option);
@@ -531,9 +530,9 @@ function handleSearch() {
       switch (_context9.prev = _context9.next) {
         case 0:
           _context9.prev = 0;
-          searchTask = document.querySelector('#search');
+          searchTask = document.querySelector("#search");
           regEx = searchTask.value;
-          searching = new RegExp(regEx, 'i');
+          searching = new RegExp(regEx, "i");
           _context9.next = 6;
           return regeneratorRuntime.awrap(axios.get("/tasks/getAllTasks"));
 
@@ -553,17 +552,12 @@ function handleSearch() {
           console.error(_context9.t0);
 
         case 15:
-          ;
-
-        case 16:
         case "end":
           return _context9.stop();
       }
     }
   }, null, null, [[0, 12]]);
 }
-
-;
 
 function showModalDescription(taskName, limitDate, description) {
   try {
@@ -572,7 +566,7 @@ function showModalDescription(taskName, limitDate, description) {
     modalDescription.classList.add("showModal");
     var taskDescriptionInfo = document.querySelector("#showTaskDescriptionInfo");
     if (!taskDescriptionInfo) throw new Error("There is a problem finding modal from HTML");
-    limitDate = moment(limitDate).format('DD/MM/YYYY');
+    limitDate = moment(limitDate).format("DD/MM/YYYY");
     var html = "\n        <div class=\"content\">\n        <div class=\"content__name\"><h4> ".concat(taskName, "</h4></div>\n        <div class=\"content__date\"><span> ").concat(limitDate, "</span></div>\n        <div class=\"content__description\"><p>").concat(description, "</p></div>\n        </div>");
     taskDescriptionInfo.innerHTML = html;
   } catch (error) {

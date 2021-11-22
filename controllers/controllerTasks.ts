@@ -10,7 +10,7 @@ const tasksDb = db.collection('tasks');
 
 export async function createTask(req, res) {
     try {
-        const { taskName, description, limitDate, projectId, status, flag } = req.body;
+        const { taskName, description, limitDate, projectId, statusTask, flag } = req.body;
         const id = uuidv4()
         await tasksDb.doc(id).set({
             uuid: id,
@@ -19,7 +19,7 @@ export async function createTask(req, res) {
             limitDate: limitDate,
             createdDate: Date.now(),
             projectId: projectId,
-            status: status,
+            statusTask: statusTask,
             flag: flag
 
         });
@@ -84,7 +84,7 @@ export async function getATask(req, res) {
 export async function editTask(req, res) {
     try {
         const { idTask } = req.params;
-        const { taskName, description, limitDate, projectId, status, flag } = req.body;
+        const { taskName, description, limitDate, projectId, statusTask, flag } = req.body;
 
         //Found the task
         const task = await db.collection('tasks').doc(idTask).get();
@@ -112,7 +112,7 @@ export async function editTask(req, res) {
             description: description,
             limitDate: limitDate,
             projectId: projectId,
-            status: status,
+            statusTask: statusTask,
             flag: flag
         }, { merge: true });
         res.send({ message: "The project was updated" })
