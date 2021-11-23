@@ -56,10 +56,10 @@ async function uploadClientNames() {
 }
 //*Search Projects
 
-// const pepe= document.getElementById("pepe");
-// const searchProjectByDate =(event)=> {
-// console.log(event.target.elements.pepe.value);
-// }
+const pepe= document.getElementById("pepe");
+const searchProjectByDate =(event)=> {
+console.log(event.target.elements.pepe.value);
+}
 
 pepe.addEventListener("change",searchProjectByDate)
 
