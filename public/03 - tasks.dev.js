@@ -111,57 +111,56 @@ function renderTasks(tasksToShow) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
-          console.log(tasksToShow);
           taskToday = document.querySelector("#taskToday");
 
           if (taskToday) {
-            _context3.next = 5;
+            _context3.next = 4;
             break;
           }
 
           throw new Error("There is a problem finding the HTML element to put the data");
 
-        case 5:
+        case 4:
           taskTomorrow = document.querySelector("#taskTomorrow");
 
           if (taskTomorrow) {
-            _context3.next = 8;
+            _context3.next = 7;
             break;
           }
 
           throw new Error("There is a problem finding the HTML element to put the data");
 
-        case 8:
+        case 7:
           taskGeneral = document.querySelector("#taskGeneral");
 
           if (taskGeneral) {
-            _context3.next = 11;
+            _context3.next = 10;
             break;
           }
 
           throw new Error("There is a problem finding the HTML element to put the data");
 
-        case 11:
-          _context3.next = 13;
+        case 10:
+          _context3.next = 12;
           return regeneratorRuntime.awrap(axios.get("/projects/getAllProjects"));
 
-        case 13:
+        case 12:
           projectsInfo = _context3.sent;
           projects = projectsInfo.data.infoProjects;
 
           if (tasksToShow) {
-            _context3.next = 20;
+            _context3.next = 19;
             break;
           }
 
-          _context3.next = 18;
+          _context3.next = 17;
           return regeneratorRuntime.awrap(axios.get("/tasks/getAlltasks"));
 
-        case 18:
+        case 17:
           tasksInfo = _context3.sent;
           tasksToShow = tasksInfo.data.infoTasks;
 
-        case 20:
+        case 19:
           _loop = function _loop(index) {
             var task = tasksToShow[index];
             projects.forEach(function (project) {
@@ -192,7 +191,8 @@ function renderTasks(tasksToShow) {
               };
 
               var taskName = element.taskName;
-              return " <div class=\"task\">\n                        <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                        <div class=\"task-titles__container\">\n                            <div class=\"task-titles__container__oval\">\n                                <img src=\"./img/Oval 8.png\" alt=\"\">\n                            </div>\n                            <div class=\"task-titles__container__content\">\n                                <div class=\"task-titles__container__content__taskName\">\n                                <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                                </div>\n                                <div class=\"task-titles__container__content__projectName\">\n                                <p>").concat(element.projectName, "</p>\n                                </div>\n                            </div>\n\n                           \n                        </div>\n                        </div>\n                        <div class=\"task-date\">\n                            <p>").concat(limitDate, "</p>\n                            <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                            <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                        </div>\n                    </div>");
+              var changeOval = element.statusTask === "starting" ? "./img/Oval 8.png" : element.statusTask === "characterization" ? "./img/Oval 9.png" : element.statusTask === "design" ? "./img/Oval 10.png" : element.statusTask === "repairs" ? "./img/Oval 16.png" : element.statusTask === "toSend" ? "./img/Oval 12.png" : element.statusTask === "waiting" ? "./img/Oval 13.png" : element.statusTask === "stuck" ? "./img/Oval 14.png" : element.statusTask === "freeText" ? "./img/Oval 15.png" : null;
+              return " <div class=\"task\">\n                        <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                        <div class=\"task-titles__container\">\n                            <div class=\"task-titles__container__oval\">\n                            <img src=\"").concat(changeOval, "\" alt=\"\">\n                            </div>\n                            <div class=\"task-titles__container__content\">\n                                <div class=\"task-titles__container__content__taskName\">\n                                <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                                </div>\n                                <div class=\"task-titles__container__content__projectName\">\n                                <p>").concat(element.projectName, "</p>\n                                </div>\n                            </div>\n\n                           \n                        </div>\n                        </div>\n                        <div class=\"task-date\">\n                            <p>").concat(limitDate, "</p>\n                            <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                            <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                        </div>\n                    </div>");
             }
           }).join("");
           taskToday.innerHTML = htmlToday;
@@ -209,7 +209,8 @@ function renderTasks(tasksToShow) {
               };
 
               var taskName = element.taskName;
-              return " <div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__container\">\n                        <div class=\"task-titles__container__oval\">\n                            <img src=\"./img/Oval 8.png\" alt=\"\">\n                        </div>\n                        <div class=\"task-titles__container__content\">\n                            <div class=\"task-titles__container__content__taskName\">\n                            <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                            </div>\n                            <div class=\"task-titles__container__content__projectName\">\n                            <p>").concat(element.projectName, "</p>\n                            </div>\n                        </div>\n\n                       \n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                        <p>").concat(limitDate, "</p>\n                        <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                        <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                </div>");
+              var changeOval = element.statusTask === "starting" ? "./img/Oval 8.png" : element.statusTask === "characterization" ? "./img/Oval 9.png" : element.statusTask === "design" ? "./img/Oval 10.png" : element.statusTask === "repairs" ? "./img/Oval 16.png" : element.statusTask === "toSend" ? "./img/Oval 12.png" : element.statusTask === "waiting" ? "./img/Oval 13.png" : element.statusTask === "stuck" ? "./img/Oval 14.png" : element.statusTask === "freeText" ? "./img/Oval 15.png" : null;
+              return " <div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__container\">\n                        <div class=\"task-titles__container__oval\">\n                        <img src=\"").concat(changeOval, "\" alt=\"\">\n                        </div>\n                        <div class=\"task-titles__container__content\">\n                            <div class=\"task-titles__container__content__taskName\">\n                            <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                            </div>\n                            <div class=\"task-titles__container__content__projectName\">\n                            <p>").concat(element.projectName, "</p>\n                            </div>\n                        </div>\n\n                       \n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                        <p>").concat(limitDate, "</p>\n                        <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                        <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                </div>");
             }
           }).join("");
           taskTomorrow.innerHTML = htmlTommorow; //This is to sort the tasks by date
@@ -232,26 +233,26 @@ function renderTasks(tasksToShow) {
               };
 
               var taskName = element.taskName;
-              var changeOval = element.flag === "urgent" ? "./img/Oval 9.png" : element.flag === "fastImprovement" ? "./img/Oval 14.png" : element.flag === "needChat" ? "./img/Oval 13.png" : element.flag === "now" ? "./img/Oval 14.png" : null;
+              var changeOval = element.statusTask === "starting" ? "./img/Oval 8.png" : element.statusTask === "characterization" ? "./img/Oval 9.png" : element.statusTask === "design" ? "./img/Oval 10.png" : element.statusTask === "repairs" ? "./img/Oval 16.png" : element.statusTask === "toSend" ? "./img/Oval 12.png" : element.statusTask === "waiting" ? "./img/Oval 13.png" : element.statusTask === "stuck" ? "./img/Oval 14.png" : element.statusTask === "freeText" ? "./img/Oval 15.png" : null;
               return " <div class=\"task\">\n                    <div class=\"task-titles\" onclick='showModalDescription(\"".concat(element.taskName, "\", \"").concat(element.limitDate, "\", \"").concat(element.description, "\")'>\n                    <div class=\"task-titles__container\">\n                        <div class=\"task-titles__container__oval\">\n                            <img src=\"").concat(changeOval, "\" alt=\"\">\n                        </div>\n                        <div class=\"task-titles__container__content\">\n                            <div class=\"task-titles__container__content__taskName\">\n                            <h5>").concat(limitStrLength(taskName, 15), "</h5>\n                            </div>\n                            <div class=\"task-titles__container__content__projectName\">\n                            <p>").concat(element.projectName, "</p>\n                            </div>\n                        </div>\n\n                       \n                    </div>\n                    </div>\n                    <div class=\"task-date\">\n                        <p>").concat(limitDate, "</p>\n                        <img src=\"./img/edit.png\" alt=\"\" onclick='editTask(\"").concat(element.uuid, "\")' title=\"Edit\"> \n                        <img src=\"./img/delete.png\" alt=\"\" onclick='removeTask(\"").concat(element.uuid, "\", \"").concat(element.taskName, "\", \"").concat(element.projectId, "\")' title=\"Remove\"> \n                    </div>\n                </div>");
             }
           }).join("");
           taskGeneral.innerHTML = htmlGeneral;
-          _context3.next = 37;
+          _context3.next = 36;
           break;
 
-        case 33:
-          _context3.prev = 33;
+        case 32:
+          _context3.prev = 32;
           _context3.t0 = _context3["catch"](0);
           swal("Ohhh no!", _context3.t0.response.data, "warning");
           console.error(_context3.t0);
 
-        case 37:
+        case 36:
         case "end":
           return _context3.stop();
       }
     }
-  }, null, null, [[0, 33]]);
+  }, null, null, [[0, 32]]);
 } //Set the day of today
 
 
@@ -372,7 +373,7 @@ function editTask(idTask) {
           foundTask = taskFound.data.foundTask; //Set the Project Name
 
           showProjectNameInDOM(foundTask.projectId).then(function (data) {
-            var html = "\n            <h3>Edit the task</h3>\n            <div>\n                 \n                <input type=\"text\" name=\"taskName\" placeholder=\"Task Name\" value=\"".concat(foundTask.taskName, "\" required>\n            </div>\n\n            <div>\n              \n                <input type=\"text\" name=\"description\" placeholder=\"Description\" value=\"").concat(foundTask.description, "\" required>\n            </div>\n\n            <div>\n   \n                <select onclick=\"uploadProjectNamesEdit()\" name=\"projectId\" id=\"selectProjectNameEdit\">\n                    <option id=\"option").concat(foundTask.projectId, "\" value=\"").concat(foundTask.projectId, "\" selected disabled hidden>").concat(data, "</option>\n                </select>\n            </div>\n\n            <div> \n                <input type=\"date\" name=\"limitDate\" value=\"").concat(foundTask.limitDate, "\" required>\n            </div>\n\n            <div>\n            <select name=\"statusTask\" id=\"statusTask\">\n              <option selected disabled>Select a status...</option>\n              <option value=\"1\">1</option>\n              <option value=\"2\">2</option>\n              <option value=\"3\">3</option>\n              <option value=\"4\">4</option>\n              <option value=\"5\">5</option>\n              <option value=\"6\">6</option>\n              <option value=\"7\">7</option>\n              <option value=\"8\">8</option>\n            </select>\n          </div>\n\n          <div>\n            <select name=\"flag\" id=\"flag\">\n              <option selected disabled>Select a flag...</option>\n              <option value=\"now\">Now</option>\n              <option value=\"urgent\">Urgent</option>\n              <option value=\"needChat\">Need to chat before</option>\n              <option value=\"fastImprovement\">Fast improvement</option>\n            </select>\n          </div>\n\n            <input type=\"submit\" value=\"Update task\"class=\"button-form\">\n        ");
+            var html = "\n            <h3>Edit the task</h3>\n            <div>\n                 \n                <input type=\"text\" name=\"taskName\" placeholder=\"Task Name\" value=\"".concat(foundTask.taskName, "\" required>\n            </div>\n\n            <div>\n              \n                <input type=\"text\" name=\"description\" placeholder=\"Description\" value=\"").concat(foundTask.description, "\" required>\n            </div>\n\n            <div>\n   \n                <select onclick=\"uploadProjectNamesEdit()\" name=\"projectId\" id=\"selectProjectNameEdit\">\n                    <option id=\"option").concat(foundTask.projectId, "\" value=\"").concat(foundTask.projectId, "\" selected disabled hidden>").concat(data, "</option>\n                </select>\n            </div>\n\n            <div> \n                <input type=\"date\" name=\"limitDate\" value=\"").concat(foundTask.limitDate, "\" required>\n            </div>\n\n            <div>\n            <select name=\"statusTask\" id=\"statusTask\">\n                <option value=\"").concat(foundTask.statusTask, "\" selected disabled hidden>").concat(foundTask.statusTask, "</option>\n                <option value=\"starting\">Starting</option>\n                <option value=\"characterization\">Characterization</option>\n                <option value=\"design\">Design</option>\n                <option value=\"repairs\">Repairs</option>\n                <option value=\"toSend\">To send</option>\n                <option value=\"waiting\">Waiting</option>\n                <option value=\"stuck\">Stuck</option>\n                <option value=\"freeText \">Free text </option>\n            </select>\n          </div>\n\n          <div>\n            <select name=\"flag\" id=\"flag\">\n              <option value=\"").concat(foundTask.flag, "\" selected disabled hidden>").concat(foundTask.flag, "</option>\n              <option value=\"now\">Now</option>\n              <option value=\"urgent\">Urgent</option>\n              <option value=\"needChat\">Need to chat before</option>\n              <option value=\"fastImprovement\">Fast improvement</option>\n            </select>\n          </div>\n\n            <input type=\"submit\" value=\"Update task\"class=\"button-form\">\n        ");
             formEdit.innerHTML = html;
             taskIdEdit = foundTask.uuid;
           });

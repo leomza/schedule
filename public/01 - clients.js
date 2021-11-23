@@ -5,7 +5,8 @@ handleFormClient.addEventListener("submit", handleNewClient);
 async function handleNewClient(ev) {
   try {
     ev.preventDefault();
-    let { clientname, phone, email, dealTime, callLimitPerDay } = ev.target.elements;
+    let { clientname, phone, email, dealTime, callLimitPerDay } =
+      ev.target.elements;
 
     clientname = clientname.value;
     phone = phone.value;
@@ -19,14 +20,20 @@ async function handleNewClient(ev) {
     // if (modalCreateClient) {
     //   modalCreateClient.style.display = "none";
     // }
-    
+
     ev.target.reset();
 
-    const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };
-    await axios.post('/clients/register', clientDetails);
+    const clientDetails = {
+      clientname,
+      phone,
+      email,
+      dealTime,
+      callLimitPerDay,
+    };
+    await axios.post("/clients/register", clientDetails);
     swal("Good job!", "New user added succesfully!", "success").then(() => {
       renderClients();
-    })
+    });
   } catch (error) {
     console.error(error);
   }
@@ -43,11 +50,13 @@ async function renderClients(clientsToShow) {
       clientsToShow = clientsInfo.data.infoClients;
     }
 
-    const clientsToShowSorted = clientsToShow.sort((a, b) => a.clientname.localeCompare(b.clientname))
+    const clientsToShowSorted = clientsToShow.sort((a, b) =>
+      a.clientname.localeCompare(b.clientname)
+    );
 
-    let html = clientsToShowSorted.map((element) => {
- 
-      return `<tr>
+    let html = clientsToShowSorted
+      .map((element) => {
+        return `<tr>
             <td>${element.clientname}</td>
             <td>${element.phone}</td> 
             <td>${element.email}</td>
@@ -63,7 +72,7 @@ async function renderClients(clientsToShow) {
           </td> 
              
             </tr>`;
-    })
+      })
       .join("");
 
     table.innerHTML = html;
@@ -159,7 +168,6 @@ async function editClient(uuidClient) {
 
     formEdit.innerHTML = html;
     clientIdEdit = foundClient.id;
-
   } catch (error) {
     console.error(error);
   }
@@ -168,7 +176,8 @@ async function editClient(uuidClient) {
 //Handle Edit
 async function handleEdit(ev) {
   try {
-    let { clientname, phone, email, dealTime, callLimitPerDay } = ev.target.elements;
+    let { clientname, phone, email, dealTime, callLimitPerDay } =
+      ev.target.elements;
     clientname = clientname.value;
     phone = phone.value;
     email = email.value;
@@ -183,7 +192,13 @@ async function handleEdit(ev) {
     modalEdit.style.display = "none";
     ev.target.reset();
 
-    const clientDetails = { clientname, phone, email, dealTime, callLimitPerDay };
+    const clientDetails = {
+      clientname,
+      phone,
+      email,
+      dealTime,
+      callLimitPerDay,
+    };
     await axios.put(`/clients/editClient/${clientIdEdit}`, clientDetails);
     renderClients();
   } catch (error) {

@@ -59,7 +59,6 @@ async function uploadProjectNames() {
 //Render all the tasks
 async function renderTasks(tasksToShow) {
   try {
-    console.log(tasksToShow);
     const taskToday = document.querySelector("#taskToday");
     if (!taskToday)
       throw new Error(
@@ -113,7 +112,7 @@ async function renderTasks(tasksToShow) {
             }
           };
           const taskName = element.taskName;
-          
+
           let changeOval =
             element.statusTask === "starting"
               ? "./img/Oval 8.png"
@@ -427,7 +426,7 @@ async function editTask(idTask) {
 
             <div>
             <select name="statusTask" id="statusTask">
-                <option selected disabled>Select a status...</option>
+                <option value="${foundTask.statusTask}" selected disabled hidden>${foundTask.statusTask}</option>
                 <option value="starting">Starting</option>
                 <option value="characterization">Characterization</option>
                 <option value="design">Design</option>
@@ -441,7 +440,7 @@ async function editTask(idTask) {
 
           <div>
             <select name="flag" id="flag">
-              <option selected disabled>Select a flag...</option>
+              <option value="${foundTask.flag}" selected disabled hidden>${foundTask.flag}</option>
               <option value="now">Now</option>
               <option value="urgent">Urgent</option>
               <option value="needChat">Need to chat before</option>

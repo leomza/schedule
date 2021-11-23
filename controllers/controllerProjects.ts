@@ -130,3 +130,16 @@ export async function setProjectTime(req, res) {
         console.error(error);
     }
 }
+
+export async function resetRetailerInfo(req, res) {
+    try {
+        let { idProject } = req.params;
+
+        await db.collection('projects').doc(idProject).set({
+            usedHours: 0,
+            timeInDesign: 0
+        }, { merge: true });
+    } catch (error) {
+        console.error(error);
+    }
+}
