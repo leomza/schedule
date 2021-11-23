@@ -367,7 +367,7 @@
     padding-bottom: 5rem;
     .task {
       display: flex;
-      gap: 2rem;
+      justify-content: space-between;
       align-items: center;
       margin: 0 2rem;
       .task-titles {

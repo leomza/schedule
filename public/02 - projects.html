@@ -25,14 +25,42 @@
   <body onload="uploadClientNames(); renderProjects()">
     <div class="container box">
       <div class="top-table">
-        <div class="top-vreate__title">
+        <div class="top-table__title">
           <h2>פרויקטים</h2>
         </div>
         <div class="top-table__button">
           <button id="buttonCreate" class="button-talbe">חדש</button>
         </div>
       </div>
-    
+      <div class="search-table">
+        <div class="search-table__title">
+          <span>עד כה</span>
+        </div>
+        <div class="search-table__by-month">
+          <img src="./img/Group Schedule.png" alt="" />
+          <div class="search-table__by-month__title">
+            <span>לפי חודש</span>
+          </div>
+
+          <div class="search-table__by-month__input">
+            <input  type="text" name="pepe"  id="pepe"   />
+          </div>
+        </div>
+        <div class="search-table__by-dates">
+          <img src="./img/Group Schedule.png" alt="" />
+          <div class="search-table__by-dates__title">
+            <span>לפי חודש</span>
+          </div>
+
+          <div class="search-table__by-dates__input">
+            <input type="text" />
+          </div>
+          to
+          <div class="search-table__by-dates__input">
+            <input type="text" />
+          </div>
+        </div>
+      </div>
       <table id="tblData">
         <tr>
           <th>שם</th>
@@ -44,7 +72,7 @@
           <th>Status</th>
           <th><i class="fas fa-wrench"></i></th>
         </tr>
-  
+
         <tbody class="table"></tbody>
       </table>
 

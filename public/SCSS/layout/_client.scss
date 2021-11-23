@@ -16,9 +16,37 @@ button {
 }
 .top-table {
   display: flex;
-  justify-content: space-between;
+  gap: 2rem;
 
   margin: 5rem 0;
+}
+.search-table {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5rem;
+  gap: 3rem;
+  &__by-month {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    &__input {
+      input {
+        width: 98px;
+        margin: 0;
+      }
+    }
+  }
+  &__by-dates {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    &__input {
+      input {
+        width: 98px;
+        margin: 0;
+      }
+    }
+  }
 }
 .button--disabled {
   background: black;
@@ -207,7 +235,7 @@ button {
     .close {
       color: #95a3b9;
     }
-  } 
+  }
 }
 
 /* Close Button */

@@ -47,6 +47,14 @@ async function uploadClientNames() {
         console.error(error);
     }
 }
+//*Search Projects
+
+const pepe= document.getElementById("pepe");
+const searchProjectByDate =(event)=> {
+console.log(event.target.elements.pepe.value);
+}
+
+pepe.addEventListener("change",searchProjectByDate)
 
 //Render all the projects
 async function renderProjects(projectsToShow) {
@@ -76,6 +84,7 @@ async function renderProjects(projectsToShow) {
         const projectToShowSorted = projectsToShow.sort((a, b) => a.projectName.localeCompare(b.projectName))
 
         let html = projectToShowSorted.map(element => {
+            
             timeInProject = convertTimeToMinuteAndHours(element.usedHours);
             timeSpendInDesign = convertTimeToMinuteAndHours(element.timeInDesign);
             return (
