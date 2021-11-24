@@ -85,6 +85,7 @@ function handleSignoutClick(event) {
  */
 
 function listUpcomingEvents() {
+  console.log(gapi.client);
   gapi.client.calendar.events
     .list({
       calendarId: "primary",
