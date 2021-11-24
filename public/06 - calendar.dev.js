@@ -23,6 +23,12 @@ function initClient() {
   // included, separated by spaces.
 
   var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+  console.log({
+    apiKey: API_KEY,
+    clientId: CLIENT_ID,
+    discoveryDocs: DISCOVERY_DOCS,
+    scope: SCOPES
+  });
   gapi.client.init({
     apiKey: API_KEY,
     clientId: CLIENT_ID,
