@@ -88,7 +88,7 @@ function listUpcomingEvents() {
     orderBy: "startTime"
   }).then(function (response) {
     var events = response.result.items;
-    console.log(events);
+    console.log(response);
     googleEvents(events);
     renderCalendarInfo(events); //   renderCalendarInfoToday(events);
   });
