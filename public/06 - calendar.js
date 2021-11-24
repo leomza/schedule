@@ -1,15 +1,4 @@
-const CLIENT_ID =
-  "737686618954-d0k28hcsdajurnrt1mj4v7rhv3p87bd4.apps.googleusercontent.com";
-const API_KEY = "AIzaSyBT-xOdFVT38YxGiOY3fbnblgVlbQ0kfO0";
 
-// Array of API discovery doc URLs for APIs used by the quickstart
-const DISCOVERY_DOCS = [
-  "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
-];
-
-// Authorization scopes required by the API; multiple scopes can be
-// included, separated by spaces.
-const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
 const authorizeButton = document.getElementById("authorize_button");
 const signoutButton = document.getElementById("signout_button");
@@ -26,6 +15,19 @@ function handleClientLoad() {
  *  listeners.
  */
 function initClient() {
+  const CLIENT_ID =
+  "737686618954-d0k28hcsdajurnrt1mj4v7rhv3p87bd4.apps.googleusercontent.com";
+  const API_KEY = "AIzaSyBT-xOdFVT38YxGiOY3fbnblgVlbQ0kfO0";
+
+  // Array of API discovery doc URLs for APIs used by the quickstart
+  const DISCOVERY_DOCS = [
+    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+  ];
+
+  // Authorization scopes required by the API; multiple scopes can be
+  // included, separated by spaces.
+  const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
   gapi.client
     .init({
       apiKey: API_KEY,
