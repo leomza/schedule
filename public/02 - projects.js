@@ -54,14 +54,6 @@ async function uploadClientNames() {
     console.error(error);
   }
 }
-//*Search Projects
-
-const pepe= document.getElementById("pepe");
-const searchProjectByDate =(event)=> {
-console.log(event.target.elements.pepe.value);
-}
-
-pepe.addEventListener("change",searchProjectByDate)
 
 //Render all the projects
 async function renderProjects(projectsToShow) {
@@ -364,4 +356,12 @@ async function restartInfoInProject(element) {
   } catch (error) {
     console.error(error);
   }
+}
+
+//Search Projects
+const searchSpecific = document.getElementById("search_specific");
+
+searchSpecific.addEventListener("change", searchSpecificDay);
+function searchSpecificDay(ev) {
+  console.log(ev.target.value);
 }

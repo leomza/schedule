@@ -536,4 +536,12 @@ function restartInfoInProject(element) {
       }
     }
   }, null, null, [[0, 5]]);
+} //Search Projects
+
+
+var searchSpecific = document.getElementById("search_specific");
+searchSpecific.addEventListener("change", searchSpecificDay);
+
+function searchSpecificDay(ev) {
+  console.log(ev.target.value);
 }
