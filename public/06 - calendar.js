@@ -28,7 +28,6 @@ function initClient() {
   // included, separated by spaces.
   const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
-  console.log(gapi.client)
   gapi.client
     .init({
       apiKey: API_KEY,
@@ -88,7 +87,6 @@ function handleSignoutClick(event) {
  */
 
 function listUpcomingEvents() {
-  console.log(gapi.client);
   gapi.client.calendar.events
     .list({
       calendarId: "primary",
