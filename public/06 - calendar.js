@@ -96,6 +96,7 @@ function listUpcomingEvents() {
     })
     .then(function (response) {
       const events = response.result.items;
+      console.log(events);
       googleEvents(events);
       renderCalendarInfo(events);
    

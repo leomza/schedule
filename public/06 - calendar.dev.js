@@ -88,6 +88,7 @@ function listUpcomingEvents() {
     orderBy: "startTime"
   }).then(function (response) {
     var events = response.result.items;
+    console.log(events);
     googleEvents(events);
     renderCalendarInfo(events); //   renderCalendarInfoToday(events);
   });
@@ -112,17 +113,17 @@ var googleEvents = function googleEvents(event) {
   var date = new Date();
   var momentsHour = moment(date).format("L"); // "9:00 PM"
 
-  console.log(momentsHour);
   var eventToday = document.getElementById("eventToday");
   var noEvent = document.querySelector(".noEvent"); //  moment(date).format('LT');;
 
   var html = "";
   html = event.map(function (el) {
     var formatHourEvent = moment(el.start.dateTime).format("L");
+    var reFormat = moment(el.start.dateTime).format("HH:mm");
 
     if (momentsHour === formatHourEvent) {
       noEvent.style.display = "none";
-      return "\n        <p>".concat(formatHourEvent, "</p>\n        ");
+      return "\n        <p>".concat(reFormat, "</p>\n        ");
     }
   }).join("");
   eventToday.innerHTML = html; // const date = new Date();
@@ -132,7 +133,7 @@ var googleEvents = function googleEvents(event) {
 function formatCalendarDate(startDate) {
   try {
     if (startDate.dateTime) {
-      startDate.dateTime = moment(startDate.dateTime).format("LT");
+      startDate.dateTime = moment(startDate.dateTime).format("HH:mm");
       return startDate.dateTime;
     } else if (startDate.date) {
       startDate.date = moment(startDate.date).format("dddd");
