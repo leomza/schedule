@@ -36,7 +36,8 @@ function initClient() {
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
-  }, function (error) {
+  })["catch"](function (error) {
+    console.log(error);
     renderCalendarInfo(JSON.stringify(error, null, 2));
   });
 }
