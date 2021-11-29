@@ -1,4 +1,5 @@
 export { };
+import app from 'firebase-admin'
 
 enum DealTime {
     retainer = 'retainer',
@@ -17,6 +18,7 @@ export class Client {
     createdDate: any;
     lastDesignDate: any;
     lastCallDate: any;
+    
 
     constructor(id: string, clientname: string, phone: string, email: string, dealTime: DealTime, callLimitPerDay: string) {
         this.id = id;
@@ -28,5 +30,9 @@ export class Client {
         this.createdDate = Date.now();
         this.lastDesignDate = '';
         this.lastCallDate = '';
+    }
+
+    getClient(){
+    app.firestore.Query       
     }
 }

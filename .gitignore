@@ -70,6 +70,7 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.bkp
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -104,10 +105,3 @@ dist
 .tern-port
 
 .schedule-51dfa-firebase-adminsdk-l883n-2ff0688573.json
-
-
-API_KEY
-
-CLIENT_ID
-
-DISCOVERY_DOCS

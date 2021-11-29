@@ -1,12 +1,5 @@
 "use strict";
 
-var CLIENT_ID = "737686618954-d0k28hcsdajurnrt1mj4v7rhv3p87bd4.apps.googleusercontent.com";
-var API_KEY = "AIzaSyBT-xOdFVT38YxGiOY3fbnblgVlbQ0kfO0"; // Array of API discovery doc URLs for APIs used by the quickstart
-
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]; // Authorization scopes required by the API; multiple scopes can be
-// included, separated by spaces.
-
-var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 var authorizeButton = document.getElementById("authorize_button");
 var signoutButton = document.getElementById("signout_button");
 /**
@@ -23,6 +16,13 @@ function handleClientLoad() {
 
 
 function initClient() {
+  var CLIENT_ID = "737686618954-d0k28hcsdajurnrt1mj4v7rhv3p87bd4.apps.googleusercontent.com";
+  var API_KEY = "AIzaSyBT-xOdFVT38YxGiOY3fbnblgVlbQ0kfO0"; // Array of API discovery doc URLs for APIs used by the quickstart
+
+  var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"]; // Authorization scopes required by the API; multiple scopes can be
+  // included, separated by spaces.
+
+  var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
   gapi.client.init({
     apiKey: API_KEY,
     clientId: CLIENT_ID,
@@ -35,7 +35,8 @@ function initClient() {
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
-  }, function (error) {
+  })["catch"](function (error) {
+    console.log(error);
     renderCalendarInfo(JSON.stringify(error, null, 2));
   });
 }
@@ -88,6 +89,7 @@ function listUpcomingEvents() {
     orderBy: "startTime"
   }).then(function (response) {
     var events = response.result.items;
+    console.log(response);
     googleEvents(events);
     renderCalendarInfo(events); //   renderCalendarInfoToday(events);
   });
@@ -112,17 +114,17 @@ var googleEvents = function googleEvents(event) {
   var date = new Date();
   var momentsHour = moment(date).format("L"); // "9:00 PM"
 
-  console.log(momentsHour);
   var eventToday = document.getElementById("eventToday");
   var noEvent = document.querySelector(".noEvent"); //  moment(date).format('LT');;
 
   var html = "";
   html = event.map(function (el) {
     var formatHourEvent = moment(el.start.dateTime).format("L");
+    var reFormat = moment(el.start.dateTime).format("HH:mm");
 
     if (momentsHour === formatHourEvent) {
       noEvent.style.display = "none";
-      return "\n        <p>".concat(formatHourEvent, "</p>\n        ");
+      return "\n        <p>".concat(reFormat, "</p>\n        ");
     }
   }).join("");
   eventToday.innerHTML = html; // const date = new Date();
@@ -132,7 +134,7 @@ var googleEvents = function googleEvents(event) {
 function formatCalendarDate(startDate) {
   try {
     if (startDate.dateTime) {
-      startDate.dateTime = moment(startDate.dateTime).format("LT");
+      startDate.dateTime = moment(startDate.dateTime).format("HH:mm");
       return startDate.dateTime;
     } else if (startDate.date) {
       startDate.date = moment(startDate.date).format("dddd");
