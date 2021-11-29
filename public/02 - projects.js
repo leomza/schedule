@@ -1,3 +1,4 @@
+let projectsInfo=[]
 //Handle the form to create a new Project:
 const handleFormProject = document.querySelector("#formCreateProject");
 handleFormProject.addEventListener("submit", handleNewProject);
@@ -65,7 +66,7 @@ async function renderProjects(projectsToShow) {
     const { infoClients: clients } = clientsInfo.data;
 
     if (!projectsToShow) {
-      const projectsInfo = await axios.get(`/projects/getAllprojects`);
+      projectsInfo = await axios.get(`/projects/getAllprojects`);
       projectsToShow = projectsInfo.data.infoProjects;
     }
 
@@ -361,7 +362,29 @@ async function restartInfoInProject(element) {
 //Search Projects
 const searchSpecific = document.getElementById("search_specific");
 
-searchSpecific.addEventListener("change", searchSpecificDay);
+
 function searchSpecificDay(ev) {
-  console.log(ev.target.value);
+const date = ev.target.value
+const projectsToFilter = projectsInfo.data.infoProjects;
+ const pepe = projectsToFilter.filter((el)=>{
+   console.log(el);
+   return el.projectName.includes(date)
+ })
+
+
+
+console.log(pepe);
+  //renderProjects(data)
 }
+searchSpecific.addEventListener("change", searchSpecificDay);
+// const pepe = (date,data)=>{
+//   let filterData =[];
+
+// for (let i = 0; i < data.length; i++) {
+//   date= date.toLowerCase();
+
+
+  
+// }
+//   return filterData
+// }

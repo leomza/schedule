@@ -1,6 +1,7 @@
 "use strict";
 
-//Handle the form to create a new Project:
+var projectsInfo = []; //Handle the form to create a new Project:
+
 var handleFormProject = document.querySelector("#formCreateProject");
 handleFormProject.addEventListener("submit", handleNewProject);
 
@@ -97,7 +98,7 @@ function uploadClientNames() {
 
 
 function renderProjects(projectsToShow) {
-  var table, clientsInfo, clients, projectsInfo, _loop, index, projectToShowSorted, html;
+  var table, clientsInfo, clients, _loop, index, projectToShowSorted, html;
 
   return regeneratorRuntime.async(function renderProjects$(_context3) {
     while (1) {
@@ -449,7 +450,7 @@ function uploadClientNamesEdit() {
 
 
 function deleteInfoRetailer() {
-  var clientsInfo, _clients2, projectsInfo, _loop2, index;
+  var clientsInfo, _clients2, _projectsInfo, _loop2, index;
 
   return regeneratorRuntime.async(function deleteInfoRetailer$(_context9) {
     while (1) {
@@ -472,8 +473,8 @@ function deleteInfoRetailer() {
           return regeneratorRuntime.awrap(axios.get("/projects/getAllprojects"));
 
         case 8:
-          projectsInfo = _context9.sent;
-          projectsToShow = projectsInfo.data.infoProjects; //Add the information of the user to the project
+          _projectsInfo = _context9.sent;
+          projectsToShow = _projectsInfo.data.infoProjects; //Add the information of the user to the project
 
           _loop2 = function _loop2(index) {
             var project = projectsToShow[index];
@@ -540,8 +541,21 @@ function restartInfoInProject(element) {
 
 
 var searchSpecific = document.getElementById("search_specific");
-searchSpecific.addEventListener("change", searchSpecificDay);
 
 function searchSpecificDay(ev) {
-  console.log(ev.target.value);
+  var date = ev.target.value;
+  var projectsToFilter = projectsInfo.data.infoProjects;
+  var pepe = projectsToFilter.filter(function (el) {
+    console.log(el);
+    return el.projectName.includes(date);
+  });
+  console.log(pepe); //renderProjects(data)
 }
+
+searchSpecific.addEventListener("change", searchSpecificDay); // const pepe = (date,data)=>{
+//   let filterData =[];
+// for (let i = 0; i < data.length; i++) {
+//   date= date.toLowerCase();
+// }
+//   return filterData
+// }
